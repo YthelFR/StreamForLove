@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Newsletters{% endblock %}
+
+{% block body %}
+    <h1>Edit Newsletters</h1>
+
+    {{ include('newsletters/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_newsletters_index') }}">back to list</a>
+
+    {{ include('newsletters/_delete_form.html.twig') }}
+{% endblock %}
