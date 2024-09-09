@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Outsiders index{% endblock %}
+
+{% block body %}
+    <h1>Outsiders index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Twitch</th>
+                <th>Somme</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for outsider in outsiders %}
+            <tr>
+                <td>{{ outsider.id }}</td>
+                <td>{{ outsider.pseudo }}</td>
+                <td>{{ outsider.twitch }}</td>
+                <td>{{ outsider.somme }}</td>
+                <td>
+                    <a href="{{ path('app_outsiders_show', {'id': outsider.id}) }}">show</a>
+                    <a href="{{ path('app_outsiders_edit', {'id': outsider.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_outsiders_new') }}">Create new</a>
+{% endblock %}
