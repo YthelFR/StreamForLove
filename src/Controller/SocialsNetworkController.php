@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\SocialsNetwork;
-use App\Form\SocialsNetwork1Type;
+use App\Form\SocialsNetworkType;
 use App\Repository\SocialsNetworkRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ final class SocialsNetworkController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $socialsNetwork = new SocialsNetwork();
-        $form = $this->createForm(SocialsNetwork1Type::class, $socialsNetwork);
+        $form = $this->createForm(SocialsNetworkType::class, $socialsNetwork);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ final class SocialsNetworkController extends AbstractController
     #[Route('/{id}/edit', name: 'app_socials_network_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SocialsNetwork $socialsNetwork, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(SocialsNetwork1Type::class, $socialsNetwork);
+        $form = $this->createForm(SocialsNetworkType::class, $socialsNetwork);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

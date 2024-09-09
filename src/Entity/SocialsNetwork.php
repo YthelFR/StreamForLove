@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\SocialsNetworkTypeEnum;
 use App\Repository\SocialsNetworkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,8 +17,8 @@ class SocialsNetwork
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 255, type:'string', enumType: SocialsNetworkTypeEnum::class)]
+    private SocialsNetworkTypeEnum $name;
 
     #[ORM\ManyToOne(inversedBy: 'usersSocial')]
     private ?Users $users = null;
@@ -39,12 +40,12 @@ class SocialsNetwork
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): SocialsNetworkTypeEnum
     {
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(SocialsNetworkTypeEnum $name): static
     {
         $this->name = $name;
 

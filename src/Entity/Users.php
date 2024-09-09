@@ -24,7 +24,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var list<string> The user roles
      */
-    #[ORM\Column]
+    #[ORM\Column(type:'json')]
     private array $roles = [];
 
     /**
@@ -40,7 +40,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $avatar = null;
 
     #[ORM\Column]
-    private ?bool $isValid = null;
+    private ?bool $isValid = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;

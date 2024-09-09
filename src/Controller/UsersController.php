@@ -53,18 +53,22 @@ final class UsersController extends AbstractController
     #[Route('/{id}/edit', name: 'app_users_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Users $user, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
         $form = $this->createForm(UsersType::class, $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_users_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre profil a été mis à jour.');
+
+            return $this->redirectToRoute('user_edit');
         }
 
-        return $this->render('users/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
+        return $this->render('user/edit.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
