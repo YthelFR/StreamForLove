@@ -22,6 +22,9 @@ class Outsiders
     #[ORM\Column]
     private ?int $somme = null;
 
+    #[ORM\ManyToOne(inversedBy: 'adminOutsiders')]
+    private ?Users $users = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Outsiders
     public function setSomme(int $somme): static
     {
         $this->somme = $somme;
+
+        return $this;
+    }
+
+    public function getUsers(): ?Users
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?Users $users): static
+    {
+        $this->users = $users;
 
         return $this;
     }
