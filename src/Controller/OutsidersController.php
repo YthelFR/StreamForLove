@@ -42,13 +42,19 @@ final class OutsidersController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_outsiders_show', methods: ['GET'])]
-    public function show(Outsiders $outsider): Response
-    {
-        return $this->render('outsiders/show.html.twig', [
-            'outsider' => $outsider,
-        ]);
+    #[Route('/{pseudo}', name: 'app_outsiders_show', methods: ['GET'])]
+public function show(OutsidersRepository $outsidersRepository, string $pseudo): Response
+{
+    $outsider = $outsidersRepository->findOneBy(['pseudo' => $pseudo]);
+
+    if (!$outsider) {
+        throw $this->createNotFoundException('Outsider not found');
     }
+
+    return $this->render('outsiders/show.html.twig', [
+        'outsider' => $outsider,
+    ]);
+}
 
     #[Route('/{id}/edit', name: 'app_outsiders_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Outsiders $outsider, EntityManagerInterface $entityManager): Response

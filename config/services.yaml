@@ -18,6 +18,9 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
+    App\Service\TwitchApiService:
+        arguments:
+            $clientId: '%env(TWITCH_CLIENT_ID)%'
+            $accessToken: '%env(TWITCH_ACCESS_TOKEN)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

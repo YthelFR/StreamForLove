@@ -9,10 +9,14 @@
         {% endblock %}
 
         {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+    {{ include('views/header.html.twig') }}
     <body>
         {% block body %}{% endblock %}
     </body>
+    {{ include('views/newsletter.html.twig') }}
+    {{ include('views/footer.html.twig') }}
 </html>
