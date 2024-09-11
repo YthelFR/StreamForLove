@@ -6,6 +6,7 @@ use App\Repository\OutsidersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OutsidersRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_PSEUDO', fields: ['pseudo'])]
 class Outsiders
 {
     #[ORM\Id]
