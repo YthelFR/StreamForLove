@@ -22,3 +22,8 @@ newsletter:
     path: /newsletter
     controller: App\Controller\NewslettersController::index
     methods: GET
+
+blog:
+    path: /blog
+    controller: App\Controller\BlogController::index
+    methods: GET

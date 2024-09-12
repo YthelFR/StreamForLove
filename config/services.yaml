@@ -24,3 +24,6 @@ services:
             $accessToken: '%env(TWITCH_ACCESS_TOKEN)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Repository\ArticlesRepository:
+        arguments:
+            $paginator: '@knp_paginator'

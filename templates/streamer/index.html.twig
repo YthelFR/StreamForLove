@@ -9,7 +9,7 @@
     }
 </style>
 <div class="gradientBg py-12">
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers Actifs</h2>
+<h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers de l'évènement</h2>
 
 {% if activeStreamers is not empty %}
     <ul class="flex flex-wrap gap-4">
@@ -24,7 +24,7 @@
     <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer actif trouvé.</p>
 {% endif %}
 
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers Absents</h2>
+<h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers anciens évènements</h2>
 
 {% if inactiveStreamers is not empty %}
     <ul class="flex flex-wrap gap-4">
@@ -39,7 +39,7 @@
     <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer absent trouvé.</p>
 {% endif %}
 
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Liste des Outsiders</h2>
+<h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers hors-évènement</h2>
 
 {% if outsiders is not empty %}
     <ul class="flex flex-wrap gap-4">
