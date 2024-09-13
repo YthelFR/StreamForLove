@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Streamer;
 
 use App\Entity\SocialsNetwork;
 use App\Form\SocialsNetworkType;
@@ -10,14 +10,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/socials/network')]
-final class SocialsNetworkController extends AbstractController
+#[Route('/dashboard/socials')]
+#[IsGranted('ROLE_STREAMER_ACTIF', 'ROLE_STREAMER_ABSENTS', 'ROLE_ADMIN', 'ROLE_MANAGER')]
+final class StreamerSocialsNetworkController extends AbstractController
 {
     #[Route(name: 'app_socials_network_index', methods: ['GET'])]
     public function index(SocialsNetworkRepository $socialsNetworkRepository): Response
     {
-        return $this->render('socials_network/index.html.twig', [
+        return $this->render('streamer/socials_network/index.html.twig', [  // Mise à jour du chemin
             'socials_networks' => $socialsNetworkRepository->findAll(),
         ]);
     }
@@ -36,7 +38,7 @@ final class SocialsNetworkController extends AbstractController
             return $this->redirectToRoute('app_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('socials_network/new.html.twig', [
+        return $this->render('streamer/socials_network/new.html.twig', [  // Mise à jour du chemin
             'socials_network' => $socialsNetwork,
             'form' => $form,
         ]);
@@ -45,7 +47,7 @@ final class SocialsNetworkController extends AbstractController
     #[Route('/{id}', name: 'app_socials_network_show', methods: ['GET'])]
     public function show(SocialsNetwork $socialsNetwork): Response
     {
-        return $this->render('socials_network/show.html.twig', [
+        return $this->render('streamer/socials_network/show.html.twig', [  // Mise à jour du chemin
             'socials_network' => $socialsNetwork,
         ]);
     }
@@ -62,20 +64,9 @@ final class SocialsNetworkController extends AbstractController
             return $this->redirectToRoute('app_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('socials_network/edit.html.twig', [
+        return $this->render('streamer/socials_network/edit.html.twig', [  // Mise à jour du chemin
             'socials_network' => $socialsNetwork,
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_socials_network_delete', methods: ['POST'])]
-    public function delete(Request $request, SocialsNetwork $socialsNetwork, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$socialsNetwork->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($socialsNetwork);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_socials_network_index', [], Response::HTTP_SEE_OTHER);
     }
 }

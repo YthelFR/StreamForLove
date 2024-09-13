@@ -38,6 +38,9 @@ class Presentations
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $clip4 = null;
 
+    #[ORM\OneToOne(inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    private ?Users $streamersPresentation = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Presentations
     public function setClip4(?string $clip4): static
     {
         $this->clip4 = $clip4;
+
+        return $this;
+    }
+
+    public function getStreamersPresentation(): ?Users
+    {
+        return $this->streamersPresentation;
+    }
+
+    public function setStreamersPresentation(?Users $streamersPresentation): static
+    {
+        $this->streamersPresentation = $streamersPresentation;
 
         return $this;
     }
