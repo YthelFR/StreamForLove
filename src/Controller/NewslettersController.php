@@ -2,80 +2,36 @@
 
 namespace App\Controller;
 
-use App\Entity\Newsletters;
-use App\Form\NewslettersType;
-use App\Repository\NewslettersRepository;
+use App\Entity\Abonnes;
+use App\Form\AbonnesType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/newsletters')]
-final class NewslettersController extends AbstractController
+#[Route('/newsletter')]
+class NewslettersController extends AbstractController
 {
-    #[Route(name: 'app_newsletters_index', methods: ['GET'])]
-    public function index(NewslettersRepository $newslettersRepository): Response
+    #[Route('/', name: 'app_newsletter_subscribe', methods: ['GET', 'POST'])]
+    public function subscribe(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('newsletters/index.html.twig', [
-            'newsletters' => $newslettersRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_newsletters_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $newsletter = new Newsletters();
-        $form = $this->createForm(NewslettersType::class, $newsletter);
+        $abonne = new Abonnes();
+        $form = $this->createForm(AbonnesType::class, $abonne);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($newsletter);
+            $entityManager->persist($abonne);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_newsletters_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Vous êtes inscrit avec succès à notre newsletter.');
+
+            return $this->redirectToRoute('app_newsletter_subscribe');
         }
 
-        return $this->render('newsletters/new.html.twig', [
-            'newsletter' => $newsletter,
-            'form' => $form,
+        return $this->render('newsletters/subscribe.html.twig', [
+            'form' => $form->createView(),
         ]);
-    }
-
-    #[Route('/{id}', name: 'app_newsletters_show', methods: ['GET'])]
-    public function show(Newsletters $newsletter): Response
-    {
-        return $this->render('newsletters/show.html.twig', [
-            'newsletter' => $newsletter,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_newsletters_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Newsletters $newsletter, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(NewslettersType::class, $newsletter);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_newsletters_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('newsletters/edit.html.twig', [
-            'newsletter' => $newsletter,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_newsletters_delete', methods: ['POST'])]
-    public function delete(Request $request, Newsletters $newsletter, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$newsletter->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($newsletter);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_newsletters_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+

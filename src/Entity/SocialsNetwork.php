@@ -23,6 +23,9 @@ class SocialsNetwork
     #[ORM\ManyToOne(inversedBy: 'usersSocial')]
     private ?Users $users = null;
 
+    #[ORM\ManyToOne(inversedBy: 'socialsNetworks')]
+    private ?Users $usersSocials = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class SocialsNetwork
     public function setUsers(?Users $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getUsersSocials(): ?Users
+    {
+        return $this->usersSocials;
+    }
+
+    public function setUsersSocials(?Users $usersSocials): static
+    {
+        $this->usersSocials = $usersSocials;
 
         return $this;
     }

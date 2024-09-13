@@ -26,6 +26,9 @@ class Evenements
     #[ORM\ManyToOne(inversedBy: 'adminEvenements')]
     private ?Users $users = null;
 
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    private ?Users $adminEvenements = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Evenements
     public function setUsers(?Users $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getAdminEvenements(): ?Users
+    {
+        return $this->adminEvenements;
+    }
+
+    public function setAdminEvenements(?Users $adminEvenements): static
+    {
+        $this->adminEvenements = $adminEvenements;
 
         return $this;
     }

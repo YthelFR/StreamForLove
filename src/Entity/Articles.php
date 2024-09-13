@@ -29,6 +29,9 @@ class Articles
     #[ORM\ManyToOne(inversedBy: 'blogueursArticle')]
     private ?Users $users = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Users $blogueurArticles = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Articles
     public function setUsers(?Users $users): static
     {
         $this->users = $users;
+
+        return $this;
+    }
+
+    public function getBlogueurArticles(): ?Users
+    {
+        return $this->blogueurArticles;
+    }
+
+    public function setBlogueurArticles(?Users $blogueurArticles): static
+    {
+        $this->blogueurArticles = $blogueurArticles;
 
         return $this;
     }

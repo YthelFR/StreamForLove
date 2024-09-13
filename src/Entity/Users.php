@@ -73,12 +73,43 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'users')]
     private Collection $blogueursArticle;
 
+    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    private ?Presentations $presentations = null;
+
+    /**
+     * @var Collection<int, Evenements>
+     */
+    #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'adminEvenements')]
+    private Collection $evenements;
+
+    /**
+     * @var Collection<int, SocialsNetwork>
+     */
+    #[ORM\OneToMany(targetEntity: SocialsNetwork::class, mappedBy: 'usersSocials')]
+    private Collection $socialsNetworks;
+
+    /**
+     * @var Collection<int, Outsiders>
+     */
+    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'adminOutsiders')]
+    private Collection $outsiders;
+
+    /**
+     * @var Collection<int, Articles>
+     */
+    #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'blogueurArticles')]
+    private Collection $articles;
+
     public function __construct()
     {
         $this->adminEvenements = new ArrayCollection();
         $this->usersSocial = new ArrayCollection();
         $this->adminOutsiders = new ArrayCollection();
         $this->blogueursArticle = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
+        $this->socialsNetworks = new ArrayCollection();
+        $this->outsiders = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -330,6 +361,148 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($blogueursArticle->getUsers() === $this) {
                 $blogueursArticle->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getPresentations(): ?Presentations
+    {
+        return $this->presentations;
+    }
+
+    public function setPresentations(?Presentations $presentations): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($presentations === null && $this->presentations !== null) {
+            $this->presentations->setStreamersPresentation(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($presentations !== null && $presentations->getStreamersPresentation() !== $this) {
+            $presentations->setStreamersPresentation($this);
+        }
+
+        $this->presentations = $presentations;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evenements>
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
+
+    public function addEvenement(Evenements $evenement): static
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->setAdminEvenements($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenements $evenement): static
+    {
+        if ($this->evenements->removeElement($evenement)) {
+            // set the owning side to null (unless already changed)
+            if ($evenement->getAdminEvenements() === $this) {
+                $evenement->setAdminEvenements(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SocialsNetwork>
+     */
+    public function getSocialsNetworks(): Collection
+    {
+        return $this->socialsNetworks;
+    }
+
+    public function addSocialsNetwork(SocialsNetwork $socialsNetwork): static
+    {
+        if (!$this->socialsNetworks->contains($socialsNetwork)) {
+            $this->socialsNetworks->add($socialsNetwork);
+            $socialsNetwork->setUsersSocials($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSocialsNetwork(SocialsNetwork $socialsNetwork): static
+    {
+        if ($this->socialsNetworks->removeElement($socialsNetwork)) {
+            // set the owning side to null (unless already changed)
+            if ($socialsNetwork->getUsersSocials() === $this) {
+                $socialsNetwork->setUsersSocials(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Outsiders>
+     */
+    public function getOutsiders(): Collection
+    {
+        return $this->outsiders;
+    }
+
+    public function addOutsider(Outsiders $outsider): static
+    {
+        if (!$this->outsiders->contains($outsider)) {
+            $this->outsiders->add($outsider);
+            $outsider->setAdminOutsiders($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOutsider(Outsiders $outsider): static
+    {
+        if ($this->outsiders->removeElement($outsider)) {
+            // set the owning side to null (unless already changed)
+            if ($outsider->getAdminOutsiders() === $this) {
+                $outsider->setAdminOutsiders(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articles>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Articles $article): static
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setBlogueurArticles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Articles $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getBlogueurArticles() === $this) {
+                $article->setBlogueurArticles(null);
             }
         }
 

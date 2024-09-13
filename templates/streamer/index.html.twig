@@ -9,49 +9,49 @@
     }
 </style>
 <div class="gradientBg py-12">
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers Actifs</h2>
+    <h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers de l'évènement</h2>
 
-{% if activeStreamers is not empty %}
-    <ul class="flex flex-wrap gap-4">
-        {% for streamer in activeStreamers %}
-            <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
-                <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
-                <p>{{ streamer.pseudo }}</p>
-            </a>
-{% endfor %}
-    </ul>
-{% else %}
-    <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer actif trouvé.</p>
-{% endif %}
+    {% if activeStreamers is not empty %}
+        <ul class="flex flex-wrap gap-4">
+            {% for streamer in activeStreamers %}
+                <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
+                    <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
+                    <p>{{ streamer.pseudo }}</p>
+                </a>
+    {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer actif trouvé.</p>
+    {% endif %}
 
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers Absents</h2>
+    <h2 class="text-3xl font-bold text-center mb-10 text-white">Streamers anciens évènements</h2>
 
-{% if inactiveStreamers is not empty %}
-    <ul class="flex flex-wrap gap-4">
-        {% for streamer in inactiveStreamers %}
-            <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
-                <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
-                <p>{{ streamer.pseudo }}</p>
-            </a>
-{% endfor %}
-    </ul>
-{% else %}
-    <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer absent trouvé.</p>
-{% endif %}
+    {% if inactiveStreamers is not empty %}
+        <ul class="flex flex-wrap gap-4">
+            {% for streamer in inactiveStreamers %}
+                <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
+                    <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
+                    <p>{{ streamer.pseudo }}</p>
+                </a>
+    {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer absent trouvé.</p>
+    {% endif %}
 
-<h2 class="text-3xl font-bold text-center mb-10 text-white">Liste des Outsiders</h2>
+    <h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers hors-évènement</h2>
 
-{% if outsiders is not empty %}
-    <ul class="flex flex-wrap gap-4">
-        {% for outsider in outsiders %}
-            <a href="{{ path('app_outsiders_show', { pseudo: outsider.pseudo }) }}">
-                <img src="{{ outsider.avatar }}" alt="{{ outsider.pseudo }}">
-                <p>{{ outsider.pseudo }}</p>
-            </a>
-{% endfor %}
-    </ul>
-{% else %}
-    <p class="text-2xl font-bold text-center mb-10 text-white">Aucun outsider trouvé.</p>
-{% endif %}
+    {% if outsiders is not empty %}
+        <ul class="flex flex-wrap gap-4">
+            {% for outsider in outsiders %}
+                <a href="{{ path('app_outsiders_show', { pseudo: outsider.pseudo }) }}">
+                    <img src="{{ outsider.avatar }}" alt="{{ outsider.pseudo }}">
+                    <p>{{ outsider.pseudo }}</p>
+                </a>
+    {% endfor %}
+        </ul>
+    {% else %}
+        <p class="text-2xl font-bold text-center mb-10 text-white">Aucun outsider trouvé.</p>
+    {% endif %}
 </div>
 {% endblock %}

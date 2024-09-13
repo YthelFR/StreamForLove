@@ -7,6 +7,8 @@ use App\Service\TwitchApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
@@ -19,8 +21,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
+        // $user = new Users();
+        // $user->setEmail('ythel.gaming@gmail.com')->setPseudo('Ythel')->setPassword($hasher->hashPassword($user, '@Yoyoyo1993'))->setValid(true)->setRoles(['ROLE_ADMIN'])->setCreatedAt(new \DateTimeImmutable());
+        // $entityManager->persist($user);
+        // $entityManager->flush();
         // Récupérer tous les utilisateurs de la base de données
         $users = $entityManager->getRepository(Users::class)->findAll();
         $liveUsers = [];

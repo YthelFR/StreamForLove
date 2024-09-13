@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Présentations{% endblock %}
+
+{% block body %}
+    <h1>Liste des Présentations</h1>
+
+    <div class="presentations">
+        {% for presentation in presentations %}
+            <div class="presentation">
+                <h2>{{ presentation.title }}</h2>
+                <p>{{ presentation.content }}</p>
+                <a href="{{ path('admin_presentations_edit', { id: presentation.id }) }}" class="btn btn-primary">Modifier</a>
+                {{ include('presentations/_delete_form.html.twig', {'presentation': presentation, 'route': 'admin_presentations_delete'}) }}
+            </div>
+        {% else %}
+            <p>Aucune présentation trouvée.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,5 +1,5 @@
 {% block body %}
-<header data-controller="active-link" class="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4 bg-white bg-opacity-50"><div class="max-w-[120rem] text-black px-6 md:px-8 lg:px-10">
+<header data-controller="active-link" class="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4 bg-white bg-opacity-50"><div class="max-w-[120rem] text-black px-6 md:px-8 lg:px-10" id="mainNavbar">
     <nav class="w-full flex flex-row items-center font-sans">
         <a class="text-black" href="/">
             <img class="h-12" src="{{ asset('assets/medias/headers/logo.png') }}" />
@@ -10,10 +10,13 @@
                     <a class="nav-link" href="/">Accueil</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="{{ path('streamers') }}">Streamer</a>
+                    <a class="nav-link" href="{{ path('streamers') }}">Nos streamers</a>
                 </li>
                 <li>
                     <a class="nav-link" href="{{ path('evenements') }}">Evenement</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{{ path('blog') }}">Actualités</a>
                 </li>
                 <li>
                     <a class="nav-link" href="https://www.coalitionplus.org/" target="_blank">Coalition PLUS</a>

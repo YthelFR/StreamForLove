@@ -1,34 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenements{% endblock %}
+{% block title %}Détails de l'Événement{% endblock %}
 
 {% block body %}
-    <h1>Evenements</h1>
+    <h1>{{ evenement.nom }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ evenement.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Donations</th>
-                <td>{{ evenement.donations }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ evenement.description }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <p>Date: {{ evenement.date|date('d/m/Y') }}</p>
+    <p>Description: {{ evenement.description }}</p>
 
-    <a href="{{ path('app_evenements_index') }}">back to list</a>
-
-    <a href="{{ path('app_evenements_edit', {'id': evenement.id}) }}">edit</a>
-
-    {{ include('evenements/_delete_form.html.twig') }}
+    <a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
 {% endblock %}
