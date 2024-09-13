@@ -15,7 +15,7 @@ class AdminUsersController extends AbstractController
     public function pendingUsers(EntityManagerInterface $entityManager): Response
     {
         // Récupérer les utilisateurs non activés
-        $users = $entityManager->getRepository(Users::class)->findBy(['isActive' => false]);
+        $users = $entityManager->getRepository(Users::class)->findBy(['isValid' => false]);
 
         return $this->render('admin/user/pending.html.twig', [
             'users' => $users,

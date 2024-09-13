@@ -1,32 +1,38 @@
 {# templates/admin/user/pending.html.twig #}
 
-{% extends 'base.html.twig' %}
+{% extends 'admin/index.html.twig' %}
 
 {% block title %}Utilisateurs en attente{% endblock %}
 
 {% block body %}
-<h1>Utilisateurs en attente de validation</h1>
+    <h1>Utilisateurs en attente de validation</h1>
 
-<table>
-    <thead>
-        <tr>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.email }}</td>
-                <td>
-                    <form method="post" action="{{ path('admin_user_activate', {'id': user.id}) }}">
-                        <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ user.id) }}">
-                        <button type="submit">Activer</button>
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+    {% if users is empty %}
+        <p>Aucun utilisateur en attente de validation.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Pseudo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.pseudo }}</td>
+                        <td>
+                            <form action="{{ path('admin_user_activate', {'id': user.id}) }}" method="post">
+                                <button type="submit">Valider</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
