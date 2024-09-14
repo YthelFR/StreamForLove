@@ -7,10 +7,16 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('users') }}
     {% endblock %}
+    {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+        <link href="{{ asset('build/quill.snow.css') }}" rel="stylesheet">
 </head>
 {{ include('dashboard/views/sidebar.html.twig') }}
 {{ include('dashboard/views/header.html.twig') }}
 <body>
     {% block body %}{% endblock %}
+    <script src="{{ asset('build/app.js') }}"></script>
 </body>
 </html>
