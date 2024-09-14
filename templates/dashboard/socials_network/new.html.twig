@@ -1,0 +1,21 @@
+{# templates/streamer/socials_network/new.html.twig #}
+
+{% extends 'user_base.html.twig' %}
+
+{% block title %}Ajouter un Réseau Social{% endblock %}
+
+{% block body %}
+<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-2xl font-bold mb-4">Ajouter un Réseau Social</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <div class="mt-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Créer</button>
+                <a href="{{ path('streamer_socials_network_index') }}" class="bg-gray-500 text-white px-4 py-2 rounded ml-4">Annuler</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

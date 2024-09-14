@@ -49,7 +49,7 @@ class StreamerUsersController extends AbstractController
             return $this->redirectToRoute('streamer_profile_edit');
         }
 
-        return $this->render('streamer/profile_edit.html.twig', [
+        return $this->render('dashboard/profile_edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }

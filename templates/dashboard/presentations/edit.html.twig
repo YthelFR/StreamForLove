@@ -1,8 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'user_base.html.twig' %}
 
 {% block title %}Edit Presentation{% endblock %}
 
 {% block body %}
+<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <h1>Edit Presentation</h1>
 
     {{ form_start(form) }}
@@ -11,4 +12,5 @@
     {{ form_end(form) }}
 
     <a href="{{ path('streamer_presentations_index') }}">back to list</a>
+</div>
 {% endblock %}
