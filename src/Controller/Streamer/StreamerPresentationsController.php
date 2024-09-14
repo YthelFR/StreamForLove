@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/dashboard/presentations')]
-#[IsGranted('ROLE_STREAMER_ACTIF')]
-#[IsGranted('ROLE_STREAMER_ABSENT')]
 class StreamerPresentationsController extends AbstractController
 {
     #[Route('/', name: 'streamer_presentations_index', methods: ['GET'])]
