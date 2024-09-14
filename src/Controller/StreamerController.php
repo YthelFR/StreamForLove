@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Outsiders;
 use App\Entity\Users;
 use App\Repository\UsersRepository;
+use App\Service\TwitchApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,15 +13,23 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class StreamerController extends AbstractController
 {
+    private $twitchApiService;
+
+    public function __construct(TwitchApiService $twitchApiService)
+    {
+        $this->twitchApiService = $twitchApiService;
+    }
     #[Route('/streamers', name: 'app_streamers')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $activeStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ACTIF');
         $inactiveStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ABSENT');
-
-        // Récupérer tous les outsiders
         $outsiders = $entityManager->getRepository(Outsiders::class)->findAll();
 
+        foreach ($outsiders as $outsider) {
+            $channelInfo = $this->twitchApiService->getChannelInfo($outsider->getPseudo());
+            $outsider->avatar = $channelInfo['profile_image_url'] ?? ''; // Assignez l'URL de l'avatar
+        }
         // Rendre le template Twig avec la liste des streamers actifs, absents et outsiders
         return $this->render('streamer/index.html.twig', [
             'activeStreamers' => $activeStreamers,

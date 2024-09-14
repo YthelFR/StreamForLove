@@ -9,5 +9,5 @@
 
     <a href="{{ path('admin_outsiders_index') }}">back to list</a>
 
-    {{ include('admin/outsiders/_delete_form.html.twig') }}
+    {{ include('admin/outsiders/_delete_form.html.twig', {'outsider': outsider}) }}
 {% endblock %}
