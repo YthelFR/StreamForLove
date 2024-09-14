@@ -1,0 +1,30 @@
+{# templates/admin/socials_network/index.html.twig #}
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des réseaux sociaux</h1>
+
+    <a href="{{ path('admin_socials_network_new') }}">Ajouter un nouveau réseau social</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>URL</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for social in socialsNetworks %}
+                <tr>
+                    <td>{{ social.name|capitalize }}</td>
+                    <td>{{ social.url }}</td>
+                    <td>
+                        <a href="{{ path('admin_socials_network_edit', { id: social.id }) }}">Modifier</a>
+                        <a href="{{ path('admin_socials_network_delete', { id: social.id }) }}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

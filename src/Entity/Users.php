@@ -22,16 +22,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
-    /**
-     * @var list<string> The user roles
-     */
-    #[ORM\Column(type:'json')]
+    #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
@@ -43,71 +37,40 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isValid = false;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
 
-    /**
-     * @var Collection<int, Evenements>
-     */
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'users')]
     private Collection $adminEvenements;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Presentations $streamersPresentation = null;
 
-    /**
-     * @var Collection<int, SocialsNetwork>
-     */
-    #[ORM\OneToMany(targetEntity: SocialsNetwork::class, mappedBy: 'users')]
-    private Collection $usersSocial;
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
+    private Collection $socialsNetworks;
 
-    /**
-     * @var Collection<int, Outsiders>
-     */
     #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'users')]
     private Collection $adminOutsiders;
 
-    /**
-     * @var Collection<int, Articles>
-     */
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'users')]
     private Collection $blogueursArticle;
 
-    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
-    private ?Presentations $presentations = null;
-
-    /**
-     * @var Collection<int, Evenements>
-     */
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'adminEvenements')]
     private Collection $evenements;
 
-    /**
-     * @var Collection<int, SocialsNetwork>
-     */
-    #[ORM\OneToMany(targetEntity: SocialsNetwork::class, mappedBy: 'usersSocials')]
-    private Collection $socialsNetworks;
-
-    /**
-     * @var Collection<int, Outsiders>
-     */
     #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'adminOutsiders')]
     private Collection $outsiders;
 
-    /**
-     * @var Collection<int, Articles>
-     */
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'blogueurArticles')]
     private Collection $articles;
 
     public function __construct()
     {
         $this->adminEvenements = new ArrayCollection();
-        $this->usersSocial = new ArrayCollection();
+        $this->socialsNetworks = new ArrayCollection();
         $this->adminOutsiders = new ArrayCollection();
         $this->blogueursArticle = new ArrayCollection();
         $this->evenements = new ArrayCollection();
-        $this->socialsNetworks = new ArrayCollection();
         $this->outsiders = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
@@ -125,7 +88,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -142,24 +104,22 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      *
-     * @return list<string>
+     * @return array<string>
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
 
     /**
-     * @param list<string> $roles
+     * @param array<string> $roles
      */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
-
         return $this;
     }
 
@@ -171,10 +131,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(?string $password): static
     {
         $this->password = $password;
-
         return $this;
     }
 
@@ -195,7 +154,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
-
         return $this;
     }
 
@@ -207,7 +165,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?string $avatar): static
     {
         $this->avatar = $avatar;
-
         return $this;
     }
 
@@ -219,7 +176,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setValid(bool $isValid): static
     {
         $this->isValid = $isValid;
-
         return $this;
     }
 
@@ -231,7 +187,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -249,7 +204,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->adminEvenements->add($adminEvenement);
             $adminEvenement->setUsers($this);
         }
-
         return $this;
     }
 
@@ -261,7 +215,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $adminEvenement->setUsers(null);
             }
         }
-
         return $this;
     }
 
@@ -273,34 +226,33 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStreamersPresentation(?Presentations $streamersPresentation): static
     {
         $this->streamersPresentation = $streamersPresentation;
-
         return $this;
     }
 
     /**
      * @return Collection<int, SocialsNetwork>
      */
-    public function getUsersSocial(): Collection
+    public function getSocialsNetworks(): Collection
     {
-        return $this->usersSocial;
+        return $this->socialsNetworks;
     }
 
-    public function addUsersSocial(SocialsNetwork $usersSocial): static
+    public function addSocialsNetwork(SocialsNetwork $socialsNetwork): self
     {
-        if (!$this->usersSocial->contains($usersSocial)) {
-            $this->usersSocial->add($usersSocial);
-            $usersSocial->setUsers($this);
+        if (!$this->socialsNetworks->contains($socialsNetwork)) {
+            $this->socialsNetworks->add($socialsNetwork);
+            $socialsNetwork->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeUsersSocial(SocialsNetwork $usersSocial): static
+    public function removeSocialsNetwork(SocialsNetwork $socialsNetwork): self
     {
-        if ($this->usersSocial->removeElement($usersSocial)) {
+        if ($this->socialsNetworks->removeElement($socialsNetwork)) {
             // set the owning side to null (unless already changed)
-            if ($usersSocial->getUsers() === $this) {
-                $usersSocial->setUsers(null);
+            if ($socialsNetwork->getUser() === $this) {
+                $socialsNetwork->setUser(null);
             }
         }
 
@@ -321,7 +273,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->adminOutsiders->add($adminOutsider);
             $adminOutsider->setUsers($this);
         }
-
         return $this;
     }
 
@@ -333,7 +284,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $adminOutsider->setUsers(null);
             }
         }
-
         return $this;
     }
 
@@ -351,7 +301,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->blogueursArticle->add($blogueursArticle);
             $blogueursArticle->setUsers($this);
         }
-
         return $this;
     }
 
@@ -363,29 +312,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $blogueursArticle->setUsers(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPresentations(): ?Presentations
-    {
-        return $this->presentations;
-    }
-
-    public function setPresentations(?Presentations $presentations): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($presentations === null && $this->presentations !== null) {
-            $this->presentations->setStreamersPresentation(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($presentations !== null && $presentations->getStreamersPresentation() !== $this) {
-            $presentations->setStreamersPresentation($this);
-        }
-
-        $this->presentations = $presentations;
-
         return $this;
     }
 
@@ -403,7 +329,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->evenements->add($evenement);
             $evenement->setAdminEvenements($this);
         }
-
         return $this;
     }
 
@@ -415,37 +340,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $evenement->setAdminEvenements(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, SocialsNetwork>
-     */
-    public function getSocialsNetworks(): Collection
-    {
-        return $this->socialsNetworks;
-    }
-
-    public function addSocialsNetwork(SocialsNetwork $socialsNetwork): static
-    {
-        if (!$this->socialsNetworks->contains($socialsNetwork)) {
-            $this->socialsNetworks->add($socialsNetwork);
-            $socialsNetwork->setUsersSocials($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSocialsNetwork(SocialsNetwork $socialsNetwork): static
-    {
-        if ($this->socialsNetworks->removeElement($socialsNetwork)) {
-            // set the owning side to null (unless already changed)
-            if ($socialsNetwork->getUsersSocials() === $this) {
-                $socialsNetwork->setUsersSocials(null);
-            }
-        }
-
         return $this;
     }
 
@@ -463,7 +357,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->outsiders->add($outsider);
             $outsider->setAdminOutsiders($this);
         }
-
         return $this;
     }
 
@@ -475,7 +368,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $outsider->setAdminOutsiders(null);
             }
         }
-
         return $this;
     }
 
@@ -493,7 +385,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             $this->articles->add($article);
             $article->setBlogueurArticles($this);
         }
-
         return $this;
     }
 
@@ -505,7 +396,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $article->setBlogueurArticles(null);
             }
         }
-
         return $this;
     }
 }

@@ -1,0 +1,32 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evenement in evenements %}
+                <tr>
+                    <td>{{ evenement.id }}</td>
+                    <td>{{ evenement.nom }}</td>
+                    <td>{{ evenement.date ? evenement.date|date('d/m/Y') : '' }}</td>
+                    <td>
+                        <a href="{{ path('admin_evenements_show', {'id': evenement.id}) }}" class="btn btn-info">Voir</a>
+                        <a href="{{ path('admin_evenements_edit', {'id': evenement.id}) }}" class="btn btn-warning">Éditer</a>
+                        <form method="post" action="{{ path('admin_evenements_delete', {'id': evenement.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

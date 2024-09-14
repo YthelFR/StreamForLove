@@ -27,3 +27,12 @@ services:
     App\Repository\ArticlesRepository:
         arguments:
             $paginator: '@knp_paginator'
+    App\Form\Type\EnumType:
+        arguments:
+            $enumClass: 'App\Enum\SocialsNetworkTypeEnum'
+    App\Twig\GlobalUserExtension:
+        arguments:
+            $security: '@security.helper'
+            $entityManager: '@doctrine.orm.entity_manager'
+        tags:
+            - { name: 'twig.extension' }

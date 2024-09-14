@@ -1,0 +1,11 @@
+{# templates/admin/socials_network/edit.html.twig #}
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier le réseau social</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">Modifier</button>
+    {{ form_end(form) }}
+{% endblock %}

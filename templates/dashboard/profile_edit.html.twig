@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier mon profil</h1>
+
+    {{ form_start(form) }}
+        <div>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <div>
+            {{ form_label(form.pseudo) }}
+            {{ form_widget(form.pseudo) }}
+            {{ form_errors(form.pseudo) }}
+        </div>
+
+        <div>
+            {{ form_label(form.old_password) }}
+            {{ form_widget(form.old_password) }}
+            {{ form_errors(form.old_password) }}
+        </div>
+
+        <div>
+            {{ form_label(form.new_password.first) }}
+            {{ form_widget(form.new_password.first) }}
+            {{ form_errors(form.new_password.first) }}
+        </div>
+
+        <div>
+            {{ form_label(form.new_password.second) }}
+            {{ form_widget(form.new_password.second) }}
+            {{ form_errors(form.new_password.second) }}
+        </div>
+
+        <button type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}

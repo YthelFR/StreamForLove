@@ -16,6 +16,24 @@ use Symfony\Component\Security\Http\Attribute\IsGranted as AttributeIsGranted;
 #[AttributeIsGranted('ROLE_ADMIN')] // Restreindre l'accès à ce contrôleur aux utilisateurs ayant le rôle ADMIN
 final class AdminEvenementsController extends AbstractController
 {
+    #[Route('/', name: 'admin_evenements_index', methods: ['GET'])]
+    public function index(EvenementsRepository $evenementsRepository): Response
+    {
+        // Affiche tous les événements
+        return $this->render('admin/evenements/index.html.twig', [
+            'evenements' => $evenementsRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/{id}', name: 'admin_evenements_show', methods: ['GET'])]
+    public function show(Evenements $evenement): Response
+    {
+        // Affiche un événement spécifique
+        return $this->render('admin/evenements/show.html.twig', [
+            'evenement' => $evenement,
+        ]);
+    }
+
     #[Route('/new', name: 'admin_evenements_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -27,7 +45,7 @@ final class AdminEvenementsController extends AbstractController
             $entityManager->persist($evenement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_evenements_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/evenements/new.html.twig', [
@@ -45,7 +63,7 @@ final class AdminEvenementsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_evenements_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/evenements/edit.html.twig', [
@@ -62,6 +80,6 @@ final class AdminEvenementsController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_evenements_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
     }
 }

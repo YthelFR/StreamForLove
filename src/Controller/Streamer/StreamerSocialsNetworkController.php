@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/dashboard/socials')]
-#[IsGranted('ROLE_STREAMER_ACTIF', 'ROLE_STREAMER_ABSENTS', 'ROLE_ADMIN', 'ROLE_MANAGER')]
 final class StreamerSocialsNetworkController extends AbstractController
 {
     #[Route(name: 'app_socials_network_index', methods: ['GET'])]

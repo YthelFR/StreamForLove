@@ -12,9 +12,8 @@ enum SocialsNetworkTypeEnum: string
     case TWITCH = 'twitch';
     case DISCORD = 'discord';
 
-    public static function choices(): array
+    public static function getChoices(): array
     {
-        return array_column(self::cases(), 'value', 'name');
+        return array_map(fn($case) => $case->name, self::cases());
     }
 }
-

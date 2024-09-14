@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}Abonnes index{% endblock %}
 
@@ -19,8 +19,8 @@
                 <td>{{ abonne.id }}</td>
                 <td>{{ abonne.email }}</td>
                 <td>
-                    <a href="{{ path('app_abonnes_show', {'id': abonne.id}) }}">show</a>
-                    <a href="{{ path('app_abonnes_edit', {'id': abonne.id}) }}">edit</a>
+                    <a href="{{ path('admin_abonnes_show', {'id': abonne.id}) }}">show</a>
+                    <a href="{{ path('admin_abonnes_edit', {'id': abonne.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_abonnes_new') }}">Create new</a>
 {% endblock %}

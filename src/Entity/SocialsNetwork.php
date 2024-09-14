@@ -1,8 +1,11 @@
 <?php
 
+// src/Entity/SocialsNetwork.php
+
+// src/Entity/SocialsNetwork.php
+
 namespace App\Entity;
 
-use App\Enum\SocialsNetworkTypeEnum;
 use App\Repository\SocialsNetworkRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,14 +20,12 @@ class SocialsNetwork
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 255, type:'string', enumType: SocialsNetworkTypeEnum::class)]
-    private SocialsNetworkTypeEnum $name;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'usersSocial')]
-    private ?Users $users = null;
-
-    #[ORM\ManyToOne(inversedBy: 'socialsNetworks')]
-    private ?Users $usersSocials = null;
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'socialsNetworks')]
+    #[ORM\JoinColumn(nullable: false)]  // Ensure that every SocialsNetwork is linked to a User
+    private ?Users $user = null;
 
     public function getId(): ?int
     {
@@ -39,43 +40,28 @@ class SocialsNetwork
     public function setUrl(string $url): static
     {
         $this->url = $url;
-
         return $this;
     }
 
-    public function getName(): SocialsNetworkTypeEnum
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(SocialsNetworkTypeEnum $name): static
+    public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
-    public function getUsers(): ?Users
+    public function getUser(): ?Users
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUsers(?Users $users): static
+    public function setUser(?Users $user): static
     {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    public function getUsersSocials(): ?Users
-    {
-        return $this->usersSocials;
-    }
-
-    public function setUsersSocials(?Users $usersSocials): static
-    {
-        $this->usersSocials = $usersSocials;
-
+        $this->user = $user;
         return $this;
     }
 }

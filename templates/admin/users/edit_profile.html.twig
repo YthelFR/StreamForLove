@@ -1,0 +1,12 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block body %}
+    <h1>Modifier votre profil</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.new_password, {'label': 'Nouveau mot de passe'}) }}
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    {{ form_end(form) }}
+{% endblock %}

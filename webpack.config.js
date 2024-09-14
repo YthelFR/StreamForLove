@@ -22,7 +22,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addStyleEntry('admin', './assets/styles/admin.css')
-    .addStyleEntry('users', './assets/styles/user_styles.css')
+    .addEntry('users', './assets/styles/user_styles.css')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -57,6 +57,7 @@ Encore
 
     // enables Sass/SCSS support
     //.enableSassLoader()
+    .enablePostCssLoader()
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()

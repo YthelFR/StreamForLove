@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}Abonnes{% endblock %}
 
@@ -18,9 +18,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_abonnes_index') }}">back to list</a>
+    <a href="{{ path('admin_abonnes_index') }}">back to list</a>
 
-    <a href="{{ path('app_abonnes_edit', {'id': abonne.id}) }}">edit</a>
+    <a href="{{ path('admin_abonnes_edit', {'id': abonne.id}) }}">edit</a>
 
-    {{ include('abonnes/_delete_form.html.twig') }}
+    {{ include('admin/abonnes/_delete_form.html.twig') }}
 {% endblock %}

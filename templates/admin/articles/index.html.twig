@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}Articles index{% endblock %}
 
@@ -25,8 +25,8 @@
                 <td>{{ article.accroche }}</td>
                 <td>{{ article.texte }}</td>
                 <td>
-                    <a href="{{ path('app_articles_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('app_articles_edit', {'id': article.id}) }}">edit</a>
+                    <a href="{{ path('admin_articles_show', {'id': article.id}) }}">show</a>
+                    <a href="{{ path('admin_articles_edit', {'id': article.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_articles_new') }}">Create new</a>
+    <a href="{{ path('admin_articles_new') }}">Create new</a>
 {% endblock %}

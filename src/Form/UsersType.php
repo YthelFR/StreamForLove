@@ -3,8 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use App\Enum\SocialsNetworkTypeEnum;
+use App\Form\SocialsNetworkType; // Assurez-vous que cette ligne est présente
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,15 @@ class UsersType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'User' => 'ROLE_USER',
+                    'Manager' => 'ROLE_MANAGER',
+                ],
+                'multiple' => true,
+                'expanded' => true, 
+            ])
             ->add('password')
             ->add('pseudo')
             ->add('avatar')
@@ -23,14 +32,18 @@ class UsersType extends AbstractType
             ->add('createdAt', null, [
                 'widget' => 'single_text',
             ])
-            ->add('socialNetworks', CollectionType::class, [
-                'entry_type' => SocialsNetworkTypeEnum::class,
+            ->add('socialsNetworks', CollectionType::class, [
+                'entry_type' => SocialsNetworkType::class,
+                'entry_options' => [
+                    'label' => false,
+                ],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'Réseaux sociaux',
+                'prototype' => true, // Permet l'ajout dynamique de nouveaux éléments
+                'required' => false, // Facultatif, si vous ne voulez pas que ce champ soit requis
             ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
