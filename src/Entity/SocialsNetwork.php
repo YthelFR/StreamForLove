@@ -1,9 +1,5 @@
 <?php
 
-// src/Entity/SocialsNetwork.php
-
-// src/Entity/SocialsNetwork.php
-
 namespace App\Entity;
 
 use App\Repository\SocialsNetworkRepository;
