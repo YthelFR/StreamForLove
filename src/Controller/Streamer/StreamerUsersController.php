@@ -10,10 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/streamer')]
-#[IsGranted('ROLE_USER')]
 class StreamerUsersController extends AbstractController
 {
     #[Route('/profil', name: 'streamer_profile_edit', methods: ['GET', 'POST'])]
