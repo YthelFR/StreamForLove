@@ -44,7 +44,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'users')]
     private Collection $adminEvenements;
 
-    #[ORM\OneToOne(targetEntity: Presentations::class, inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
     private ?Presentations $streamersPresentation = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
@@ -229,10 +229,15 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setStreamersPresentation(?Presentations $streamersPresentation): static
     {
+        // Set the owning side of the relation if necessary
+        if ($streamersPresentation !== null && $streamersPresentation->getStreamersPresentation() !== $this) {
+            $streamersPresentation->setStreamersPresentation($this);
+        }
+
         $this->streamersPresentation = $streamersPresentation;
+
         return $this;
     }
-
     /**
      * @return Collection<int, SocialsNetwork>
      */
