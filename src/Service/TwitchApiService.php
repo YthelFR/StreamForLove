@@ -169,5 +169,21 @@ class TwitchApiService
         return $data['data'][0]['profile_image_url'] ?? '';
     }
 
-    // normalement ca marche
+    public function getChannelFollowers(string $broadcasterId): int
+    {
+        $response = $this->client->request('GET', 'https://api.twitch.tv/helix/channels/followers', [
+            'headers' => [
+                'Client-ID' => $this->clientId,
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ],
+            'query' => [
+                'broadcaster_id' => $broadcasterId,
+            ],
+        ]);
+
+        $data = $response->toArray();
+
+        // Renvoyer le nombre total de followers
+        return $data['total'] ?? 0;
+    }
 }

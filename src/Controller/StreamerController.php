@@ -31,6 +31,20 @@ class StreamerController extends AbstractController
         $activeStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ACTIF');
         $inactiveStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_INACTIF');
         $outsiders = $entityManager->getRepository(Outsiders::class)->findAll();
+        // Trier les streamers actifs par pseudo
+        usort($activeStreamers, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
+
+        // Trier les streamers inactifs par pseudo
+        usort($inactiveStreamers, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
+
+        // Trier les outsiders par pseudo   
+        usort($outsiders, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
 
         foreach ($activeStreamers as $streamer) {
             $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
@@ -70,6 +84,8 @@ class StreamerController extends AbstractController
         $socialsNetworks = $streamer->getSocialsNetworks();
         // Retrieve Twitch channel info
         $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
+        $broadcasterId = $channelInfo['id'] ?? '';
+        $followersCount = $twitchApiService->getChannelFollowers($broadcasterId);
         $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
     
         return $this->render('streamer/show.html.twig', [
@@ -78,6 +94,7 @@ class StreamerController extends AbstractController
             'recentGames' => $recentGames, 
             'presentations' => $presentations,
             'socialsNetworks' => $socialsNetworks,
+            'followersCount' => $followersCount,
         ]);
     }
 }

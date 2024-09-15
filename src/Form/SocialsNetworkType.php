@@ -20,12 +20,12 @@ class SocialsNetworkType extends AbstractType
             ->add('name', ChoiceType::class, [
                 'choices' => [
                     'Twitter' => 'twitter',
-                    'Facebook' => 'facebook',
                     'Instagram' => 'instagram',
                     'TikTok' => 'tiktok',
                     'YouTube' => 'youtube',
                     'Twitch' => 'twitch',
                     'Discord' => 'discord',
+                    'Spotify' => 'spotify',
                 ],
                 'choice_label' => function ($choice) {
                     return ucfirst($choice);
