@@ -16,7 +16,7 @@
             {% for streamer in activeStreamers %}
                 <li>
                     <a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}">
-                        <img class="rounded-full w-44 h-auto" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
+                        <img class="rounded-full w-44 h-auto {{ streamer.isLive ? 'border-4 border-red-600' : '' }}" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
                         <p class="text-center pt-4 font-bold text-white text-xl">{{ streamer.pseudo }}</p>
                     </a>
                 </li>
@@ -35,7 +35,7 @@
             {% for streamer in inactiveStreamers %}
                 <li>
                     <a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}">
-                        <img class="rounded-full w-44 h-auto" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
+                        <img class="rounded-full w-44 h-auto {{ streamer.isLive ? 'border-4 border-red-600' : '' }}" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
                         <p class="text-center pt-4 font-bold text-xl">{{ streamer.pseudo }}</p>
                     </a>
                 </li>

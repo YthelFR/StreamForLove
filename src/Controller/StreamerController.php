@@ -49,11 +49,13 @@ class StreamerController extends AbstractController
         foreach ($activeStreamers as $streamer) {
             $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
             $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+            $streamer->isLive = $twitchApiService->isUserLive($streamer);
         }
         
         foreach ($inactiveStreamers as $streamer) {
             $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
             $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+            $streamer->isLive = $twitchApiService->isUserLive($streamer);
         }
 
         // Assignez les avatars pour les outsiders
