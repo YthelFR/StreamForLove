@@ -69,6 +69,7 @@ class AdminOutsidersController extends AbstractController
 
         return $this->render('admin/outsiders/edit.html.twig', [
             'form' => $form->createView(),
+            'outsider' => $outsider,
         ]);
     }
 

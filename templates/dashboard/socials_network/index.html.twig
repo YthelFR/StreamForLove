@@ -1,5 +1,3 @@
-{# templates/streamer/socials_network/index.html.twig #}
-
 {% extends 'user_base.html.twig' %}
 
 {% block title %}Mes Réseaux Sociaux{% endblock %}
@@ -16,9 +14,7 @@
         <ul class="list-disc pl-5">
             {% for social in socials_networks %}
                 <li class="mb-2">
-                    <a href="{{ path('streamer_socials_network_show', {'id': social.id}) }}" class="text-blue-500 hover:underline">
-                        {{ social.name }}
-                    </a>
+                    <strong>{{ social.name | capitalize }}</strong>: {{ social.url }}
                     <a href="{{ path('streamer_socials_network_edit', {'id': social.id}) }}" class="text-yellow-500 hover:underline ml-4">Éditer</a>
                     <form action="{{ path('streamer_socials_network_delete', {'id': social.id}) }}" method="post" style="display:inline;">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ social.id) }}">

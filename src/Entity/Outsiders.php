@@ -24,10 +24,10 @@ class Outsiders
     private ?int $somme = null;
 
     #[ORM\ManyToOne(inversedBy: 'adminOutsiders')]
-    private ?Users $users = null;
+    private ?Users $admin = null;
 
     #[ORM\ManyToOne(inversedBy: 'outsiders')]
-    private ?Users $adminOutsiders = null;
+    private ?Users $user = null;
 
     public function getId(): ?int
     {
@@ -66,31 +66,28 @@ class Outsiders
     public function setSomme(int $somme): static
     {
         $this->somme = $somme;
-
         return $this;
     }
 
-    public function getUsers(): ?Users
+    public function getUser(): ?Users
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUsers(?Users $users): static
+    public function setUser(?Users $user): static
     {
-        $this->users = $users;
-
+        $this->user = $user;
         return $this;
     }
 
-    public function getAdminOutsiders(): ?Users
+    public function getAdmin(): ?Users
     {
-        return $this->adminOutsiders;
+        return $this->admin;
     }
 
-    public function setAdminOutsiders(?Users $adminOutsiders): static
+    public function setAdmin(?Users $admin): static
     {
-        $this->adminOutsiders = $adminOutsiders;
-
+        $this->admin = $admin;
         return $this;
     }
 }

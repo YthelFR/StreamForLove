@@ -50,7 +50,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
     private Collection $socialsNetworks;
 
-    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'users')]
+    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'admin')]
     private Collection $adminOutsiders;
 
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'users')]
@@ -59,7 +59,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'adminEvenements')]
     private Collection $evenements;
 
-    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'adminOutsiders')]
+    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'user')]
     private Collection $outsiders;
 
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'blogueurArticles')]
@@ -275,7 +275,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->adminOutsiders->contains($adminOutsider)) {
             $this->adminOutsiders->add($adminOutsider);
-            $adminOutsider->setUsers($this);
+            $adminOutsider->setAdmin($this);
         }
         return $this;
     }
@@ -284,8 +284,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->adminOutsiders->removeElement($adminOutsider)) {
             // set the owning side to null (unless already changed)
-            if ($adminOutsider->getUsers() === $this) {
-                $adminOutsider->setUsers(null);
+            if ($adminOutsider->getAdmin() === $this) {
+                $adminOutsider->setAdmin(null);
             }
         }
         return $this;
@@ -359,7 +359,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->outsiders->contains($outsider)) {
             $this->outsiders->add($outsider);
-            $outsider->setAdminOutsiders($this);
+            $outsider->setUser($this);
         }
         return $this;
     }
@@ -368,8 +368,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->outsiders->removeElement($outsider)) {
             // set the owning side to null (unless already changed)
-            if ($outsider->getAdminOutsiders() === $this) {
-                $outsider->setAdminOutsiders(null);
+            if ($outsider->getUser() === $this) {
+                $outsider->setUser(null);
             }
         }
         return $this;

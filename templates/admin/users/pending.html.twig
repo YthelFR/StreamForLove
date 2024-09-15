@@ -27,6 +27,8 @@
                         <td>{{ user.pseudo }}</td>
                         <td>
                             <form action="{{ path('admin_user_activate', {'id': user.id}) }}" method="post">
+                                <!-- CSRF token ajouté -->
+                                <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ user.id) }}">
                                 <button type="submit">Valider</button>
                             </form>
                         </td>
