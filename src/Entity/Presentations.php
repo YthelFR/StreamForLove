@@ -38,7 +38,7 @@ class Presentations
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $clip4 = null;
 
-    #[ORM\OneToOne(inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
     private ?Users $streamersPresentation = null;
 
     #[ORM\Column(length: 255)]

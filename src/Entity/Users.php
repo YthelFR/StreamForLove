@@ -44,7 +44,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'users')]
     private Collection $adminEvenements;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Presentations::class, inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
     private ?Presentations $streamersPresentation = null;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
