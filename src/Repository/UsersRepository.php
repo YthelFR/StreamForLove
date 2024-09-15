@@ -34,22 +34,22 @@ class UsersRepository extends ServiceEntityRepository implements PasswordUpgrade
     }
 
     public function findByRole(string $role): array
-{
-    return $this->createQueryBuilder('u')
-        ->where('u.roles LIKE :role')
-        ->setParameter('role', '%"' . $role . '"%')
-        ->getQuery()
-        ->getResult();
-}
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%"' . $role . '"%')
+            ->getQuery()
+            ->getResult();
+    }
 
-public function findOneByPseudo(string $pseudo): ?Users
-{
-    return $this->createQueryBuilder('u')
-        ->andWhere('u.pseudo = :pseudo')
-        ->setParameter('pseudo', $pseudo)
-        ->getQuery()
-        ->getOneOrNullResult();
-}
+    public function findOneByPseudo(string $pseudo): ?Users
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.pseudo = :pseudo')
+            ->setParameter('pseudo', $pseudo)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
     //    /**
     //     * @return Users[] Returns an array of Users objects

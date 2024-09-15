@@ -36,12 +36,7 @@ class TwitchApiService
 
         $data = $response->toArray();
 
-        // Vérifiez que la réponse contient des données
-        if (isset($data['data'][0])) {
-            return $data['data'][0]; // Retourne le premier utilisateur trouvé
-        }
-
-        return [];
+        return $data['data'][0] ?? [];
     }
 
     public function isUserLive(Users $user): bool
@@ -82,7 +77,6 @@ class TwitchApiService
 
     public function getRecentGames(string $username): array
     {
-        // Récupère les informations du canal pour obtenir le jeu actuel
         $channelResponse = $this->client->request('GET', 'https://api.twitch.tv/helix/channels', [
             'headers' => [
                 'Client-ID' => $this->clientId,
@@ -98,7 +92,6 @@ class TwitchApiService
         if (isset($channelData['data'][0])) {
             $gameId = $channelData['data'][0]['game_id'];
             
-            // Utilise l'ID du jeu pour récupérer les détails du jeu, y compris l'image
             $gamesResponse = $this->client->request('GET', 'https://api.twitch.tv/helix/games', [
                 'headers' => [
                     'Client-ID' => $this->clientId,
@@ -110,10 +103,10 @@ class TwitchApiService
             ]);
 
             $gameData = $gamesResponse->toArray();
+            dump($gameData); // Dump the game data to inspect it
 
             if (isset($gameData['data'][0])) {
                 $game = $gameData['data'][0];
-                // Remplacer les placeholders {width}x{height} par des valeurs concrètes pour l'image
                 $game['box_art_url'] = str_replace('{width}x{height}', '300x400', $game['box_art_url']);
                 return $game;
             }
@@ -137,5 +130,42 @@ class TwitchApiService
         $data = $response->toArray();
 
         return $data['data'][0]['id'] ?? '';
+    }
+
+    public function getUsersInfo(array $usernames): array
+    {
+        // Limiter à 100 pseudos maximum
+        $usernames = array_slice($usernames, 0, 100);
+        
+        $response = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
+            'headers' => [
+                'Client-ID' => $this->clientId,
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ],
+            'query' => [
+                'login' => implode('&login=', $usernames),
+            ],
+        ]);
+
+        $data = $response->toArray();
+        
+        return $data['data'] ?? [];
+    }
+
+    public function getAvatarUrl(string $pseudo): string
+    {
+        // Call Twitch API to get user data
+        $response = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
+            'headers' => [
+                'Client-ID' => $this->clientId,
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ],
+            'query' => [
+                'login' => $pseudo,
+            ],
+        ]);
+
+        $data = $response->toArray();
+        return $data['data'][0]['profile_image_url'] ?? '';
     }
 }
