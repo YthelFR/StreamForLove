@@ -168,4 +168,6 @@ class TwitchApiService
         $data = $response->toArray();
         return $data['data'][0]['profile_image_url'] ?? '';
     }
+
+    // normalement ca marche
 }
