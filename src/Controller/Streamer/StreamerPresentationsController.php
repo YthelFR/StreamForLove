@@ -56,10 +56,20 @@ class StreamerPresentationsController extends AbstractController
                 $presentation->setPicturePath(null); // Ensure picturePath is null if no file is uploaded
             }
 
-            // Traitement des champs texte
-            $presentation->setQuestion1(htmlspecialchars($request->request->get('question1')));
-            $presentation->setQuestion2(htmlspecialchars($request->request->get('question2')));
-            $presentation->setQuestion3(htmlspecialchars($request->request->get('question3')));
+            $planningFile = $form->get('planning')->getData();
+            if ($planningFile) {
+                $originalFilename = pathinfo($planningFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $planningFile->guessExtension();
+
+                $planningFile->move(
+                    $this->getParameter('planning_directory') . '/public/assets/users/presentations/planning',
+                    $newFilename
+                );
+                $presentation->setPlanning($newFilename);
+            } else {
+                $presentation->setPlanning(null);
+            }
             
             $entityManager->persist($presentation);
             $entityManager->flush();
@@ -87,6 +97,7 @@ class StreamerPresentationsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('picturePath')->getData();
+            $planningFile = $form->get('planning')->getData(); // Ajout de la gestion du planning
 
             if ($file) {
                 if ($presentation->getPicturePath()) {
@@ -106,6 +117,26 @@ class StreamerPresentationsController extends AbstractController
                 );
 
                 $presentation->setPicturePath($newFilename); // Set the new file path
+            }
+
+            if ($planningFile) { // Gestion du fichier planning
+                if ($presentation->getPlanning()) {
+                    $oldPlanningPath = $this->getParameter('planning_directory') . '/' . $presentation->getPlanning();
+                    if (file_exists($oldPlanningPath)) {
+                        unlink($oldPlanningPath);
+                    }
+                }
+        
+                $originalPlanningFilename = pathinfo($planningFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safePlanningFilename = $slugger->slug($originalPlanningFilename);
+                $newPlanningFilename = $safePlanningFilename . '-' . uniqid() . '.' . $planningFile->guessExtension();
+        
+                $planningFile->move(
+                    $this->getParameter('planning_directory'),
+                    $newPlanningFilename
+                );
+        
+                $presentation->setPlanning($newPlanningFilename); // Set the new planning file path
             }
 
             $entityManager->flush();

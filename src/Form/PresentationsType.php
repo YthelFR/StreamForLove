@@ -35,6 +35,14 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip4', null, [
                 'label' => 'Clip 4'
+            ])
+            ->add('planning', FileType::class, [
+                'label' => 'Planning',
+                'mapped' => false, // Not mapped to the entity
+                'required' => false,
+                'attr' => [
+                    'accept' => 'image/*', // Optional: restrict to image files
+                ],
             ]);
     }
 

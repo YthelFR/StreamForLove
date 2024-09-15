@@ -17,7 +17,9 @@
                 <p><strong>Question 1:</strong> {{ presentation.question1 }}</p>
                 <p><strong>Question 2:</strong> {{ presentation.question2 }}</p>
                 <p><strong>Question 3:</strong> {{ presentation.question3 }}</p>
-                <p><strong>Planning:</strong> {{ presentation.planning }}</p>
+                {% if presentation.planning %}
+                    <img src="{{ asset('assets/users/presentations/planning/' ~ presentation.planning) }}" alt="Planning Image" class="w-full h-auto mb-4">
+                {% endif %}
                 {% if presentation.clip1 %}
                     <p><strong>Clip 1:</strong> <a href="{{ presentation.clip1 }}" target="_blank">Voir le clip</a></p>
                 {% endif %}

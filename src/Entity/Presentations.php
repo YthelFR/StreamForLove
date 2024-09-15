@@ -14,9 +14,6 @@ class Presentations
     #[ORM\Column]
     private ?int $id = null;
 
-    // #[ORM\Column(length: 255, nullable: true)]
-    // private ?string $picture = null;
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $question1 = null;
 
@@ -41,7 +38,7 @@ class Presentations
     #[ORM\OneToOne(targetEntity: Users::class, inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
     private ?Users $streamersPresentation = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $planning = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -51,18 +48,6 @@ class Presentations
     {
         return $this->id;
     }
-
-    // public function getPicture(): ?string
-    // {
-    //     return $this->picture;
-    // }
-
-    // public function setPicture(string $picture): static
-    // {
-    //     $this->picture = $picture;
-
-    //     return $this;
-    // }
 
     public function getQuestion1(): ?string
     {
@@ -165,10 +150,9 @@ class Presentations
         return $this->planning;
     }
 
-    public function setPlanning(string $planning): static
+    public function setPlanning(?string $planning): self
     {
         $this->planning = $planning;
-
         return $this;
     }
 
