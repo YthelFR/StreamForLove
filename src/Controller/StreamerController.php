@@ -67,6 +67,7 @@ class StreamerController extends AbstractController
             throw $this->createNotFoundException('Streamer not found');
         }
         $presentations = $this->presentationsRepository->findOneBy(['streamersPresentation' => $streamer]);
+        $socialsNetworks = $streamer->getSocialsNetworks();
         // Retrieve Twitch channel info
         $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
         $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
@@ -76,6 +77,7 @@ class StreamerController extends AbstractController
             'channelInfo' => $channelInfo,
             'recentGames' => $recentGames, 
             'presentations' => $presentations,
+            'socialsNetworks' => $socialsNetworks,
         ]);
     }
 }

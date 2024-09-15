@@ -9,22 +9,47 @@
 {% set clip4 = presentations.clip4|replace({(clipBaseUrl): ''}) %}
 
 {% block body %}
-<div class="gradientBg py-12 px-40 flex flex-row">
-    <div class="w-1/2">
-        {% if presentations %}
-            <img class="rounded-2xl" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" />
-        {% endif %}
+<div class="gradientBg py-12 px-40 flex flex-col">
+    <div class="flex flex-row items-center">
+        <div class="w-1/2 flex justify-center">
+            {% if presentations %}
+                <img class="w-auto h-5/6 object-cover rounded-2xl" 
+                src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" 
+                alt="Image de présentation" />
+            {% endif %}
+        </div>
+        <div class="w-1/2">
+            <h2 class="text-8xl text-white font-bold uppercase text-center pb-20">{{ streamer.pseudo }}</h2>
+            {% if presentations %}
+                <h3 class="text-3xl pb-4" style="color: #9F2627;">Peux-tu te présenter en quelques mots ?</h3>
+                <p class="text-white text-lg">{{ presentations.question1 }}</p>
+                <h3 class="text-3xl py-4" style="color: #9F2627;">Comment en es-tu arrivé l'univers du streaming ?</h3>
+                <p class="text-white text-lg">{{ presentations.question2 }}</p>
+                <h3 class="text-3xl py-4" style="color: #9F2627;">Pourquoi faire un stream caritatif ?</h3>
+                <p class="text-white text-lg">{{ presentations.question3 }}</p>
+            {% endif %}
+        </div>
     </div>
-    <div class="w-1/2">
-        <h2>{{ streamer.pseudo }}</h2>
-        {% if presentations %}
-            <h3>Peux-tu te présenter en quelques mots ?</h3>
-            <p>{{ presentations.question1 }}</p>
-            <h3>Comment en es-tu arrivé l'univers du streaming ?</h3>
-            <p>{{ presentations.question2 }}</p>
-            <h3>Pourquoi faire un stream caritatif ?</h3>
-            <p>{{ presentations.question3 }}</p>
-        {% endif %}
+    <div class="pt-10">
+        <h3 class="text-3xl pb-4 text-center" style="color: #9F2627;">Réseaux sociaux</h3>
+        <div class="flex flex-row">
+            {% for social in socialsNetworks %}
+                <a href="{{ social.url }}" target="_blank">
+                    {% if 'twitch' in social.url %}
+                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo" />
+                    {% elseif 'twitter' in social.url %}
+                        <img src="{{ asset('medias/socials/twitterlogo.png') }}" alt="Twitter Logo" />
+                    {% elseif 'instagram' in social.url %}
+                        <img src="{{ asset('medias/socials/instagramlogo.png') }}" alt="Instagram Logo" />
+                    {% else %}
+                        <!-- Optionally handle other social media links here -->
+                        <img src="{{ asset('medias/socials/defaultlogo.png') }}" alt="Default Logo" />
+                    {% endif %}
+                </a>
+            {% else %}
+                <p>Aucun réseau social disponible.</p>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -33,7 +58,7 @@
 </div>
 
 <div class="flex flex-col justify-center py-12 px-20">
-    <h2 class="text-center">Des moments forts sur sa chaîne !​</h2>
+    <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Des moments forts sur sa chaîne !​</h2>
     <div class="flex flex-row justify-around py-10">
         <iframe src="https://clips.twitch.tv/embed?clip={{ clip1 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
         <iframe src="https://clips.twitch.tv/embed?clip={{ clip2 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
@@ -45,14 +70,14 @@
 </div>
 
 <div class="flex flex-col items-center py-12">
-    <h2 class="text-center">Son planning</h2>
+    <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Son planning</h2>
     {% if presentations %}
         <img class="size-3/12" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" />
     {% endif %}
 </div>
 
     
-    <div>
+    {# <div>
         <h2>Infos sur la chaîne Twitch</h2>
         {% if channelInfo %}
             <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
@@ -92,5 +117,5 @@
         {% else %}
             <p>Aucun jeu récent trouvé.</p>
         {% endif %}
-    </div>
+    </div> #}
 {% endblock %}
