@@ -23,7 +23,8 @@ Encore
     .addEntry('app', './assets/app.js')
     .addStyleEntry('admin', './assets/styles/admin.css')
     .addEntry('users', './assets/styles/user_styles.css')
-    .addStyleEntry('quill', './node_modules/quill/dist/quill.snow.css')
+    .addEntry('quill', './assets/quill.js')
+    .addStyleEntry('quill_styles', './assets/styles/quill.css')
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 

@@ -1,20 +1,4 @@
 {{ form_start(form) }}
-
-{{ form_row(form.entete) }}
-
-{{ form_row(form.titre) }}
-
-<div class="form-group">
-    {{ form_label(form.accroche) }}
-    <div id="accroche-editor" class="quill-editor">{{ form_widget(form.accroche) }}</div>
-    <input type="hidden" id="accroche-editor-hidden" name="articles[accroche]" value="{{ form.accroche.vars.value }}" />
-</div>
-
-<div class="form-group">
-    {{ form_label(form.texte) }}
-    <div id="texte-editor" class="quill-editor">{{ form_widget(form.texte) }}</div>
-    <input type="hidden" id="texte-editor-hidden" name="articles[texte]" value="{{ form.texte.vars.value }}" />
-</div>
-
-<button type="submit">Envoyer</button>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
