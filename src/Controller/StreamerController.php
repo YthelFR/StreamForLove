@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Outsiders;
 use App\Entity\Users;
+use App\Repository\PresentationsRepository;
 use App\Repository\UsersRepository;
 use App\Service\TwitchApiService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,15 +21,26 @@ class StreamerController extends AbstractController
         $this->twitchApiService = $twitchApiService;
     }
     #[Route('/streamers', name: 'app_streamers')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, TwitchApiService $twitchApiService): Response
     {
         $activeStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ACTIF');
-        $inactiveStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ABSENT');
+        $inactiveStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_INACTIF');
         $outsiders = $entityManager->getRepository(Outsiders::class)->findAll();
 
+        foreach ($activeStreamers as $streamer) {
+            $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
+            $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+        }
+        
+        foreach ($inactiveStreamers as $streamer) {
+            $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
+            $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+        }
+
+        // Assignez les avatars pour les outsiders
         foreach ($outsiders as $outsider) {
             $channelInfo = $this->twitchApiService->getChannelInfo($outsider->getPseudo());
-            $outsider->avatar = $channelInfo['profile_image_url'] ?? ''; // Assignez l'URL de l'avatar
+            $outsider->avatarUrl = $channelInfo['profile_image_url'] ?? '';
         }
         // Rendre le template Twig avec la liste des streamers actifs, absents et outsiders
         return $this->render('streamer/index.html.twig', [
@@ -39,16 +51,25 @@ class StreamerController extends AbstractController
     }
 
     #[Route('/streamers/{pseudo}', name: 'app_streamers_show', methods: ['GET'])]
-    public function showStreamer(UsersRepository $usersRepository, string $pseudo): Response
-    {
+    public function showStreamer(
+        UsersRepository $usersRepository, 
+        TwitchApiService $twitchApiService, 
+        string $pseudo
+    ): Response {
         $streamer = $usersRepository->findOneByPseudo($pseudo);
-
+    
         if (!$streamer) {
             throw $this->createNotFoundException('Streamer not found');
         }
-
+    
+        // Retrieve Twitch channel info
+        $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
+        $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
+    
         return $this->render('streamer/show.html.twig', [
             'streamer' => $streamer,
+            'channelInfo' => $channelInfo,
+            'recentGames' => $recentGames, // Passing the game details to the view
         ]);
     }
 }

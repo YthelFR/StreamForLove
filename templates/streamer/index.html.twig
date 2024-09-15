@@ -11,14 +11,14 @@
 <div class="gradientBg py-12">
     <h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers de l'évènement</h2>
 
-    {% if activeStreamers is not empty %}
+      {% if activeStreamers is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for streamer in activeStreamers %}
-                <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
-                    <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
+                <div>
+                    <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
                     <p>{{ streamer.pseudo }}</p>
-                </a>
-    {% endfor %}
+                </div>
+            {% endfor %}
         </ul>
     {% else %}
         <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer actif trouvé.</p>
@@ -29,11 +29,11 @@
     {% if inactiveStreamers is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for streamer in inactiveStreamers %}
-                <a href="{{ path('app_streamers_show', { pseudo: streamer.pseudo }) }}">
-                    <img src="{{ streamer.avatar }}" alt="{{ streamer.pseudo }}">
+                <div>
+                    <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
                     <p>{{ streamer.pseudo }}</p>
-                </a>
-    {% endfor %}
+                </div>
+            {% endfor %}
         </ul>
     {% else %}
         <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer absent trouvé.</p>
@@ -44,10 +44,10 @@
     {% if outsiders is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for outsider in outsiders %}
-                <a href="{{ path('app_outsiders_show', { pseudo: outsider.pseudo }) }}">
-                    <img src="{{ outsider.avatar }}" alt="{{ outsider.pseudo }}">
+                <div>
+                    <img src="{{ outsider.avatarUrl }}" alt="{{ outsider.pseudo }}'s avatar">
                     <p>{{ outsider.pseudo }}</p>
-                </a>
+                </div>
             {% endfor %}
         </ul>
     {% else %}

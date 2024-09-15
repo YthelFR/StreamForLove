@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
+
+{% block body %}
+    <h1>{{ streamer.pseudo }}</h1>
+    
+    <div>
+        <h2>Infos sur la chaîne Twitch</h2>
+        {% if channelInfo %}
+            <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
+            <p><strong>Affichage:</strong> <img src="{{ channelInfo.profile_image_url }}" alt="Avatar de {{ channelInfo.login }}" /></p>
+            <p><strong>Description:</strong> {{ channelInfo.description }}</p>
+        {% else %}
+            <p>Aucune information disponible.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2 class="text-2xl font-bold mb-2">Dernier Jeu Joué</h2>
+        {% if recentGames is not empty %}
+            <div class="flex items-center">
+                <img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-32 rounded mr-4">
+                <div>
+                    <p><strong>Nom du Jeu:</strong> {{ recentGames['name'] }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun jeu récent trouvé.</p>
+        {% endif %}
+    </div>
+{% endblock %}
