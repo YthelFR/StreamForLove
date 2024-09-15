@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/dashboard/presentations')]
 class StreamerPresentationsController extends AbstractController
@@ -28,7 +29,7 @@ class StreamerPresentationsController extends AbstractController
     }
 
     #[Route('/new', name: 'streamer_presentations_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $user = $this->getUser();
         $presentation = new Presentations();
@@ -38,6 +39,28 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('picturePath')->getData();
+
+            if ($file) {
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures',
+                    $newFilename
+                );
+
+                $presentation->setPicturePath($newFilename); // Set the path to the file
+            } else {
+                $presentation->setPicturePath(null); // Ensure picturePath is null if no file is uploaded
+            }
+
+            // Traitement des champs texte
+            $presentation->setQuestion1(htmlspecialchars($request->request->get('question1')));
+            $presentation->setQuestion2(htmlspecialchars($request->request->get('question2')));
+            $presentation->setQuestion3(htmlspecialchars($request->request->get('question3')));
+            
             $entityManager->persist($presentation);
             $entityManager->flush();
 
@@ -50,7 +73,7 @@ class StreamerPresentationsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'streamer_presentations_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Presentations $presentation, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Presentations $presentation, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $user = $this->getUser();
 
@@ -63,6 +86,28 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('picturePath')->getData();
+
+            if ($file) {
+                if ($presentation->getPicturePath()) {
+                    $oldPicturePath = $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures/' . $presentation->getPicturePath();
+                    if (file_exists($oldPicturePath)) {
+                        unlink($oldPicturePath);
+                    }
+                }
+
+                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+                $file->move(
+                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures',
+                    $newFilename
+                );
+
+                $presentation->setPicturePath($newFilename); // Set the new file path
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('streamer_presentations_index', [], Response::HTTP_SEE_OTHER);

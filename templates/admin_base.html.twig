@@ -7,13 +7,11 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
             {{ encore_entry_link_tags('admin') }}
-            {{ encore_entry_link_tags('quill_styles') }}
         {% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
             {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('quill') }}
         {% endblock %}
     </head>
 

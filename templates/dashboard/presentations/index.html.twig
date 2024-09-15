@@ -11,8 +11,8 @@
         <div class="bg-white p-4 rounded shadow-md">
             <h2 class="text-xl font-bold mb-2">Présentation</h2>
             <div class="mb-4">
-                {% if presentation.picture %}
-                    <img src="{{ asset(presentation.picture) }}" alt="Présentation Image" class="w-full h-auto mb-4">
+                {% if presentation.picturePath %}
+                    <img src="{{ asset('assets/users/presentations/pictures/' ~ presentation.picturePath) }}" alt="Présentation Image" class="w-full h-auto mb-4">
                 {% endif %}
                 <p><strong>Question 1:</strong> {{ presentation.question1 }}</p>
                 <p><strong>Question 2:</strong> {{ presentation.question2 }}</p>

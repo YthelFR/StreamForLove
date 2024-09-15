@@ -14,16 +14,16 @@ class Presentations
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $picture = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $picture = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $question1 = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $question2 = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $question3 = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -41,25 +41,28 @@ class Presentations
     #[ORM\OneToOne(targetEntity: Users::class, inversedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
     private ?Users $streamersPresentation = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $planning = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $picturePath = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
+    // public function getPicture(): ?string
+    // {
+    //     return $this->picture;
+    // }
 
-    public function setPicture(string $picture): static
-    {
-        $this->picture = $picture;
+    // public function setPicture(string $picture): static
+    // {
+    //     $this->picture = $picture;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getQuestion1(): ?string
     {
@@ -166,6 +169,17 @@ class Presentations
     {
         $this->planning = $planning;
 
+        return $this;
+    }
+
+    public function getPicturePath(): ?string
+    {
+        return $this->picturePath;
+    }
+
+    public function setPicturePath(?string $picturePath): self
+    {
+        $this->picturePath = $picturePath;
         return $this;
     }
 }

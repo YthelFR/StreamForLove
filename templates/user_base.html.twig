@@ -6,22 +6,16 @@
     <title>{% block title %}Dashboard{% endblock %}</title>
     {% block stylesheets %}
         {{ encore_entry_link_tags('users') }}
-        {{ encore_entry_link_tags('quill_styles') }}
     {% endblock %}
     {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
             {{ encore_entry_script_tags('app') }}
-            {{ encore_entry_script_tags('quill') }}
         {% endblock %}
 </head>
 {{ include('dashboard/views/sidebar.html.twig') }}
 {{ include('dashboard/views/header.html.twig') }}
 <body>
     {% block body %}{% endblock %}
-    <script>
-  const quill = new Quill('#editor', {
-    theme: 'snow'
-  });
-</script>
+    
 </body>
 </html>
