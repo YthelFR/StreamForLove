@@ -15,10 +15,15 @@ use Symfony\Component\Routing\Attribute\Route;
 class StreamerController extends AbstractController
 {
     private $twitchApiService;
+    private $presentationsRepository;
+    private $usersRepository;
 
-    public function __construct(TwitchApiService $twitchApiService)
+    public function __construct(TwitchApiService $twitchApiService, PresentationsRepository $presentationsRepository,
+    UsersRepository $usersRepository)
     {
         $this->twitchApiService = $twitchApiService;
+        $this->presentationsRepository = $presentationsRepository;
+        $this->usersRepository = $usersRepository;
     }
     #[Route('/streamers', name: 'app_streamers')]
     public function index(EntityManagerInterface $entityManager, TwitchApiService $twitchApiService): Response
@@ -26,15 +31,31 @@ class StreamerController extends AbstractController
         $activeStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_ACTIF');
         $inactiveStreamers = $entityManager->getRepository(Users::class)->findByRole('ROLE_STREAMER_INACTIF');
         $outsiders = $entityManager->getRepository(Outsiders::class)->findAll();
+        // Trier les streamers actifs par pseudo
+        usort($activeStreamers, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
+
+        // Trier les streamers inactifs par pseudo
+        usort($inactiveStreamers, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
+
+        // Trier les outsiders par pseudo   
+        usort($outsiders, function($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
 
         foreach ($activeStreamers as $streamer) {
             $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
             $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+            $streamer->isLive = $twitchApiService->isUserLive($streamer);
         }
         
         foreach ($inactiveStreamers as $streamer) {
             $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
             $streamer->avatarUrl = $channelInfo['profile_image_url'] ?? '';
+            $streamer->isLive = $twitchApiService->isUserLive($streamer);
         }
 
         // Assignez les avatars pour les outsiders
@@ -61,15 +82,21 @@ class StreamerController extends AbstractController
         if (!$streamer) {
             throw $this->createNotFoundException('Streamer not found');
         }
-    
+        $presentations = $this->presentationsRepository->findOneBy(['streamersPresentation' => $streamer]);
+        $socialsNetworks = $streamer->getSocialsNetworks();
         // Retrieve Twitch channel info
         $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
+        $broadcasterId = $channelInfo['id'] ?? '';
+        $followersCount = $twitchApiService->getChannelFollowers($broadcasterId);
         $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
     
         return $this->render('streamer/show.html.twig', [
             'streamer' => $streamer,
             'channelInfo' => $channelInfo,
-            'recentGames' => $recentGames, // Passing the game details to the view
+            'recentGames' => $recentGames, 
+            'presentations' => $presentations,
+            'socialsNetworks' => $socialsNetworks,
+            'followersCount' => $followersCount,
         ]);
     }
 }
