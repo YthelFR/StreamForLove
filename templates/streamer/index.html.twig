@@ -11,13 +11,15 @@
 <div class="gradientBg py-12">
     <h2 class="text-3xl font-bold text-center mb-10 text-white">Les streamers de l'évènement</h2>
 
-      {% if activeStreamers is not empty %}
+    {% if activeStreamers is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for streamer in activeStreamers %}
-                <div>
-                    <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
-                    <p>{{ streamer.pseudo }}</p>
-                </div>
+                <li>
+                    <a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}">
+                        <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
+                        <p>{{ streamer.pseudo }}</p>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
@@ -29,10 +31,12 @@
     {% if inactiveStreamers is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for streamer in inactiveStreamers %}
-                <div>
-                    <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
-                    <p>{{ streamer.pseudo }}</p>
-                </div>
+                <li>
+                    <a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}">
+                        <img src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }}'s avatar">
+                        <p>{{ streamer.pseudo }}</p>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
@@ -44,10 +48,12 @@
     {% if outsiders is not empty %}
         <ul class="flex flex-wrap gap-4">
             {% for outsider in outsiders %}
-                <div>
-                    <img src="{{ outsider.avatarUrl }}" alt="{{ outsider.pseudo }}'s avatar">
-                    <p>{{ outsider.pseudo }}</p>
-                </div>
+                <li>
+                    <a href="{{ path('app_outsiders_show', { 'pseudo': outsider.pseudo }) }}">
+                        <img src="{{ outsider.avatarUrl }}" alt="{{ outsider.pseudo }}'s avatar">
+                        <p>{{ outsider.pseudo }}</p>
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     {% else %}
