@@ -21,9 +21,15 @@ class PresentationsType extends AbstractType
                 'accept' => 'image/*', // Optional: restrict to image files
             ],
         ])
-            ->add('question1')
-            ->add('question2')
-            ->add('question3')
+            ->add('question1', null, [
+                'label' => 'Peux-tu te présenter en quelques mots ?'
+            ])
+            ->add('question2', null, [
+                'label' => 'Comment en es-tu arrivé l\'univers du streaming ?'
+            ])
+            ->add('question3', null, [
+                'label' => 'Pourquoi faire un stream caritatif ?'
+            ])
             ->add('clip1', null, [
                 'label' => 'Clip 1'
             ])
