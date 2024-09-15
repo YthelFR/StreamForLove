@@ -15,10 +15,15 @@ use Symfony\Component\Routing\Attribute\Route;
 class StreamerController extends AbstractController
 {
     private $twitchApiService;
+    private $presentationsRepository;
+    private $usersRepository;
 
-    public function __construct(TwitchApiService $twitchApiService)
+    public function __construct(TwitchApiService $twitchApiService, PresentationsRepository $presentationsRepository,
+    UsersRepository $usersRepository)
     {
         $this->twitchApiService = $twitchApiService;
+        $this->presentationsRepository = $presentationsRepository;
+        $this->usersRepository = $usersRepository;
     }
     #[Route('/streamers', name: 'app_streamers')]
     public function index(EntityManagerInterface $entityManager, TwitchApiService $twitchApiService): Response
@@ -61,7 +66,7 @@ class StreamerController extends AbstractController
         if (!$streamer) {
             throw $this->createNotFoundException('Streamer not found');
         }
-    
+        $presentations = $this->presentationsRepository->findOneBy(['streamersPresentation' => $streamer]);
         // Retrieve Twitch channel info
         $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
         $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
@@ -69,7 +74,8 @@ class StreamerController extends AbstractController
         return $this->render('streamer/show.html.twig', [
             'streamer' => $streamer,
             'channelInfo' => $channelInfo,
-            'recentGames' => $recentGames, // Passing the game details to the view
+            'recentGames' => $recentGames, 
+            'presentations' => $presentations,
         ]);
     }
 }

@@ -3,6 +3,8 @@
 {% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
 
 {% block body %}
+
+
     <h1>{{ streamer.pseudo }}</h1>
     
     <div>
@@ -13,6 +15,23 @@
             <p><strong>Description:</strong> {{ channelInfo.description }}</p>
         {% else %}
             <p>Aucune information disponible.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>Présentation</h2>
+        {% if presentations %}
+            <p><strong>Question 1:</strong> {{ presentations.question1 }}</p>
+            <p><strong>Question 2:</strong> {{ presentations.question2 }}</p>
+            <p><strong>Question 3:</strong> {{ presentations.question3 }}</p>
+            <p><strong>Clip 1:</strong> <a href="{{ presentations.clip1 }}">{{ presentations.clip1 }}</a></p>
+            <p><strong>Clip 2:</strong> <a href="{{ presentations.clip2 }}">{{ presentations.clip2 }}</a></p>
+            <p><strong>Clip 3:</strong> <a href="{{ presentations.clip3 }}">{{ presentations.clip3 }}</a></p>
+            <p><strong>Clip 4:</strong> <a href="{{ presentations.clip4 }}">{{ presentations.clip4 }}</a></p>
+            <p><strong>Planning:</strong> <img src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" /></p>
+            <p><strong>Image:</strong> <img src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" /></p>
+        {% else %}
+            <p>Aucune présentation disponible.</p>
         {% endif %}
     </div>
 
