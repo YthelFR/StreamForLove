@@ -1,11 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
+{% set siteUrl = 'https://localhost:8000/' %}
+{% set clipBaseUrl = 'https://www.twitch.tv/ythel_/clip/' %}
+{% set clip1 = presentations.clip1|replace({(clipBaseUrl): ''}) %}
+{% set clip2 = presentations.clip2|replace({(clipBaseUrl): ''}) %}
+{% set clip3 = presentations.clip3|replace({(clipBaseUrl): ''}) %}
+{% set clip4 = presentations.clip4|replace({(clipBaseUrl): ''}) %}
 
 {% block body %}
+<div class="gradientBg py-12 px-40 flex flex-row">
+    <div class="w-1/2">
+        {% if presentations %}
+            <img class="rounded-2xl" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" />
+        {% endif %}
+    </div>
+    <div class="w-1/2">
+        <h2>{{ streamer.pseudo }}</h2>
+        {% if presentations %}
+            <h3>Peux-tu te présenter en quelques mots ?</h3>
+            <p>{{ presentations.question1 }}</p>
+            <h3>Comment en es-tu arrivé l'univers du streaming ?</h3>
+            <p>{{ presentations.question2 }}</p>
+            <h3>Pourquoi faire un stream caritatif ?</h3>
+            <p>{{ presentations.question3 }}</p>
+        {% endif %}
+    </div>
+</div>
 
+<div class="flex justify-center py-12">
+    <iframe src="https://player.twitch.tv/?channel={{ streamer.pseudo|lower }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="720" width="1280"></iframe>
+</div>
 
-    <h1>{{ streamer.pseudo }}</h1>
+<div class="flex flex-col justify-center py-12 px-20">
+    <h2 class="text-center">Des moments forts sur sa chaîne !​</h2>
+    <div class="flex flex-row justify-around py-10">
+        <iframe src="https://clips.twitch.tv/embed?clip={{ clip1 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="https://clips.twitch.tv/embed?clip={{ clip2 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+    </div>
+    <div class="flex flex-row justify-around">
+        <iframe src="https://clips.twitch.tv/embed?clip={{ clip3 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="https://clips.twitch.tv/embed?clip={{ clip4 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+    </div>
+</div>
+
+<div class="flex flex-col items-center py-12">
+    <h2 class="text-center">Son planning</h2>
+    {% if presentations %}
+        <img class="size-3/12" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" />
+    {% endif %}
+</div>
+
     
     <div>
         <h2>Infos sur la chaîne Twitch</h2>
