@@ -13,8 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted as AttributeIsGranted;
 
 #[Route('/admin/evenements')]
-#[AttributeIsGranted('ROLE_ADMIN')] // Restreindre l'accès à ce contrôleur aux utilisateurs ayant le rôle ADMIN
-final class AdminEvenementsController extends AbstractController
+class AdminEvenementsController extends AbstractController
 {
     #[Route('/', name: 'admin_evenements_index', methods: ['GET'])]
     public function index(EvenementsRepository $evenementsRepository): Response
