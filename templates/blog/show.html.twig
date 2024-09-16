@@ -6,11 +6,10 @@
     <article>
         <h1>{{ article.titre }}</h1>
         
-        {% if article.imagePath %}
-            <img src="{{ asset(article.imagePath) }}" alt="{{ article.titre }}" class="article-image-large">
+        {% if article.entete %}
+            <img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image-large">
         {% endif %}
         
-        <p class="entete">{{ article.entete }}</p>
         <p class="accroche">{{ article.accroche }}</p>
         <div class="texte">{{ article.texte|raw }}</div>
         

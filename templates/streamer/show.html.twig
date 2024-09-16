@@ -37,19 +37,19 @@
             {% for social in socialsNetworks %}
                 <a href="{{ social.url }}" target="_blank">
                     {% if 'twitch' in social.url %}
-                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo" />
                     {% elseif 'x.com' in social.url %}
-                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/twitterlogo.jpg') }}" alt="Twitter Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Twitter Logo" />
                     {% elseif 'instagram' in social.url %}
-                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Instagram Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Instagram Logo" />
                     {% elseif 'youtube' in social.url %}
-                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="Instagram Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="YouTube Logo" />
                     {% elseif 'tiktok' in social.url %}
-                        <img class="size-24 rounded-3xl" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="Instagram Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="TikTok Logo" />
                     {% elseif 'spotify' in social.url %}
-                        <img class="size-24 rounded-3xl bg-black p-2" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Instagram Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl bg-black p-2" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Spotify Logo" />
                     {% elseif 'discord' in social.url %}
-                        <img class="size-24 rounded-3xl" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Instagram Logo" />
+                        <img class="size-24 rounded-3xl shadow-xl" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Instagram Logo" />
                     {% else %}
                         <!-- Optionally handle other social media links here -->
                         <img src="{{ asset('medias/socials/defaultlogo.png') }}" alt="Default Logo" />

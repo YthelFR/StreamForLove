@@ -15,10 +15,10 @@ class PresentationsType extends AbstractType
         $builder
         ->add('picturePath', FileType::class, [
             'label' => 'Image de présentation',
-            'mapped' => false, // Not mapped to the entity
+            'mapped' => false, 
             'required' => false,
             'attr' => [
-                'accept' => 'image/*', // Optional: restrict to image files
+                'accept' => 'image/*',
             ],
         ])
             ->add('question1', null, [
@@ -44,10 +44,10 @@ class PresentationsType extends AbstractType
             ])
             ->add('planning', FileType::class, [
                 'label' => 'Planning',
-                'mapped' => false, // Not mapped to the entity
+                'mapped' => false,
                 'required' => false,
                 'attr' => [
-                    'accept' => 'image/*', // Optional: restrict to image files
+                    'accept' => 'image/*',
                 ],
             ]);
     }
