@@ -41,25 +41,25 @@ class TwitchApiService
 
     public function isUserLive(Users $user): bool
     {
-        // Cherche le réseau social "Twitch" associé à l'utilisateur
+        // Find the user's Twitch social network information
         $twitchNetwork = $this->em->getRepository(SocialsNetwork::class)
             ->findOneBy(['user' => $user, 'name' => 'twitch']);
 
-        // Si l'utilisateur n'a pas de réseau Twitch, retourne false
         if (!$twitchNetwork) {
-            return false;
+            return false; // No Twitch account linked
         }
 
-        // Extrait le pseudo Twitch de l'URL (ex : https://www.twitch.tv/mandragoule_ -> mandragoule_)
+        // Extract Twitch username from URL
         $twitchUrl = $twitchNetwork->getUrl();
-        $username = str_replace('https://www.twitch.tv/', '', $twitchUrl);
+        $parsedUrl = parse_url($twitchUrl, PHP_URL_PATH);
+        $username = trim($parsedUrl, '/');
 
-        // Si le pseudo est vide après extraction, retourne false
+        // If the extracted username is empty, return false
         if (empty($username)) {
             return false;
         }
 
-        // Effectue la requête pour savoir si l'utilisateur est en live
+        // Query Twitch API to check if the user is live
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/streams', [
             'headers' => [
                 'Client-ID' => $this->clientId,
@@ -72,7 +72,8 @@ class TwitchApiService
 
         $data = $response->toArray();
 
-        return !empty($data['data']);
+        // Check if there's data and if the stream is live
+        return !empty($data['data']) && $data['data'][0]['type'] === 'live';
     }
 
     public function getRecentGames(string $username): array
@@ -103,7 +104,6 @@ class TwitchApiService
             ]);
 
             $gameData = $gamesResponse->toArray();
-            dump($gameData); // Dump the game data to inspect it
 
             if (isset($gameData['data'][0])) {
                 $game = $gameData['data'][0];

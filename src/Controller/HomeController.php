@@ -24,10 +24,9 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
         // $user = new Users();
-        // $user->setEmail('yoanjambon21112@gmail.com')->setPseudo('Ythel4')->setPassword($hasher->hashPassword($user, '@Yoyoyo1993'))->setValid(true)->setRoles(['ROLE_STREAMER_ABSENT'])->setCreatedAt(new \DateTimeImmutable());
+        // $user->setEmail('therock666@therock666.fr')->setPseudo('therock666')->setPassword($hasher->hashPassword($user, '@therock66669'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
         // $entityManager->persist($user);
         // $entityManager->flush();
-        // Récupérer tous les utilisateurs de la base de données
         $users = $entityManager->getRepository(Users::class)->findAll();
         $liveUsers = [];
 

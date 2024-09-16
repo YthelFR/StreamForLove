@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
-{% set siteUrl = 'https://localhost:8000/' %}
-{% set clipBaseUrl = 'https://www.twitch.tv/{{ streamer.pseudo }}/clip/' %}
-{% set clip1 = presentations.clip1|replace({(clipBaseUrl): ''}) %}
-{% set clip2 = presentations.clip2|replace({(clipBaseUrl): ''}) %}
-{% set clip3 = presentations.clip3|replace({(clipBaseUrl): ''}) %}
-{% set clip4 = presentations.clip4|replace({(clipBaseUrl): ''}) %}
+{% set siteUrl = 'localhost:8000' %}
+{% set clipBaseUrl = 'https://www.twitch.tv/' ~ streamer.pseudo ~ '/clip/' %}
+{% set clip1Id = presentations.clip1|split('/clip/')|last %}
+{% set clip2Id = presentations.clip2|split('/clip/')|last %}
+{% set clip3Id = presentations.clip3|split('/clip/')|last %}
+{% set clip4Id = presentations.clip4|split('/clip/')|last %}
+
+{% set clip1EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip1Id %}
+{% set clip2EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip2Id %}
+{% set clip3EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip3Id %}
+{% set clip4EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip4Id %}
 
 {% block body %}
 <div class="gradientBg py-12 px-40 flex flex-col">
@@ -92,12 +97,12 @@
 <div class="flex flex-col justify-center py-12 px-20">
     <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Des moments forts sur sa chaîne !​</h2>
     <div class="flex flex-row justify-around py-10">
-        <iframe src="https://clips.twitch.tv/embed?clip={{ clip1 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        <iframe src="https://clips.twitch.tv/embed?clip={{ clip2 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="{{ clip1EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="{{ clip2EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
     </div>
     <div class="flex flex-row justify-around">
-        <iframe src="https://clips.twitch.tv/embed?clip={{ clip3 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-        <iframe src="https://clips.twitch.tv/embed?clip={{ clip4 }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="{{ clip3EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+        <iframe src="{{ clip4EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
     </div>
 </div>
 
