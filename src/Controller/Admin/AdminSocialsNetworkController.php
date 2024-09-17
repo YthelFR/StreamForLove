@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller\Admin;
 
@@ -14,9 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminSocialsNetworkController extends AbstractController
 {
     #[Route('/admin/socials-network', name: 'admin_socials_network_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, Security $security): Response
     {
-        $socialsNetworks = $entityManager->getRepository(SocialsNetwork::class)->findAll();
+        $user = $security->getUser();  // Get the currently logged-in user
+        
+        // Fetch only the social networks for the logged-in user
+        $socialsNetworks = $entityManager->getRepository(SocialsNetwork::class)
+            ->findBy(['user' => $user]);
 
         return $this->render('admin/socials_network/index.html.twig', [
             'socialsNetworks' => $socialsNetworks,

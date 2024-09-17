@@ -1,11 +1,39 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}New Articles{% endblock %}
+{% block title %}Créer un Article{% endblock %}
 
 {% block body %}
-    <h1>Create new Articles</h1>
+<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+    <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Créer un Article</h1>
 
-    {{ include('admin/articles/_form.html.twig') }}
+    <!-- Formulaire de création -->
+    {{ form_start(form) }}
+        <div class="mb-4">
+            {{ form_label(form.entete, 'Image de présentation', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.entete, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
 
-    <a href="{{ path('admin_articles_index') }}">back to list</a>
+        <div class="mb-4">
+            {{ form_label(form.titre, 'Titre', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.titre, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.accroche, 'Accroche', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.accroche, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.texte, 'Texte', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.texte, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex justify-end mt-6">
+            <a href="{{ path('admin_articles_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Créer</button>
+        </div>
+
+    {{ form_end(form) }}
+</div>
 {% endblock %}

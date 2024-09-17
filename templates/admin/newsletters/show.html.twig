@@ -1,34 +1,44 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Newsletters{% endblock %}
+{% block title %}Détails de la Newsletter{% endblock %}
 
 {% block body %}
-    <h1>Newsletters</h1>
+<div class="container mx-auto p-6 bg-gray-100">
+    <h1 class="text-3xl font-bold mb-6">Détails de la Newsletter</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ newsletter.id }}</td>
-            </tr>
-            <tr>
-                <th>Sujet</th>
-                <td>{{ newsletter.sujet }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ newsletter.contenu }}</td>
-            </tr>
-            <tr>
-                <th>DateEnvoi</th>
-                <td>{{ newsletter.dateEnvoi ? newsletter.dateEnvoi|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <table class="min-w-full bg-white border border-gray-200">
+            <tbody>
+                <tr class="border-b">
+                    <th class="px-4 py-2 text-left text-gray-600 font-semibold">Id</th>
+                    <td class="px-4 py-2">{{ newsletter.id }}</td>
+                </tr>
+                <tr class="border-b">
+                    <th class="px-4 py-2 text-left text-gray-600 font-semibold">Sujet</th>
+                    <td class="px-4 py-2">{{ newsletter.sujet }}</td>
+                </tr>
+                <tr class="border-b">
+                    <th class="px-4 py-2 text-left text-gray-600 font-semibold">Contenu</th>
+                    <td class="px-4 py-2">{{ newsletter.contenu }}</td>
+                </tr>
+                <tr class="border-b">
+                    <th class="px-4 py-2 text-left text-gray-600 font-semibold">Date d'envoi</th>
+                    <td class="px-4 py-2">{{ newsletter.dateEnvoi ? newsletter.dateEnvoi|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('admin_newsletters_index') }}">back to list</a>
+    <div class="mt-6 flex space-x-4">
+        <a href="{{ path('admin_newsletters_index') }}" class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700">
+            Retour à la liste
+        </a>
 
-    <a href="{{ path('admin_newsletters_edit', {'id': newsletter.id}) }}">edit</a>
+        <a href="{{ path('admin_newsletters_edit', {'id': newsletter.id}) }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500">
+            Modifier
+        </a>
 
-    {{ include('admin/newsletters/_delete_form.html.twig') }}
+        {{ include('admin/newsletters/_delete_form.html.twig') }}
+    </div>
+</div>
 {% endblock %}
