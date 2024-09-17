@@ -16,7 +16,33 @@
     {{ include('views/header.html.twig') }}
     <body>
         {% block body %}{% endblock %}
+        <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener('click', function (e) {
+    const toggle = e.target.closest('.dropdown-toggle');
+    const menu = e.target.closest('.dropdown-menu');
+    if (toggle) {
+        const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu');
+        if (menuEl.classList.contains('hidden')) {
+            hideDropdown();
+            menuEl.classList.remove('hidden');
+        } else {
+            menuEl.classList.add('hidden');
+        }
+    } else if (!menu) {
+        hideDropdown();
+    }
+});
+
+function hideDropdown() {
+    document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+        item.classList.add('hidden');
+    });
+}
+</script>
     </body>
     {{ include('views/newsletter.html.twig') }}
     {{ include('views/footer.html.twig') }}
+    
 </html>

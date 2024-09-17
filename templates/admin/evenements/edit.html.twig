@@ -1,13 +1,32 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Edit Evenements{% endblock %}
+{% block title %}Éditer Événement{% endblock %}
 
 {% block body %}
-    <h1>Edit Evenements</h1>
+<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+    <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier Événement</h1>
 
-    {{ include('admin/evenements/_form.html.twig', {'button_label': 'Update'}) }}
+    <!-- Formulaire d'édition -->
+    {{ form_start(form) }}
+        <div class="mb-4">
+            {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.nom, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
 
-    <a href="{{ path('admin_evenements_index') }}">back to list</a>
+        <div class="mb-4">
+            {{ form_label(form.date, 'Date', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.date, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
 
+        <!-- Boutons d'action -->
+        <div class="flex justify-end mt-6">
+            <a href="{{ path('admin_evenements_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Mettre à jour</button>
+        </div>
+
+    {{ form_end(form) }}
+
+    <!-- Formulaire de suppression -->
     {{ include('admin/evenements/_delete_form.html.twig') }}
+</div>
 {% endblock %}
