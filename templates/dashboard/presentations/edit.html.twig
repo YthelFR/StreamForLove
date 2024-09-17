@@ -53,9 +53,9 @@
         </div>
 
         <!-- Form buttons -->
-        <div class="buttons flex justify-end">
-            <a href="{{ path('admin_presentations_index') }}" class="btn border border-gray-300 p-2 px-4 font-semibold cursor-pointer text-gray-500">Retour à la liste</a>
-            <button class="btn border border-indigo-500 p-2 px-4 font-semibold cursor-pointer text-white bg-indigo-500 ml-2">Enregistrer les modifications</button>
+        <div class="flex justify-end mt-4">
+            <a href="{{ path('admin_presentations_index') }}" class="inline-block border border-gray-300 p-2 px-4 font-semibold text-gray-500 hover:bg-gray-100 rounded-lg">Retour à la liste</a>
+            <button class="ml-2 inline-block border border-indigo-500 p-2 px-4 font-semibold text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg">Enregistrer les modifications</button>
         </div>
 
         {{ form_end(form) }}

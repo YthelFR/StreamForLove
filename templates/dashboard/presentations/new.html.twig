@@ -1,13 +1,65 @@
 {% extends 'user_base.html.twig' %}
 
-{% block title %}New Presentations{% endblock %}
+{% block title %}Créer une nouvelle Présentation{% endblock %}
 
 {% block body %}
 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-    <h1>Create new Presentations</h1>
+    <h1 class="text-center font-bold text-2xl m-5 text-gray-800">Créer une nouvelle Présentation</h1>
 
-    {{ include('presentations/_form.html.twig') }}
+    <div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white">
+        {{ form_start(form) }}
 
-    <a href="{{ path('streamer_presentations_index') }}">back to list</a>
+        <!-- Question 1 -->
+        <div class="mb-4">
+            {{ form_row(form.question1, {'attr': {'class': 'w-full h-60 border border-gray-300 p-2 rounded-lg'}}) }}
+        </div>
+
+        <!-- Question 2 -->
+        <div class="mb-4">
+            {{ form_row(form.question2, {'attr': {'class': 'w-full h-60 border border-gray-300 p-2 rounded-lg'}}) }}
+        </div>
+
+        <!-- Question 3 -->
+        <div class="mb-4">
+            {{ form_row(form.question3, {'attr': {'class': 'w-full h-60 border border-gray-300 p-2 rounded-lg'}}) }}
+        </div>
+
+        <!-- Clip fields with larger input area -->
+        <div class="mb-4">
+            {{ form_row(form.clip1, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+        </div>
+        <div class="mb-4">
+            {{ form_row(form.clip2, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+        </div>
+        <div class="mb-4">
+            {{ form_row(form.clip3, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+        </div>
+        <div class="mb-4">
+            {{ form_row(form.clip4, {'attr': {'class': 'w-full p-2 border border-gray-300 rounded-lg'}}) }}
+        </div>
+
+        <!-- Image fields with reduced width for file uploads -->
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="presentation_image">Image de présentation</label>
+            <div class="w-2/3">
+                {{ form_row(form.picturePath, {'attr': {'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none'}}) }}
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <label class="block mb-2 text-sm font-medium text-gray-900" for="planning">Planning</label>
+            <div class="w-2/3">
+                {{ form_row(form.planning, {'attr': {'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none'}}) }}
+            </div>
+        </div>
+
+        <!-- Form buttons -->
+        <div class="buttons flex justify-end mt-4">
+            <a href="{{ path('streamer_presentations_index') }}" class="btn border border-gray-300 p-2 px-4 font-semibold cursor-pointer text-gray-500">Retour à la liste</a>
+            <button class="btn border border-indigo-500 p-2 px-4 font-semibold cursor-pointer text-white bg-indigo-500 ml-2">Enregistrer la présentation</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
 </div>
 {% endblock %}

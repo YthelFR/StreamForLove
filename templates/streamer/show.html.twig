@@ -3,15 +3,17 @@
 {% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
 {% set siteUrl = 'localhost:8000' %}
 {% set clipBaseUrl = 'https://www.twitch.tv/' ~ streamer.pseudo ~ '/clip/' %}
-{% set clip1Id = presentations.clip1|split('/clip/')|last %}
-{% set clip2Id = presentations.clip2|split('/clip/')|last %}
-{% set clip3Id = presentations.clip3|split('/clip/')|last %}
-{% set clip4Id = presentations.clip4|split('/clip/')|last %}
+{% set clip1Id = presentations is not null and presentations.clip1 is not empty ? presentations.clip1|split('/clip/')|last : null %}
+{% set clip2Id = presentations is not null and presentations.clip2 is not empty ? presentations.clip2|split('/clip/')|last : null %}
+{% set clip3Id = presentations is not null and presentations.clip3 is not empty ? presentations.clip3|split('/clip/')|last : null %}
+{% set clip4Id = presentations is not null and presentations.clip4 is not empty ? presentations.clip4|split('/clip/')|last : null %}
 
-{% set clip1EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip1Id %}
-{% set clip2EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip2Id %}
-{% set clip3EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip3Id %}
-{% set clip4EmbedUrl = 'https://clips.twitch.tv/embed?clip=' ~ clip4Id %}
+{% set clip1EmbedUrl = clip1Id ? 'https://clips.twitch.tv/embed?clip=' ~ clip1Id : null %}
+{% set clip2EmbedUrl = clip2Id ? 'https://clips.twitch.tv/embed?clip=' ~ clip2Id : null %}
+{% set clip3EmbedUrl = clip3Id ? 'https://clips.twitch.tv/embed?clip=' ~ clip3Id : null %}
+{% set clip4EmbedUrl = clip4Id ? 'https://clips.twitch.tv/embed?clip=' ~ clip4Id : null %}
+
+
 
 {% block body %}
 <div class="gradientBg py-12 px-40 flex flex-col">
@@ -20,6 +22,10 @@
             {% if presentations %}
                 <img class="w-auto h-5/6 object-cover rounded-2xl" 
                 src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" 
+                alt="Image de présentation" />
+            {% else %}
+                <img class="w-auto h-5/6 object-cover rounded-2xl" 
+                src="{{ channelInfo.profile_image_url }}" 
                 alt="Image de présentation" />
             {% endif %}
         </div>
@@ -33,6 +39,9 @@
                 <p class="text-white text-lg">{{ presentations.question2 }}</p>
                 <h3 class="text-3xl py-4" style="color: #9F2627;">Pourquoi faire un stream caritatif ?</h3>
                 <p class="text-white text-lg">{{ presentations.question3 }}</p>
+            {% else %}
+                <h3 class="text-3xl pb-4" style="color: #9F2627;">Bio de {{ streamer.pseudo }}</h3>
+                <p class="text-white text-lg">{{ channelInfo.description }}</p>
             {% endif %} 
         </div>
     </div>
@@ -94,22 +103,38 @@
     </div>
 </div>
 
-<div class="flex flex-col justify-center py-12 px-20">
-    <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Des moments forts sur sa chaîne !​</h2>
-    <div class="flex flex-row justify-around py-10">
+<div class="flex flex-row justify-around py-10">
+    {% if clip1EmbedUrl %}
         <iframe src="{{ clip1EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+    {% else %}
+        <p>Aucun clip 1 disponible.</p>
+    {% endif %}
+    
+    {% if clip2EmbedUrl %}
         <iframe src="{{ clip2EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-    </div>
-    <div class="flex flex-row justify-around">
+    {% else %}
+        <p>Aucun clip 2 disponible.</p>
+    {% endif %}
+</div>
+<div class="flex flex-row justify-around">
+    {% if clip3EmbedUrl %}
         <iframe src="{{ clip3EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+    {% else %}
+        <p>Aucun clip 3 disponible.</p>
+    {% endif %}
+    
+    {% if clip4EmbedUrl %}
         <iframe src="{{ clip4EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
-    </div>
+    {% else %}
+        <p>Aucun clip 4 disponible.</p>
+    {% endif %}
 </div>
 
 <div class="flex flex-col items-center py-12">
     <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Son planning</h2>
     {% if presentations %}
         <img class="size-3/12" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" />
+    {% else %}
     {% endif %}
 </div>
 
