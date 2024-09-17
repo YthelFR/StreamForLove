@@ -1,13 +1,37 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Edit Outsiders{% endblock %}
+{% block title %}Éditer Outsiders{% endblock %}
 
 {% block body %}
-    <h1>Edit Outsiders</h1>
+<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+    <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier Outsider</h1>
 
-    {{ include('admin/outsiders/_form.html.twig', {'button_label': 'Update'}) }}
+    <!-- Formulaire d'édition -->
+    {{ form_start(form) }}
+        <div class="mb-4">
+            {{ form_label(form.pseudo, 'Pseudo', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.pseudo, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
 
-    <a href="{{ path('admin_outsiders_index') }}">back to list</a>
+        <div class="mb-4">
+            {{ form_label(form.twitch, 'Twitch', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.twitch, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
 
-    {{ include('admin/outsiders/_delete_form.html.twig', {'outsider': outsider}) }}
+        <div class="mb-4">
+            {{ form_label(form.somme, 'Somme', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.somme, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex justify-end mt-6">
+            <a href="{{ path('admin_outsiders_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Mettre à jour</button>
+            {{ include('admin/outsiders/_delete_form.html.twig', {'outsider': outsider}) }}
+        </div>
+
+        
+
+    {{ form_end(form) }}
+</div>
 {% endblock %}

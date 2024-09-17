@@ -1,39 +1,83 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Outsiders index{% endblock %}
+{% block title %}Gestion des Outsiders{% endblock %}
 
 {% block body %}
-    <h1>Outsiders index</h1>
+<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+    <h1 class="text-2xl font-semibold text-gray-700">Liste des Outsiders</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Pseudo</th>
-                <th>Twitch</th>
-                <th>Somme</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for outsider in outsiders %}
-            <tr>
-                <td>{{ outsider.id }}</td>
-                <td>{{ outsider.pseudo }}</td>
-                <td>{{ outsider.twitch }}</td>
-                <td>{{ outsider.somme }}</td>
-                <td>
-                    <a href="{{ path('admin_outsiders_show', {'id': outsider.id}) }}">show</a>
-                    <a href="{{ path('admin_outsiders_edit', {'id': outsider.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- Bouton pour créer un nouvel outsider en haut -->
+    <a href="{{ path('admin_outsiders_new') }}"
+       class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600 mb-4">
+        Créer un nouvel outsider
+    </a>
 
-    <a href="{{ path('admin_outsiders_new') }}">Create new</a>
+    {% if outsiders is empty %}
+        <p class="mt-4 text-gray-500">Aucun outsider trouvé.</p>
+    {% else %}
+        <div class="overflow-y-hidden rounded-lg border mt-6">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                            <th class="px-5 py-3">ID</th>
+                            <th class="px-5 py-3">Pseudo</th>
+                            <th class="px-5 py-3">Twitch</th>
+                            <th class="px-5 py-3">Somme</th>
+                            <th class="px-5 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-500">
+                        {% for outsider in outsiders %}
+                        <tr class="bg-white hover:bg-gray-100">
+                            <!-- ID de l'outsider -->
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ outsider.id }}</p>
+                            </td>
+
+                            <!-- Pseudo de l'outsider -->
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ outsider.pseudo }}</p>
+                            </td>
+
+                            <!-- Twitch de l'outsider -->
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ outsider.twitch }}</p>
+                            </td>
+
+                            <!-- Somme -->
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ outsider.somme }}</p>
+                            </td>
+
+                            <!-- Actions : Voir et Éditer -->
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <div class="flex space-x-4">
+                                    <!-- Bouton pour afficher les détails -->
+                                    <a href="{{ path('admin_outsiders_show', {'id': outsider.id}) }}"
+                                       class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+                                        Voir
+                                    </a>
+
+                                    <!-- Bouton pour éditer -->
+                                    <a href="{{ path('admin_outsiders_edit', {'id': outsider.id}) }}"
+                                       class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+                                        Éditer
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Bouton pour créer un nouvel outsider en bas -->
+    <a href="{{ path('admin_outsiders_new') }}"
+       class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600 mt-4">
+        Créer un nouvel outsider
+    </a>
+</div>
 {% endblock %}
