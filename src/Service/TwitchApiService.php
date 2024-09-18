@@ -41,25 +41,24 @@ class TwitchApiService
 
     public function isUserLive(Users $user): bool
     {
-        // Find the user's Twitch social network information
+        // Trouver les informations du réseau Twitch de l'utilisateur
         $twitchNetwork = $this->em->getRepository(SocialsNetwork::class)
             ->findOneBy(['user' => $user, 'name' => 'twitch']);
 
         if (!$twitchNetwork) {
-            return false; // No Twitch account linked
+            return false; // Aucun compte Twitch lié
         }
 
-        // Extract Twitch username from URL
+        // Extraire le pseudo Twitch depuis l'URL du réseau social
         $twitchUrl = $twitchNetwork->getUrl();
         $parsedUrl = parse_url($twitchUrl, PHP_URL_PATH);
         $username = trim($parsedUrl, '/');
 
-        // If the extracted username is empty, return false
         if (empty($username)) {
             return false;
         }
 
-        // Query Twitch API to check if the user is live
+        // Appel API Twitch pour vérifier si l'utilisateur est en live
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/streams', [
             'headers' => [
                 'Client-ID' => $this->clientId,
@@ -72,7 +71,6 @@ class TwitchApiService
 
         $data = $response->toArray();
 
-        // Check if there's data and if the stream is live
         return !empty($data['data']) && $data['data'][0]['type'] === 'live';
     }
 

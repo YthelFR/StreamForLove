@@ -3,16 +3,19 @@
 {% block title %}Stream For Love{% endblock %}
 
 {% block body %}
-<div class="gradientBg py-12">
-    <h2 class="text-3xl font-bold text-center mb-10 text-white">Nos streamers en direct !</h2>
+<div class="gradientBg py-12 px-20">
+    <h2 class="text-3xl font-bold text-center pb-10 text-white">Nos streamers en direct !</h2>
 
 {% if liveUsers is not empty %}
-    <div class="flex flex-wrap gap-4">
-        {% for user in liveUsers %}
-            <div class="w-24 h-24">
-                <img class="w-full h-full rounded-full" src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo }}">
-            </div>
-        {% endfor %}
+        <ul class="flex flex-wrap gap-4 justify-evenly">
+            {% for user in liveUsers %}
+                <li>
+                    <a class="flex flex-col items-center text-center" href="{{ path('app_streamers_show', { 'pseudo': user.pseudo }) }}">
+                        <img class="rounded-full w-24 h-auto bg-white border-4 border-red-600" src="{{ user.avatar }}" alt="{{ user.pseudo }} avatar">
+                        <p class="text-center pt-4 font-bold text-white text-xl">{{ user.pseudo }}</p>
+                    </a>
+                </li>
+            {% endfor %}
     </div>
 {% else %}
     <p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer n'est actuellement en direct.</p>
