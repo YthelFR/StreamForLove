@@ -21,8 +21,12 @@ class HomeController extends AbstractController
     }
 
     #[Route('/', name: 'app_home')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
+        // $user = new Users();
+        // $user->setEmail('masthom_@masthom_.fr')->setPseudo('Masthom_')->setPassword($hasher->hashPassword($user, '@masthom_69'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
+        // $entityManager->persist($user);
+        // $entityManager->flush();
         // Filtrer les utilisateurs ayant le rôle ROLE_STREAMER_ACTIF
         $users = $entityManager->getRepository(Users::class)
             ->findByRole('ROLE_STREAMER_ACTIF');
@@ -47,8 +51,5 @@ class HomeController extends AbstractController
             'liveUsers' => $liveUsers,
         ]);
     }
-    // $user = new Users();
-        // $user->setEmail('therock666@therock666.fr')->setPseudo('therock666')->setPassword($hasher->hashPassword($user, '@therock66669'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
-        // $entityManager->persist($user);
-        // $entityManager->flush();
+    
 }

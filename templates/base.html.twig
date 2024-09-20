@@ -12,6 +12,7 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
+        <link rel="icon" type="image/jpg" href="{{ asset('/assets/medias/accueil/favicon.ico') }}" />
     </head>
     {{ include('views/header.html.twig') }}
     <body>
@@ -44,5 +45,5 @@ function hideDropdown() {
     </body>
     {{ include('views/newsletter.html.twig') }}
     {{ include('views/footer.html.twig') }}
-    
+    {{ include('views/back_to_top.html.twig') }}
 </html>
