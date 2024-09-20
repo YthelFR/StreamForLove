@@ -2,18 +2,23 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class ErrorController extends AbstractController
 {
-
-    public function show404(): Response
+    public function show(Request $request): Response
     {
-        return $this->render('error/404.html.twig', [
-            'message' => 'Page non trouvée.',
-        ]);
+        $exception = $request->attributes->get('exception');
+
+        if ($exception instanceof NotFoundHttpException) {
+            return $this->render('bundles/TwigBundle/Exception/error404.html.twig', [
+                'message' => $exception->getMessage(),
+            ]);
+        }
+
+        return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
     }
 }

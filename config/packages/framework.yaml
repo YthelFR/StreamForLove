@@ -5,10 +5,10 @@ framework:
 
     # Note that the session will be started ONLY if you read or write from it.
     session: true
+    error_controller: App\Controller\ErrorController::show
 
     #esi: true
     #fragments: true
-    error_controller: 'App\Controller\ErrorController::show404'
 when@test:
     framework:
         test: true
