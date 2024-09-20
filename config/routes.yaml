@@ -4,6 +4,7 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-_error:
-    resource: '@App\Controller\ErrorController'
-    type: annotation
+when@dev:
+    _errors:
+        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+        prefix:   /_error
