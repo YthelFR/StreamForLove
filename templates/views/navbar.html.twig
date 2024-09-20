@@ -2,13 +2,13 @@
 <header data-controller="active-link" class="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4 bg-white bg-opacity-50">
     <div class="max-w-[120rem] text-black px-6 md:px-8 lg:px-10" id="mainNavbar">
         <nav class="w-full flex flex-row items-center font-sans">
-            <a class="text-black" href="/">
+            <a class="text-black w-1/4" href="/">
                 <img class="h-12" src="{{ asset('assets/medias/headers/logo.png') }}" />
             </a>
-            <div class="flex-1 relative hidden md:flex items-center justify-center">
+            <div class="flex-1 w-2/4 relative hidden md:flex items-center justify-center">
                 <ul class="mx-auto inline-flex gap-6 text-base font-bold">
                     <li>
-                        <a class="nav-link" href="/">Accueil</a>
+                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
                     </li>
                     <li>
                         <a class="nav-link" href="{{ path('app_streamers') }}">Nos streamers</a>
@@ -26,7 +26,7 @@
                         <a class="nav-link" href="{{ path('app_newsletter_subscribe') }}">Newsletter</a>
                     </li>
                 </ul>
-                <ul class="ml-auto flex items-center">
+                <ul class="ml-auto flex justify-end self-center w-1/4">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <!-- Dropdown User Avatar -->
                         <li class="px-2 dropdown ml-3 relative">
@@ -100,8 +100,8 @@
 
                     <!-- Contact Button -->
                     <li class="relative">
-                        <button class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
-                            <span class="flex items-center justify-center text-lg px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+                        <button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+                            <span class="flex items-center justify-center text-lg px-5 py-1.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
                                 Contact
                             </span>
                         </button>

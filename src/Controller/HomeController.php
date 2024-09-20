@@ -24,18 +24,23 @@ class HomeController extends AbstractController
     public function index(EntityManagerInterface $entityManager, UserPasswordHasherInterface $hasher): Response
     {
         // $user = new Users();
-        // $user->setEmail('therock666@therock666.fr')->setPseudo('therock666')->setPassword($hasher->hashPassword($user, '@therock66669'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
+        // $user->setEmail('masthom_@masthom_.fr')->setPseudo('Masthom_')->setPassword($hasher->hashPassword($user, '@masthom_69'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
         // $entityManager->persist($user);
         // $entityManager->flush();
-        $users = $entityManager->getRepository(Users::class)->findAll();
+        // Filtrer les utilisateurs ayant le rôle ROLE_STREAMER_ACTIF
+        $users = $entityManager->getRepository(Users::class)
+            ->findByRole('ROLE_STREAMER_ACTIF');
         $liveUsers = [];
 
-        // Vérifier si chaque utilisateur est en live et récupérer son avatar
+        // Vérifier si chaque utilisateur est en live et récupérer son avatar via Twitch
         foreach ($users as $user) {
             if ($this->twitchApiService->isUserLive($user)) {
+                $channelInfo = $this->twitchApiService->getChannelInfo($user->getPseudo());
+                $avatarUrl = $channelInfo['profile_image_url'] ?? '';
+
                 $liveUsers[] = [
                     'pseudo' => $user->getPseudo(),
-                    'avatar' => $user->getAvatar()
+                    'avatar' => $avatarUrl
                 ];
             }
         }
@@ -46,4 +51,5 @@ class HomeController extends AbstractController
             'liveUsers' => $liveUsers,
         ]);
     }
+    
 }

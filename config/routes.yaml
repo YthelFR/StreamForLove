@@ -4,26 +4,6 @@ controllers:
         namespace: App\Controller
     type: attribute
 
-# home:
-#     path: /
-#     controller: App\Controller\HomeController::index
-
-# streamers:
-#     path: /streamers
-#     controller: App\Controller\StreamerController::index
-#     methods: GET
-
-# evenements:
-#     path: /evenements
-#     controller: App\Controller\EvenementsController::index
-#     methods: GET
-
-# newsletter:
-#     path: /newsletter
-#     controller: App\Controller\NewslettersController::index
-#     methods: GET
-
-# blog:
-#     path: /blog
-#     controller: App\Controller\BlogController::index
-#     methods: GET
+_error:
+    resource: '@App\Controller\ErrorController'
+    type: annotation

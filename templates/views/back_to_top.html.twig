@@ -1,0 +1,24 @@
+<!-- Bouton pour remonter en haut -->
+<a href="#" id="back-to-top" class="fixed bottom-10 right-10 bg-pink-500 text-white p-3 rounded-full shadow-lg hover:bg-pink-700 transition-opacity duration-300" style="display:none;">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+    </svg>
+</a>
+
+<script>
+    // JavaScript pour afficher/cacher le bouton en fonction du scroll
+    window.addEventListener('scroll', function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        if (window.scrollY > 300) { // Affiche le bouton après 300px de scroll
+            backToTopButton.style.display = 'block';
+        } else {
+            backToTopButton.style.display = 'none';
+        }
+    });
+
+    // Scroll vers le haut au clic sur le bouton
+    document.getElementById('back-to-top').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
