@@ -1,23 +1,99 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription - Stream For Love{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<!-- component -->
+<div class="min-h-screen flex flex-col items-center justify-center gradientBg">
+  <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+    <div class="font-medium self-center text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800">
+      Rejoignez-nous !
+    </div>
+    <div class="mt-4 self-center text-sm sm:text-md md:text-lg text-gray-800">
+      Remplissez les informations ci-dessous pour créer un compte
+    </div>
 
-    <h1>Register</h1>
+    <div class="mt-10">
+      {{ form_start(registrationForm) }}
+      
+      <div class="flex flex-col mb-5">
+        <label for="email" class="mb-1 text-xs tracking-wide text-gray-600">E-mail:</label>
+        <div class="relative">
+          <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+            <i class="fas fa-at text-blue-500"></i>
+          </div>
+          {{ form_widget(registrationForm.email, {
+              'attr': {
+                'class': 'text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400',
+                'placeholder': 'Votre e-mail'
+              }
+            }) }}
+        </div>
+        {{ form_errors(registrationForm.email) }}
+      </div>
 
-    {{ form_errors(registrationForm) }}
+      <div class="flex flex-col mb-5">
+        <label for="pseudo" class="mb-1 text-xs tracking-wide text-gray-600">Pseudo:</label>
+        <div class="relative">
+          <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+            <i class="fas fa-user text-blue-500"></i>
+          </div>
+          {{ form_widget(registrationForm.pseudo, {
+              'attr': {
+                'class': 'text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400',
+                'placeholder': 'Votre pseudo'
+              }
+            }) }}
+        </div>
+        {{ form_errors(registrationForm.pseudo) }}
+      </div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+      <div class="flex flex-col mb-6">
+        <label for="plainPassword" class="mb-1 text-xs tracking-wide text-gray-600">Mot de passe:</label>
+        <div class="relative">
+          <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+            <span><i class="fas fa-lock text-blue-500"></i></span>
+          </div>
+          {{ form_widget(registrationForm.plainPassword, {
+              'attr': {
+                'class': 'text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400',
+                'placeholder': 'Votre mot de passe'
+              }
+            }) }}
+        </div>
+        {{ form_errors(registrationForm.plainPassword) }}
+      </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+      <div class="flex items-center mb-4">
+        {{ form_widget(registrationForm.agreeTerms, {
+            'attr': {
+              'class': 'mr-2'
+            }
+          }) }}
+        <label for="agreeTerms" class="text-xs tracking-wide text-gray-600">J'accepte les <a href="#" class="text-red-700">termes et conditions</a></label>
+      </div>
+      
+      {{ form_errors(registrationForm.agreeTerms) }}
+
+      <div class="flex w-full">
+        <button type="submit" class="flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base btnSfl rounded-2xl py-2 w-full transition duration-150 ease-in">
+          <span class="mr-2 uppercase">S'inscrire</span>
+          <span>
+            <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+      {{ form_end(registrationForm) }}
+    </div>
+  </div>
+
+  <div class="flex justify-center items-center mt-6">
+    <a href="{{ path('app_login') }}" class="inline-flex items-center text-gray-700 font-medium text-xs text-center">
+      <span class="ml-2">Déjà un compte ? <a href="{{ path('app_login') }}" class="text-xs ml-2 text-red-700 font-semibold">Connectez-vous ici !</a></span>
+    </a>
+  </div>
+</div>
+
 {% endblock %}
