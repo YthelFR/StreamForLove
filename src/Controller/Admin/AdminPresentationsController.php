@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Controller\Admin;
 
@@ -29,10 +29,9 @@ class AdminPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Traitez les fichiers
             $pictureFile = $form->get('picturePath')->getData();
             if ($pictureFile) {
-                $newFilename = uniqid().'.'.$pictureFile->guessExtension();
+                $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
                 $pictureFile->move(
                     $this->getParameter('pictures_directory'),
                     $newFilename
@@ -42,7 +41,7 @@ class AdminPresentationsController extends AbstractController
 
             $planningFile = $form->get('planning')->getData();
             if ($planningFile) {
-                $newPlanningFilename = uniqid().'.'.$planningFile->guessExtension();
+                $newPlanningFilename = uniqid() . '.' . $planningFile->guessExtension();
                 $planningFile->move(
                     $this->getParameter('planning_directory'),
                     $newPlanningFilename
@@ -52,7 +51,7 @@ class AdminPresentationsController extends AbstractController
 
             $goalsFile = $form->get('goals')->getData();
             if ($goalsFile) {
-                $newGoalsFilename = uniqid().'.'.$goalsFile->guessExtension();
+                $newGoalsFilename = uniqid() . '.' . $goalsFile->guessExtension();
                 $goalsFile->move(
                     $this->getParameter('goals_directory'),
                     $newGoalsFilename

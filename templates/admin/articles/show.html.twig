@@ -1,48 +1,49 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}Article
+{% endblock %}
 
 {% block body %}
-    <div class="container mx-auto p-6 bg-gray-100">
-        <h1 class="text-3xl font-bold mb-6">Article Details</h1>
+	<div class="container mx-auto p-6 bg-gray-100">
+		<h1 class="text-3xl font-bold mb-6">Article Details</h1>
 
-        <div class="bg-white shadow-md rounded-lg p-6">
-            <table class="min-w-full bg-white border border-gray-200">
-                <tbody>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-left text-gray-600 font-semibold">Id</th>
-                        <td class="px-4 py-2">{{ article.id }}</td>
-                    </tr>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-left text-gray-600 font-semibold">Entete</th>
-                        <td class="px-4 py-2">{{ article.entete }}</td>
-                    </tr>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-left text-gray-600 font-semibold">Titre</th>
-                        <td class="px-4 py-2">{{ article.titre }}</td>
-                    </tr>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-left text-gray-600 font-semibold">Accroche</th>
-                        <td class="px-4 py-2">{{ article.accroche }}</td>
-                    </tr>
-                    <tr class="border-b">
-                        <th class="px-4 py-2 text-left text-gray-600 font-semibold">Texte</th>
-                        <td class="px-4 py-2">{{ article.texte }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+		<div class="bg-white shadow-md rounded-lg p-6">
+			<table class="min-w-full bg-white border border-gray-200">
+				<tbody>
+					<tr class="border-b">
+						<th class="px-4 py-2 text-left text-gray-600 font-semibold">Id</th>
+						<td class="px-4 py-2">{{ article.id }}</td>
+					</tr>
+					<tr class="border-b">
+						<th class="px-4 py-2 text-left text-gray-600 font-semibold">Entete</th>
+						<td class="px-4 py-2">{{ article.entete }}</td>
+					</tr>
+					<tr class="border-b">
+						<th class="px-4 py-2 text-left text-gray-600 font-semibold">Titre</th>
+						<td class="px-4 py-2">{{ article.titre }}</td>
+					</tr>
+					<tr class="border-b">
+						<th class="px-4 py-2 text-left text-gray-600 font-semibold">Accroche</th>
+						<td class="px-4 py-2">{{ article.accroche }}</td>
+					</tr>
+					<tr class="border-b">
+						<th class="px-4 py-2 text-left text-gray-600 font-semibold">Texte</th>
+						<td class="px-4 py-2">{{ article.texte }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-        <div class="mt-6 flex space-x-4">
-            <a href="{{ path('admin_articles_index') }}" class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700">
-                Back to list
-            </a>
+		<div class="mt-6 flex space-x-4">
+			<a href="{{ path('admin_articles_index') }}" class="inline-block px-6 py-3 bg-gray-800 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700">
+				Back to list
+			</a>
 
-            <a href="{{ path('admin_articles_edit', {'id': article.id}) }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500">
-                Edit
-            </a>
+			<a href="{{ path('admin_articles_edit', {'id': article.id}) }}" class="inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-500">
+				Edit
+			</a>
 
-            {{ include('admin/articles/_delete_form.html.twig', { 'article': article }) }}
-        </div>
-    </div>
+			{{ include('admin/articles/_delete_form.html.twig', { 'article': article }) }}
+		</div>
+	</div>
 {% endblock %}

@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de l'Événement{% endblock %}
+{% block title %}Détails de l'Événement
+{% endblock %}
 
 {% block body %}
-    <h1>{{ evenement.nom }}</h1>
+	<h1>{{ evenement.nom }}</h1>
 
-    <p>Date: {{ evenement.date|date('d/m/Y') }}</p>
-    <p>Description: {{ evenement.description }}</p>
+	<p>Date:
+		{{ evenement.date|date('d/m/Y') }}</p>
+	<p>Description:
+		{{ evenement.description }}</p>
 
-    <a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
+	<a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
 {% endblock %}

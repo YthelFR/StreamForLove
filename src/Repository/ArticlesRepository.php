@@ -24,9 +24,9 @@ class ArticlesRepository extends ServiceEntityRepository
             ->getQuery();
 
         return $this->paginator->paginate(
-            $queryBuilder, 
-            $page,         
-            $limit         
+            $queryBuilder,
+            $page,
+            $limit
         );
     }
 }

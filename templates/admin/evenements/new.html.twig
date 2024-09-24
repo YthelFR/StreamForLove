@@ -1,36 +1,36 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Créer un Nouvel Événement{% endblock %}
+{% block title %}Créer un Nouvel Événement
+{% endblock %}
 
 {% block body %}
-<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
-    <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Créer un Nouvel Événement</h1>
+	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+		<h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Créer un Nouvel Événement</h1>
 
-    {% for label, messages in app.session.flashBag.all() %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
+		{% for label, messages in app.session.flashBag.all() %}
+			{% for message in messages %}
+				<div class="alert alert-{{ label }}">
+					{{ message }}
+				</div>
+			{% endfor %}
+		{% endfor %}
 
-    {{ form_start(form) }}
-        <div class="mb-4">
-            {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-            {{ form_widget(form.nom, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-        </div>
+		{{ form_start(form) }}
+		<div class="mb-4">
+			{{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.nom, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
 
-        <div class="mb-4">
-            {{ form_label(form.date, 'Date', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-            {{ form_widget(form.date, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-        </div>
+		<div class="mb-4">
+			{{ form_label(form.date, 'Date', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.date, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
 
-        <!-- Boutons d'action -->
-        <div class="flex justify-end mt-6">
-            <a href="{{ path('admin_evenements_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
-            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Créer</button>
-        </div>
+		<div class="flex justify-end mt-6">
+			<a href="{{ path('admin_evenements_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+			<button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Créer</button>
+		</div>
 
-    {{ form_end(form) }}
-</div>
+		{{ form_end(form) }}
+	</div>
 {% endblock %}

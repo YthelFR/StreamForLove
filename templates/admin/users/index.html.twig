@@ -1,88 +1,72 @@
 {% extends 'admin_base.html.twig' %}
 
 {% block body %}
-<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-  <div class="flex items-center justify-between pb-6">
-    <div>
-      <h2 class="font-semibold text-gray-700">Liste des utilisateurs</h2>
-      <span class="text-xs text-gray-500">Gestion des comptes utilisateurs</span>
-    </div>
-  </div>
-  
-  <div class="overflow-y-hidden rounded-lg border">
-      <table class="w-full">
-        <thead>
-          <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-            <th class="px-5 py-3">Avatar</th>
-            <th class="px-5 py-3">Pseudo</th>
-            <th class="px-5 py-3">Email</th>
-            <th class="px-5 py-3">Rôles</th>
-            <th class="px-5 py-3">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="text-gray-500">
-          {% for user in users %}
-          <tr class="bg-white hover:bg-gray-100">
-            <!-- Avatar avec image par défaut si manquante -->
-            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-              <div class="flex items-center">
-                <div class="h-10 w-10 flex-shrink-0">
-                  <img class="h-full w-full rounded-full"
-                    src="{{ user.avatar ?: asset('medias/avatars/default-avatar.png') }}" 
-                    alt="Avatar de {{ user.pseudo }}" />
-                </div>
-              </div>
-            </td>
+	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+		<div class="flex items-center justify-between pb-6">
+			<div>
+				<h2 class="font-semibold text-gray-700">Liste des utilisateurs</h2>
+				<span class="text-xs text-gray-500">Gestion des comptes utilisateurs</span>
+			</div>
+		</div>
 
-            <!-- Pseudo -->
-            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-              <div class="ml-3">
-                <p class="whitespace-no-wrap">{{ user.pseudo }}</p>
-              </div>
-            </td>
+		<div class="overflow-y-hidden rounded-lg border">
+			<table class="w-full">
+				<thead>
+					<tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+						<th class="px-5 py-3">Avatar</th>
+						<th class="px-5 py-3">Pseudo</th>
+						<th class="px-5 py-3">Email</th>
+						<th class="px-5 py-3">Rôles</th>
+						<th class="px-5 py-3">Actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-gray-500">
+					{% for user in users %}
+						<tr
+							class="bg-white hover:bg-gray-100">
+							<td class="border-b border-gray-200 px-5 py-5 text-sm">
+								<div class="flex items-center">
+									<div class="h-10 w-10 flex-shrink-0">
+										<img class="h-full w-full rounded-full" src="{{ user.avatar ?: asset('medias/avatars/default-avatar.png') }}" alt="Avatar de {{ user.pseudo }}"/>
+									</div>
+								</div>
+							</td>
 
-            <!-- Email -->
-            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">{{ user.email }}</p>
-            </td>
+							<td class="border-b border-gray-200 px-5 py-5 text-sm">
+								<div class="ml-3">
+									<p class="whitespace-no-wrap">{{ user.pseudo }}</p>
+								</div>
+							</td>
 
-            <!-- Rôles -->
-            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-              <p class="whitespace-no-wrap">{{ user.roles|join(', ') }}</p>
-            </td>
+							<td class="border-b border-gray-200 px-5 py-5 text-sm">
+								<p class="whitespace-no-wrap">{{ user.email }}</p>
+							</td>
 
-            <!-- Actions avec boutons vert et rouge -->
-            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-              <div class="flex space-x-4">
-                <!-- Bouton vert pour éditer -->
-                <a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
-                  Éditer
-                </a>
+							<td class="border-b border-gray-200 px-5 py-5 text-sm">
+								<p class="whitespace-no-wrap">{{ user.roles|join(', ') }}</p>
+							</td>
 
-                <!-- Bouton rouge pour supprimer -->
-                {% if user.id != app.user.id %}
-                  <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline-block">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-                    <button class="rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
-                      Supprimer
-                    </button>
-                  </form>
-                {% endif %}
-              </div>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    
-    {# <!-- Pagination -->
-    <div class="flex flex-col items-center border-t px-5 py-5 sm:flex-row sm:justify-between">
-      <span class="text-xs text-gray-600 sm:text-sm"> Affichage de 1 à {{ users|length }} utilisateurs </span>
-      <div class="mt-2 inline-flex sm:mt-0">
-        <button class="mr-2 h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Précédent</button>
-        <button class="h-12 w-12 rounded-full border text-sm font-semibold text-gray-600 transition duration-150 hover:bg-gray-100">Suivant</button>
-      </div>
-    </div> #}
-  </div>
-</div>
+							<td class="border-b border-gray-200 px-5 py-5 text-sm">
+								<div
+									class="flex space-x-4">
+									<a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+										Éditer
+									</a>
+
+									{% if user.id != app.user.id %}
+										<form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline-block">
+											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+											<button class="rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
+												Supprimer
+											</button>
+										</form>
+									{% endif %}
+								</div>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

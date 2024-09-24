@@ -22,7 +22,6 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            // Créer l'email
             $email = (new Email())
                 ->from($data['email'])
                 ->to('support@streamforlove.coalitionplus.org')
@@ -31,13 +30,11 @@ class ContactController extends AbstractController
 
             $mailer->send($email);
 
-            // Message de succès
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
             return $this->redirectToRoute('contact');
         }
 
-        // Gérer les messages d'erreur
         $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
 
         return $this->render('contact/contact.html.twig', [

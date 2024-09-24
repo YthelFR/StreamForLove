@@ -60,4 +60,3 @@ class ContactType extends AbstractType
         $resolver->setDefaults([]);
     }
 }
-

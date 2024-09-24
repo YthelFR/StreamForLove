@@ -1,54 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Presentations{% endblock %}
+{% block title %}Presentations
+{% endblock %}
 
 {% block body %}
-    <h1>Presentations</h1>
+	<h1>Presentations</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ presentation.id }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ presentation.picture }}</td>
-            </tr>
-            <tr>
-                <th>Question1</th>
-                <td>{{ presentation.question1 }}</td>
-            </tr>
-            <tr>
-                <th>Question2</th>
-                <td>{{ presentation.question2 }}</td>
-            </tr>
-            <tr>
-                <th>Question3</th>
-                <td>{{ presentation.question3 }}</td>
-            </tr>
-            <tr>
-                <th>Clip1</th>
-                <td>{{ presentation.clip1 }}</td>
-            </tr>
-            <tr>
-                <th>Clip2</th>
-                <td>{{ presentation.clip2 }}</td>
-            </tr>
-            <tr>
-                <th>Clip3</th>
-                <td>{{ presentation.clip3 }}</td>
-            </tr>
-            <tr>
-                <th>Clip4</th>
-                <td>{{ presentation.clip4 }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ presentation.id }}</td>
+			</tr>
+			<tr>
+				<th>Picture</th>
+				<td>{{ presentation.picture }}</td>
+			</tr>
+			<tr>
+				<th>Question1</th>
+				<td>{{ presentation.question1 }}</td>
+			</tr>
+			<tr>
+				<th>Question2</th>
+				<td>{{ presentation.question2 }}</td>
+			</tr>
+			<tr>
+				<th>Question3</th>
+				<td>{{ presentation.question3 }}</td>
+			</tr>
+			<tr>
+				<th>Clip1</th>
+				<td>{{ presentation.clip1 }}</td>
+			</tr>
+			<tr>
+				<th>Clip2</th>
+				<td>{{ presentation.clip2 }}</td>
+			</tr>
+			<tr>
+				<th>Clip3</th>
+				<td>{{ presentation.clip3 }}</td>
+			</tr>
+			<tr>
+				<th>Clip4</th>
+				<td>{{ presentation.clip4 }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_presentations_index') }}">back to list</a>
+	<a href="{{ path('app_presentations_index') }}">back to list</a>
 
-    <a href="{{ path('app_presentations_edit', {'id': presentation.id}) }}">edit</a>
+	<a href="{{ path('app_presentations_edit', {'id': presentation.id}) }}">edit</a>
 
-    {{ include('presentations/_delete_form.html.twig') }}
+	{{ include('presentations/_delete_form.html.twig') }}
 {% endblock %}

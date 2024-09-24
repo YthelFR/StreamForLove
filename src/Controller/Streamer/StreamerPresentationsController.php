@@ -38,7 +38,6 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Utilisation de la fonction pour traiter les fichiers
             $this->handleFileUpload($form, $presentation, $slugger);
 
             $entityManager->persist($presentation);
@@ -65,7 +64,6 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Utilisation de la fonction pour traiter les fichiers
             $this->handleFileUpload($form, $presentation, $slugger, true);
 
             $entityManager->flush();
@@ -81,33 +79,27 @@ class StreamerPresentationsController extends AbstractController
 
     private function handleFileUpload($form, $presentation, SluggerInterface $slugger, $isEdit = false): void
     {
-        // Gestion de l'image
         $file = $form->get('picturePath')->getData();
         if ($file) {
             if ($isEdit && $presentation->getPicturePath()) {
-                // Supprimer l'ancienne image
                 $this->deleteFile($this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures/' . $presentation->getPicturePath());
             }
             $newFilename = $this->uploadFile($file, 'kernel.project_dir', 'pictures', $slugger);
             $presentation->setPicturePath($newFilename);
         }
 
-        // Gestion du planning
         $planningFile = $form->get('planning')->getData();
         if ($planningFile) {
             if ($isEdit && $presentation->getPlanning()) {
-                // Supprimer l'ancien planning
                 $this->deleteFile($this->getParameter('planning_directory') . '/' . $presentation->getPlanning());
             }
             $newFilename = $this->uploadFile($planningFile, 'planning_directory', 'planning', $slugger);
             $presentation->setPlanning($newFilename);
         }
 
-        // Gestion des goals
         $goalsFile = $form->get('goals')->getData();
         if ($goalsFile) {
             if ($isEdit && $presentation->getGoals()) {
-                // Supprimer l'ancien fichier goals
                 $this->deleteFile($this->getParameter('goals_directory') . '/public/assets/users/presentations/goals/' . $presentation->getGoals());
             }
             $newFilename = $this->uploadFile($goalsFile, 'goals_directory', 'goals', $slugger);

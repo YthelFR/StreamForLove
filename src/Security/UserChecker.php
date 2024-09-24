@@ -26,4 +26,3 @@ class UserChecker implements UserCheckerInterface
         // Vous pouvez ajouter des vérifications supplémentaires après l'authentification si nécessaire
     }
 }
-

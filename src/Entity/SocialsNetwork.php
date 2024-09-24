@@ -20,7 +20,7 @@ class SocialsNetwork
     private ?string $name = null;
 
     #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'socialsNetworks')]
-    #[ORM\JoinColumn(nullable: false)]  // Ensure that every SocialsNetwork is linked to a User
+    #[ORM\JoinColumn(nullable: false)] 
     private ?Users $user = null;
 
     public function getId(): ?int

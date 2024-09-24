@@ -1,13 +1,12 @@
-{# templates/admin/socials_network/new.html.twig #}
 {% extends 'admin_base.html.twig' %}
 
 {% block body %}
-    <h1>Ajouter un réseau social</h1>
-{% for message in app.flashes('success') %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">Ajouter</button>
-    {{ form_end(form) }}
+	<h1>Ajouter un réseau social</h1>
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button class="btn">Ajouter</button>
+	{{ form_end(form) }}
 {% endblock %}

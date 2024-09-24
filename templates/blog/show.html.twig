@@ -1,18 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.titre }}{% endblock %}
+{% block title %}
+	{{ article.titre }}
+{% endblock %}
 
 {% block body %}
-    <article>
-        <h1>{{ article.titre }}</h1>
-        
-        {% if article.entete %}
-            <img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image-large">
-        {% endif %}
-        
-        <p class="accroche">{{ article.accroche }}</p>
-        <div class="texte">{{ article.texte|raw }}</div>
-        
-        <a href="{{ path('app_blog_index') }}" class="btn btn-secondary">Retour à la liste</a>
-    </article>
+	<article>
+		<h1>{{ article.titre }}</h1>
+
+		{% if article.entete %}
+			<img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image-large">
+		{% endif %}
+
+		<p class="accroche">{{ article.accroche }}</p>
+		<div class="texte">{{ article.texte|raw }}</div>
+
+		<a href="{{ path('app_blog_index') }}" class="btn btn-secondary">Retour à la liste</a>
+	</article>
 {% endblock %}

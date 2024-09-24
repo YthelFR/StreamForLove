@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ streamer.pseudo }} - Streamer{% endblock %}
+{% block title %}
+	{{ streamer.pseudo }}
+	- Streamer
+{% endblock %}
 {% set siteUrl = 'streamforlove.coalitionplus.org' %}
 {% set clipBaseUrl = 'https://www.twitch.tv/' ~ streamer.pseudo ~ '/clip/' %}
 {% set clip1Id = presentations is not null and presentations.clip1 is not empty ? presentations.clip1|split('/clip/')|last : null %}
@@ -14,203 +17,181 @@
 {% set clip4EmbedUrl = clip4Id ? 'https://clips.twitch.tv/embed?clip=' ~ clip4Id : null %}
 
 
-
 {% block body %}
-<div class="gradientBg py-12 px-4 md:px-20 lg:px-40 flex flex-col">
-    <div class="flex flex-col lg:flex-row items-center">
-        <!-- Image de présentation -->
-        <div class="w-full lg:w-1/2 flex justify-center mb-10 lg:mb-0">
-            {% if presentations %}
-                <img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" 
-                     src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" 
-                     alt="Image de présentation" />
-            {% else %}
-                <img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" 
-                     src="{{ channelInfo.profile_image_url }}" 
-                     alt="Image de présentation" />
-            {% endif %}
-        </div>
-        
-        <!-- Présentation et Pseudo -->
-        <div class="w-full lg:w-1/2">
-            <h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-white font-bold uppercase text-center">
-                {{ streamer.pseudo }}
-            </h2>
-            <p class="pb-10 pt-4 md:pb-16 md:pt-8 text-center text-white font-bold text-xl md:text-2xl lg:text-3xl">
-                {{ followersCount }} followers
-            </p>
-            
-            {% if presentations %}
-                <h3 class="text-2xl md:text-3xl pb-4" style="color: #9F2627;">Peux-tu te présenter en quelques mots ?</h3>
-                <p class="text-white text-base md:text-lg">{{ presentations.question1 }}</p>
-                <h3 class="text-2xl md:text-3xl py-4" style="color: #9F2627;">Comment en es-tu arrivé l'univers du streaming ?</h3>
-                <p class="text-white text-base md:text-lg">{{ presentations.question2 }}</p>
-                <h3 class="text-2xl md:text-3xl py-4" style="color: #9F2627;">Pourquoi faire un stream caritatif ?</h3>
-                <p class="text-white text-base md:text-lg">{{ presentations.question3 }}</p>
-            {% else %}
-                <h3 class="text-2xl md:text-3xl pb-4" style="color: #9F2627;">Bio de {{ streamer.pseudo }}</h3>
-                <p class="text-white text-base md:text-lg">{{ channelInfo.description }}</p>
-            {% endif %}
-        </div>
-    </div>
-    
-    <!-- Réseaux sociaux -->
-    <div class="pt-10">
-        <h3 class="text-2xl md:text-3xl pb-4 text-center" style="color: #9F2627;">Réseaux sociaux</h3>
-        <div class="flex flex-wrap justify-around">
-            {% for social in socialsNetworks %}
-                <a href="{{ social.url }}" target="_blank" class="mb-4">
-                    {% if 'twitch' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo" />
-                    {% elseif 'x.com' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Twitter Logo" />
-                    {% elseif 'instagram' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Instagram Logo" />
-                    {% elseif 'youtube' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="YouTube Logo" />
-                    {% elseif 'tiktok' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="TikTok Logo" />
-                    {% elseif 'spotify' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl bg-black p-2" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Spotify Logo" />
-                    {% elseif 'discord' in social.url %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Discord Logo" />
-                    {% else %}
-                        <img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('medias/socials/defaultlogo.png') }}" alt="Default Logo" />
-                    {% endif %}
-                </a>
-            {% else %}
-                <p class="text-white">Aucun réseau social disponible.</p>
-            {% endfor %}
-        </div>
-    </div>
-</div>
+	<div class="gradientBg py-12 px-4 md:px-20 lg:px-40 flex flex-col">
+		<div
+			class="flex flex-col lg:flex-row items-center">
+			<div class="w-full lg:w-1/2 flex justify-center mb-10 lg:mb-0">
+				{% if presentations %}
+					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation"/>
+				{% else %}
+					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ channelInfo.profile_image_url }}" alt="Image de présentation"/>
+				{% endif %}
+			</div>
+
+			<div class="w-full lg:w-1/2">
+				<h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-white font-bold uppercase text-center">
+					{{ streamer.pseudo }}
+				</h2>
+				<p class="pb-10 pt-4 md:pb-16 md:pt-8 text-center text-white font-bold text-xl md:text-2xl lg:text-3xl">
+					{{ followersCount }}
+					followers
+				</p>
+
+				{% if presentations %}
+					<h3 class="text-2xl md:text-3xl pb-4" style="color: #9F2627;">Peux-tu te présenter en quelques mots ?</h3>
+					<p class="text-white text-base md:text-lg">{{ presentations.question1 }}</p>
+					<h3 class="text-2xl md:text-3xl py-4" style="color: #9F2627;">Comment en es-tu arrivé l'univers du streaming ?</h3>
+					<p class="text-white text-base md:text-lg">{{ presentations.question2 }}</p>
+					<h3 class="text-2xl md:text-3xl py-4" style="color: #9F2627;">Pourquoi faire un stream caritatif ?</h3>
+					<p class="text-white text-base md:text-lg">{{ presentations.question3 }}</p>
+				{% else %}
+					<h3 class="text-2xl md:text-3xl pb-4" style="color: #9F2627;">Bio de
+						{{ streamer.pseudo }}</h3>
+					<p class="text-white text-base md:text-lg">{{ channelInfo.description }}</p>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="pt-10">
+			<h3 class="text-2xl md:text-3xl pb-4 text-center" style="color: #9F2627;">Réseaux sociaux</h3>
+			<div class="flex flex-wrap justify-around">
+				{% for social in socialsNetworks %}
+					<a href="{{ social.url }}" target="_blank" class="mb-4">
+						{% if 'twitch' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo"/>
+						{% elseif 'x.com' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Twitter Logo"/>
+						{% elseif 'instagram' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Instagram Logo"/>
+						{% elseif 'youtube' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="YouTube Logo"/>
+						{% elseif 'tiktok' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="TikTok Logo"/>
+						{% elseif 'spotify' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl bg-black p-2" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Spotify Logo"/>
+						{% elseif 'discord' in social.url %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Discord Logo"/>
+						{% else %}
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl" src="{{ asset('medias/socials/defaultlogo.png') }}" alt="Default Logo"/>
+						{% endif %}
+					</a>
+				{% else %}
+					<p class="text-white">Aucun réseau social disponible.</p>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 
 
-<div class="flex flex-col items-center py-12 px-6">
-    <!-- Responsive iframe -->
-    <iframe 
-        src="https://player.twitch.tv/?channel={{ streamer.pseudo|lower }}&parent={{ siteUrl|raw }}" 
-        frameborder="0" 
-        allowfullscreen="true" 
-        scrolling="no" 
-        class="w-full md:w-[640px] lg:w-[1280px] h-72 md:h-80 lg:h-[720px] aspect-video"
-    ></iframe>
+	<div
+		class="flex flex-col items-center py-12 px-6">
+		<iframe src="https://player.twitch.tv/?channel={{ streamer.pseudo|lower }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full md:w-[640px] lg:w-[1280px] h-72 md:h-80 lg:h-[720px] aspect-video"></iframe>
 
-    <div class="flex flex-row pt-5">
-        <a 
-            href="https://www.twitch.tv/{{ streamer.pseudo|lower }}" 
-            target="_blank" 
-            class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200"
-        >
-            <span class="flex items-center justify-center px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-                Accéder au stream
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-            </span>
-        </a>
-    </div>
+		<div class="flex flex-row pt-5">
+			<a href="https://www.twitch.tv/{{ streamer.pseudo|lower }}" target="_blank" class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+				<span class="flex items-center justify-center px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+					Accéder au stream
+					<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
+						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+					</svg>
+				</span>
+			</a>
+		</div>
 
-    <div class="pt-10 w-full max-w-screen-lg">
-        <h2 class="text-3xl font-bold pb-4 text-center" style="color: #9F2627;">Dernier Jeu Joué</h2>
-        {% if recentGames is not empty %}
-            <div class="flex flex-col sm:flex-row items-center justify-center">
-                <img 
-                    src="{{ recentGames['box_art_url'] }}" 
-                    alt="{{ recentGames['name'] }}" 
-                    class="w-32 h-auto rounded mb-4 sm:mb-0 sm:mr-4"
-                >
-                <div>
-                    <p><strong>{{ recentGames['name'] }}</strong></p>
-                </div>
-            </div>
-        {% else %}
-            <p>Aucun jeu récent trouvé.</p>
-        {% endif %}
-    </div>
-</div>
+		<div class="pt-10 w-full max-w-screen-lg">
+			<h2 class="text-3xl font-bold pb-4 text-center" style="color: #9F2627;">Dernier Jeu Joué</h2>
+			{% if recentGames is not empty %}
+				<div class="flex flex-col sm:flex-row items-center justify-center">
+					<img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-auto rounded mb-4 sm:mb-0 sm:mr-4">
+					<div>
+						<p>
+							<strong>{{ recentGames['name'] }}</strong>
+						</p>
+					</div>
+				</div>
+			{% else %}
+				<p>Aucun jeu récent trouvé.</p>
+			{% endif %}
+		</div>
+	</div>
 
-<div class="flex flex-col md:flex-row md:justify-around py-10">
-    {% if clip1EmbedUrl %}
-        <iframe src="{{ clip1EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no"
-            class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
-    {% else %}
-        <p class="text-center">Aucun clip disponible.</p>
-    {% endif %}
-    
-    {% if clip2EmbedUrl %}
-        <iframe src="{{ clip2EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no"
-            class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
-    {% else %}
-        <p class="text-center">Aucun clip disponible.</p>
-    {% endif %}
-</div>
+	<div class="flex flex-col md:flex-row md:justify-around py-10">
+		{% if clip1EmbedUrl %}
+			<iframe src="{{ clip1EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
+		{% else %}
+			<p class="text-center">Aucun clip disponible.</p>
+		{% endif %}
 
-<div class="flex flex-col md:flex-row md:justify-around">
-    {% if clip3EmbedUrl %}
-        <iframe src="{{ clip3EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no"
-            class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
-    {% else %}
-        <p class="text-center">Aucun clip disponible.</p>
-    {% endif %}
-    
-    {% if clip4EmbedUrl %}
-        <iframe src="{{ clip4EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no"
-            class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
-    {% else %}
-        <p class="text-center">Aucun clip disponible.</p>
-    {% endif %}
-</div>
+		{% if clip2EmbedUrl %}
+			<iframe src="{{ clip2EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
+		{% else %}
+			<p class="text-center">Aucun clip disponible.</p>
+		{% endif %}
+	</div>
 
-<div class="flex flex-col items-center py-12">
-    <h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Son planning</h2>
-    {% if presentations %}
-        <img class="w-full md:w-1/3 lg:w-1/4 xl:w-1/6" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" />
-    {% else %}
-    {% endif %}
-</div>
+	<div class="flex flex-col md:flex-row md:justify-around">
+		{% if clip3EmbedUrl %}
+			<iframe src="{{ clip3EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
+		{% else %}
+			<p class="text-center">Aucun clip disponible.</p>
+		{% endif %}
+
+		{% if clip4EmbedUrl %}
+			<iframe src="{{ clip4EmbedUrl }}&parent={{ siteUrl|raw }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full md:w-[620px] md:h-[378px] h-[200px] aspect-w-16 aspect-h-9"></iframe>
+		{% else %}
+			<p class="text-center">Aucun clip disponible.</p>
+		{% endif %}
+	</div>
+
+	<div class="flex flex-col items-center py-12">
+		<h2 style="color: #9F2627;" class="text-center text-3xl pb-4">Son planning</h2>
+		{% if presentations %}
+			<img class="w-full md:w-1/3 lg:w-1/4 xl:w-1/6" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation"/>
+			{% else %}
+		{% endif %}
+	</div>
 
 
-    
-    {# <div>
-        <h2>Infos sur la chaîne Twitch</h2>
-        {% if channelInfo %}
-            <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
-            <p><strong>Affichage:</strong> <img src="{{ channelInfo.profile_image_url }}" alt="Avatar de {{ channelInfo.login }}" /></p>
-            <p><strong>Description:</strong> {{ channelInfo.description }}</p>
-        {% else %}
-            <p>Aucune information disponible.</p>
-        {% endif %}
-    </div>
-
-    <div>
-        <h2>Présentation</h2>
-        {% if presentations %}
-            <p><strong>Question 1:</strong> {{ presentations.question1 }}</p>
-            <p><strong>Question 2:</strong> {{ presentations.question2 }}</p>
-            <p><strong>Question 3:</strong> {{ presentations.question3 }}</p>
-            <p><strong>Clip 1:</strong> <a href="{{ presentations.clip1 }}">{{ presentations.clip1 }}</a></p>
-            <p><strong>Clip 2:</strong> <a href="{{ presentations.clip2 }}">{{ presentations.clip2 }}</a></p>
-            <p><strong>Clip 3:</strong> <a href="{{ presentations.clip3 }}">{{ presentations.clip3 }}</a></p>
-            <p><strong>Clip 4:</strong> <a href="{{ presentations.clip4 }}">{{ presentations.clip4 }}</a></p>
-            <p><strong>Planning:</strong> <img src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" /></p>
-            <p><strong>Image:</strong> <img src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" /></p>
-        {% else %}
-            <p>Aucune présentation disponible.</p>
-        {% endif %}
-    </div>
-
-    <div>
-        <h2 class="text-2xl font-bold mb-2">Dernier Jeu Joué</h2>
-        {% if recentGames is not empty %}
-            <div class="flex items-center">
-                <img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-32 rounded mr-4">
-                <div>
-                    <p><strong>Nom du Jeu:</strong> {{ recentGames['name'] }}</p>
-                </div>
-            </div>
-        {% else %}
-            <p>Aucun jeu récent trouvé.</p>
-        {% endif %}
-    </div> #}
+	{# <div>
+	        <h2>Infos sur la chaîne Twitch</h2>
+	        {% if channelInfo %}
+	            <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
+	            <p><strong>Affichage:</strong> <img src="{{ channelInfo.profile_image_url }}" alt="Avatar de {{ channelInfo.login }}" /></p>
+	            <p><strong>Description:</strong> {{ channelInfo.description }}</p>
+	        {% else %}
+	            <p>Aucune information disponible.</p>
+	        {% endif %}
+	    </div>
+	
+	    <div>
+	        <h2>Présentation</h2>
+	        {% if presentations %}
+	            <p><strong>Question 1:</strong> {{ presentations.question1 }}</p>
+	            <p><strong>Question 2:</strong> {{ presentations.question2 }}</p>
+	            <p><strong>Question 3:</strong> {{ presentations.question3 }}</p>
+	            <p><strong>Clip 1:</strong> <a href="{{ presentations.clip1 }}">{{ presentations.clip1 }}</a></p>
+	            <p><strong>Clip 2:</strong> <a href="{{ presentations.clip2 }}">{{ presentations.clip2 }}</a></p>
+	            <p><strong>Clip 3:</strong> <a href="{{ presentations.clip3 }}">{{ presentations.clip3 }}</a></p>
+	            <p><strong>Clip 4:</strong> <a href="{{ presentations.clip4 }}">{{ presentations.clip4 }}</a></p>
+	            <p><strong>Planning:</strong> <img src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" /></p>
+	            <p><strong>Image:</strong> <img src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" /></p>
+	        {% else %}
+	            <p>Aucune présentation disponible.</p>
+	        {% endif %}
+	    </div>
+	
+	    <div>
+	        <h2 class="text-2xl font-bold mb-2">Dernier Jeu Joué</h2>
+	        {% if recentGames is not empty %}
+	            <div class="flex items-center">
+	                <img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-32 rounded mr-4">
+	                <div>
+	                    <p><strong>Nom du Jeu:</strong> {{ recentGames['name'] }}</p>
+	                </div>
+	            </div>
+	        {% else %}
+	            <p>Aucun jeu récent trouvé.</p>
+	        {% endif %}
+	    </div> #}
 {% endblock %}

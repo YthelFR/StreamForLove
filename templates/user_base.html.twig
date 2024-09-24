@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Dashboard{% endblock %}</title>
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('users') }}
-    {% endblock %}
-    {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-</head>
-{{ include('dashboard/views/sidebar.html.twig') }}
-{{ include('dashboard/views/header.html.twig') }}
-<body>
-    {% block body %}{% endblock %}
-    
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>
+			{% block title %}Dashboard
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('users') }}
+		{% endblock %}
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	{{ include('dashboard/views/sidebar.html.twig') }}
+	{{ include('dashboard/views/header.html.twig') }}
+	<body>
+		{% block body %}{% endblock %}
+
+	</body>
 </html>

@@ -35,21 +35,20 @@ class OutsidersController extends AbstractController
             throw $this->createNotFoundException('Outsider not found');
         }
 
-        // Récupération des informations de la chaîne Twitch
         $channelInfo = $this->twitchApiService->getChannelInfo($outsider->getPseudo());
         $recentGames = $this->twitchApiService->getRecentGames($outsider->getPseudo());
 
         return $this->render('outsiders/show.html.twig', [
             'outsider' => $outsider,
             'channelInfo' => $channelInfo,
-            'recentGames' => $recentGames, // Passing the game details to the view
+            'recentGames' => $recentGames, 
         ]);
     }
 
 
     private function getRecentGames(string $username): array
     {
-        $response = $this->twitchApiService->getChannelInfo($username); // Assumes this method can fetch recent games, otherwise implement a new one.
-        return $response['data']['recent_games'] ?? []; // Adapt according to actual API response
+        $response = $this->twitchApiService->getChannelInfo($username); 
+        return $response['data']['recent_games'] ?? []; 
     }
 }

@@ -41,15 +41,13 @@ class TwitchApiService
 
     public function isUserLive(Users $user): bool
     {
-        // Trouver les informations du réseau Twitch de l'utilisateur
         $twitchNetwork = $this->em->getRepository(SocialsNetwork::class)
             ->findOneBy(['user' => $user, 'name' => 'twitch']);
 
         if (!$twitchNetwork) {
-            return false; // Aucun compte Twitch lié
+            return false; 
         }
 
-        // Extraire le pseudo Twitch depuis l'URL du réseau social
         $twitchUrl = $twitchNetwork->getUrl();
         $parsedUrl = parse_url($twitchUrl, PHP_URL_PATH);
         $username = trim($parsedUrl, '/');
@@ -58,7 +56,6 @@ class TwitchApiService
             return false;
         }
 
-        // Appel API Twitch pour vérifier si l'utilisateur est en live
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/streams', [
             'headers' => [
                 'Client-ID' => $this->clientId,
@@ -90,7 +87,7 @@ class TwitchApiService
 
         if (isset($channelData['data'][0])) {
             $gameId = $channelData['data'][0]['game_id'];
-            
+
             $gamesResponse = $this->client->request('GET', 'https://api.twitch.tv/helix/games', [
                 'headers' => [
                     'Client-ID' => $this->clientId,
@@ -134,7 +131,7 @@ class TwitchApiService
     {
         // Limiter à 100 pseudos maximum
         $usernames = array_slice($usernames, 0, 100);
-        
+
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
             'headers' => [
                 'Client-ID' => $this->clientId,
@@ -146,7 +143,7 @@ class TwitchApiService
         ]);
 
         $data = $response->toArray();
-        
+
         return $data['data'] ?? [];
     }
 
@@ -181,7 +178,6 @@ class TwitchApiService
 
         $data = $response->toArray();
 
-        // Renvoyer le nombre total de followers
         return $data['total'] ?? 0;
     }
 }

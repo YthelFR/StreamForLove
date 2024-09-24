@@ -16,7 +16,7 @@ class PresentationsType extends AbstractType
         $builder
             ->add('picturePath', FileType::class, [
                 'label' => 'Image de présentation',
-                'mapped' => false, 
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -28,7 +28,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('planning', FileType::class, [
                 'label' => 'Planning',
-                'mapped' => false, 
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -40,7 +40,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('goals', FileType::class, [
                 'label' => 'Objectifs',
-                'mapped' => false, 
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -71,7 +71,7 @@ class PresentationsType extends AbstractType
             ->add('clip4', null, [
                 'label' => 'Clip 4'
             ])
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

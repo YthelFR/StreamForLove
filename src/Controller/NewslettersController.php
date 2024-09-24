@@ -34,4 +34,3 @@ class NewslettersController extends AbstractController
         ]);
     }
 }
-

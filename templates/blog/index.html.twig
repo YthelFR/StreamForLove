@@ -1,31 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Blog - Stream For Love{% endblock %}
+{% block title %}Blog - Stream For Love
+{% endblock %}
 
 {% block body %}
-<div class="gradientBg py-12 flex flex-col items-center">
-    <img class="h-auto max-w-3xl rounded-lg object-cover" src="{{ asset('assets/medias/headers/thumbnail_blog.jpeg') }}" alt="">
-    <h2 class="font-bold text-2xl" style="color: #9F2627;">Dernières nouvelles</h2>
-</div>
-    <h1>Liste des articles</h1>
+	<div class="gradientBg py-12 flex flex-col items-center">
+		<img class="h-auto max-w-3xl rounded-lg object-cover" src="{{ asset('assets/medias/headers/thumbnail_blog.jpeg') }}" alt="">
+		<h2 class="font-bold text-2xl" style="color: #9F2627;">Dernières nouvelles</h2>
+	</div>
+	<h1>Liste des articles</h1>
 
-    <div class="articles">
-        {% for article in pagination %}
-            <div class="article">
-                {% if article.entete %}
-                    <img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image">
-                {% endif %}
-                <h2>{{ article.titre }}</h2>
-                <p class="accroche">{{ article.accroche|striptags|slice(0, 100) ~ '...' }}</p>
-                <a href="{{ path('app_blog_show', { id: article.id }) }}" class="btn btn-primary">Voir plus</a>
-            </div>
-        {% else %}
-            <p>Aucun article trouvé.</p>
-        {% endfor %}
-    </div>
+	<div class="articles">
+		{% for article in pagination %}
+			<div class="article">
+				{% if article.entete %}
+					<img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image">
+				{% endif %}
+				<h2>{{ article.titre }}</h2>
+				<p class="accroche">{{ article.accroche|striptags|slice(0, 100) ~ '...' }}</p>
+				<a href="{{ path('app_blog_show', { id: article.id }) }}" class="btn btn-primary">Voir plus</a>
+			</div>
+		{% else %}
+			<p>Aucun article trouvé.</p>
+		{% endfor %}
+	</div>
 
-    {# Pagination #}
-    <div class="pagination">
-        {{ knp_pagination_render(pagination) }}
-    </div>
+	<div class="pagination">
+		{{ knp_pagination_render(pagination) }}
+	</div>
 {% endblock %}

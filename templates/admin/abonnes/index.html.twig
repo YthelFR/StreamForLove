@@ -1,57 +1,51 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Abonnés index{% endblock %}
+{% block title %}Abonnés index
+{% endblock %}
 
 {% block body %}
-<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-    <h1 class="text-2xl font-semibold text-gray-700">Liste des Abonnés</h1>
+	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+		<h1 class="text-2xl font-semibold text-gray-700">Liste des Abonnés</h1>
 
-    {% if abonnes is empty %}
-        <p class="mt-4 text-gray-500">Aucun abonné trouvé.</p>
-    {% else %}
-        <div class="overflow-y-hidden rounded-lg border mt-6">
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-                            <th class="px-5 py-3">ID</th>
-                            <th class="px-5 py-3">Email</th>
-                            <th class="px-5 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-500">
-                        {% for abonne in abonnes %}
-                        <tr class="bg-white hover:bg-gray-100">
-                            <!-- ID de l'abonné -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <p class="whitespace-no-wrap">{{ abonne.id }}</p>
-                            </td>
+		{% if abonnes is empty %}
+			<p class="mt-4 text-gray-500">Aucun abonné trouvé.</p>
+		{% else %}
+			<div class="overflow-y-hidden rounded-lg border mt-6">
+				<div class="overflow-x-auto">
+					<table class="w-full">
+						<thead>
+							<tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+								<th class="px-5 py-3">ID</th>
+								<th class="px-5 py-3">Email</th>
+								<th class="px-5 py-3">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="text-gray-500">
+							{% for abonne in abonnes %}
+								<tr class="bg-white hover:bg-gray-100">
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<p class="whitespace-no-wrap">{{ abonne.id }}</p>
+									</td>
 
-                            <!-- Email de l'abonné -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <p class="whitespace-no-wrap">{{ abonne.email }}</p>
-                            </td>
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<p class="whitespace-no-wrap">{{ abonne.email }}</p>
+									</td>
 
-                            <!-- Actions : Voir et Éditer -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <div class="flex space-x-4">
-                                    <!-- Bouton bleu pour voir -->
-                                    <a href="{{ path('admin_abonnes_show', { id: abonne.id }) }}"
-                                       class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
-                                        Voir
-                                    </a>
-                                    <!-- Bouton vert pour éditer -->
-                                    <a href="{{ path('admin_abonnes_edit', { id: abonne.id }) }}"
-                                       class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
-                                        Éditer
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    {% endif %}
-{% endblock %}
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<div class="flex space-x-4">
+											<a href="{{ path('admin_abonnes_show', { id: abonne.id }) }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+												Voir
+											</a>
+											<a href="{{ path('admin_abonnes_edit', { id: abonne.id }) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+												Éditer
+											</a>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{% endif %}
+	{% endblock %}

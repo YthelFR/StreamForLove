@@ -27,12 +27,10 @@ class HomeController extends AbstractController
         // $user->setEmail('masthom_@masthom_.fr')->setPseudo('Masthom_')->setPassword($hasher->hashPassword($user, '@masthom_69'))->setValid(false)->setRoles(['ROLE_STREAMER_ACTIF'])->setCreatedAt(new \DateTimeImmutable());
         // $entityManager->persist($user);
         // $entityManager->flush();
-        // Filtrer les utilisateurs ayant le rôle ROLE_STREAMER_ACTIF
         $users = $entityManager->getRepository(Users::class)
             ->findByRole('ROLE_STREAMER_ACTIF');
         $liveUsers = [];
 
-        // Vérifier si chaque utilisateur est en live et récupérer son avatar via Twitch
         foreach ($users as $user) {
             if ($this->twitchApiService->isUserLive($user)) {
                 $channelInfo = $this->twitchApiService->getChannelInfo($user->getPseudo());
@@ -45,11 +43,9 @@ class HomeController extends AbstractController
             }
         }
 
-        // Rendre le template Twig avec les utilisateurs en live
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'liveUsers' => $liveUsers,
         ]);
     }
-    
 }

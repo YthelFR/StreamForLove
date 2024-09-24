@@ -2,26 +2,32 @@
 
 {% extends 'user_base.html.twig' %}
 
-{% block title %}Détails du Réseau Social{% endblock %}
+{% block title %}Détails du Réseau Social
+{% endblock %}
 
 {% block body %}
-<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-4">{{ socials_network.name }}</h1>
+	<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+		<div class="container mx-auto px-4 py-8">
+			<h1 class="text-2xl font-bold mb-4">{{ socials_network.name }}</h1>
 
-        <p><strong>Description:</strong> {{ socials_network.description }}</p>
-        <p><strong>URL:</strong> <a href="{{ socials_network.url }}" class="text-blue-500 hover:underline">{{ socials_network.url }}</a></p>
+			<p>
+				<strong>Description:</strong>
+				{{ socials_network.description }}</p>
+			<p>
+				<strong>URL:</strong>
+				<a href="{{ socials_network.url }}" class="text-blue-500 hover:underline">{{ socials_network.url }}</a>
+			</p>
 
-        <div class="mt-4">
-            <a href="{{ path('streamer_socials_network_edit', {'id': socials_network.id}) }}" class="bg-yellow-500 text-white px-4 py-2 rounded">Éditer</a>
+			<div class="mt-4">
+				<a href="{{ path('streamer_socials_network_edit', {'id': socials_network.id}) }}" class="bg-yellow-500 text-white px-4 py-2 rounded">Éditer</a>
 
-            <form action="{{ path('streamer_socials_network_delete', {'id': socials_network.id}) }}" method="post" style="display:inline;">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ socials_network.id) }}">
-                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded ml-4">Supprimer</button>
-            </form>
+				<form action="{{ path('streamer_socials_network_delete', {'id': socials_network.id}) }}" method="post" style="display:inline;">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ socials_network.id) }}">
+					<button type="submit" class="bg-red-500 text-white px-4 py-2 rounded ml-4">Supprimer</button>
+				</form>
 
-            <a href="{{ path('streamer_socials_network_index') }}" class="bg-gray-500 text-white px-4 py-2 rounded ml-4">Retour à la liste</a>
-        </div>
-    </div>
-</div>
+				<a href="{{ path('streamer_socials_network_index') }}" class="bg-gray-500 text-white px-4 py-2 rounded ml-4">Retour à la liste</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

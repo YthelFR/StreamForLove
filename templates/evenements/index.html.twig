@@ -1,95 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenements - Stream For Love{% endblock %}
+{% block title %}Evenements - Stream For Love
+{% endblock %}
 
 {% block body %}
-    <div class="gradientBg py-12 h-4/6 flex flex-col items-center justify-center">
-        <button class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
-            <span class="flex items-center justify-center px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-                Liste des anciens évènements
-                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-            </span>
-        </button>
+	<div class="gradientBg py-12 h-4/6 flex flex-col items-center justify-center">
+		<button class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+			<span class="flex items-center justify-center px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+				Liste des anciens évènements
+				<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+				</svg>
+			</span>
+		</button>
 
-        <!-- Responsive container for the first event section -->
-        <div class="flex flex-col md:flex-row items-center gap-4 mt-8">
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img class="h-auto max-w-sm md:max-w-lg rounded-lg" src="{{ asset('assets/medias/evenements/event1.jpeg') }}"/>
-            </div>
-            <div class="w-full md:w-1/2 pr-4 md:pr-20 text-center md:text-left">
-                <h2 class="mb-4 text-2xl md:text-4xl font-bold">
-                    Qu’est-ce que le Stream For Love ?
-                </h2>
-                <p class="leading-relaxed text-md md:text-xl text-white">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                </p>
-            </div>
-        </div>
-    </div>
+		<div class="flex flex-col md:flex-row items-center gap-4 mt-8">
+			<div class="w-full md:w-1/2 flex justify-center">
+				<img class="h-auto max-w-sm md:max-w-lg rounded-lg" src="{{ asset('assets/medias/evenements/event1.jpeg') }}"/>
+			</div>
+			<div class="w-full md:w-1/2 pr-4 md:pr-20 text-center md:text-left">
+				<h2 class="mb-4 text-2xl md:text-4xl font-bold">
+					Qu’est-ce que le Stream For Love ?
+				</h2>
+				<p class="leading-relaxed text-md md:text-xl text-white">
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+				</p>
+			</div>
+		</div>
+	</div>
 
-    <!-- Responsive container for the second event section -->
-    <div class="flex flex-col md:flex-row items-center gap-4 py-12">
-        <div class="w-full md:w-1/2 pl-4 md:pl-20 text-center md:text-left">
-            <h2 class="mb-4 text-2xl md:text-4xl font-bold">
-                Pourquoi faire un don ?
-            </h2>
-            <p class="leading-relaxed text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-            </p>
-        </div>
-        <div class="w-full md:w-1/2 flex justify-center">
-            <img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event2.jpeg') }}"/>
-        </div>
-    </div>
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12">
+		<div class="w-full md:w-1/2 pl-4 md:pl-20 text-center md:text-left">
+			<h2 class="mb-4 text-2xl md:text-4xl font-bold">
+				Pourquoi faire un don ?
+			</h2>
+			<p class="leading-relaxed text-md md:text-xl">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+			</p>
+		</div>
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event2.jpeg') }}"/>
+		</div>
+	</div>
 
-    <!-- Parallax section -->
-    <section class="flex flex-col w-full h-[500px] bg-cover bg-fixed bg-[75%] md:bg-center flex justify-center items-right"
-        style="background-image: url({{'assets/medias/evenements/parallax.jpeg'}});">
-    </section>
+	<!-- Parallax section -->
+	<section class="flex flex-col w-full h-[500px] bg-cover bg-fixed bg-[75%] md:bg-center flex justify-center items-right" style="background-image: url({{'assets/medias/evenements/parallax.jpeg'}});"></section>
 
-    <!-- Responsive container for the third event section -->
-    <div class="flex flex-col md:flex-row items-center gap-4 py-12">
-        <div class="w-full md:w-1/2 flex justify-center">
-            <img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event3.jpeg') }}"/>
-        </div>
-        <div class="w-full md:w-1/2 pr-4 md:pr-20 text-center md:text-left">
-            <h2 class="mb-4 text-2xl md:text-4xl font-bold">
-                Comment faire une donation ?
-            </h2>
-            <p class="leading-relaxed text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-            </p>
-        </div>
-    </div>
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12">
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event3.jpeg') }}"/>
+		</div>
+		<div class="w-full md:w-1/2 pr-4 md:pr-20 text-center md:text-left">
+			<h2 class="mb-4 text-2xl md:text-4xl font-bold">
+				Comment faire une donation ?
+			</h2>
+			<p class="leading-relaxed text-md md:text-xl">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+			</p>
+		</div>
+	</div>
 
-    <!-- Responsive container for the fourth event section -->
-    <div class="flex flex-col md:flex-row items-center gap-4 py-12 bg-gray-100">
-        <div class="w-full md:w-1/2 pl-4 md:pl-20 text-center md:text-left">
-            <h2 class="mb-4 text-2xl md:text-4xl font-bold">
-                A quoi serviront les donations
-            </h2>
-            <p class="leading-relaxed text-md md:text-xl">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-            </p>
-        </div>
-        <div class="w-full md:w-1/2 flex justify-center">
-            <img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event4.jpeg') }}"/>
-        </div>
-    </div>
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12 bg-gray-100">
+		<div class="w-full md:w-1/2 pl-4 md:pl-20 text-center md:text-left">
+			<h2 class="mb-4 text-2xl md:text-4xl font-bold">
+				A quoi serviront les donations
+			</h2>
+			<p class="leading-relaxed text-md md:text-xl">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+			</p>
+		</div>
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-sm md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event4.jpeg') }}"/>
+		</div>
+	</div>
 
-    <h1 class="text-2xl md:text-4xl font-bold mb-8 text-center">Liste des Événements</h1>
+	<h1 class="text-2xl md:text-4xl font-bold mb-8 text-center">Liste des Événements</h1>
 
-    <ul class="text-center">
-        {% for evenement in evenements %}
-            <li class="mb-4 text-lg">
-                <a href="{{ path('app_evenements_show', { id: evenement.id }) }}" class="text-blue-600 hover:underline">
-                    {{ evenement.nom }} - {{ evenement.date|date('d/m/Y') }}
-                </a>
-            </li>
-        {% else %}
-            <li>Aucun événement trouvé.</li>
-        {% endfor %}
-    </ul>
+	<ul class="text-center">
+		{% for evenement in evenements %}
+			<li class="mb-4 text-lg">
+				<a href="{{ path('app_evenements_show', { id: evenement.id }) }}" class="text-blue-600 hover:underline">
+					{{ evenement.nom }}
+					-
+					{{ evenement.date|date('d/m/Y') }}
+				</a>
+			</li>
+		{% else %}
+			<li>Aucun événement trouvé.</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

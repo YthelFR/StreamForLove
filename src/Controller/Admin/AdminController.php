@@ -12,10 +12,11 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function dashboard(Security $security): Response
     {
-        $user = $security->getUser(); // Obtenez l'utilisateur connecté
+        $currentUser = $security->getUser();
 
         return $this->render('admin/admindashboard.html.twig', [
-            'user' => $user,
+            'currentUser' => $currentUser,
         ]);
     }
+
 }

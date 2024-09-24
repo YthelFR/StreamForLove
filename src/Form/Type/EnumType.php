@@ -43,7 +43,7 @@ class EnumType extends AbstractType
             'label' => null,
             'placeholder' => null,
         ]);
-        
+
         $resolver->setRequired('enum_class');
     }
 }

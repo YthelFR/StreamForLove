@@ -33,7 +33,7 @@ class AdminNewslettersController extends AbstractController
             $entityManager->persist($newsletter);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La newsletter a été créée avec succès.'); // Message de succès
+            $this->addFlash('success', 'La newsletter a été créée avec succès.'); 
 
             return $this->redirectToRoute('admin_newsletters_index');
         }
@@ -60,7 +60,7 @@ class AdminNewslettersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'La newsletter a été mise à jour avec succès.'); // Message de succès
+            $this->addFlash('success', 'La newsletter a été mise à jour avec succès.'); 
 
             return $this->redirectToRoute('admin_newsletters_index');
         }
@@ -77,9 +77,9 @@ class AdminNewslettersController extends AbstractController
             $entityManager->remove($newsletter);
             $entityManager->flush();
 
-            $this->addFlash('success', 'La newsletter a été supprimée avec succès.'); // Message de succès
+            $this->addFlash('success', 'La newsletter a été supprimée avec succès.');
         } else {
-            $this->addFlash('error', 'Erreur de suppression de la newsletter.'); // Message d'erreur
+            $this->addFlash('error', 'Erreur de suppression de la newsletter.');
         }
 
         return $this->redirectToRoute('admin_newsletters_index');

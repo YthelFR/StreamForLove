@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-        <link rel="icon" type="image/jpg" href="{{ asset('/assets/medias/accueil/favicon.ico') }}" />
-    </head>
-    {{ include('views/header.html.twig') }}
-    <body>
-        {% block body %}{% endblock %}
-        <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script>
-            document.addEventListener('click', function (e) {
-    const toggle = e.target.closest('.dropdown-toggle');
-    const menu = e.target.closest('.dropdown-menu');
-    if (toggle) {
-        const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu');
-        if (menuEl.classList.contains('hidden')) {
-            hideDropdown();
-            menuEl.classList.remove('hidden');
-        } else {
-            menuEl.classList.add('hidden');
-        }
-    } else if (!menu) {
-        hideDropdown();
-    }
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		<link rel="icon" type="image/jpg" href="{{ asset('/assets/medias/accueil/favicon.ico') }}"/>
+	</head>
+	{{ include('views/header.html.twig') }}
+	<body>
+		{% block body %}{% endblock %}
+		<script src="https://unpkg.com/@popperjs/core@2"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script>
+			document.addEventListener('click', function (e) {
+const toggle = e.target.closest('.dropdown-toggle');
+const menu = e.target.closest('.dropdown-menu');
+if (toggle) {
+const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu');
+if (menuEl.classList.contains('hidden')) {
+hideDropdown();
+menuEl.classList.remove('hidden');
+} else {
+menuEl.classList.add('hidden');
+}
+} else if (! menu) {
+hideDropdown();
+}
 });
 
 function hideDropdown() {
-    document.querySelectorAll('.dropdown-menu').forEach(function (item) {
-        item.classList.add('hidden');
-    });
+document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+item.classList.add('hidden');
+});
 }
-</script>
-    </body>
-    {# {{ include('views/newsletter.html.twig') }} #}
-    {{ include('views/footer.html.twig') }}
-    {{ include('views/back_to_top.html.twig') }}
+		</script>
+	</body>
+	{# {{ include('views/newsletter.html.twig') }} #}
+	{{ include('views/footer.html.twig') }}
+	{{ include('views/back_to_top.html.twig') }}
 </html>

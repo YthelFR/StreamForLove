@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use App\Form\SocialsNetworkType; // Assurez-vous que cette ligne est présente
+use App\Form\SocialsNetworkType; 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -23,7 +23,7 @@ class UsersType extends AbstractType
                     'Manager' => 'ROLE_MANAGER',
                 ],
                 'multiple' => true,
-                'expanded' => true, 
+                'expanded' => true,
             ])
             ->add('password')
             ->add('pseudo')
@@ -41,8 +41,8 @@ class UsersType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'Réseaux sociaux',
-                'prototype' => true, // Permet l'ajout dynamique de nouveaux éléments
-                'required' => false, // Facultatif, si vous ne voulez pas que ce champ soit requis
+                'prototype' => true, 
+                'required' => false, 
             ]);
     }
 

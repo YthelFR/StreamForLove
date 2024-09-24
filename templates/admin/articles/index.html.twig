@@ -1,73 +1,64 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Articles index{% endblock %}
+{% block title %}Articles index
+{% endblock %}
 
 {% block body %}
-<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-    <h1 class="text-2xl font-semibold text-gray-700">Liste des Articles</h1>
+	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+		<h1 class="text-2xl font-semibold text-gray-700">Liste des Articles</h1>
 
-    {% if articles is empty %}
-        <p class="mt-4 text-gray-500">Aucun article trouvé.</p>
-    {% else %}
-        <div class="overflow-y-hidden rounded-lg border mt-6">
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-                            <th class="px-5 py-3">Titre</th>
-                            <th class="px-5 py-3">Auteur</th>
-                            <th class="px-5 py-3">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-500">
-                        {% for article in articles %}
-                        <tr class="bg-white hover:bg-gray-100">
-                            <!-- Titre de l'article -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <p class="whitespace-no-wrap">{{ article.titre }}</p>
-                            </td>
+		{% if articles is empty %}
+			<p class="mt-4 text-gray-500">Aucun article trouvé.</p>
+		{% else %}
+			<div class="overflow-y-hidden rounded-lg border mt-6">
+				<div class="overflow-x-auto">
+					<table class="w-full">
+						<thead>
+							<tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+								<th class="px-5 py-3">Titre</th>
+								<th class="px-5 py-3">Auteur</th>
+								<th class="px-5 py-3">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="text-gray-500">
+							{% for article in articles %}
+								<tr class="bg-white hover:bg-gray-100">
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<p class="whitespace-no-wrap">{{ article.titre }}</p>
+									</td>
 
-                            <!-- Auteur de l'article -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <p class="whitespace-no-wrap">
-                                    {% if article.users is not null %}
-                                        {{ article.users.pseudo }}
-                                    {% else %}
-                                        Pas de pseudo disponible
-                                    {% endif %}
-                                </p>
-                            </td>
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<p class="whitespace-no-wrap">
+											{% if article.users is not null %}
+												{{ article.users.pseudo }}
+											{% else %}
+												Pas de pseudo disponible
+											{% endif %}
+										</p>
+									</td>
 
-                            <!-- Actions : Voir, Éditer et Supprimer -->
-                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
-                                <div class="flex space-x-4">
-                                    <!-- Bouton bleu pour voir -->
-                                    <a href="{{ path('admin_articles_show', { id: article.id }) }}"
-                                       class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
-                                        Voir
-                                    </a>
-                                    <!-- Bouton vert pour éditer -->
-                                    <a href="{{ path('admin_articles_edit', { id: article.id }) }}"
-                                       class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
-                                        Éditer
-                                    </a>
-                                    <!-- Bouton rouge pour supprimer -->
-                                    <a href="{{ path('admin_articles_delete', { id: article.id }) }}"
-                                       class="inline-block rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
-                                        Supprimer
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    {% endif %}
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<div class="flex space-x-4">
+											<a href="{{ path('admin_articles_show', { id: article.id }) }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+												Voir
+											</a>
+											<a href="{{ path('admin_articles_edit', { id: article.id }) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+												Éditer
+											</a>
+											<a href="{{ path('admin_articles_delete', { id: article.id }) }}" class="inline-block rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
+												Supprimer
+											</a>
+										</div>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{% endif %}
 
-    <a href="{{ path('admin_articles_new') }}"
-       class="inline-block mt-4 rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
-       Créer un nouvel article
-    </a>
-{% endblock %}
+		<a href="{{ path('admin_articles_new') }}" class="inline-block mt-4 rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+			Créer un nouvel article
+		</a>
+	{% endblock %}

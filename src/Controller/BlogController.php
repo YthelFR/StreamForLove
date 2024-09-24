@@ -15,7 +15,7 @@ class BlogController extends AbstractController
     public function index(Request $request, ArticlesRepository $articlesRepository): Response
     {
         $page = $request->query->getInt('page', 1);
-        $limit = 10; // Vous pouvez ajuster le nombre d'articles par page
+        $limit = 10;
 
         $pagination = $articlesRepository->findPaginatedArticles($page, $limit);
 
@@ -32,4 +32,3 @@ class BlogController extends AbstractController
         ]);
     }
 }
-

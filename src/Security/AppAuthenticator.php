@@ -23,9 +23,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator, private AuthorizationCheckerInterface $authChecker)
-    {
-    }
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private AuthorizationCheckerInterface $authChecker) {}
 
     public function authenticate(Request $request): Passport
     {
@@ -44,19 +42,19 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-{
-    if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-        return new RedirectResponse($targetPath);
-    }
+    {
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
 
-    // Check user roles and redirect accordingly
-    if ($this->authChecker->isGranted('ROLE_ADMIN') || $this->authChecker->isGranted('ROLE_MANAGER')) {
-        return new RedirectResponse($this->urlGenerator->generate('app_admin'));
-    }
+        // Check user roles and redirect accordingly
+        if ($this->authChecker->isGranted('ROLE_ADMIN') || $this->authChecker->isGranted('ROLE_MANAGER')) {
+            return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        }
 
-    // Default redirection for other users
-    return new RedirectResponse($this->urlGenerator->generate('app_home'));
-}
+        // Default redirection for other users
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+    }
 
     protected function getLoginUrl(Request $request): string
     {

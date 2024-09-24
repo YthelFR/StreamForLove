@@ -16,9 +16,8 @@ class AdminSocialsNetworkController extends AbstractController
     #[Route('/admin/socials-network', name: 'admin_socials_network_index')]
     public function index(EntityManagerInterface $entityManager, Security $security): Response
     {
-        $user = $security->getUser();  // Get the currently logged-in user
-        
-        // Fetch only the social networks for the logged-in user
+        $user = $security->getUser(); 
+
         $socialsNetworks = $entityManager->getRepository(SocialsNetwork::class)
             ->findBy(['user' => $user]);
 
@@ -41,7 +40,7 @@ class AdminSocialsNetworkController extends AbstractController
             $entityManager->persist($socialsNetwork);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Réseau social ajouté avec succès.');  // Message de succès
+            $this->addFlash('success', 'Réseau social ajouté avec succès.');  
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
@@ -60,7 +59,7 @@ class AdminSocialsNetworkController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Réseau social modifié avec succès.');  // Message de succès
+            $this->addFlash('success', 'Réseau social modifié avec succès.'); 
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
@@ -76,7 +75,7 @@ class AdminSocialsNetworkController extends AbstractController
         $entityManager->remove($socialsNetwork);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Réseau social supprimé avec succès.');  // Message de succès
+        $this->addFlash('success', 'Réseau social supprimé avec succès.');  
         return $this->redirectToRoute('admin_socials_network_index');
     }
 }

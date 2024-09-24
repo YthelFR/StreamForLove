@@ -16,13 +16,13 @@ class StreamerUsersController extends AbstractController
 {
     #[Route('/profil', name: 'streamer_profile_edit', methods: ['GET', 'POST'])]
     public function editProfile(
-        Request $request, 
-        EntityManagerInterface $em, 
+        Request $request,
+        EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher
     ): Response {
         /** @var Users $user */
         $user = $this->getUser();
-        
+
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
