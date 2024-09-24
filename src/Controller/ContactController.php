@@ -1,6 +1,5 @@
 <?php
 
-// src/Controller/ContactController.php
 namespace App\Controller;
 
 use App\Form\ContactType;
@@ -26,16 +25,20 @@ class ContactController extends AbstractController
             // Créer l'email
             $email = (new Email())
                 ->from($data['email'])
-                ->to('support@example.com') // Changez ceci avec l'adresse de votre support
+                ->to('support@streamforlove.coalitionplus.org')
                 ->subject($data['subject'])
                 ->text($data['message'] . "\n\nDe : " . $data['name'] . " <" . $data['email'] . ">");
 
             $mailer->send($email);
 
+            // Message de succès
             $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
             return $this->redirectToRoute('contact');
         }
+
+        // Gérer les messages d'erreur
+        $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
 
         return $this->render('contact/contact.html.twig', [
             'form' => $form->createView(),

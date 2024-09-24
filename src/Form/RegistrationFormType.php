@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints\Unique;
 
 class RegistrationFormType extends AbstractType
 {
@@ -24,7 +25,10 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Email',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter an email',
+                        'message' => 'Veuillez entrer un email',
+                    ]),
+                    new Unique([
+                        'message' => 'Cet email est déjà utilisé',
                     ]),
                 ],
             ])
@@ -32,46 +36,48 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Pseudo',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a pseudo',
+                        'message' => 'Veuillez entrer un pseudo',
                     ]),
                     new Length([
                         'min' => 3,
-                        'minMessage' => 'Your pseudo should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre pseudo doit contenir au moins {{ limit }} caractères',
                         'max' => 50,
-                        'maxMessage' => 'Your pseudo should not exceed {{ limit }} characters',
+                        'maxMessage' => 'Votre pseudo ne doit pas dépasser {{ limit }} caractères',
                     ]),
-                    // Optional: enforce alphanumeric usernames with Regex
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9_]+$/',
-                        'message' => 'Pseudo can only contain letters, numbers, and underscores',
+                        'message' => 'Le pseudo ne peut contenir que des lettres, des chiffres et des underscores',
                     ]),
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'Mot de passe',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
                         'max' => 4096,
+                    ]),
+                    new Regex([
+                        'pattern' => '/(?=.*[0-9])(?=.*[!@#$%^&*])/i',
+                        'message' => 'Votre mot de passe doit contenir au moins un chiffre et un caractère spécial',
                     ]),
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'Agree to terms',
+                'label' => 'Accepter les conditions',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter nos conditions.',
                     ]),
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

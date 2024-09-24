@@ -33,6 +33,8 @@ class AdminOutsidersController extends AbstractController
             $entityManager->persist($outsider);
             $entityManager->flush();
 
+            $this->addFlash('success', 'L\'outsider a été créé avec succès.');
+
             return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -47,7 +49,7 @@ class AdminOutsidersController extends AbstractController
         $outsider = $outsidersRepository->find($id);
 
         if (!$outsider) {
-            throw $this->createNotFoundException('Outsider not found');
+            throw $this->createNotFoundException('Outsider non trouvé');
         }
 
         return $this->render('admin/outsiders/show.html.twig', [
@@ -64,6 +66,8 @@ class AdminOutsidersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'L\'outsider a été mis à jour avec succès.');
+
             return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -79,6 +83,10 @@ class AdminOutsidersController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $outsider->getId(), $request->request->get('_token'))) {
             $entityManager->remove($outsider);
             $entityManager->flush();
+
+            $this->addFlash('success', 'L\'outsider a été supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Erreur de suppression, veuillez réessayer.');
         }
 
         return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);

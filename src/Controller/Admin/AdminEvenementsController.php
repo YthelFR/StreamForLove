@@ -18,7 +18,6 @@ class AdminEvenementsController extends AbstractController
     #[Route('/', name: 'admin_evenements_index', methods: ['GET'])]
     public function index(EvenementsRepository $evenementsRepository): Response
     {
-        // Affiche tous les événements
         return $this->render('admin/evenements/index.html.twig', [
             'evenements' => $evenementsRepository->findAll(),
         ]);
@@ -27,7 +26,6 @@ class AdminEvenementsController extends AbstractController
     #[Route('/{id}', name: 'admin_evenements_show', methods: ['GET'])]
     public function show(Evenements $evenement): Response
     {
-        // Affiche un événement spécifique
         return $this->render('admin/evenements/show.html.twig', [
             'evenement' => $evenement,
         ]);
@@ -43,6 +41,8 @@ class AdminEvenementsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($evenement);
             $entityManager->flush();
+
+            $this->addFlash('success', 'L\'événement a été créé avec succès.');
 
             return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -62,6 +62,8 @@ class AdminEvenementsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'L\'événement a été mis à jour avec succès.');
+
             return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -77,6 +79,10 @@ class AdminEvenementsController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
             $entityManager->remove($evenement);
             $entityManager->flush();
+
+            $this->addFlash('success', 'L\'événement a été supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Erreur lors de la suppression de l\'événement.');
         }
 
         return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
