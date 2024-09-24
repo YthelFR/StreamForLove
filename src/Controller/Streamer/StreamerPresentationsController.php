@@ -38,54 +38,9 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('picturePath')->getData();
+            // Utilisation de la fonction pour traiter les fichiers
+            $this->handleFileUpload($form, $presentation, $slugger);
 
-            if ($file) {
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-
-                $file->move(
-                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures',
-                    $newFilename
-                );
-
-                $presentation->setPicturePath($newFilename); // Set the path to the file
-            } else {
-                $presentation->setPicturePath(null); // Ensure picturePath is null if no file is uploaded
-            }
-
-            $planningFile = $form->get('planning')->getData();
-            if ($planningFile) {
-                $originalFilename = pathinfo($planningFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $planningFile->guessExtension();
-
-                $planningFile->move(
-                    $this->getParameter('planning_directory') . '/public/assets/users/presentations/planning',
-                    $newFilename
-                );
-                $presentation->setPlanning($newFilename);
-            } else {
-                $presentation->setPlanning(null);
-            }
-
-            $goalsFile = $form->get('goals')->getData();
-            if ($goalsFile) {
-                $originalFilename = pathinfo($goalsFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $goalsFile->guessExtension();
-
-                $goalsFile->move(
-                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals',
-                    $newFilename
-                );
-                $presentation->setGoals($newFilename);
-            } else {
-                $presentation->setGoals(null);
-            }
-
-            
             $entityManager->persist($presentation);
             $entityManager->flush();
 
@@ -102,7 +57,6 @@ class StreamerPresentationsController extends AbstractController
     {
         $user = $this->getUser();
 
-        // Vérifiez que la présentation appartient bien au streamer connecté
         if ($presentation->getStreamersPresentation() !== $user) {
             throw $this->createAccessDeniedException('Vous n\'avez pas la permission de modifier cette présentation.');
         }
@@ -111,69 +65,8 @@ class StreamerPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('picturePath')->getData();
-            $planningFile = $form->get('planning')->getData(); // Ajout de la gestion du planning
-
-            if ($file) {
-                if ($presentation->getPicturePath()) {
-                    $oldPicturePath = $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures/' . $presentation->getPicturePath();
-                    if (file_exists($oldPicturePath)) {
-                        unlink($oldPicturePath);
-                    }
-                }
-
-                $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-
-                $file->move(
-                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures',
-                    $newFilename
-                );
-
-                $presentation->setPicturePath($newFilename); // Set the new file path
-            }
-
-            if ($planningFile) { // Gestion du fichier planning
-                if ($presentation->getPlanning()) {
-                    $oldPlanningPath = $this->getParameter('planning_directory') . '/' . $presentation->getPlanning();
-                    if (file_exists($oldPlanningPath)) {
-                        unlink($oldPlanningPath);
-                    }
-                }
-        
-                $originalPlanningFilename = pathinfo($planningFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safePlanningFilename = $slugger->slug($originalPlanningFilename);
-                $newPlanningFilename = $safePlanningFilename . '-' . uniqid() . '.' . $planningFile->guessExtension();
-        
-                $planningFile->move(
-                    $this->getParameter('planning_directory'),
-                    $newPlanningFilename
-                );
-        
-                $presentation->setPlanning($newPlanningFilename); // Set the new planning file path
-            }
-
-            $goalsFile = $form->get('goals')->getData();
-            if ($goalsFile) {
-                if ($presentation->getGoals()) {
-                    $oldGoalsPath = $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals/' . $presentation->getGoals();
-                    if (file_exists($oldGoalsPath)) {
-                        unlink($oldGoalsPath);
-                    }
-                }
-
-                $originalGoalsFilename = pathinfo($goalsFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeGoalsFilename = $slugger->slug($originalGoalsFilename);
-                $newGoalsFilename = $safeGoalsFilename . '-' . uniqid() . '.' . $goalsFile->guessExtension();
-
-                $goalsFile->move(
-                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals',
-                    $newGoalsFilename
-                );
-
-                $presentation->setGoals($newGoalsFilename);
-            }
+            // Utilisation de la fonction pour traiter les fichiers
+            $this->handleFileUpload($form, $presentation, $slugger, true);
 
             $entityManager->flush();
 
@@ -184,5 +77,62 @@ class StreamerPresentationsController extends AbstractController
             'form' => $form->createView(),
             'presentation' => $presentation,
         ]);
+    }
+
+    private function handleFileUpload($form, $presentation, SluggerInterface $slugger, $isEdit = false): void
+    {
+        // Gestion de l'image
+        $file = $form->get('picturePath')->getData();
+        if ($file) {
+            if ($isEdit && $presentation->getPicturePath()) {
+                // Supprimer l'ancienne image
+                $this->deleteFile($this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures/' . $presentation->getPicturePath());
+            }
+            $newFilename = $this->uploadFile($file, 'kernel.project_dir', 'pictures', $slugger);
+            $presentation->setPicturePath($newFilename);
+        }
+
+        // Gestion du planning
+        $planningFile = $form->get('planning')->getData();
+        if ($planningFile) {
+            if ($isEdit && $presentation->getPlanning()) {
+                // Supprimer l'ancien planning
+                $this->deleteFile($this->getParameter('planning_directory') . '/' . $presentation->getPlanning());
+            }
+            $newFilename = $this->uploadFile($planningFile, 'planning_directory', 'planning', $slugger);
+            $presentation->setPlanning($newFilename);
+        }
+
+        // Gestion des goals
+        $goalsFile = $form->get('goals')->getData();
+        if ($goalsFile) {
+            if ($isEdit && $presentation->getGoals()) {
+                // Supprimer l'ancien fichier goals
+                $this->deleteFile($this->getParameter('goals_directory') . '/public/assets/users/presentations/goals/' . $presentation->getGoals());
+            }
+            $newFilename = $this->uploadFile($goalsFile, 'goals_directory', 'goals', $slugger);
+            $presentation->setGoals($newFilename);
+        }
+    }
+
+    private function uploadFile($file, $directoryParameter, $subFolder, SluggerInterface $slugger): string
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+
+        $file->move(
+            $this->getParameter($directoryParameter) . '/public/assets/users/presentations/' . $subFolder,
+            $newFilename
+        );
+
+        return $newFilename;
+    }
+
+    private function deleteFile($filePath): void
+    {
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
     }
 }

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/dashboard/socials')]
-final class StreamerSocialsNetworkController extends AbstractController
+class StreamerSocialsNetworkController extends AbstractController
 {
     private $security;
 
@@ -47,6 +47,8 @@ final class StreamerSocialsNetworkController extends AbstractController
             $entityManager->persist($socialsNetwork);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Le réseau social a été ajouté avec succès.');
+
             return $this->redirectToRoute('streamer_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,9 +60,8 @@ final class StreamerSocialsNetworkController extends AbstractController
     #[Route('/{id}', name: 'streamer_socials_network_show', methods: ['GET'])]
     public function show(SocialsNetwork $socialsNetwork): Response
     {
-        // Check if the logged-in user owns this network
         if ($socialsNetwork->getUser() !== $this->security->getUser()) {
-            throw $this->createAccessDeniedException('You do not have permission to view this social network.');
+            throw $this->createAccessDeniedException('Vous n\'avez pas la permission d\'accéder à ce réseau social.');
         }
 
         return $this->render('dashboard/socials_network/show.html.twig', [
@@ -71,9 +72,8 @@ final class StreamerSocialsNetworkController extends AbstractController
     #[Route('/{id}/edit', name: 'streamer_socials_network_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SocialsNetwork $socialsNetwork, EntityManagerInterface $entityManager): Response
     {
-        // Check if the logged-in user owns this network
         if ($socialsNetwork->getUser() !== $this->security->getUser()) {
-            throw $this->createAccessDeniedException('You do not have permission to edit this social network.');
+            throw $this->createAccessDeniedException('Vous n\'avez pas la permission de modifier ce réseau social.');
         }
 
         $form = $this->createForm(SocialsNetworkType::class, $socialsNetwork);
@@ -81,6 +81,8 @@ final class StreamerSocialsNetworkController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
+            $this->addFlash('success', 'Le réseau social a été modifié avec succès.');
 
             return $this->redirectToRoute('streamer_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -94,14 +96,17 @@ final class StreamerSocialsNetworkController extends AbstractController
     #[Route('/{id}/delete', name: 'streamer_socials_network_delete', methods: ['POST'])]
     public function delete(Request $request, SocialsNetwork $socialsNetwork, EntityManagerInterface $entityManager): Response
     {
-        // Check if the logged-in user owns this network
         if ($socialsNetwork->getUser() !== $this->security->getUser()) {
-            throw $this->createAccessDeniedException('You do not have permission to delete this social network.');
+            throw $this->createAccessDeniedException('Vous n\'avez pas la permission de supprimer ce réseau social.');
         }
 
         if ($this->isCsrfTokenValid('delete' . $socialsNetwork->getId(), $request->request->get('_token'))) {
             $entityManager->remove($socialsNetwork);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Le réseau social a été supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Le token CSRF est invalide. Veuillez réessayer.');
         }
 
         return $this->redirectToRoute('streamer_socials_network_index', [], Response::HTTP_SEE_OTHER);

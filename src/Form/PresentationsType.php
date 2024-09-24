@@ -7,20 +7,49 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class PresentationsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('picturePath', FileType::class, [
-            'label' => 'Image de présentation',
-            'mapped' => false, 
-            'required' => false,
-            'attr' => [
-                'accept' => 'image/*',
-            ],
-        ])
+            ->add('picturePath', FileType::class, [
+                'label' => 'Image de présentation',
+                'mapped' => false, 
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG).',
+                    ])
+                ],
+            ])
+            ->add('planning', FileType::class, [
+                'label' => 'Planning',
+                'mapped' => false, 
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['application/pdf'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                    ])
+                ],
+            ])
+            ->add('goals', FileType::class, [
+                'label' => 'Objectifs',
+                'mapped' => false, 
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => ['application/pdf'],
+                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                    ])
+                ],
+            ])
             ->add('question1', null, [
                 'label' => 'Peux-tu te présenter en quelques mots ?'
             ])
@@ -41,22 +70,6 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip4', null, [
                 'label' => 'Clip 4'
-            ])
-            ->add('planning', FileType::class, [
-                'label' => 'Planning',
-                'mapped' => false,
-                'required' => false,
-                'attr' => [
-                    'accept' => 'image/*',
-                ],
-            ])
-            ->add('goals', FileType::class, [
-                'label' => 'Donations Goal',
-                'mapped' => false,
-                'required' => false,
-                'attr' => [
-                    'accept' => 'image/*',
-                ],
             ])
             ;
     }

@@ -6,6 +6,7 @@
 parameters:
     upload_directory: '%kernel.project_dir%/public/assets/users/presentations/pictures'
     planning_directory: '%kernel.project_dir%/public/assets/users/presentations/planning'
+    goals_directory: '%kernel.project_dir%/public/assets/users/presentations/goals'
 
 services:
     # default configuration for services in *this* file

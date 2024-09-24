@@ -3,6 +3,14 @@
 {% block title %}Créer une nouvelle Présentation{% endblock %}
 
 {% block body %}
+{% for type, messages in app.flashes %}
+    <div class="alert alert-{{ type }}">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
 <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
     <h1 class="text-center font-bold text-2xl m-5 text-gray-800">Créer une nouvelle Présentation</h1>
 

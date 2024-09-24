@@ -33,7 +33,11 @@ class AdminArticlesController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Article créé avec succès !');
+
             return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash('error', 'Erreur lors de la création de l\'article. Veuillez vérifier les informations.');
         }
 
         return $this->render('admin/articles/new.html.twig', [
@@ -58,7 +62,11 @@ class AdminArticlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Article édité avec succès !');
+
             return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash('error', 'Erreur lors de la création de l\'article. Veuillez vérifier les informations.');
         }
 
         return $this->render('admin/articles/edit.html.twig', [
