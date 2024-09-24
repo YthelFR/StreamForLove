@@ -27,7 +27,7 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/users/{id}/edit', name: 'admin_users_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'admin_users_edit', methods: ['GET', 'POST'])]
     public function editUser(
         Users $user, 
         Request $request, 
@@ -52,13 +52,18 @@ class AdminUsersController extends AbstractController
             return $this->redirectToRoute('admin_users_index');
         }
 
+        // Gestion des erreurs
+        foreach ($form->getErrors(true) as $error) {
+            $this->addFlash('error', $error->getMessage());
+        }
+
         return $this->render('admin/users/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);
     }
 
-    #[Route('/admin/profile/edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
+    #[Route('/profile/edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
     public function editAdminProfile(
         Request $request, 
         EntityManagerInterface $em, 
@@ -87,6 +92,11 @@ class AdminUsersController extends AbstractController
             return $this->redirectToRoute('admin_profile_edit');
         }
 
+        // Gestion des erreurs
+        foreach ($form->getErrors(true) as $error) {
+            $this->addFlash('error', $error->getMessage());
+        }
+
         return $this->render('admin/users/edit_profile.html.twig', [
             'form' => $form->createView(),
             'admin' => $admin,
@@ -102,9 +112,11 @@ class AdminUsersController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide.');
         }
 
-        return $this->redirectToRoute('admin_user_index');
+        return $this->redirectToRoute('admin_users_index');
     }
 
     #[Route('/pending', name: 'admin_user_pending')]
@@ -127,6 +139,8 @@ class AdminUsersController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Utilisateur activé avec succès.');
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide.');
         }
 
         return $this->redirectToRoute('admin_user_pending');

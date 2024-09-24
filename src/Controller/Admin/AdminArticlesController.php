@@ -33,7 +33,7 @@ class AdminArticlesController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Article créé avec succès !');
+            $this->addFlash('success', 'Article créé avec succès!');
 
             return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
         } else {
@@ -62,11 +62,11 @@ class AdminArticlesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $this->addFlash('success', 'Article édité avec succès !');
+            $this->addFlash('success', 'Article mis à jour avec succès!');
 
             return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
         } else {
-            $this->addFlash('error', 'Erreur lors de la création de l\'article. Veuillez vérifier les informations.');
+            $this->addFlash('error', 'Erreur lors de la mise à jour de l\'article. Veuillez vérifier les informations.');
         }
 
         return $this->render('admin/articles/edit.html.twig', [
@@ -81,6 +81,7 @@ class AdminArticlesController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $entityManager->remove($article);
             $entityManager->flush();
+            $this->addFlash('success', 'Article supprimé avec succès!');
         }
 
         return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);

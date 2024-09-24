@@ -6,7 +6,17 @@
 <div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
     <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier Outsider</h1>
 
-    <!-- Formulaire d'édition -->
+    {% for message in app.flashes('success') %}
+    <div class="bg-green-500 text-white p-2 mb-4 rounded">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="bg-red-500 text-white p-2 mb-4 rounded">
+        {{ message }}
+    </div>
+{% endfor %}
+
     {{ form_start(form) }}
         <div class="mb-4">
             {{ form_label(form.pseudo, 'Pseudo', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}

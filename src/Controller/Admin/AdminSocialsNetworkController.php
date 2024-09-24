@@ -30,9 +30,9 @@ class AdminSocialsNetworkController extends AbstractController
     #[Route('/admin/socials-network/new', name: 'admin_socials_network_new')]
     public function new(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
-        $user = $security->getUser();  // Get the currently logged-in user
+        $user = $security->getUser();
         $socialsNetwork = new SocialsNetwork();
-        $socialsNetwork->setUser($user);  // Associate the user
+        $socialsNetwork->setUser($user);
         $form = $this->createForm(SocialsNetworkType::class, $socialsNetwork);
 
         $form->handleRequest($request);
@@ -41,6 +41,7 @@ class AdminSocialsNetworkController extends AbstractController
             $entityManager->persist($socialsNetwork);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Réseau social ajouté avec succès.');  // Message de succès
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
@@ -59,6 +60,7 @@ class AdminSocialsNetworkController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Réseau social modifié avec succès.');  // Message de succès
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
@@ -74,6 +76,7 @@ class AdminSocialsNetworkController extends AbstractController
         $entityManager->remove($socialsNetwork);
         $entityManager->flush();
 
+        $this->addFlash('success', 'Réseau social supprimé avec succès.');  // Message de succès
         return $this->redirectToRoute('admin_socials_network_index');
     }
 }

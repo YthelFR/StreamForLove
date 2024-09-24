@@ -29,9 +29,46 @@ class AdminPresentationsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Traitez les fichiers
+            $pictureFile = $form->get('picturePath')->getData();
+            if ($pictureFile) {
+                $newFilename = uniqid().'.'.$pictureFile->guessExtension();
+                $pictureFile->move(
+                    $this->getParameter('pictures_directory'),
+                    $newFilename
+                );
+                $presentation->setPicturePath($newFilename);
+            }
+
+            $planningFile = $form->get('planning')->getData();
+            if ($planningFile) {
+                $newPlanningFilename = uniqid().'.'.$planningFile->guessExtension();
+                $planningFile->move(
+                    $this->getParameter('planning_directory'),
+                    $newPlanningFilename
+                );
+                $presentation->setPlanning($newPlanningFilename);
+            }
+
+            $goalsFile = $form->get('goals')->getData();
+            if ($goalsFile) {
+                $newGoalsFilename = uniqid().'.'.$goalsFile->guessExtension();
+                $goalsFile->move(
+                    $this->getParameter('goals_directory'),
+                    $newGoalsFilename
+                );
+                $presentation->setGoals($newGoalsFilename);
+            }
+
             $entityManager->flush();
 
+            $this->addFlash('success', 'Les modifications ont été enregistrées avec succès.');
+
             return $this->redirectToRoute('admin_presentations_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        if ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Veuillez corriger les erreurs dans le formulaire.');
         }
 
         return $this->render('admin/presentations/edit.html.twig', [
