@@ -45,7 +45,7 @@ class TwitchApiService
             ->findOneBy(['user' => $user, 'name' => 'twitch']);
 
         if (!$twitchNetwork) {
-            return false; 
+            return false;
         }
 
         $twitchUrl = $twitchNetwork->getUrl();
@@ -179,5 +179,23 @@ class TwitchApiService
         $data = $response->toArray();
 
         return $data['total'] ?? 0;
+    }
+
+    public function getRecentClips(string $broadcasterId, int $limit = 5): array
+    {
+        $response = $this->client->request('GET', 'https://api.twitch.tv/helix/clips', [
+            'headers' => [
+                'Client-ID' => $this->clientId,
+                'Authorization' => 'Bearer ' . $this->accessToken,
+            ],
+            'query' => [
+                'broadcaster_id' => $broadcasterId,
+                'first' => $limit,
+                'started_at' => date('Y-m-d\TH:i:s\Z', strtotime('-30 days')),  // Derniers 30 jours
+            ],
+        ]);
+
+        $data = $response->toArray();
+        return $data['data'] ?? [];
     }
 }

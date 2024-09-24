@@ -27,87 +27,117 @@
 							<a class="nav-link" href="https://www.coalitionplus.org/" target="_blank">Coalition PLUS</a>
 						</li>
 					</ul>
-					<ul class="ml-auto flex justify-end self-center w-1/4">
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-							<!-- Dropdown User Avatar -->
-							<li class="px-2 dropdown ml-3 relative">
-								<button type="button" class="dropdown-toggle flex items-center">
-									<div class="p-2 md:block text-left">
-										<h2 class="text-sm font-semibold text-gray-800">{{ current_user().pseudo }}</h2>
-										<p class="text-xs text-gray-800">
-											{{ current_user().roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}
-										</p>
-									</div>
-									<div class="flex-shrink-0 w-10 h-10 relative">
-										<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-											<img class="w-8 h-8 rounded-full" src="{{ current_user().avatar ? asset(current_user().avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ current_user().pseudo }}"/>
-										</div>
-									</div>
-								</button>
-								<ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
-									<li>
-										{% set userRole = current_user().roles[0] %}
-										{% set path = '' %}
+				</div>
 
-										{% if userRole == 'ROLE_ADMIN' or userRole == 'ROLE_MANAGER' %}
-											{% set path = path('app_admin') %}
-										{% elseif userRole == 'ROLE_STREAMER_ACTIF' or userRole == 'ROLE_STREAMER_ABSENT' or userRole == 'ROLE_BLOGUEUR' %}
-											{% set path = path('app_dashboard') %}
-										{% else %}
-											{# Optionnel : définir un chemin par défaut si aucun des rôles ne correspond #}
-											{% set path = '#' %}
-										{% endif %}
+				<!-- Menu Hamburger -->
+				<div class="md:hidden w-1/4 sm:w-2/4 flex justify-center">
+					<button id="menu-btn" class="focus:outline-none">
+						<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M4 6h16M4 12h16M4 18h16"></path>
+						</svg>
+					</button>
+				</div>
+				<!-- End Menu Hamburger -->
 
-										<a href="{{ path }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profil</a>
-									</li>
-									<li>
-										<form method="POST" action="{{ path('app_logout') }}" style="display: none;" id="logout-form">
-											{{ csrf_token('logout') }}
-										</form>
-										<a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault();
-												                                    document.getElementById('logout-form').submit();">
-											Déconnexion
-										</a>
-									</li>
-								</ul>
-							</li>
-							<!-- End Dropdown User Avatar -->
-						{% else %}
-							<!-- Not Authenticated: Display Login and Register -->
-							<li class="px-2 dropdown ml-3 relative">
-								<button type="button" class="dropdown-toggle flex items-center">
-									<div class="flex-shrink-0 w-10 h-10 relative">
-										<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-											<img class="w-8 h-8 rounded-full" src="{{ asset('assets/users/avatars/default-avatar.png') }}" alt="Default Avatar"/>
-										</div>
-									</div>
-								</button>
-								<ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
-									<li>
-										<a href="{{ path('app_login') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Connexion</a>
-									</li>
-									<li>
-										<a href="{{ path('app_register') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">S'inscrire</a>
-									</li>
-								</ul>
-							</li>
-							<!-- End Not Authenticated -->
-						{% endif %}
-
-						<!-- Contact Button -->
-						<a href="{{ path('contact') }}" class="inline-flex">
-							<li class="relative">
-								<button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
-									<span class="flex items-center justify-center text-lg px-5 py-1 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-										Contact
-									</span>
-								</button>
-							</li>
-						</a>
-						<!-- End Contact Button -->
+				<!-- Menu Mobile -->
+				<div id="mobile-menu" class="absolute top-16 left-1/2 transform -translate-x-1/2 hidden bg-white shadow-lg rounded-lg w-full max-w-md z-50">
+					<ul class="flex flex-col p-4">
+						<li>
+							<a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+						</li>
+						<li>
+							<a class="nav-link" href="{{ path('app_streamers') }}">Nos streamers</a>
+						</li>
+						<li>
+							<a class="nav-link" href="{{ path('app_evenements_index') }}">Evenement</a>
+						</li>
+						<li>
+							<a class="nav-link" href="https://www.coalitionplus.org/" target="_blank">Coalition PLUS</a>
+						</li>
 					</ul>
 				</div>
+				<!-- End Menu Mobile -->
+
+				<ul class="ml-auto flex justify-end self-center w-1/4">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<!-- Dropdown User Avatar -->
+						<li class="px-2 dropdown ml-3 relative">
+							<button type="button" class="dropdown-toggle flex items-center">
+								<div class="p-2 md:block text-left">
+									<h2 class="text-sm font-semibold text-gray-800">{{ current_user().pseudo }}</h2>
+									<p class="text-xs text-gray-800">{{ current_user().roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}</p>
+								</div>
+								<div class="flex-shrink-0 w-10 h-10 relative">
+									<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
+										<img class="w-8 h-8 rounded-full" src="{{ current_user().avatar ? asset(current_user().avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ current_user().pseudo }}"/>
+									</div>
+								</div>
+							</button>
+							<ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
+								<li>
+									{% set userRole = current_user().roles[0] %}
+									{% set path = '' %}
+									{% if userRole == 'ROLE_ADMIN' or userRole == 'ROLE_MANAGER' %}
+										{% set path = path('app_admin') %}
+									{% elseif userRole == 'ROLE_STREAMER_ACTIF' or userRole == 'ROLE_STREAMER_ABSENT' or userRole == 'ROLE_BLOGUEUR' %}
+										{% set path = path('app_dashboard') %}
+									{% else %}
+										{% set path = '#' %}
+									{% endif %}
+									<a href="{{ path }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profil</a>
+								</li>
+								<li>
+									<form method="POST" action="{{ path('app_logout') }}" style="display: none;" id="logout-form">
+										{{ csrf_token('logout') }}
+									</form>
+									<a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+										Déconnexion
+									</a>
+								</li>
+							</ul>
+						</li>
+						<!-- End Dropdown User Avatar -->
+					{% else %}
+						<li class="px-2 dropdown ml-3 relative">
+							<button type="button" class="dropdown-toggle flex items-center">
+								<div class="flex-shrink-0 w-10 h-10 relative">
+									<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
+										<img class="w-8 h-8 rounded-full" src="{{ asset('assets/users/avatars/default-avatar.png') }}" alt="Default Avatar"/>
+									</div>
+								</div>
+							</button>
+							<ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
+								<li>
+									<a href="{{ path('app_login') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Connexion</a>
+								</li>
+								<li>
+									<a href="{{ path('app_register') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">S'inscrire</a>
+								</li>
+							</ul>
+						</li>
+					{% endif %}
+
+					<!-- Contact Button -->
+					<a href="{{ path('contact') }}" class="inline-flex">
+						<li class="relative">
+							<button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+								<span class="flex items-center justify-center text-lg px-5 py-1 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">Contact</span>
+							</button>
+						</li>
+					</a>
+					<!-- End Contact Button -->
+				</ul>
 			</nav>
 		</div>
 	</header>
+
+	<script>
+		// Script to toggle the mobile menu
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+
+menuBtn.addEventListener('click', () => {
+mobileMenu.classList.toggle('hidden');
+});
+	</script>
 {% endblock %}

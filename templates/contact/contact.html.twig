@@ -1,75 +1,66 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Contact
-{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
-	<div class="min-h-screen flex flex-col items-center justify-center gradientBg">
-		<div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
-			<div class="font-medium self-center text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800">
-				Contactez-nous
-			</div>
-			<div class="mt-4 self-center text-sm sm:text-md md:text-lg text-gray-800">
-				Remplissez le formulaire ci-dessous pour nous contacter
-			</div>
+<div class="min-h-screen flex flex-col items-center justify-center gradientBg">
+    <div class="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <div class="font-medium self-center text-lg sm:text-xl md:text-2xl lg:text-3xl text-gray-800">Contactez-nous</div>
+        <div class="mt-4 self-center text-sm sm:text-md md:text-lg text-gray-800">Remplissez le formulaire ci-dessous pour nous contacter</div>
 
-			<div class="mt-10">
-				{{ form_start(form) }}
+        <div class="mt-10">
+            {{ form_start(form) }}
 
-				{% for field in form %}
-					<div class="flex flex-col mb-5">
-						<label for="{{ field.vars.id }}" class="mb-1 text-xs tracking-wide text-gray-600">{{ field.vars.label }}:</label>
-						<div class="relative">
-							<div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
-								{% if field.vars.name == 'email' %}
-									<i class="fas fa-at text-blue-500"></i>
-								{% elseif field.vars.name == 'name' %}
-									<i class="fas fa-user text-blue-500"></i>
-								{% elseif field.vars.name == 'subject' %}
-									<i class="fas fa-tag text-blue-500"></i>
-								{% elseif field.vars.name == 'message' %}
-									<i class="fas fa-comment text-blue-500"></i>
-								{% endif %}
-							</div>
-							{{ form_widget(field, {
-                'attr': {
-                  'class': 'text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400',
-                  'placeholder': field.vars.placeholder|default('Entrez votre ' ~ field.vars.label|lower)
-                }
-              }) }}
-						</div>
-						{{ form_errors(field) }}
-					</div>
-				{% endfor %}
+            {% for field in form %}
+            <div class="flex flex-col mb-5">
+                <label for="{{ field.vars.id }}" class="mb-1 text-xs tracking-wide text-gray-600">{{ field.vars.label }}:</label>
+                <div class="relative">
+                    <div class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                        {% if field.vars.name == 'email' %}
+                        <i class="fas fa-at text-blue-500"></i>
+                        {% elseif field.vars.name == 'name' %}
+                        <i class="fas fa-user text-blue-500"></i>
+                        {% elseif field.vars.name == 'subject' %}
+                        <i class="fas fa-tag text-blue-500"></i>
+                        {% elseif field.vars.name == 'message' %}
+                        <i class="fas fa-comment text-blue-500"></i>
+                        {% endif %}
+                    </div>
+                    {{ form_widget(field, {
+                        'attr': {
+                            'class': 'text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400',
+                            'placeholder': field.vars.placeholder|default('Entrez votre ' ~ field.vars.label|lower)
+                        }
+                    }) }}
+                </div>
+                {{ form_errors(field) }}
+            </div>
+            {% endfor %}
 
-				<div class="flex w-full">
-					<button type="submit" class="flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base btnSfl rounded-2xl py-2 w-full transition duration-150 ease-in bg-blue-500 hover:bg-blue-600">
-						<span class="mr-2 uppercase">Envoyer</span>
-						<span>
-							<svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" stroke="currentColor">
-								<path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-							</svg>
-						</span>
-					</button>
-				</div>
-				{{ form_end(form) }}
-			</div>
-		</div>
+            <div class="flex w-full">
+                <button type="submit" class="flex mt-2 items-center justify-center focus:outline-none text-white text-sm sm:text-base btnSfl rounded-2xl py-2 w-full transition duration-150 ease-in bg-blue-500 hover:bg-blue-600">
+                    <span class="mr-2 uppercase">Envoyer</span>
+                    <span>
+                        <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 
-		{% if app.session.flashBag.has('success') %}
-			<div class="flex justify-center items-center mt-6">
-				<div class="alert alert-success text-green-600">
-					{{ app.session.flashBag.get('success')|first }}
-				</div>
-			</div>
-		{% endif %}
+    {% if app.session.flashBag.has('success') %}
+    <div class="flex justify-center items-center mt-6">
+        <div class="alert alert-success text-green-600">{{ app.session.flashBag.get('success')|first }}</div>
+    </div>
+    {% endif %}
 
-		{% if app.session.flashBag.has('error') %}
-			<div class="flex justify-center items-center mt-6">
-				<div class="alert alert-danger text-red-600">
-					{{ app.session.flashBag.get('error')|first }}
-				</div>
-			</div>
-		{% endif %}
-	</div>
+    {% if app.session.flashBag.has('error') %}
+    <div class="flex justify-center items-center mt-6">
+        <div class="alert alert-danger text-red-600">{{ app.session.flashBag.get('error')|first }}</div>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

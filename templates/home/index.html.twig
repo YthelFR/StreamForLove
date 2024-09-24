@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<div class="gradientBg py-12 px-20">
+	<div class="gradientBg py-12 px-5 lg:px-20">
 		<h2 class="text-3xl font-bold text-center pb-10 text-white">Nos streamers en direct !</h2>
 
 		{% if liveUsers is not empty %}
@@ -12,12 +12,14 @@
 				{% for user in liveUsers %}
 					<li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
 						<a class="flex flex-col items-center text-center" href="{{ path('app_streamers_show', { 'pseudo': user.pseudo }) }}">
-							<img class="rounded-full w-full h-auto bg-white border-4 border-red-600" src="{{ user.avatar }}" alt="{{ user.pseudo }} avatar">
+							<div class="relative rounded-full overflow-hidden w-full h-full border-4 border-red-600 bg-white">
+								<img class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110" src="{{ user.avatar }}" alt="{{ user.pseudo }} avatar">
+							</div>
 							<p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl text-white">{{ user.pseudo }}</p>
 						</a>
 					</li>
 				{% endfor %}
-			</div>
+			</ul>
 		{% else %}
 			<p class="text-2xl font-bold text-center mb-10 text-white">Aucun streamer n'est actuellement en direct.</p>
 			<p class="text-xl text-center text-white mb-5">Découvrez les streamers présents pour l'évènement et ne manquez pas leurs prochaines diffusions :</p>
@@ -53,8 +55,8 @@
 		</div>
 
 	</div>
-	<div class="flex flex-col items-center px-5 text-center bg-gray-200 px-20 xl:px-80 py-12">
-		<h2 class="text-3xl font-bold pb-5">
+	<div class="flex flex-col items-center px-5 text-center bg-gray-200 px-6 md:px-20 xl:px-80 py-12">
+		<h2 class="text-xl md:text-3xl font-bold pb-5">
 			" Stream For Love nous permet, via Twitch, de compter sur la générosité des gameuses et des gamers et de contribuer à faire la différence contre le VIH "
 		</h2>
 		<div class="bg-white rounded-lg p-5">
@@ -62,28 +64,28 @@
 		</div>
 		<p class="pt-5">Vincent Leclercq – Directeur général de Coalition PLUS</p>
 	</div>
-	<div class="text-center xl:mx-20 mx-10  py-12">
+	<div class="text-center xl:px-20 px-5 py-12">
 		<h2 class="text-3xl font-bold pb-10">Le VIH / Sida en 2022 ce sont :</h2>
 		<div class="grid grid-flow-row md:grid-flow-col items-start">
-			<div class="flex flex-col items-center px-5">
-				<img class="size-40 lg:size-52" src="{{ asset('assets/medias/accueil/logo4.png') }}"/>
-				<h3 class="text-2xl font-bold py-3">39.000.000</h3>
-				<p class="px-10">de personnes qui vivent encore avec la maladie</p>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo4.png') }}"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">39.000.000</h3>
+				<p class="px-5 sm:px-10">de personnes qui vivent encore avec la maladie</p>
 			</div>
-			<div class="flex flex-col items-center px-5">
-				<img class="size-40 lg:size-52" src="{{ asset('assets/medias/accueil/logo5.png') }}"/>
-				<h3 class="text-2xl font-bold py-3">Près de 10.000.000</h3>
-				<p class="px-10">de personnes n’ont pas accès à un traitement</p>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo5.png') }}"/>
+				<h3 class="text-2xl font-bold py1 md:py-3">Près de 10.000.000</h3>
+				<p class="px-5 sm:px-10">de personnes n’ont pas accès à un traitement</p>
 			</div>
-			<div class="flex flex-col items-center px-5">
-				<img class="size-40 lg:size-52" src="{{ asset('assets/medias/accueil/logo6.png') }}"/>
-				<h3 class="text-2xl font-bold py-3">130.000</h3>
-				<p class="px-10">enfants de moins de 14 ans qui ont été infectés par la maladie</p>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo6.png') }}"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">130.000</h3>
+				<p class="px-5 sm:px-10">enfants de moins de 14 ans qui ont été infectés par la maladie</p>
 			</div>
-			<div class="flex flex-col items-center px-5">
-				<img class="size-40 lg:size-52" src="{{ asset('assets/medias/accueil/logo7.png') }}"/>
-				<h3 class="text-2xl font-bold py-3">630.000</h3>
-				<p class="px-10">de personnes qui sont décédées des maladies liées au sida</p>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo7.png') }}"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">630.000</h3>
+				<p class="px-5 sm:px-10">de personnes qui sont décédées des maladies liées au sida</p>
 			</div>
 		</div>
 	</div>
