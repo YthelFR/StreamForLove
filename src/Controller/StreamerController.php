@@ -85,6 +85,7 @@ class StreamerController extends AbstractController
         $broadcasterId = $channelInfo['id'] ?? '';
         $followersCount = $twitchApiService->getChannelFollowers($broadcasterId);
         $recentGames = $twitchApiService->getRecentGames($streamer->getPseudo());
+        $recentClips = $twitchApiService->getRecentClips($broadcasterId, 4);
 
         return $this->render('streamer/show.html.twig', [
             'streamer' => $streamer,
@@ -93,6 +94,7 @@ class StreamerController extends AbstractController
             'presentations' => $presentations,
             'socialsNetworks' => $socialsNetworks,
             'followersCount' => $followersCount,
+            'recentClips' => $recentClips,
         ]);
     }
 }

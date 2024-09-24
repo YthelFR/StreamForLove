@@ -1,6 +1,8 @@
 <div class="py-2 px-6 bg-[#f8f4f3] flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
 	<button type="button" class="text-lg text-gray-900 font-semibold sidebar-toggle">
-		<i class="ri-menu-line"></i>
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="text-gray-900" viewbox="0 0 24 24">
+			<path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+		</svg>
 	</button>
 
 	<ul class="ml-auto flex items-center">
@@ -29,7 +31,7 @@
 						{{ csrf_token('logout') }}
 					</form>
 					<a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault();
-							                                document.getElementById('logout-form').submit();">
+																																			                                document.getElementById('logout-form').submit();">
 						Déconnexion
 					</a>
 				</li>

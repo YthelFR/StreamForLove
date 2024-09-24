@@ -28,30 +28,30 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
+        // Vérifiez si le formulaire a été soumis et est valide
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $plainPassword = $form->get('plainPassword')->getData();
+                $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+                $entityManager->persist($user);
+                $entityManager->flush();
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+                $this->emailVerifier->sendEmailConfirmation(
+                    'app_verify_email',
+                    $user,
+                    (new TemplatedEmail())
+                        ->from(new Address('support@streamforlove.coalitionplus.org', 'Support'))
+                        ->to((string) $user->getEmail())
+                        ->subject('Please Confirm your Email')
+                        ->htmlTemplate('registration/confirmation_email.html.twig')
+                );
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation(
-                'app_verify_email',
-                $user,
-                (new TemplatedEmail())
-                    ->from(new Address('ythel.gaming@gmail.com', 'Support'))
-                    ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_home');
+                return $this->redirectToRoute('app_home');
+            } else {
+                // Affichez un message d'erreur uniquement si le formulaire est soumis mais non valide
+                $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
+            }
         }
 
         return $this->render('registration/register.html.twig', [

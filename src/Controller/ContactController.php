@@ -16,26 +16,26 @@ class ContactController extends AbstractController
     public function contact(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ContactType::class);
-
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $data = $form->getData();
 
-            $email = (new Email())
-                ->from($data['email'])
-                ->to('support@streamforlove.coalitionplus.org')
-                ->subject($data['subject'])
-                ->text($data['message'] . "\n\nDe : " . $data['name'] . " <" . $data['email'] . ">");
+                $email = (new Email())
+                    ->from($data['email'])
+                    ->to('support@streamforlove.coalitionplus.org')
+                    ->subject($data['subject'])
+                    ->text($data['message'] . "\n\nDe : " . $data['name'] . " <" . $data['email'] . ">");
 
-            $mailer->send($email);
+                $mailer->send($email);
+                $this->addFlash('success', 'Votre message a été envoyé avec succès.');
 
-            $this->addFlash('success', 'Votre message a été envoyé avec succès.');
-
-            return $this->redirectToRoute('contact');
+                return $this->redirectToRoute('contact');
+            } else {
+                $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
+            }
         }
-
-        $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
 
         return $this->render('contact/contact.html.twig', [
             'form' => $form->createView(),
