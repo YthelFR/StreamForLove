@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/dashboard/presentations')]
@@ -70,6 +69,22 @@ class StreamerPresentationsController extends AbstractController
             } else {
                 $presentation->setPlanning(null);
             }
+
+            $goalsFile = $form->get('goals')->getData();
+            if ($goalsFile) {
+                $originalFilename = pathinfo($goalsFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $goalsFile->guessExtension();
+
+                $goalsFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals',
+                    $newFilename
+                );
+                $presentation->setGoals($newFilename);
+            } else {
+                $presentation->setGoals(null);
+            }
+
             
             $entityManager->persist($presentation);
             $entityManager->flush();
@@ -137,6 +152,27 @@ class StreamerPresentationsController extends AbstractController
                 );
         
                 $presentation->setPlanning($newPlanningFilename); // Set the new planning file path
+            }
+
+            $goalsFile = $form->get('goals')->getData();
+            if ($goalsFile) {
+                if ($presentation->getGoals()) {
+                    $oldGoalsPath = $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals/' . $presentation->getGoals();
+                    if (file_exists($oldGoalsPath)) {
+                        unlink($oldGoalsPath);
+                    }
+                }
+
+                $originalGoalsFilename = pathinfo($goalsFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeGoalsFilename = $slugger->slug($originalGoalsFilename);
+                $newGoalsFilename = $safeGoalsFilename . '-' . uniqid() . '.' . $goalsFile->guessExtension();
+
+                $goalsFile->move(
+                    $this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/goals',
+                    $newGoalsFilename
+                );
+
+                $presentation->setGoals($newGoalsFilename);
             }
 
             $entityManager->flush();

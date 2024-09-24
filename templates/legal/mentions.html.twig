@@ -1,20 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LegalController!{% endblock %}
+{% block title %}Mentions Légales{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="gradientBg p-14 space-y-6">
+    <h2 class="text-[#9F2627] font-bold text-5xl py-2">Mentions légales</h2>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="space-y-4">
+        <h3 class="text-[#9F2627] font-bold text-3xl">Éditeurs</h3>
+        <p class="text-white">
+            Ce site est édité par les entités :
+        </p>
+        <div class="space-y-2">
+            <p class="text-white">
+                Coalition PLUS, association de droit français reconnue d’utilité publique, dont le siège social est situé Tour Essor – 14 Rue Scandicci, 93500 Pantin, France
+            </p>
+            <p class="text-white">Email : dons@coalitionplus.org</p>
+            <p class="text-white">Téléphone : 0033 1 77 93 97 25</p>
+        </div>
+        <div class="space-y-2">
+            <p class="text-white">
+                Coalition PLUS Belgique, association sans but lucratif de droit belge, dont le siège social est situé 90 Boulevard Emile Jacqmain, 1000 Bruxelles, Belgique
+            </p>
+            <p class="text-white">Email : servicedonateurs@coalitionplus.org</p>
+            <p class="text-white">Téléphone : 0032 2 502 89 48</p>
+        </div>
+        <div class="space-y-2">
+            <p class="text-white">
+                Coalition PLUS Suisse, association de droit suisse reconnue d’utilité publique, dont le siège social est situé 10 Rue de Chantepoulet, 1201 Genève
+            </p>
+            <p class="text-white">Email : donateurs@coalitionplus.org</p>
+            <p class="text-white">Téléphone : 0041 22 342 40 53</p>
+        </div>
+        <div class="space-y-2">
+            <p class="text-white">
+                Coalition PLUS Afrique, association étrangère de droit commun, dont le siège social est situé Rue DD 116, Sicap Dieupeul II, Villa 2466, Immeuble Abdoulaye Fofana, 11 000 Dakar
+            </p>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Utilisateur/Documents/StreamForLove/src/Controller/LegalController.php</code></li>
-        <li>Your template at <code>C:/Users/Utilisateur/Documents/StreamForLove/templates/legal/index.html.twig</code></li>
+    <h3 class="text-[#9F2627] font-bold text-3xl">Directeurs de publication</h3>
+    <p class="text-white">
+        Les directeurs de publication sont Monsieur Vincent Leclercq et Madame Florence Giard, en leurs qualités respectives de Directeur Général et Directrice Générale Adjointe de Coalition PLUS.
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Hébergeur</h3>
+    <p class="text-white">
+        Ce site est hébergé exclusivement sur des datacenters en Europe via le prestataire d’hébergement IONOS.
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Conditions générales d'utilisation</h3>
+    <p class="text-white">
+        Coalition PLUS veille à la protection de vos données en accord avec la réglementation européenne et les réglementations nationales en vigueur. A ce titre, vous avez le droit de vous opposer à leur traitement, de demander à les consulter, à les rectifier ou encore à les supprimer. Pour toute demande d’information complémentaire ou requête, vous pouvez vous adresser à dpo@coalitionplus.org.
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Politiques de Cookies et protection de vos données personnelles</h3>
+    <p class="text-white">
+        Un « Cookie » permet l’identification de l’utilisateur, la personnalisation de sa consultation du site www.coalitionplus.org et l’accélération de la mise en page du site grâce à l’enregistrement d’un léger fichier de données sur votre ordinateur.
+    </p>
+    <p class="text-white">
+        Les données collectées via l’utilisation des cookies sont transmises de manière sécurisée au personnel autorisé. Elles sont utilisées dans le but de :
+    </p>
+    <ul class="text-white list-disc pl-8 space-y-2">
+        <li>réaliser des mesures d’audience et d’analyse du trafic de notre site internet ;</li>
+        <li>améliorer l’expérience utilisateur en proposant un contenu personnalisé ;</li>
+        <li>faciliter le partage des informations sur les réseaux sociaux ;</li>
     </ul>
+    <p class="text-white">
+        Coalition PLUS fait appel à des services tiers pour l’exécution de certains traitements des données collectées. Nous veillons à ce que ces services tiers protègent vos données et à ce que des mesures de protection soient suffisantes pour un traitement correct et sécurisé de vos données.
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Droits d’auteur</h3>
+    <p class="text-white">
+        La totalité des éléments du site www.coalitionplus.org sont, sauf documents publics, la propriété intellectuelle exclusive de Coalition PLUS ou de ses partenaires. Toute représentation, reproduction, imbrication, diffusion ou rediffusion devra figurer la mention « Copyright 2024 Coalition PLUS tous droits réservés ».
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Accès au site</h3>
+    <p class="text-white">
+        Le site www.coalitionplus.org est accessible à l’utilisateur 24 heures sur 24, 7 jours sur 7 sauf précisions contraires. La responsabilité de Coalition PLUS ne peut être engagée en raison d’une indisponibilité technique de la connexion, qu’elle soit due notamment à un cas de force majeure, à une maintenance, à une mise à jour, à une modification du site, à une intervention de l’hébergeur, à une grève interne ou externe, à une panne de réseau, à une coupure d’alimentation électrique, ou encore à une mauvaise configuration ou utilisation de l’ordinateur de l’utilisateur.
+    </p>
+
+    <h3 class="text-[#9F2627] font-bold text-3xl">Modification des conditions générales d'utilisation</h3>
+    <p class="text-white">
+        Coalition PLUS se réserve le droit de modifier, supprimer ou d’ajouter des éléments aux modifications générales d’utilisation.
+    </p>
+    <p class="text-white">Dernière modification : janvier 2022.</p>
 </div>
 {% endblock %}

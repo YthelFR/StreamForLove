@@ -49,7 +49,16 @@ class PresentationsType extends AbstractType
                 'attr' => [
                     'accept' => 'image/*',
                 ],
-            ]);
+            ])
+            ->add('goals', FileType::class, [
+                'label' => 'Donations Goal',
+                'mapped' => false,
+                'required' => false,
+                'attr' => [
+                    'accept' => 'image/*',
+                ],
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
