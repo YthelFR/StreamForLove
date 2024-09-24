@@ -27,6 +27,8 @@ class ContactType extends AbstractType
             ->add('subject', ChoiceType::class, [
                 'label' => 'Sujet',
                 'choices' => [
+                    'Demande de participation au prochain event' => 'inscriptionEvent',
+                    'Demande de participation à une collecte hors event' => 'horsEvent',
                     'Demande d\'information' => 'info',
                     'Problème technique' => 'tech',
                     'Autre' => 'other',

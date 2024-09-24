@@ -44,6 +44,9 @@ class Presentations
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $picturePath = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $goals = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +167,18 @@ class Presentations
     public function setPicturePath(?string $picturePath): self
     {
         $this->picturePath = $picturePath;
+        return $this;
+    }
+
+    public function getGoals(): ?string
+    {
+        return $this->goals;
+    }
+
+    public function setGoals(?string $goals): static
+    {
+        $this->goals = $goals;
+
         return $this;
     }
 }

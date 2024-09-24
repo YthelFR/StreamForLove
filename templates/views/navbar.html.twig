@@ -104,13 +104,15 @@
                     {% endif %}
 
                     <!-- Contact Button -->
-                    <li class="relative">
-                        <button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
-                            <span class="flex items-center justify-center text-lg px-5 py-1.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
-                                Contact
-                            </span>
-                        </button>
-                    </li>
+                    <a href="{{ path('contact') }}" class="inline-flex">
+                        <li class="relative">
+                            <button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+                                <span class="flex items-center justify-center text-lg px-5 py-1 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+                                    Contact
+                                </span>
+                            </button>
+                        </li>
+                    </a>
                     <!-- End Contact Button -->
                 </ul>
             </div>

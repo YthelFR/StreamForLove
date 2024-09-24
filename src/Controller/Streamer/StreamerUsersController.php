@@ -23,12 +23,10 @@ class StreamerUsersController extends AbstractController
         /** @var Users $user */
         $user = $this->getUser();
         
-        // Créez le formulaire pour éditer le profil
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Gestion du changement de mot de passe
             $oldPassword = $form->get('old_password')->getData();
             if ($oldPassword && $passwordHasher->isPasswordValid($user, $oldPassword)) {
                 $newPassword = $form->get('new_password')->getData();
@@ -36,9 +34,11 @@ class StreamerUsersController extends AbstractController
                     $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                     $user->setPassword($hashedPassword);
                 }
+            } else {
+                $this->addFlash('danger', 'Le mot de passe actuel est incorrect.');
+                return $this->redirectToRoute('streamer_profile_edit');
             }
 
-            // Mise à jour des autres informations (email et pseudo)
             $em->persist($user);
             $em->flush();
 
