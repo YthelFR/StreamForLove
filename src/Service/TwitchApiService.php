@@ -124,6 +124,7 @@ class TwitchApiService
 
         $data = $response->toArray();
 
+        // Vérifier si 'data' est présent et non vide
         return $data['data'][0]['id'] ?? '';
     }
 
@@ -181,7 +182,7 @@ class TwitchApiService
         return $data['total'] ?? 0;
     }
 
-    public function getRecentClips(string $broadcasterId, int $limit = 5): array
+    public function getRecentClips(string $broadcasterId, int $limit = 4): array // Changer le limit par défaut à 4
     {
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/clips', [
             'headers' => [
@@ -191,7 +192,6 @@ class TwitchApiService
             'query' => [
                 'broadcaster_id' => $broadcasterId,
                 'first' => $limit,
-                'started_at' => date('Y-m-d\TH:i:s\Z', strtotime('-30 days')),  // Derniers 30 jours
             ],
         ]);
 
