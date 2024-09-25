@@ -10,7 +10,7 @@
 			<button type="button" class="dropdown-toggle flex items-center">
 				<div class="flex-shrink-0 w-10 h-10 relative">
 					<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-						<img class="w-8 h-8 rounded-full" src="{{ current_user().avatar ? asset(current_user().avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ current_user().pseudo }}"/>
+						<img class="w-8 h-8 rounded-full" src="{{ current_user().avatar ? asset('assets/users/avatars/' ~ current_user().avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ current_user().pseudo }}"/>
 						<div class="top-0 left-7 absolute w-3 h-3 bg-lime-400 border-2 border-white rounded-full animate-ping"></div>
 						<div class="top-0 left-7 absolute w-3 h-3 bg-lime-500 border-2 border-white rounded-full"></div>
 					</div>
@@ -31,7 +31,7 @@
 						{{ csrf_token('logout') }}
 					</form>
 					<a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault();
-																																			                                document.getElementById('logout-form').submit();">
+																																										                                document.getElementById('logout-form').submit();">
 						Déconnexion
 					</a>
 				</li>

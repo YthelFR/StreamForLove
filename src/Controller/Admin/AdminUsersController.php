@@ -3,13 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Users;
+use App\Form\AvatarType;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/user')]
 class AdminUsersController extends AbstractController
@@ -64,11 +67,38 @@ class AdminUsersController extends AbstractController
     public function editAdminProfile(
         Request $request,
         EntityManagerInterface $em,
-        UserPasswordHasherInterface $passwordHasher
+        UserPasswordHasherInterface $passwordHasher,
+        SluggerInterface $slugger // Ajout de SluggerInterface
     ): Response {
         /** @var Users $admin */
         $admin = $this->getUser();
 
+        // Formulaire pour l'Avatar
+        $avatarForm = $this->createForm(AvatarType::class);
+        $avatarForm->handleRequest($request);
+
+        if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+            $avatarFile = $avatarForm->get('avatar')->getData();
+            if ($avatarFile) {
+                $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
+
+                try {
+                    $avatarFile->move(
+                        $this->getParameter('avatars_directory'),
+                        $newFilename
+                    );
+                    $admin->setAvatar($newFilename); // Met à jour l'avatar de l'utilisateur dans la base de données
+                    $em->flush();
+                    $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'avatar : ' . $e->getMessage());
+                }
+            }
+        }
+
+        // Formulaire pour le profil
         $form = $this->createForm(ProfileType::class, $admin);
         $form->handleRequest($request);
 
@@ -85,12 +115,8 @@ class AdminUsersController extends AbstractController
             return $this->redirectToRoute('admin_profile_edit');
         }
 
-        // Gestion des erreurs
-        foreach ($form->getErrors(true) as $error) {
-            $this->addFlash('error', $error->getMessage());
-        }
-
         return $this->render('admin/users/edit_profile.html.twig', [
+            'avatar_form' => $avatarForm->createView(),
             'form' => $form->createView(),
             'admin' => $admin,
         ]);

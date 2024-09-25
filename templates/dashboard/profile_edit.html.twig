@@ -2,48 +2,80 @@
 
 {% block body %}
 	<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-		<h1>Modifier mon profil</h1>
+		<div class="container mx-auto px-4 py-8">
+			<h1 class="text-center text-2xl font-bold mb-4 text-gray-800">Modifier mon profil</h1>
 
-		{% for label, messages in app.flashes %}
-			<div class="alert alert-{{ label }}">
-				{% for message in messages %}
-					<p>{{ message }}</p>
-				{% endfor %}
+			{% for label, messages in app.flashes %}
+				<div class="bg-green-500 text-white p-3 rounded mb-4">
+					{% for message in messages %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				</div>
+			{% endfor %}
+
+			<div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white">
+				<h2 class="text-lg font-bold mb-4">Changer l'Avatar</h2>
+				{{ form_start(avatar_form) }}
+				<div class="mb-4">
+					<label class="block text-gray-700 font-bold mb-2">Avatar actuel</label>
+					{% if app.user.avatar %}
+						<img src="{{ asset('assets/users/avatars/' ~ app.user.avatar) }}" alt="Avatar actuel" class="w-64 h-64 rounded-full mb-2">
+					{% else %}
+						<p>Pas d'avatar</p>
+					{% endif %}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(avatar_form.avatar, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(avatar_form.avatar, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(avatar_form.avatar) }}
+				</div>
+
+				<div class="flex justify-end mt-4">
+					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistrer l'Avatar</button>
+				</div>
+				{{ form_end(avatar_form) }}
 			</div>
-		{% endfor %}
 
-		{{ form_start(form) }}
-		<div>
-			{{ form_label(form.email) }}
-			{{ form_widget(form.email) }}
-			{{ form_errors(form.email) }}
+			<div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white mt-8">
+				<h2 class="text-lg font-bold mb-4">Modifier le Profil</h2>
+				{{ form_start(profile_form) }}
+
+				<div class="mb-4">
+					{{ form_label(profile_form.email, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(profile_form.email, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(profile_form.email) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(profile_form.pseudo, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(profile_form.pseudo, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(profile_form.pseudo) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(profile_form.old_password, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(profile_form.old_password, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(profile_form.old_password) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(profile_form.new_password.first, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(profile_form.new_password.first, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(profile_form.new_password.first) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(profile_form.new_password.second, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(profile_form.new_password.second, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(profile_form.new_password.second) }}
+				</div>
+
+				<div class="flex justify-end mt-4">
+					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistrer le Profil</button>
+				</div>
+				{{ form_end(profile_form) }}
+			</div>
 		</div>
-
-		<div>
-			{{ form_label(form.pseudo) }}
-			{{ form_widget(form.pseudo) }}
-			{{ form_errors(form.pseudo) }}
-		</div>
-
-		<div>
-			{{ form_label(form.old_password) }}
-			{{ form_widget(form.old_password) }}
-			{{ form_errors(form.old_password) }}
-		</div>
-
-		<div>
-			{{ form_label(form.new_password.first) }}
-			{{ form_widget(form.new_password.first) }}
-			{{ form_errors(form.new_password.first) }}
-		</div>
-
-		<div>
-			{{ form_label(form.new_password.second) }}
-			{{ form_widget(form.new_password.second) }}
-			{{ form_errors(form.new_password.second) }}
-		</div>
-
-		<button type="submit">Enregistrer</button>
-		{{ form_end(form) }}
 	</div>
 {% endblock %}

@@ -3,19 +3,24 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use App\Form\SocialsNetworkType; 
+use App\Form\SocialsNetworkType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\File;
 
 class UsersType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email', null, [
+                'constraints' => new Email(['message' => 'Veuillez entrer une adresse email valide.']),
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Admin' => 'ROLE_ADMIN',
@@ -27,7 +32,21 @@ class UsersType extends AbstractType
             ])
             ->add('password')
             ->add('pseudo')
-            ->add('avatar')
+            ->add('avatar', FileType::class, [
+                'label' => 'Avatar (Image file)',
+                'required' => false, // Avatar peut être facultatif
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG ou GIF).',
+                    ])
+                ],
+            ])
             ->add('isValid')
             ->add('createdAt', null, [
                 'widget' => 'single_text',
@@ -41,8 +60,8 @@ class UsersType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'Réseaux sociaux',
-                'prototype' => true, 
-                'required' => false, 
+                'prototype' => true,
+                'required' => false,
             ]);
     }
 
