@@ -30,15 +30,18 @@ class AdminOutsidersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $outsider->setUser($this->getUser());
+
             $entityManager->persist($outsider);
             $entityManager->flush();
 
-            $this->addFlash('success', 'L\'outsider a été créé avec succès.');
+            $this->addFlash('success', 'L\'outsider a bien été créé.');
 
-            return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_outsiders_show', ['id' => $outsider->getId()]);
         }
 
         return $this->render('admin/outsiders/new.html.twig', [
+            'outsider' => $outsider,
             'form' => $form->createView(),
         ]);
     }
@@ -65,10 +68,9 @@ class AdminOutsidersController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
             $this->addFlash('success', 'L\'outsider a été mis à jour avec succès.');
 
-            return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_outsiders_show', ['id' => $outsider->getId()]);
         }
 
         return $this->render('admin/outsiders/edit.html.twig', [
@@ -80,15 +82,17 @@ class AdminOutsidersController extends AbstractController
     #[Route('/{id}', name: 'admin_outsiders_delete', methods: ['POST'])]
     public function delete(Request $request, Outsiders $outsider, EntityManagerInterface $entityManager): Response
     {
+        // Vérification du token CSRF
         if ($this->isCsrfTokenValid('delete' . $outsider->getId(), $request->request->get('_token'))) {
             $entityManager->remove($outsider);
             $entityManager->flush();
 
-            $this->addFlash('success', 'L\'outsider a été supprimé avec succès.');
+            $this->addFlash('success', 'L\'outsider a bien été supprimé.');
         } else {
-            $this->addFlash('error', 'Erreur de suppression, veuillez réessayer.');
+            $this->addFlash('error', 'Échec de la suppression. Le token CSRF est invalide.');
+            return $this->redirectToRoute('admin_outsiders_index');
         }
 
-        return $this->redirectToRoute('admin_outsiders_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_outsiders_index');
     }
 }

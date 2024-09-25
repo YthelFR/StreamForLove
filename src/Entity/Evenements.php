@@ -15,7 +15,7 @@ class Evenements
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $annee = null;
 
     #[ORM\Column]
     private ?int $donations = null;
@@ -23,25 +23,19 @@ class Evenements
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'adminEvenements')]
-    private ?Users $users = null;
-
-    #[ORM\ManyToOne(inversedBy: 'evenements')]
-    private ?Users $adminEvenements = null;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getAnnee(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->annee;
     }
 
-    public function setDate(\DateTimeInterface $date): static
+    public function setAnnee(\DateTimeInterface $annee): static
     {
-        $this->date = $date;
+        $this->annee = $annee;
 
         return $this;
     }
@@ -53,6 +47,10 @@ class Evenements
 
     public function setDonations(int $donations): static
     {
+        if ($donations < 0) {
+            throw new \InvalidArgumentException('Le montant des dons ne peut pas être inférieur à 0.');
+        }
+
         $this->donations = $donations;
 
         return $this;
@@ -66,30 +64,6 @@ class Evenements
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getUsers(): ?Users
-    {
-        return $this->users;
-    }
-
-    public function setUsers(?Users $users): static
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    public function getAdminEvenements(): ?Users
-    {
-        return $this->adminEvenements;
-    }
-
-    public function setAdminEvenements(?Users $adminEvenements): static
-    {
-        $this->adminEvenements = $adminEvenements;
 
         return $this;
     }

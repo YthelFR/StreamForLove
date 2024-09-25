@@ -5,8 +5,17 @@
 
 {% block body %}
 	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
-		<h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier Outsider</h1>
-
+		<h2 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier Outsider</h2>
+		{% for message in app.session.flashBag.get('success') %}
+			<div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.session.flashBag.get('error') %}
+			<div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% for message in app.flashes('success') %}
 			<div class="bg-green-500 text-white p-2 mb-4 rounded">
 				{{ message }}
@@ -37,10 +46,9 @@
 		<div class="flex justify-end mt-6">
 			<a href="{{ path('admin_outsiders_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
 			<button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Mettre à jour</button>
-			{{ include('admin/outsiders/_delete_form.html.twig', {'outsider': outsider}) }}
 		</div>
 
-
+		{{ form_rest(form) }}
 		{{ form_end(form) }}
 	</div>
 {% endblock %}

@@ -1,15 +1,50 @@
 {% extends 'admin_base.html.twig' %}
 
+{% block title %}Éditer l'utilisateur{% endblock %}
+
 {% block body %}
-	<h1>Éditer l'utilisateur</h1>
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">{{ message }}</div>
-	{% endfor %}
-	{% for message in app.flashes('error') %}
-		<div class="alert alert-danger">{{ message }}</div>
-	{% endfor %}
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button type="submit" class="btn btn-primary">Sauvegarder</button>
-	{{ form_end(form) }}
+	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+		<h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Éditer l'utilisateur</h1>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+		{% for message in app.flashes('error') %}
+			<div class="alert alert-danger">{{ message }}</div>
+		{% endfor %}
+		
+		{{ form_start(form) }}
+
+		<div class="mb-4">
+			{{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.email, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.pseudo, 'Pseudo', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.pseudo, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.old_password, 'Mot de passe actuel', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.old_password, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.new_password.first, 'Nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.new_password.first, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.new_password.second, 'Répéter le mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.new_password.second, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="flex justify-end mt-6">
+			<a href="{{ path('admin_users_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+			<button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Sauvegarder</button>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
 {% endblock %}

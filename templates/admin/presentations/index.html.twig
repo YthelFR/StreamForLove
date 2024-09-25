@@ -5,8 +5,12 @@
 
 {% block body %}
 	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-		<h1 class="text-2xl font-semibold text-gray-700">Liste des Présentations</h1>
-
+		<h2 class="text-2xl font-semibold text-gray-700">Liste des Présentations</h2>
+		{% for message in app.flashes('success') %}
+			<div class="mb-4 text-green-600">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% if presentations is empty %}
 			<p class="mt-4 text-gray-500">Aucune présentation trouvée.</p>
 		{% else %}
@@ -21,15 +25,13 @@
 						</thead>
 						<tbody class="text-gray-500">
 							{% for presentation in presentations %}
-								<tr
-									class="bg-white hover:bg-gray-100">
+								<tr class="bg-white hover:bg-gray-100">
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
 										<p class="whitespace-no-wrap">{{ presentation.streamersPresentation.pseudo }}</p>
 									</td>
 
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<div
-											class="flex space-x-4">
+										<div class="flex space-x-4">
 											<a href="{{ path('admin_presentations_edit', { id: presentation.id }) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
 												Éditer
 											</a>

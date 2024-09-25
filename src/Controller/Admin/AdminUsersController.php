@@ -45,6 +45,7 @@ class AdminUsersController extends AbstractController
             $em->persist($user);
             $em->flush();
 
+            // Ajout du message flash
             $this->addFlash('success', 'Profil de l\'utilisateur mis à jour.');
             return $this->redirectToRoute('admin_users_index');
         }
@@ -59,7 +60,7 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
+    #[Route('/profile-edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
     public function editAdminProfile(
         Request $request,
         EntityManagerInterface $em,

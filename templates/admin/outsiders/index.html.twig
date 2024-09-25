@@ -5,12 +5,17 @@
 
 {% block body %}
 	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-		<h1 class="text-2xl font-semibold text-gray-700">Liste des Outsiders</h1>
-
-		<a href="{{ path('admin_outsiders_new') }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600 mb-4">
-			Créer un nouvel outsider
-		</a>
-
+		<h2 class="text-2xl font-semibold text-gray-700">Liste des Outsiders</h2>
+		{% for message in app.session.flashBag.get('success') %}
+			<div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.session.flashBag.get('error') %}
+			<div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
 		{% if outsiders is empty %}
 			<p class="mt-4 text-gray-500">Aucun outsider trouvé.</p>
 		{% else %}
@@ -28,8 +33,7 @@
 						</thead>
 						<tbody class="text-gray-500">
 							{% for outsider in outsiders %}
-								<tr
-									class="bg-white hover:bg-gray-100">
+								<tr class="bg-white hover:bg-gray-100">
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
 										<p class="whitespace-no-wrap">{{ outsider.id }}</p>
 									</td>
@@ -47,8 +51,7 @@
 									</td>
 
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<div
-											class="flex space-x-4">
+										<div class="flex space-x-4">
 											<a href="{{ path('admin_outsiders_show', {'id': outsider.id}) }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
 												Voir
 											</a>

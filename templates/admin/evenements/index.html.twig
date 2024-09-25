@@ -1,57 +1,58 @@
 {% extends 'admin_base.html.twig' %}
 
 {% block body %}
-	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-		<h1 class="text-2xl font-semibold text-gray-700">Liste des Événements</h1>
+    <div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+        <h2 class="text-2xl font-semibold text-gray-700">Liste des Événements</h2>
 
-		{% if evenements is empty %}
-			<p class="mt-4 text-gray-500">Aucun événement trouvé.</p>
-		{% else %}
-			<div class="overflow-y-hidden rounded-lg border mt-6">
-				<div class="overflow-x-auto">
-					<table class="w-full">
-						<thead>
-							<tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-								<th class="px-5 py-3">Nom</th>
-								<th class="px-5 py-3">Date</th>
-								<th class="px-5 py-3">Actions</th>
-							</tr>
-						</thead>
-						<tbody class="text-gray-500">
-							{% for evenement in evenements %}
-								<tr class="bg-white hover:bg-gray-100">
-									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<p class="whitespace-no-wrap">{{ evenement.nom }}</p>
-									</td>
+        <div class="mb-4">
+            <a href="{{ path('admin_evenements_new') }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+                Créer un Événement
+            </a>
+        </div>
 
-									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<p class="whitespace-no-wrap">
-											{{ evenement.date ? evenement.date|date('d/m/Y') : '' }}
-										</p>
-									</td>
+        {% if evenements is empty %}
+            <p class="mt-4 text-gray-500">Aucun événement trouvé.</p>
+        {% else %}
+            <div class="overflow-y-hidden rounded-lg border mt-6">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                                <th class="px-5 py-3">Année</th>
+                                <th class="px-5 py-3">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-500">
+                            {% for evenement in evenements %}
+                                <tr class="bg-white hover:bg-gray-100">
+                                    <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                        <p class="whitespace-no-wrap">
+                                            {{ evenement.annee ? evenement.annee|date('Y') : '' }}
+                                        </p>
+                                    </td>
 
-									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<div class="flex space-x-4">
-											<a href="{{ path('admin_evenements_show', {'id': evenement.id}) }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
-												Voir
-											</a>
-											<a href="{{ path('admin_evenements_edit', {'id': evenement.id}) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
-												Éditer
-											</a>
-											<form method="post" action="{{ path('admin_evenements_delete', {'id': evenement.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr ?');">
-												<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
-												<button type="submit" class="inline-block rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
-													Supprimer
-												</button>
-											</form>
-										</div>
-									</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-		{% endif %}
-	</div>
+                                    <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                        <div class="flex space-x-4">
+                                            <a href="{{ path('admin_evenements_show', {'id': evenement.id}) }}" class="inline-block rounded bg-blue-500 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-600">
+                                                Voir
+                                            </a>
+                                            <a href="{{ path('admin_evenements_edit', {'id': evenement.id}) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+                                                Éditer
+                                            </a>
+                                            <form method="post" action="{{ path('admin_evenements_delete', {'id': evenement.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr ?');">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+                                                <button type="submit" class="inline-block rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
+                                                    Supprimer
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

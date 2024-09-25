@@ -41,23 +41,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime_immutable')]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'users')]
-    private Collection $adminEvenements;
-
-    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist'])]
     private ?Presentations $streamersPresentation = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class)]
     private Collection $socialsNetworks;
-
-    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'admin')]
-    private Collection $adminOutsiders;
 
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'users')]
     private Collection $blogueursArticle;
-
-    #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'adminEvenements')]
-    private Collection $evenements;
 
     #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'user')]
     private Collection $outsiders;
@@ -70,11 +61,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->adminEvenements = new ArrayCollection();
         $this->socialsNetworks = new ArrayCollection();
-        $this->adminOutsiders = new ArrayCollection();
         $this->blogueursArticle = new ArrayCollection();
-        $this->evenements = new ArrayCollection();
         $this->outsiders = new ArrayCollection();
         $this->articles = new ArrayCollection();
     }
@@ -193,34 +181,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Evenements>
-     */
-    public function getAdminEvenements(): Collection
-    {
-        return $this->adminEvenements;
-    }
-
-    public function addAdminEvenement(Evenements $adminEvenement): static
-    {
-        if (!$this->adminEvenements->contains($adminEvenement)) {
-            $this->adminEvenements->add($adminEvenement);
-            $adminEvenement->setUsers($this);
-        }
-        return $this;
-    }
-
-    public function removeAdminEvenement(Evenements $adminEvenement): static
-    {
-        if ($this->adminEvenements->removeElement($adminEvenement)) {
-            // set the owning side to null (unless already changed)
-            if ($adminEvenement->getUsers() === $this) {
-                $adminEvenement->setUsers(null);
-            }
-        }
-        return $this;
-    }
-
     public function getStreamersPresentation(): ?Presentations
     {
         return $this->streamersPresentation;
@@ -268,34 +228,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Outsiders>
-     */
-    public function getAdminOutsiders(): Collection
-    {
-        return $this->adminOutsiders;
-    }
-
-    public function addAdminOutsider(Outsiders $adminOutsider): static
-    {
-        if (!$this->adminOutsiders->contains($adminOutsider)) {
-            $this->adminOutsiders->add($adminOutsider);
-            $adminOutsider->setAdmin($this);
-        }
-        return $this;
-    }
-
-    public function removeAdminOutsider(Outsiders $adminOutsider): static
-    {
-        if ($this->adminOutsiders->removeElement($adminOutsider)) {
-            // set the owning side to null (unless already changed)
-            if ($adminOutsider->getAdmin() === $this) {
-                $adminOutsider->setAdmin(null);
-            }
-        }
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Articles>
      */
     public function getBlogueursArticle(): Collection
@@ -318,34 +250,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($blogueursArticle->getUsers() === $this) {
                 $blogueursArticle->setUsers(null);
-            }
-        }
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Evenements>
-     */
-    public function getEvenements(): Collection
-    {
-        return $this->evenements;
-    }
-
-    public function addEvenement(Evenements $evenement): static
-    {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->setAdminEvenements($this);
-        }
-        return $this;
-    }
-
-    public function removeEvenement(Evenements $evenement): static
-    {
-        if ($this->evenements->removeElement($evenement)) {
-            // set the owning side to null (unless already changed)
-            if ($evenement->getAdminEvenements() === $this) {
-                $evenement->setAdminEvenements(null);
             }
         }
         return $this;
