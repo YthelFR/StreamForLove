@@ -9,6 +9,15 @@
 			</div>
 		</div>
 
+		{% for label, messages in app.flashes %}
+			<div class="mb-4">
+				<div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+					<p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+					<p>{{ messages|join(', ') }}</p>
+				</div>
+			</div>
+		{% endfor %}
+
 		<div class="overflow-y-hidden rounded-lg border">
 			<table class="w-full">
 				<thead>
@@ -22,8 +31,7 @@
 				</thead>
 				<tbody class="text-gray-500">
 					{% for user in users %}
-						<tr
-							class="bg-white hover:bg-gray-100">
+						<tr class="bg-white hover:bg-gray-100">
 							<td class="border-b border-gray-200 px-5 py-5 text-sm">
 								<div class="flex items-center">
 									<div class="h-10 w-10 flex-shrink-0">
@@ -47,16 +55,15 @@
 							</td>
 
 							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<div
-									class="flex space-x-4">
-									<a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
+								<div class="flex space-x-2">
+									<a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-3 py-1 text-sm font-semibold text-white hover:bg-green-600">
 										Éditer
 									</a>
 
 									{% if user.id != app.user.id %}
 										<form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline-block">
 											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-											<button class="rounded bg-red-500 px-4 py-2 text-sm font-semibold text-white hover:bg-red-600">
+											<button class="rounded bg-red-500 px-3 py-1 text-sm font-semibold text-white hover:bg-red-600">
 												Supprimer
 											</button>
 										</form>
