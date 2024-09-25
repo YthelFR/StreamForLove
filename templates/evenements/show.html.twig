@@ -4,10 +4,9 @@
 {% endblock %}
 
 {% block body %}
-	<h1>{{ evenement.nom }}</h1>
 
 	<p>Date:
-		{{ evenement.date|date('d/m/Y') }}</p>
+		{{ evenement.annee ? evenement.annee|date('Y') }}</p>
 	<p>Description:
 		{{ evenement.description }}</p>
 

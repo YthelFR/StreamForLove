@@ -80,9 +80,8 @@
 		{% for evenement in evenements %}
 			<li class="mb-4 text-lg">
 				<a href="{{ path('app_evenements_show', { id: evenement.id }) }}" class="text-blue-600 hover:underline">
-					{{ evenement.nom }}
 					-
-					{{ evenement.date|date('d/m/Y') }}
+					{{ evenement.annee ? evenement.annee|date('Y') }}
 				</a>
 			</li>
 		{% else %}
