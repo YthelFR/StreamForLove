@@ -3,12 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Users;
-use App\Form\SocialsNetworkType; 
+use App\Form\SocialsNetworkType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class UsersType extends AbstractType
 {
@@ -27,7 +29,22 @@ class UsersType extends AbstractType
             ])
             ->add('password')
             ->add('pseudo')
-            ->add('avatar')
+            ->add('avatar', FileType::class, [
+                'label' => 'Avatar (Image file)',
+
+                // Constraints pour le fichier
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2M', // Taille maximale de fichier
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                            'image/gif',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG ou GIF).',
+                    ])
+                ],
+            ])
             ->add('isValid')
             ->add('createdAt', null, [
                 'widget' => 'single_text',
@@ -41,8 +58,8 @@ class UsersType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'Réseaux sociaux',
-                'prototype' => true, 
-                'required' => false, 
+                'prototype' => true,
+                'required' => false,
             ]);
     }
 
