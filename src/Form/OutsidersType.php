@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Outsiders;
+use App\Entity\Users;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -34,13 +36,17 @@ class OutsidersType extends AbstractType
                     new NotBlank(['message' => 'La somme ne peut pas être vide.']),
                     new Positive(['message' => 'La somme doit être un nombre positif.']),
                 ],
-            ]);
+            ])
+        ;
     }
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Outsiders::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'outsiders_item',
         ]);
     }
 }

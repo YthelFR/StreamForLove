@@ -59,7 +59,7 @@ class AdminUsersController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
+    #[Route('/profile-edit', name: 'admin_profile_edit', methods: ['GET', 'POST'])]
     public function editAdminProfile(
         Request $request,
         EntityManagerInterface $em,

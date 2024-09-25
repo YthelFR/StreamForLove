@@ -44,14 +44,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Evenements::class, mappedBy: 'users')]
     private Collection $adminEvenements;
 
-    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'streamersPresentation', cascade: ['persist'])]
     private ?Presentations $streamersPresentation = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: SocialsNetwork::class)]
     private Collection $socialsNetworks;
-
-    #[ORM\OneToMany(targetEntity: Outsiders::class, mappedBy: 'admin')]
-    private Collection $adminOutsiders;
 
     #[ORM\OneToMany(targetEntity: Articles::class, mappedBy: 'users')]
     private Collection $blogueursArticle;
@@ -72,7 +69,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->adminEvenements = new ArrayCollection();
         $this->socialsNetworks = new ArrayCollection();
-        $this->adminOutsiders = new ArrayCollection();
         $this->blogueursArticle = new ArrayCollection();
         $this->evenements = new ArrayCollection();
         $this->outsiders = new ArrayCollection();
@@ -264,34 +260,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
 
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Outsiders>
-     */
-    public function getAdminOutsiders(): Collection
-    {
-        return $this->adminOutsiders;
-    }
-
-    public function addAdminOutsider(Outsiders $adminOutsider): static
-    {
-        if (!$this->adminOutsiders->contains($adminOutsider)) {
-            $this->adminOutsiders->add($adminOutsider);
-            $adminOutsider->setAdmin($this);
-        }
-        return $this;
-    }
-
-    public function removeAdminOutsider(Outsiders $adminOutsider): static
-    {
-        if ($this->adminOutsiders->removeElement($adminOutsider)) {
-            // set the owning side to null (unless already changed)
-            if ($adminOutsider->getAdmin() === $this) {
-                $adminOutsider->setAdmin(null);
-            }
-        }
         return $this;
     }
 
