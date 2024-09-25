@@ -6,13 +6,13 @@
 	<ul class="mt-4">
 		<span class="text-gray-400 font-bold">ADMIN</span>
 		<li class="mb-1 group">
-			<a href="{{ path('app_admin') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+			<a href="{{ path('app_admin') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'app_admin' ? 'bg-gray-800 text-white' : '' }}">
 				<i class="ri-home-2-line mr-3 text-lg"></i>
 				<span class="text-sm">Dashboard</span>
 			</a>
 		</li>
 		<li class="mb-1 group">
-			<a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle">
+			<a href="" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'admin_users_index' or app.request.get('_route') == 'admin_user_pending' ? 'bg-gray-800 text-white' : '' }} sidebar-dropdown-toggle">
 				<i class='bx bx-user mr-3 text-lg'></i>
 				<span class="flex items-center justify-between w-full text-sm">
 					<span>Utilisateurs</span>
@@ -27,10 +27,10 @@
 			</a>
 			<ul class="pl-7 mt-2 hidden group-[.selected]:block">
 				<li class="mb-4">
-					<a href="{{ path('admin_users_index') }}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Liste utilisateurs</a>
+					<a href="{{ path('admin_users_index') }}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3 {{ app.request.get('_route') == 'admin_users_index' ? 'text-[#f84525]' : '' }}">Liste utilisateurs</a>
 				</li>
 				<li class="mb-4 flex items-center">
-					<a href="{{ path('admin_user_pending') }}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">En attente</a>
+					<a href="{{ path('admin_user_pending') }}" class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3 {{ app.request.get('_route') == 'admin_user_pending' ? 'text-[#f84525]' : '' }}">En attente</a>
 					{% set pendingCount = pending_users_count() %}
 					{% if pendingCount > 0 %}
 						<span class="md:block px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-600 bg-red-200 rounded-full">
@@ -42,53 +42,53 @@
 		</li>
 		<span class="text-gray-400 font-bold">STREAMERS</span>
 		<li class="mb-1 group">
-			<a href="{{ path('admin_presentations_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+			<a href="{{ path('admin_presentations_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'admin_presentations_index' ? 'bg-gray-800 text-white' : '' }}">
 				<i class="ri-home-2-line mr-3 text-lg"></i>
 				<span class="text-sm">Présentations</span>
 			</a>
 		</li>
 		<li class="mb-1 group">
-			<a href="{{ path('admin_outsiders_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+			<a href="{{ path('admin_outsiders_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'admin_outsiders_index' ? 'bg-gray-800 text-white' : '' }}">
 				<i class='bx bx-list-ul mr-3 text-lg'></i>
 				<span class="text-sm">Outsiders</span>
 			</a>
 		</li>
 		<span class="text-gray-400 font-bold">EVENEMENTS</span>
 		<li class="mb-1 group">
-			<a href="{{ path('admin_evenements_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+			<a href="{{ path('admin_evenements_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'admin_evenements_index' ? 'bg-gray-800 text-white' : '' }}">
 				<i class='bx bx-envelope mr-3 text-lg'></i>
 				<span class="text-sm">Liste des évènements</span>
 			</a>
 		</li>
 		{# <span class="text-gray-400 font-bold">BLOG</span>
-		<li class="mb-1 group">
-			<a href="{{ path('admin_articles_new') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-				<i class='bx bx-archive mr-3 text-lg'></i>
-				<span class="text-sm">Nouvel article</span>
-			</a>
-		</li>
-		<li class="mb-1 group">
-			<a href="{{ path('admin_articles_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-				<i class='bx bx-archive mr-3 text-lg'></i>
-				<span class="text-sm">Archive</span>
-			</a>
-		</li>
-		<span class="text-gray-400 font-bold">NEWSLETTERS</span>
-		<li class="mb-1 group">
-			<a href="{{ path('admin_newsletters_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-				<i class='bx bx-envelope mr-3 text-lg'></i>
-				<span class="text-sm">Liste des newsletters</span>
-			</a>
-		</li>
-		<li class="mb-1 group">
-			<a href="{{ path('admin_abonnes_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-				<i class='bx bx-user mr-3 text-lg'></i>
-				<span class="text-sm">Abonnés</span>
-			</a>
-		</li> #}
+				<li class="mb-1 group">
+					<a href="{{ path('admin_articles_new') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+						<i class='bx bx-archive mr-3 text-lg'></i>
+						<span class="text-sm">Nouvel article</span>
+					</a>
+				</li>
+				<li class="mb-1 group">
+					<a href="{{ path('admin_articles_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+						<i class='bx bx-archive mr-3 text-lg'></i>
+						<span class="text-sm">Archive</span>
+					</a>
+				</li>
+				<span class="text-gray-400 font-bold">NEWSLETTERS</span>
+				<li class="mb-1 group">
+					<a href="{{ path('admin_newsletters_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+						<i class='bx bx-envelope mr-3 text-lg'></i>
+						<span class="text-sm">Liste des newsletters</span>
+					</a>
+				</li>
+				<li class="mb-1 group">
+					<a href="{{ path('admin_abonnes_index') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+						<i class='bx bx-user mr-3 text-lg'></i>
+						<span class="text-sm">Abonnés</span>
+					</a>
+				</li> #}
 		<span class="text-gray-400 font-bold">MON PROFIL</span>
 		<li class="mb-1 group">
-			<a href="{{ path('admin_profile_edit') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+			<a href="{{ path('admin_profile_edit') }}" class="flex font-semibold items-center py-2 px-4 text-gray-900 hover:bg-gray-950 hover:text-gray-100 rounded-md {{ app.request.get('_route') == 'admin_profile_edit' ? 'bg-gray-800 text-white' : '' }}">
 				<i class='bx bx-bell mr-3 text-lg'></i>
 				<span class="text-sm">Paramètres</span>
 			</a>
