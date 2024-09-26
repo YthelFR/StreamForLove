@@ -68,7 +68,7 @@ class AdminUsersController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher,
-        SluggerInterface $slugger // Ajout de SluggerInterface
+        SluggerInterface $slugger
     ): Response {
         /** @var Users $admin */
         $admin = $this->getUser();
@@ -80,16 +80,28 @@ class AdminUsersController extends AbstractController
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
             $avatarFile = $avatarForm->get('avatar')->getData();
             if ($avatarFile) {
+                // Supprimer l'ancien avatar s'il existe (sauf si c'est l'avatar par défaut)
+                $oldAvatar = $admin->getAvatar();
+                if ($oldAvatar && $oldAvatar !== 'default-avatar.png') {
+                    $oldAvatarPath = $this->getParameter('avatars_directory') . '/' . $oldAvatar;
+                    if (file_exists($oldAvatarPath)) {
+                        unlink($oldAvatarPath); // Supprimer l'ancien fichier avatar
+                    }
+                }
+
+                // Générer un nouveau nom de fichier pour l'avatar
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
 
                 try {
+                    // Déplacer le fichier téléchargé dans le répertoire des avatars
                     $avatarFile->move(
                         $this->getParameter('avatars_directory'),
                         $newFilename
                     );
-                    $admin->setAvatar($newFilename); // Met à jour l'avatar de l'utilisateur dans la base de données
+                    // Mettre à jour l'avatar de l'utilisateur dans la base de données
+                    $admin->setAvatar($newFilename);
                     $em->flush();
                     $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
                 } catch (FileException $e) {

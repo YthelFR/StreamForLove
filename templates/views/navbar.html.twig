@@ -64,18 +64,18 @@
 						<li class="px-2 dropdown ml-3 relative">
 							<button type="button" class="dropdown-toggle flex items-center">
 								<div class="p-2 md:block text-left">
-									<h2 class="text-sm font-semibold text-gray-800">{{ current_user().pseudo }}</h2>
-									<p class="text-xs text-gray-800">{{ current_user().roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}</p>
+									<h2 class="text-sm font-semibold text-gray-800">{{ app.user.pseudo }}</h2>
+									<p class="text-xs text-gray-800">{{ app.user.roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}</p>
 								</div>
 								<div class="flex-shrink-0 w-10 h-10 relative">
 									<div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-										<img class="w-8 h-8 rounded-full" src="{{ current_user().avatar ? asset('assets/users/avatars/' ~ current_user().avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ current_user().pseudo }}"/>
+										<img class="w-8 h-8 rounded-full" src="{{ app.user.avatar ? asset('assets/users/avatars/' ~ app.user.avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ app.user.pseudo }}"/>
 									</div>
 								</div>
 							</button>
 							<ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
 								<li>
-									{% set userRole = current_user().roles[0] %}
+									{% set userRole = app.user.roles[0] %}
 									{% set path = '' %}
 									{% if userRole == 'ROLE_ADMIN' or userRole == 'ROLE_MANAGER' %}
 										{% set path = path('app_admin') %}
@@ -96,7 +96,6 @@
 								</li>
 							</ul>
 						</li>
-						<!-- End Dropdown User Avatar -->
 					{% else %}
 						<li class="px-2 dropdown ml-3 relative">
 							<button type="button" class="dropdown-toggle flex items-center">
@@ -116,6 +115,7 @@
 							</ul>
 						</li>
 					{% endif %}
+
 
 					<!-- Contact Button -->
 					<a href="{{ path('contact') }}" class="inline-flex">

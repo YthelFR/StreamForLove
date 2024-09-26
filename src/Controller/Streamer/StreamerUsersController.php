@@ -18,68 +18,73 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class StreamerUsersController extends AbstractController
 {
     #[Route('/profil', name: 'streamer_profile_edit', methods: ['GET', 'POST'])]
-    public function editProfile(
+    public function editAdminProfile(
         Request $request,
         EntityManagerInterface $em,
         UserPasswordHasherInterface $passwordHasher,
         SluggerInterface $slugger
     ): Response {
-        /** @var Users $user */
-        $user = $this->getUser();
-
-        // Formulaire pour l'avatar
+        /** @var Users $admin */
+        $admin = $this->getUser();
+    
+        // Formulaire pour l'Avatar
         $avatarForm = $this->createForm(AvatarType::class);
         $avatarForm->handleRequest($request);
-
+    
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-            // Gestion du changement d'avatar
             $avatarFile = $avatarForm->get('avatar')->getData();
             if ($avatarFile) {
+                // Supprimer l'ancien avatar s'il existe (sauf si c'est l'avatar par défaut)
+                $oldAvatar = $admin->getAvatar();
+                if ($oldAvatar && $oldAvatar !== 'default-avatar.png') {
+                    $oldAvatarPath = $this->getParameter('avatars_directory') . '/' . $oldAvatar;
+                    if (file_exists($oldAvatarPath)) {
+                        unlink($oldAvatarPath); // Supprimer le fichier
+                    }
+                }
+    
+                // Générer un nouveau nom de fichier pour l'avatar
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
-
+    
                 try {
+                    // Déplacer le fichier téléchargé dans le répertoire des avatars
                     $avatarFile->move(
                         $this->getParameter('avatars_directory'),
                         $newFilename
                     );
-                    $user->setAvatar($newFilename); // Met à jour l'avatar de l'utilisateur dans la base de données
+                    // Mettre à jour l'avatar de l'utilisateur dans la base de données
+                    $admin->setAvatar($newFilename);
                     $em->flush();
                     $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
                 } catch (FileException $e) {
-                    $this->addFlash('danger', 'Erreur lors du téléchargement de l\'avatar : ' . $e->getMessage());
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'avatar : ' . $e->getMessage());
                 }
             }
         }
-
+    
         // Formulaire pour le profil
-        $profileForm = $this->createForm(ProfileType::class, $user);
-        $profileForm->handleRequest($request);
-
-        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
-            // Gestion du mot de passe s'il est modifié
-            $oldPassword = $profileForm->get('old_password')->getData();
-            $newPassword = $profileForm->get('new_password')->getData();
-            if ($oldPassword && $newPassword) {
-                if ($passwordHasher->isPasswordValid($user, $oldPassword)) {
-                    $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-                    $user->setPassword($hashedPassword);
-                } else {
-                    $this->addFlash('danger', 'Le mot de passe actuel est incorrect.');
-                    return $this->redirectToRoute('streamer_profile_edit');
-                }
+        $form = $this->createForm(ProfileType::class, $admin);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newPassword = $form->get('new_password')->getData();
+            if ($newPassword) {
+                $hashedPassword = $passwordHasher->hashPassword($admin, $newPassword);
+                $admin->setPassword($hashedPassword);
             }
-
-            $em->flush(); // Persist n'est pas nécessaire ici car l'entité $user est déjà gérée.
-
-            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
-            return $this->redirectToRoute('streamer_profile_edit');
+            $em->persist($admin);
+            $em->flush();
+    
+            $this->addFlash('success', 'Votre profil a été mis à jour.');
+            return $this->redirectToRoute('admin_profile_edit');
         }
-
-        return $this->render('dashboard/profile_edit.html.twig', [
+    
+        return $this->render('admin/users/edit_profile.html.twig', [
             'avatar_form' => $avatarForm->createView(),
-            'profile_form' => $profileForm->createView(),
+            'form' => $form->createView(),
+            'admin' => $admin,
         ]);
     }
 }
