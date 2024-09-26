@@ -59,12 +59,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
+    private Collection $evenements;
+
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
         $this->blogueursArticle = new ArrayCollection();
         $this->outsiders = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,6 +323,33 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evenements>
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
+
+    public function addEvenement(Evenements $evenement): static
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->addParticipant($this);  // Mise à jour de l'autre côté de la relation
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenements $evenement): static
+    {
+        if ($this->evenements->removeElement($evenement)) {
+            $evenement->removeParticipant($this);  // Mise à jour de l'autre côté de la relation
+        }
 
         return $this;
     }

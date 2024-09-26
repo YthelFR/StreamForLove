@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de l'Événement
-{% endblock %}
+{% block title %}Détails de l'Événement{% endblock %}
 
 {% block body %}
+    <h1>{{ evenement.description }}</h1>
 
-	<p>Date:
-		{{ evenement.annee ? evenement.annee|date('Y') }}</p>
-	<p>Description:
-		{{ evenement.description }}</p>
+    <p>Date : {{ evenement.annee ? evenement.annee|date('Y') }}</p>
 
-	<a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
+    {% if evenement.thumbnail %}
+        <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement">
+    {% endif %}
+
+    <h3>Participants :</h3>
+    <ul>
+        {% for participant in evenement.participants %}
+            <li>{{ participant.pseudo }}</li>
+        {% else %}
+            <p>Aucun participant pour cet événement.</p>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
 {% endblock %}
