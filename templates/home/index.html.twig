@@ -15,7 +15,7 @@
 					<li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
 						<a class="flex flex-col items-center text-center" href="{{ path('app_streamers_show', { 'pseudo': user.pseudo }) }}">
 							<div class="relative rounded-full overflow-hidden w-full h-full border-4 border-red-600 bg-white">
-								<img class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110" src="{{ user.avatar }}" alt="{{ user.pseudo }} avatar">
+								<img class="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110" src="{{ user.avatar }}" alt="Avatar de {{ user.pseudo }} en direct sur Twitch">
 							</div>
 							<p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl text-white">{{ user.pseudo }}</p>
 						</a>
@@ -40,17 +40,17 @@
 		<h2 class="text-3xl font-bold text-center mb-10">Questions/Réponses</h2>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
 			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo1.png') }}" alt="Logo 1"/>
+				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo1.png') }}" alt="Logo de l'événement Stream For Love représentant deux personnes qui s'enlacent amicalement"/>
 				<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi un événement caritatif sur Twitch ?</h3>
 				<p class="px-2 md:px-5 min-h-[120px]">Cette plateforme offre à une génération numérique un moyen d'exprimer leur générosité tout en permettant des interactions en direct avec Coalition PLUS et les viewers.</p>
 			</div>
 			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo2.png') }}" alt="Logo 2"/>
+				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo2.png') }}" alt="Logo de l'événement Stream For Love représentant une personne qui fait une donation"/>
 				<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi récolter des dons en 2023 pour le VIH/sida ?</h3>
 				<p class="px-2 md:px-5 min-h-[120px]">Le VIH/sida n'est pas une maladie lointaine. Nous connaissons tous des personnes touchées. Si, dans nos pays, elle ne tue plus, ce n'est pas le cas partout : en 2022, 630 000 personnes en sont encore mortes de maladies opportunistes liées au SIDA.</p>
 			</div>
 			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo3.png') }}" alt="Logo 3"/>
+				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo3.png') }}" alt="Logo de l'événement Stream For Love représentant une seringue pour montrer que les dons serviront aux soins"/>
 				<h3 class="text-2xl font-bold py-3 min-h-[72px]">À quoi serviront les dons ?</h3>
 				<p class="px-2 md:px-5 min-h-[120px]">Les dons financeront des dépistages dans les pays où Coalition PLUS opère via ses associations membres, ainsi que l'achat d'unités mobiles et de matériel pour les centres de soins. Connaître son statut sérologique est essentiel pour entamer un suivi de la maladie.</p>
 			</div>
@@ -62,7 +62,7 @@
 			" Stream For Love nous permet, via Twitch, de compter sur la générosité des gameuses et des gamers et de contribuer à faire la différence contre le VIH "
 		</h2>
 		<div class="bg-white rounded-lg p-5">
-			<img src="{{ asset('assets/medias/accueil/pdg.png') }}"/>
+			<img src="{{ asset('assets/medias/accueil/pdg.png') }}" alt="Portrait de Vincent Leclercq, Directeur général de Coalition PLUS"/>
 		</div>
 		<p class="pt-5">Vincent Leclercq – Directeur général de Coalition PLUS</p>
 	</div>
@@ -70,22 +70,22 @@
 		<h2 class="text-3xl font-bold pb-10">Le VIH / Sida en 2022 ce sont :</h2>
 		<div class="grid grid-flow-row md:grid-flow-col items-start">
 			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo4.png') }}"/>
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo4.png') }}" alt="Statistiques sur le VIH/SIDA : 39 millions de personnes vivant avec la maladie"/>
 				<h3 class="text-2xl font-bold py-1 md:py-3">39.000.000</h3>
 				<p class="px-5 sm:px-10">de personnes qui vivent encore avec la maladie</p>
 			</div>
 			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo5.png') }}"/>
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo5.png') }}" alt="Statistiques sur le VIH/SIDA : près de 10 millions de personnes sans accès à un traitement"/>
 				<h3 class="text-2xl font-bold py1 md:py-3">Près de 10.000.000</h3>
 				<p class="px-5 sm:px-10">de personnes n’ont pas accès à un traitement</p>
 			</div>
 			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo6.png') }}"/>
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo6.png') }}" alt="Statistiques sur le VIH/SIDA : 130,000 enfants de moins de 14 ans infectés"/>
 				<h3 class="text-2xl font-bold py-1 md:py-3">130.000</h3>
 				<p class="px-5 sm:px-10">enfants de moins de 14 ans qui ont été infectés par la maladie</p>
 			</div>
 			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo7.png') }}"/>
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo7.png') }}" alt="Statistiques sur le VIH/SIDA : 630,000 décès liés au sida"/>
 				<h3 class="text-2xl font-bold py-1 md:py-3">630.000</h3>
 				<p class="px-5 sm:px-10">de personnes qui sont décédées des maladies liées au sida</p>
 			</div>
@@ -108,7 +108,7 @@
 				</a>
 			</div>
 			<div class="flex justify-end sm:w-1/3 sm:pt-32">
-				<img class="size-32" src="{{ asset('assets/medias/accueil/logo8.png') }}"/>
+				<img class="size-32" src="{{ asset('assets/medias/accueil/logo8.png') }}" alt="Logo de donation pour l'événement Stream For Love"/>
 			</div>
 		</div>
 		<div class="flex flex-col sm:flex-row mt-10 sm:mt-0 card2 md:w-1/2 rounded-lg mx-4 sm:mx-10 md:mx-16 xl:mx-20 p-3 sm:p-5">
@@ -125,7 +125,7 @@
 				</button>
 			</div>
 			<div class="flex justify-end sm:w-1/3 sm:pt-32">
-				<img class="size-32" src="{{ asset('assets/medias/accueil/logo9.png') }}"/>
+				<img class="size-32" src="{{ asset('assets/medias/accueil/logo9.png') }}" alt="Logo d'inscription pour streamer à l'événement Stream For Love"/>
 			</div>
 		</div>
 	</div>
