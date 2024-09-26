@@ -3,13 +3,21 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Stream For Love - Luttons contre le SIDA et le VIH !
+			{% block title %}Stream For Love - Luttons contre le VIH et le SIDA
 			{% endblock %}
 		</title>
-		<meta name="description" content="Coalition PLUS est une organisation engagée dans la lutte contre le VIH et le SIDA. Rejoignez-nous pour l'événement annuel Stream For Love et apportez votre soutien à cette noble cause aux côtés de streamers sur Twitch."/>
-		<meta name="keywords" content="Coalition PLUS, VIH, SIDA, Stream For Love, dons, Twitch, associations"/>
-		<meta name="author" content="JAMBON 'Ythel_' Yoan"/>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<meta name="description" content="Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec des streamers sur Twitch."/>
+    <meta name="keywords" content="Coalition PLUS, VIH, SIDA, Stream For Love, dons, Twitch, associations"/>
+    <meta name="author" content="JAMBON 'Ythel_' Yoan"/>
+    <meta name="robots" content="index, follow">
+<!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('/assets/medias/accueil/favicon.ico') }}" sizes="32x32"/>
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Stream For Love - Luttons contre le VIH et le SIDA" />
+    <meta property="og:description" content="Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec des streamers sur Twitch." />
+    <meta property="og:image" content="{{ asset('/assets/medias/headers/logo.png') }}" />
+    <meta property="og:url" content="https://facebook.com/coalitionplus" />
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
@@ -20,7 +28,6 @@
 			{% endblock %}
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
-		<link rel="icon" type="image/jpg" href="{{ asset('/assets/medias/accueil/favicon.ico') }}"/>
 	</head>
 	{{ include('views/header.html.twig') }}
 	<body>

@@ -22,9 +22,9 @@
 		<div class="flex flex-col lg:flex-row items-center">
 			<div class="w-full lg:w-1/2 flex justify-center mb-10 lg:mb-0">
 				{% if presentations %}
-					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation"/>
+					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation de {{ streamer.pseudo }}, streamer populaire sur Twitch."/>
 				{% else %}
-					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ channelInfo.profile_image_url }}" alt="Image de présentation"/>
+					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ channelInfo.profile_image_url }}" alt="Image de profil de {{ streamer.pseudo }} sur Twitch."/>
 				{% endif %}
 			</div>
 
@@ -58,21 +58,20 @@
 				{% for social in socialsNetworks %}
 					<a href="{{ social.url }}" target="_blank" class="mb-4">
 						{% if 'twitch' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Twitch Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Logo Twitch, suivez {{ streamer.pseudo }} sur sa chaîne."/>
 						{% elseif 'x.com' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Twitter Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Logo Twitter - X, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'instagram' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Instagram Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Logo Instagram, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'youtube' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="YouTube Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="Logo Youtube, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'tiktok' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="TikTok Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/tiktoklogo.png') }}" alt="Logo TikTok, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'spotify' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl bg-black p-2 transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Spotify Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl bg-black p-2 transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/spotifylogo.png') }}" alt="Logo Spotify, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'discord' in social.url %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Discord Logo"/>
+							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" style="background-color: #4D60A9;" src="{{ asset('assets/medias/socials/discordlogo.png') }}" alt="Logo Discord, suivez {{ streamer.pseudo }} et rejoignez sa communauté Discord."/>
 						{% else %}
-							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('medias/socials/defaultlogo.png') }}" alt="Default Logo"/>
 						{% endif %}
 					</a>
 				{% else %}
@@ -101,7 +100,7 @@
 			<h2 class="text-3xl font-bold pb-4 text-center" style="color: #9F2627;">Dernier Jeu Joué</h2>
 			{% if recentGames is not empty %}
 				<div class="flex flex-col sm:flex-row items-center justify-center">
-					<img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-auto rounded mb-4 sm:mb-0 sm:mr-4">
+					<img src="{{ recentGames['box_art_url'] }}" alt="Couverture du jeu {{ recentGames['name'] }}, dernier jeu joué par {{ streamer.pseudo }}." class="w-32 h-auto rounded mb-4 sm:mb-0 sm:mr-4">
 					<div>
 						<p>
 							<strong>{{ recentGames['name'] }}</strong>
@@ -136,7 +135,7 @@
 			{% if presentations %}
 				<h2 style="color: #9F2627;" class="text-3xl text-center pb-4">Son planning</h2>
 				<a href="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" target="_blank" class="flex justify-center w-full">
-					<img class="w-1/2 sm:w-2/3 md:w-2/3 lg:w-1/2 rounded-lg object-cover hover:shadow-lg transition-shadow duration-300 ease-in-out" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Planning du streamer"/>
+					<img class="w-1/2 sm:w-2/3 md:w-2/3 lg:w-1/2 rounded-lg object-cover hover:shadow-lg transition-shadow duration-300 ease-in-out" src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Planning des activités de streaming de {{ streamer.pseudo }}."/>
 				</a>
 				{% else %}
 			{% endif %}
@@ -147,7 +146,7 @@
 			{% if presentations %}
 				<h2 style="color: #9F2627;" class="text-3xl text-center pb-4">Donations Goals</h2>
 				<a href="{{ asset('assets/users/presentations/goals/' ~ presentations.goals) }}" target="_blank" class="flex justify-center w-full">
-					<img class="w-1/2 sm:w-2/3 md:w-2/3 lg:w-1/2 rounded-lg object-cover hover:shadow-lg transition-shadow duration-300 ease-in-out" src="{{ asset('assets/users/presentations/goals/' ~ presentations.goals) }}" alt="Donations goals du streamer"/>
+					<img class="w-1/2 sm:w-2/3 md:w-2/3 lg:w-1/2 rounded-lg object-cover hover:shadow-lg transition-shadow duration-300 ease-in-out" src="{{ asset('assets/users/presentations/goals/' ~ presentations.goals) }}" alt="Objectifs de dons de {{ streamer.pseudo }} pour son stream caritatif."/>
 				</a>
 				{% else %}
 			{% endif %}

@@ -8,7 +8,7 @@
         <div class="flex flex-col md:flex-row items-center gap-4 mt-8">
             <div class="w-full md:w-1/2 flex justify-center">
                 {% if evenement.thumbnail %}
-                    <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement">
+                    <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement Stream For Love {{ evenement.annee|date('Y') }}">
                 {% endif %}
             </div>
             <div class="w-full md:w-1/2 md:pr-20 text-center md:text-left">
@@ -36,7 +36,7 @@
                     <li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
                         <a href="{{ path('app_streamers_show', { 'pseudo': participant.pseudo }) }}" class="flex flex-col items-center">
                             <div class="relative rounded-full overflow-hidden w-full h-full bg-white {% if isLive %}border-8 border-red-600{% endif %}">
-                                <img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ avatarUrl }}" alt="{{ participant.pseudo }}'s avatar">
+                                <img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ avatarUrl }}" alt="Avatar de {{ participant.pseudo }} participant à l'événement Stream For Love">
                             </div>
                             <p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl">{{ participant.pseudo }}</p>
                         </a>
