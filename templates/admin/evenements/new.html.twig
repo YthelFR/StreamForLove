@@ -11,19 +11,31 @@
         <div class="mb-4">
             {{ form_label(form.annee, 'Année', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.annee, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-            {{ form_errors(form.annee) }}  {# Ajoutez les erreurs de formulaire ici #}
+            {{ form_errors(form.annee) }}
         </div>
 
         <div class="mb-4">
             {{ form_label(form.donations, 'Dons', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.donations, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-            {{ form_errors(form.donations) }}  {# Ajoutez les erreurs de formulaire ici #}
+            {{ form_errors(form.donations) }}
         </div>
 
         <div class="mb-4">
             {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.description, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-            {{ form_errors(form.description) }}  {# Ajoutez les erreurs de formulaire ici #}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.thumbnail, 'Image (Thumbnail)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.thumbnail, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.thumbnail) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.participants, 'Participants', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.participants, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none select2'}}) }}
+            {{ form_errors(form.participants) }}
         </div>
 
         <div class="flex justify-end mt-6">
@@ -33,4 +45,12 @@
 
         {{ form_end(form) }}
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: 'Sélectionnez des participants',
+                allowClear: true
+            });
+        });
+    </script>
 {% endblock %}

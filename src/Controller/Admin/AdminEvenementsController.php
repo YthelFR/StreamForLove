@@ -7,6 +7,7 @@ use App\Form\EvenementsType;
 use App\Repository\EvenementsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,6 +32,27 @@ class AdminEvenementsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion du fichier image (thumbnail)
+            $thumbnailFile = $form->get('thumbnail')->getData();
+
+            if ($thumbnailFile) {
+                // Générer un nom unique pour le fichier
+                $newFilename = uniqid() . '.' . $thumbnailFile->guessExtension();
+
+                try {
+                    // Déplacer le fichier dans le répertoire configuré (evenements_directory)
+                    $thumbnailFile->move(
+                        $this->getParameter('evenements_directory'),
+                        $newFilename
+                    );
+                    // Stocker le nom du fichier dans l'entité Evenements
+                    $evenement->setThumbnail($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                }
+            }
+
+            // Persist and save the event
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -48,8 +70,11 @@ class AdminEvenementsController extends AbstractController
     #[Route('/admin/evenements/{id}', name: 'admin_evenements_show', methods: ['GET'])]
     public function show(Evenements $evenement): Response
     {
+        $participants = $evenement->getParticipants(); // Récupérer les participants
+
         return $this->render('admin/evenements/show.html.twig', [
             'evenement' => $evenement,
+            'participants' => $participants, // Passer les participants au template
         ]);
     }
 

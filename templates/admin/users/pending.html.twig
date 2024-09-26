@@ -6,7 +6,13 @@
 {% block body %}
 	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
 		<h1 class="text-2xl font-semibold text-gray-700">Utilisateurs en attente de validation</h1>
-
+		{% for label, messages in app.flashes %}
+			<div class="alert alert-{{ label }} bg-{{ label == 'success' ? 'green' : 'red' }}-500 text-white px-4 py-2 rounded mb-4">
+				{% for message in messages %}
+					<p>{{ message }}</p>
+				{% endfor %}
+			</div>
+		{% endfor %}
 		{% if users is empty %}
 			<p class="mt-4 text-gray-500">Aucun utilisateur en attente de validation.</p>
 		{% else %}
@@ -23,7 +29,8 @@
 						<tbody class="text-gray-500">
 							{% for user in users %}
 								<tr class="bg-white hover:bg-gray-100">
-										<td class="border-b border-gray-200 px-5 py-5 text-sm"> <p class="whitespace-no-wrap">{{ user.email }}</p>
+									<td class="border-b border-gray-200 px-5 py-5 text-sm">
+										<p class="whitespace-no-wrap">{{ user.email }}</p>
 									</td>
 
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
@@ -31,8 +38,7 @@
 									</td>
 
 									<td class="border-b border-gray-200 px-5 py-5 text-sm">
-										<div
-											class="flex space-x-4">
+										<div class="flex space-x-4">
 											<form action="{{ path('admin_user_activate', {'id': user.id}) }}" method="post">
 												<input type="hidden" name="_token" value="{{ csrf_token('activate' ~ user.id) }}">
 												<button type="submit" class="inline-block rounded bg-green-500 px-4 py-2 text-sm font-semibold text-white hover:bg-green-600">
