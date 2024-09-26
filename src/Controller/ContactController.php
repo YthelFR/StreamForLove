@@ -23,7 +23,8 @@ class ContactController extends AbstractController
                 $data = $form->getData();
 
                 $email = (new Email())
-                    ->from($data['email'])
+                    ->from('noreply@streamforlove.coalitionplus.org')  // Adresse liée à votre domaine
+                    ->replyTo($data['email'])  // L'adresse de l'utilisateur
                     ->to('support@streamforlove.coalitionplus.org')
                     ->subject($data['subject'])
                     ->text($data['message'] . "\n\nDe : " . $data['name'] . " <" . $data['email'] . ">");
