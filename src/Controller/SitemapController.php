@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SitemapController extends AbstractController
 {
-    #[Route("sitemap.xml", name: 'sitemap', format: 'xml')]
+    #[Route("/sitemap.xml", name: 'sitemap', format: 'xml')]
     public function sitemap(): Response
     {
         $urls = [

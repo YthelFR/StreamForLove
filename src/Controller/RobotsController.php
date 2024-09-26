@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class RobotsController extends AbstractController
 {
-    #[Route("robots.txt", name: 'robots', format: 'txt')]
+    #[Route("/robots.txt", name: 'robots', format: 'txt')]
     public function robots(): Response
     {
         $sitemap = $this->generateUrl('sitemap', [], UrlGeneratorInterface::ABSOLUTE_URL);

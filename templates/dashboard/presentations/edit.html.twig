@@ -44,6 +44,13 @@
 		</div>
 
 		<div class="mb-4">
+			<label class="block mb-2 text-sm font-medium text-gray-900" for="goals">Objectifs</label>
+			<div class="w-2/3">
+				{{ form_row(form.goals, {'attr': {'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none'}}) }}
+			</div>
+		</div>
+
+		<div class="mb-4">
 			<label class="block mb-2 text-sm font-medium text-gray-900" for="presentation_image">Image de présentation</label>
 			<div class="w-2/3">
 				{{ form_row(form.picturePath, {'attr': {'class': 'block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none'}}) }}

@@ -20,7 +20,7 @@ class PresentationsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => ['image/jpeg', 'image/png'],
                         'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG).',
                     ])
@@ -32,7 +32,7 @@ class PresentationsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => ['application/pdf'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
                     ])
@@ -44,7 +44,7 @@ class PresentationsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => ['application/pdf'],
                         'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
                     ])
