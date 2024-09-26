@@ -1,24 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de l'Événement{% endblock %}
+{% block title %}Détails de l'Événement
+{% endblock %}
 
 {% block body %}
-    <h1>{{ evenement.description }}</h1>
+    <div class="gradientBg py-12 h-4/6 flex flex-col items-center justify-center">
+        <div class="flex flex-col md:flex-row items-center gap-4 mt-8">
+            <div class="w-full md:w-1/2 flex justify-center">
+                {% if evenement.thumbnail %}
+                    <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement">
+                {% endif %}
+            </div>
+            <div class="w-full md:w-1/2 md:pr-20 text-center md:text-left">
+                <h2 class="mb-2 text-xl md:text-3xl font-bold break-normal">
+                    Stream For Love
+                    {{ evenement.annee ? evenement.annee|date('Y') }}
+                </h2>
+                <p class="text-sm md:text-lg text-white mb-4">
+                    {{ evenement.description }}
+                </p>
+                <a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
+            </div>
+        </div>
+    </div>
 
-    <p>Date : {{ evenement.annee ? evenement.annee|date('Y') }}</p>
+    <div class="py-12 px-4 md:px-8 lg:px-16 xl:px-20">
+        <h2 class="text-2xl md:text-3xl font-bold text-center pb-6 md:pb-10 text-white">Les participants de l'événement</h2>
 
-    {% if evenement.thumbnail %}
-        <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement">
-    {% endif %}
+        {% if participants is not empty %} {# Utiliser 'participants' triés ici #}
+            <ul class="flex flex-wrap gap-4 justify-center">
+                {% for participant in participants %}
+                    {% set avatarUrl = twitchApiService.getAvatarUrl(participant.pseudo) %}
+                    {% set isLive = twitchApiService.isUserLive(participant) %} {# Appel à la méthode pour vérifier si le streamer est en direct #}
 
-    <h3>Participants :</h3>
-    <ul>
-        {% for participant in evenement.participants %}
-            <li>{{ participant.pseudo }}</li>
+                    <li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
+                        <a href="{{ path('app_streamers_show', { 'pseudo': participant.pseudo }) }}" class="flex flex-col items-center">
+                            <div class="relative rounded-full overflow-hidden w-full h-full bg-white {% if isLive %}border-8 border-red-600{% endif %}">
+                                <img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ avatarUrl }}" alt="{{ participant.pseudo }}'s avatar">
+                            </div>
+                            <p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl">{{ participant.pseudo }}</p>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
-            <p>Aucun participant pour cet événement.</p>
-        {% endfor %}
-    </ul>
+            <p class="text-xl md:text-2xl font-bold text-center pb-6 md:pb-10 text-white">Aucun participant trouvé.</p>
+        {% endif %}
+    </div>
 
     <a href="{{ path('app_evenements_index') }}">Retour à la liste des événements</a>
 {% endblock %}

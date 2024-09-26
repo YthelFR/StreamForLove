@@ -37,8 +37,12 @@ class EvenementsType extends AbstractType
             ->add('participants', EntityType::class, [
                 'class' => Users::class,
                 'multiple' => true,
-                'expanded' => true, // Affiche une liste de cases à cocher
+                'expanded' => false, // Passer à false pour utiliser un select
                 'choice_label' => 'pseudo',
+                'attr' => [
+                    'class' => 'select2', // Ajoute une classe pour le select2
+                    'multiple' => 'multiple', // Assure que le multiple est activé
+                ],
             ])
             ->add('thumbnail', FileType::class, [
                 'label' => 'Image (Thumbnail)',

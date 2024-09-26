@@ -32,6 +32,12 @@
             {{ form_errors(form.thumbnail) }}
         </div>
 
+        <div class="mb-4">
+            {{ form_label(form.participants, 'Participants', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.participants, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none select2'}}) }}
+            {{ form_errors(form.participants) }}
+        </div>
+
         <div class="flex justify-end mt-6">
             <a href="{{ path('admin_evenements_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
             <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Créer</button>
@@ -39,4 +45,12 @@
 
         {{ form_end(form) }}
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: 'Sélectionnez des participants',
+                allowClear: true
+            });
+        });
+    </script>
 {% endblock %}

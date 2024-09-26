@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenements;
 use App\Form\EvenementsType;
 use App\Repository\EvenementsRepository;
+use App\Service\TwitchApiService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,10 +24,21 @@ final class EvenementsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_evenements_show', methods: ['GET'])]
-    public function show(Evenements $evenement): Response
+    public function show(Evenements $evenement, TwitchApiService $twitchApiService): Response
     {
+        // Convertir les participants en tableau
+        $participantsArray = $evenement->getParticipants()->toArray();
+
+        // Trier les participants par ordre alphabétique selon le pseudo
+        usort($participantsArray, function ($a, $b) {
+            return strcmp($a->getPseudo(), $b->getPseudo());
+        });
+
+        // Passer le tableau trié à la vue
         return $this->render('evenements/show.html.twig', [
             'evenement' => $evenement,
+            'participants' => $participantsArray, // Passer le tableau trié ici
+            'twitchApiService' => $twitchApiService,
         ]);
     }
 }

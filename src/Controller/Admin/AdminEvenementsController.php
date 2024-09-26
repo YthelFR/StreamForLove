@@ -70,8 +70,11 @@ class AdminEvenementsController extends AbstractController
     #[Route('/admin/evenements/{id}', name: 'admin_evenements_show', methods: ['GET'])]
     public function show(Evenements $evenement): Response
     {
+        $participants = $evenement->getParticipants(); // Récupérer les participants
+
         return $this->render('admin/evenements/show.html.twig', [
             'evenement' => $evenement,
+            'participants' => $participants, // Passer les participants au template
         ]);
     }
 
