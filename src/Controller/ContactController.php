@@ -40,7 +40,7 @@ class ContactController extends AbstractController
 
             // 2. Message de confirmation envoyé à l'utilisateur
             $userEmail = (new TemplatedEmail())
-                ->from('noreply@streamforlove.coalitionplus.org')
+                ->from('support@streamforlove.coalitionplus.org')
                 ->to($data['email'])  // L'email de l'utilisateur
                 ->subject('Confirmation de réception de votre message')
                 ->htmlTemplate('contact/emails/user_confirmation.html.twig')

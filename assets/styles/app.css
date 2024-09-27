@@ -68,3 +68,26 @@ p, li {
     display: none;
 }
 
+.flash-messages {
+    position: relative;
+    z-index: 1000; /* Assurez-vous que cela est au-dessus du contenu */
+    margin-bottom: 10px; /* Espace entre le message flash et le contenu */
+}
+
+.flash-messages.success {
+    background-color: green; /* Couleur de fond */
+    color: white; /* Couleur du texte */
+    padding: 10px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Animation pour faire disparaître le message flash après quelques secondes */
+.flash-messages.success {
+    opacity: 1;
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
