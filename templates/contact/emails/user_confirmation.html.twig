@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Confirmation de réception de votre message</title>
-</head>
-<body>
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-        <h1>Bonjour {{ name }},</h1>
-        <p>Nous avons bien reçu votre message concernant :</p>
-        <p><strong>Sujet :</strong> {{ subject }}</p>
-        <p>Voici le message que vous nous avez envoyé :</p>
-        <blockquote>{{ message }}</blockquote>
+	<head>
+		<meta charset="UTF-8">
+		<title>Confirmation de réception de votre message</title>
+	</head>
+	<body>
+		<div style="font-family: Arial, sans-serif; line-height: 1.6;">
+			<h1>Bonjour
+				{{ name }},</h1>
+			<p>Nous avons bien reçu votre message concernant :</p>
+			<p>
+				<strong>Sujet :</strong>
+				{{ subject }}</p>
+			<p>Voici le message que vous nous avez envoyé :</p>
+			<blockquote>{{ message }}</blockquote>
 
-        <p>Nous vous répondrons dans les plus brefs délais.</p>
-        <p>Merci de nous avoir contactés !</p>
+			<p>Nous vous répondrons dans les plus brefs délais.</p>
+			<p>Merci de nous avoir contactés !</p>
 
-        <p style="margin-top: 30px;">L'équipe <strong>Stream For Love</strong></p>
+			<p style="margin-top: 30px;">L'équipe
+				<strong>Stream For Love</strong>
+			</p>
 
-        <p style="margin-top: 30px;">
-            <img src="{{ asset('assets/medias/headers/logo.png') }}" alt="Logo" style="width: 150px;">
-        </p>
-    </div>
-</body>
+			<p style="margin-top: 30px;">
+				<img src="https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png" alt="Logo" style="width: 150px;">
+			</p>
+		</div>
+	</body>
 </html>
