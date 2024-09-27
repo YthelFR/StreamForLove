@@ -61,6 +61,20 @@ item.classList.add('hidden');
 });
 }
 		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const flashMessages = document.querySelectorAll('.flash-messages');
+
+flashMessages.forEach(function (message) {
+setTimeout(() => {
+message.classList.add('fade-out'); // Ajouter la classe pour disparaître
+setTimeout(() => {
+message.remove(); // Retirer le message du DOM après la disparition
+}, 500); // Attendre la fin de la transition
+}, 3000); // Temps avant de commencer la disparition (3 secondes)
+});
+});
+		</script>
 	</body>
 	{# {{ include('views/newsletter.html.twig') }} #}
 	{{ include('views/footer.html.twig') }}

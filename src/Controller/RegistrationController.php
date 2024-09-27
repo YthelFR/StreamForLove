@@ -70,21 +70,16 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $userId = $request->get('id');
+        $user = $entityManager->getRepository(Users::class)->find($userId);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Utilisateur non trouvé.');
+        }
 
         try {
-            /** @var Users $user */
-            $user = $this->getUser();
-
             // Vérifiez l'email et activez le compte
             $this->emailVerifier->handleEmailConfirmation($request, $user);
-
-            // Mettre à jour l'état de l'utilisateur
-            $user->setVerified(true); // Assurez-vous que votre méthode setter existe
-
-            // Enregistrer les changements dans la base de données
-            $entityManager->persist($user);
-            $entityManager->flush();
 
             // Envoyer un email de confirmation à l'utilisateur
             $mailer->send((new TemplatedEmail())

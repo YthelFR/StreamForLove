@@ -29,19 +29,19 @@ accent: {
 }
 			</script>
 		</head>
-		<div class="flash-messages">
-        {% for label, messages in app.flashes %}
-            <div class="{{ label }}">
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endfor %}
-    </div>
 		<body>
 			<div i id="mainHeader">
 				<section class="h-dvh w-dvw max-h-[80rem] relative">
 					{{ include('views/navbar.html.twig') }}
+					<div class="flash-messages">
+						{% for label, messages in app.flashes %}
+							<div class="flash-messages {{ label }}">
+								{% for message in messages %}
+									<p>{{ message }}</p>
+								{% endfor %}
+							</div>
+						{% endfor %}
+					</div>
 					<div class="absolute inset-0 z-[1]">
 						<img class="h-full w-full object-cover object-center" src="{{ asset('assets/medias/headers/header.png') }}" alt="Bannière de l'événement Stream For Love, illustrant des personnages tenant leur manette de jeux vidéos pendant leur partie.">
 					</div>

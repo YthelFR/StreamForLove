@@ -69,25 +69,27 @@ p, li {
 }
 
 .flash-messages {
-    position: relative;
-    z-index: 1000; /* Assurez-vous que cela est au-dessus du contenu */
-    margin-bottom: 10px; /* Espace entre le message flash et le contenu */
+    position: fixed; /* Positionner le message en haut à droite */
+    top: 20px; /* Distance du haut de la fenêtre */
+    right: 20px; /* Distance du côté droit de la fenêtre */
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    padding: 10px 20px; /* Espacement autour du message */
+    border-radius: 5px; /* Coins arrondis */
+    transition: opacity 0.5s ease-in-out; /* Transition pour l'effet de disparition */
+    opacity: 1; /* Opacité initiale */
 }
 
 .flash-messages.success {
-    background-color: green; /* Couleur de fond */
+    background-color: green; /* Couleur de fond pour succès */
     color: white; /* Couleur du texte */
-    padding: 10px;
-    transition: opacity 0.5s ease-in-out;
+}
+
+.flash-messages.error {
+    background-color: red; /* Couleur de fond pour erreur */
+    color: white; /* Couleur du texte */
 }
 
 /* Animation pour faire disparaître le message flash après quelques secondes */
-.flash-messages.success {
-    opacity: 1;
-    animation: fadeOut 5s forwards;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+.fade-out {
+    opacity: 0; /* Rendre le message transparent */
 }
