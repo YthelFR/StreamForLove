@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 class ContactController extends AbstractController
 {
@@ -31,16 +30,17 @@ class ContactController extends AbstractController
                 ->htmlTemplate('contact/emails/support_email.html.twig')
                 ->context([
                     'name' => $data['name'],
-                    'email' => $data['email'],
+                    'user_email' => $data['email'],  // Renommé pour éviter tout conflit
                     'subject' => $data['subject'],
                     'message' => $data['message'],
                 ]);
 
+            // Envoi de l'email de support
             $mailer->send($supportEmail);
 
             // 2. Message de confirmation envoyé à l'utilisateur
             $userEmail = (new TemplatedEmail())
-                ->from('noreply@streamforlove.coalitionplus.org')
+                ->from('support@streamforlove.coalitionplus.org')
                 ->to($data['email'])  // L'email de l'utilisateur
                 ->subject('Confirmation de réception de votre message')
                 ->htmlTemplate('contact/emails/user_confirmation.html.twig')
@@ -50,11 +50,13 @@ class ContactController extends AbstractController
                     'message' => $data['message'],
                 ]);
 
+            // Envoi de l'email à l'utilisateur
             $mailer->send($userEmail);
 
             // Message de succès à afficher sur la page de contact
             $this->addFlash('success', 'Votre message a été envoyé avec succès et une confirmation vous a été envoyée.');
 
+            // Redirection vers la page de contact
             return $this->redirectToRoute('contact');
         } elseif ($form->isSubmitted()) {
             $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');

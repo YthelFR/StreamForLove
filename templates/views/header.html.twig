@@ -29,6 +29,15 @@ accent: {
 }
 			</script>
 		</head>
+		<div class="flash-messages">
+        {% for label, messages in app.flashes %}
+            <div class="{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
 		<body>
 			<div i id="mainHeader">
 				<section class="h-dvh w-dvw max-h-[80rem] relative">
