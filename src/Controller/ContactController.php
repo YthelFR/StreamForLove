@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ContactType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,24 +19,45 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $data = $form->getData();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
 
-                $email = (new Email())
-                    ->from('noreply@streamforlove.coalitionplus.org')  // Adresse liée à votre domaine
-                    ->replyTo($data['email'])  // L'adresse de l'utilisateur
-                    ->to('support@streamforlove.coalitionplus.org')
-                    ->subject($data['subject'])
-                    ->text($data['message'] . "\n\nDe : " . $data['name'] . " <" . $data['email'] . ">");
+            // 1. Message envoyé à l'équipe de support
+            $supportEmail = (new TemplatedEmail())
+                ->from('noreply@streamforlove.coalitionplus.org')
+                ->replyTo($data['email'])  // Répondre à l'adresse de l'utilisateur
+                ->to('support@streamforlove.coalitionplus.org')  // Adresse de support
+                ->subject('Nouvelle demande de contact : ' . $data['subject'])
+                ->htmlTemplate('contact/emails/support_email.html.twig')
+                ->context([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'subject' => $data['subject'],
+                    'message' => $data['message'],
+                ]);
 
-                $mailer->send($email);
-                $this->addFlash('success', 'Votre message a été envoyé avec succès.');
+            $mailer->send($supportEmail);
 
-                return $this->redirectToRoute('contact');
-            } else {
-                $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
-            }
+            // 2. Message de confirmation envoyé à l'utilisateur
+            $userEmail = (new TemplatedEmail())
+                ->from('noreply@streamforlove.coalitionplus.org')
+                ->to($data['email'])  // L'email de l'utilisateur
+                ->subject('Confirmation de réception de votre message')
+                ->htmlTemplate('contact/emails/user_confirmation.html.twig')
+                ->context([
+                    'name' => $data['name'],
+                    'subject' => $data['subject'],
+                    'message' => $data['message'],
+                ]);
+
+            $mailer->send($userEmail);
+
+            // Message de succès à afficher sur la page de contact
+            $this->addFlash('success', 'Votre message a été envoyé avec succès et une confirmation vous a été envoyée.');
+
+            return $this->redirectToRoute('contact');
+        } elseif ($form->isSubmitted()) {
+            $this->addFlash('error', 'Une erreur est survenue. Veuillez vérifier votre saisie.');
         }
 
         return $this->render('contact/contact.html.twig', [
