@@ -13,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Url;
 
 class OutsidersType extends AbstractType
 {
@@ -29,12 +31,14 @@ class OutsidersType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Le champ Twitch ne peut pas être vide.']),
                     new Length(['max' => 255, 'maxMessage' => 'Le champ Twitch ne peut pas dépasser {{ limit }} caractères.']),
+                    new Url(['message' => 'L\'URL Twitch doit être valide.']),
                 ],
             ])
             ->add('somme', IntegerType::class, [
                 'constraints' => [
                     new NotBlank(['message' => 'La somme ne peut pas être vide.']),
                     new Positive(['message' => 'La somme doit être un nombre positif.']),
+                    new Type(['type' => 'integer', 'message' => 'La somme doit être un entier.']),
                 ],
             ])
         ;
