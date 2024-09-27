@@ -13,7 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 
 class EvenementsType extends AbstractType
 {
@@ -23,30 +25,40 @@ class EvenementsType extends AbstractType
             ->add('annee', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
             ->add('donations', IntegerType::class, [
                 'constraints' => [
                     new NotBlank(),
+                    new Range(['min' => 0, 'max' => 1000000, 'notInRangeMessage' => 'Le montant doit être entre 0 et 1 000 000']),
                 ],
             ])
             ->add('description', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
+                    new Length([
+                        'min' => 10,
+                        'max' => 1000,
+                        'minMessage' => 'La description doit contenir au moins 10 caractères',
+                        'maxMessage' => 'La description ne peut contenir plus de 1000 caractères',
+                    ]),
                 ],
             ])
             ->add('participants', EntityType::class, [
                 'class' => Users::class,
                 'multiple' => true,
-                'expanded' => false, // Passer à false pour utiliser un select
+                'expanded' => false, // Assurez-vous que `expanded` est faux pour utiliser un select multiple
                 'choice_label' => 'pseudo',
                 'attr' => [
-                    'class' => 'select2', // Ajoute une classe pour le select2
-                    'multiple' => 'multiple', // Assure que le multiple est activé
+                    'class' => 'select2', // Ajout d'une classe pour utiliser select2
+                    'multiple' => 'multiple', // S'assure que l'attribut multiple est bien activé
                 ],
             ])
             ->add('thumbnail', FileType::class, [
                 'label' => 'Image (Thumbnail)',
-                'mapped' => false, // Ce champ n'est pas associé à une propriété de l'entité directement
+                'mapped' => false, // Ce champ n'est pas mappé à une propriété de l'entité directement
                 'required' => false,
                 'constraints' => [
                     new File([
