@@ -4,10 +4,10 @@
 	{{ streamer.pseudo }}
 	- Streamer
 {% endblock %}
-{% block meta %}
+<head>
 	<meta name="description" content="Découvrez {{ streamer.pseudo }}, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.">
 	<meta name="keywords" content="{{ streamer.pseudo }}, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons">
-{% endblock %}
+</head>
 {% set siteUrl = 'streamforlove.coalitionplus.org' %}
 {% set clipBaseUrl = 'https://www.twitch.tv/' ~ streamer.pseudo ~ '/clip/' %}
 {% set clip1Id = presentations is not null and presentations.clip1 is not empty ? presentations.clip1|split('/clip/')|last : null %}

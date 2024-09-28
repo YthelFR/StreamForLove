@@ -1,0 +1,25 @@
+<IfModule mod_http2.c>
+    Protocols h2 http/1.1
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header unset X-Robots-Tag
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirection de www vers non-www
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    # Redirection de HTTP vers HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php [QSA,L]
+    # Autoriser l'accès au robots.txt
+    RewriteRule ^robots\.txt - [L]
+</IfModule>
