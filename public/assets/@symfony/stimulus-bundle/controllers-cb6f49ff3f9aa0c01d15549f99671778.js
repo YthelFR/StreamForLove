@@ -1,0 +1,10 @@
+import controller_0 from "../../@ehyiah/ux-quill/controller.js";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+import controller_1 from "../ux-autocomplete/controller.js";
+import "tom-select/dist/css/tom-select.default.css";
+import controller_2 from "../ux-turbo/turbo_controller.js";
+import controller_3 from "../../controllers/hello_controller.js";
+export const eagerControllers = {"ehyiah--ux-quill--quill": controller_0, "symfony--ux-autocomplete--autocomplete": controller_1, "symfony--ux-turbo--turbo-core": controller_2, "hello": controller_3};
+export const lazyControllers = {};
+export const isApplicationDebug = true;

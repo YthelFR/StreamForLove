@@ -11,9 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use App\Entity\Users;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class ProfileType extends AbstractType
 {
@@ -28,8 +28,20 @@ class ProfileType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('pseudo', null, [
+            ->add('pseudo', TextType::class, [
                 'label' => 'Pseudo',
+                'constraints' => [
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Votre pseudo doit contenir au moins {{ limit }} caractères.',
+                        'max' => 50,
+                        'maxMessage' => 'Votre pseudo ne doit pas dépasser {{ limit }} caractères.',
+                    ]),
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9_\-]+$/',
+                        'message' => 'Votre pseudo ne peut contenir que des lettres, chiffres, tirets et underscores.',
+                    ]),
+                ],
             ])
             ->add('old_password', PasswordType::class, [
                 'mapped' => false,
@@ -54,14 +66,22 @@ class ProfileType extends AbstractType
                         'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères.',
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+                        'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre.',
+                    ]),
                 ],
-            ]);
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
+            'csrf_protection' => true, // Activer la protection CSRF
+            'csrf_field_name' => '_token', // Nom du champ pour le CSRF token
+            'csrf_token_id' => 'profile_item', // Identifiant du token CSRF
         ]);
     }
 }
