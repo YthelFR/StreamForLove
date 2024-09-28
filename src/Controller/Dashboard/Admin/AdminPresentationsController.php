@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Dashboard\Admin;
 
 use App\Entity\Presentations;
 use App\Form\PresentationsType;

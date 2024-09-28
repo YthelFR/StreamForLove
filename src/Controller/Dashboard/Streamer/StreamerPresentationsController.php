@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Streamer;
+namespace App\Controller\Dashboard\Streamer;
 
 use App\Entity\Presentations;
 use App\Form\PresentationsType;
