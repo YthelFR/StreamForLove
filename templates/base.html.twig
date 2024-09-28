@@ -14,7 +14,8 @@
 
 			<!-- Open Graph Tags -->
 			<meta property="og:title" content="Stream For Love - Luttons contre le VIH et le SIDA"/>
-			<meta property="og:description" content="Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec des streamers sur Twitch."/>
+			<meta name="description" content="{% block meta_description %}{% endblock %}">
+			<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
 			<meta property="og:image" content="{{ asset('/assets/medias/headers/logo.png') }}"/>
 			<meta property="og:url" content="https://facebook.com/coalitionplus"/>
 		{% endblock %}
@@ -33,6 +34,30 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 		{{ include('views/referencement.html.twig') }}
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+theme: {
+extend: {
+colors: {
+accent: {
+"50": "#fff5f0",
+"100": "#ffd6c2",
+"200": "#feb795",
+"300": "#fe9868",
+"400": "#fd783c",
+"500": "#fb580f",
+"600": "#db4603",
+"700": "#b03802",
+"800": "#862b01",
+"900": "#5a1d00",
+"950": "#2f0f00"
+}
+}
+}
+}
+}
+		</script>
 	</head>
 	{{ include('views/header.html.twig') }}
 	<body>
