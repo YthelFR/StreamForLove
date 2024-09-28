@@ -1,6 +1,29 @@
 {% block body %}
-    <!-- component -->
-    <header>
+<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+theme: {
+extend: {
+colors: {
+accent: {
+"50": "#fff5f0",
+"100": "#ffd6c2",
+"200": "#feb795",
+"300": "#fe9868",
+"400": "#fd783c",
+"500": "#fb580f",
+"600": "#db4603",
+"700": "#b03802",
+"800": "#862b01",
+"900": "#5a1d00",
+"950": "#2f0f00"
+}
+}
+}
+}
+}
+		</script>
+    <body>
         <div id="mainHeader">
             <section class="h-dvh w-dvw max-h-[80rem] relative">
                 {{ include('views/navbar.html.twig') }}
@@ -14,7 +37,7 @@
                     {% endfor %}
                 </div>
                 <div class="absolute inset-0 z-[1]">
-                    <img class="h-full w-full object-cover object-center" src="{{ asset('assets/medias/headers/header.png') }}" alt="Bannière de l'événement Stream For Love, illustrant des personnages tenant leur manette de jeux vidéos pendant leur partie.">
+                    <img class="h-full w-full object-cover object-[53%] md:object-center" src="{{ asset('assets/medias/headers/header.png') }}" alt="Bannière de l'événement Stream For Love, illustrant des personnages tenant leur manette de jeux vidéos pendant leur partie.">
                 </div>
                 <div class="max-w-[120rem] mx-auto h-full relative z-[2] px-6 md:px-8 lg:px-10">
                     <div class="h-full w-full flex flex-col relative space-y-6">
@@ -40,5 +63,5 @@
                 </div>
             </section>
         </div>
-    </header>
+    </body>
 {% endblock %}
