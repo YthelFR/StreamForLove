@@ -30,39 +30,6 @@ class DashboardFunctionalityController extends AbstractController
         return $this->render('dashboard/resources.html.twig', []);
     }
 
-    #[Route('/dashboard/social-media', name: 'dashboard_social_media', requirements: ['_role' => 'ROLE_ADMIN'])]
-    public function socialMedia(): Response
-    {
-        // Remplacez cela par un appel à l'API Instagram
-        $instagramPosts = [
-            ['link' => 'https://www.instagram.com/p/EXEMPLE1', 'image_url' => 'https://via.placeholder.com/150'],
-            ['link' => 'https://www.instagram.com/p/EXEMPLE2', 'image_url' => 'https://via.placeholder.com/150'],
-            // Ajoutez d'autres posts de test ici
-        ];
-
-        return $this->render('dashboard/social_media.html.twig', [
-            'instagramPosts' => $instagramPosts,
-        ]);
-    }
-
-    #[Route('/dashboard/inspirations', name: 'dashboard_inspirations', requirements: ['_role' => 'ROLE_ADMIN'])]
-    public function inspirations(): Response
-    {
-        $inspirations = [
-            'La vie est un défi, relève-le !',
-            'La créativité, c\'est l\'intelligence qui s\'amuse.',
-            'Faites de votre vie un rêve, et d\'un rêve, une réalité.',
-            // Ajoutez d'autres citations ici
-        ];
-
-        // Sélectionner une inspiration au hasard
-        $randomInspiration = $inspirations[array_rand($inspirations)];
-
-        return $this->render('dashboard/inspirations.html.twig', [
-            'randomInspiration' => $randomInspiration,
-        ]);
-    }
-
     #[Route('/dashboard/updates', name: 'dashboard_updates', requirements: ['_role' => 'ROLE_ADMIN'])]
     public function updates(): Response
     {
