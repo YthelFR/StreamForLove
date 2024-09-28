@@ -17,7 +17,7 @@ class AdminPresentationsController extends AbstractController
     #[Route('/', name: 'admin_presentations_index', methods: ['GET'])]
     public function index(PresentationsRepository $presentationsRepository): Response
     {
-        return $this->render('admin/presentations/index.html.twig', [
+        return $this->render('dashboard/admin/presentations/index.html.twig', [
             'presentations' => $presentationsRepository->findAll(),
         ]);
     }
@@ -70,7 +70,7 @@ class AdminPresentationsController extends AbstractController
             $this->addFlash('error', 'Veuillez corriger les erreurs dans le formulaire.');
         }
 
-        return $this->render('admin/presentations/edit.html.twig', [
+        return $this->render('dashboard/admin/presentations/edit.html.twig', [
             'form' => $form,
         ]);
     }

@@ -11,8 +11,8 @@ class StreamerDashboardController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(): Response
     {
-        return $this->render('dashboard/user_dashboard.html.twig', [
-            'controller_name' => 'DashboardController',
+        return $this->render('dashboard/streamers/user_dashboard.html.twig', [
+            'controller_name' => 'StreamerDashboardController',
         ]);
     }
 }

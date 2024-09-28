@@ -21,7 +21,7 @@ class AdminSocialsNetworkController extends AbstractController
         $socialsNetworks = $entityManager->getRepository(SocialsNetwork::class)
             ->findBy(['user' => $user]);
 
-        return $this->render('admin/socials_network/index.html.twig', [
+        return $this->render('dashboard/admin/socials_network/index.html.twig', [
             'socialsNetworks' => $socialsNetworks,
         ]);
     }
@@ -44,7 +44,7 @@ class AdminSocialsNetworkController extends AbstractController
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
-        return $this->render('admin/socials_network/new.html.twig', [
+        return $this->render('dashboard/admin/socials_network/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -63,7 +63,7 @@ class AdminSocialsNetworkController extends AbstractController
             return $this->redirectToRoute('admin_socials_network_index');
         }
 
-        return $this->render('admin/socials_network/edit.html.twig', [
+        return $this->render('dashboard/admin/socials_network/edit.html.twig', [
             'form' => $form->createView(),
             'socialsNetwork' => $socialsNetwork,
         ]);

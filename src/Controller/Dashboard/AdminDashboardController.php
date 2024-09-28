@@ -14,7 +14,7 @@ class AdminDashboardController extends AbstractController
     {
         $currentUser = $security->getUser();
 
-        return $this->render('admin/admindashboard.html.twig', [
+        return $this->render('dashboard/admin/admindashboard.html.twig', [
             'currentUser' => $currentUser,
         ]);
     }

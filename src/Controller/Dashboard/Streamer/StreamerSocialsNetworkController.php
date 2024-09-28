@@ -28,7 +28,7 @@ class StreamerSocialsNetworkController extends AbstractController
         $user = $this->security->getUser();
         $socialsNetworks = $socialsNetworkRepository->findBy(['user' => $user]);
 
-        return $this->render('dashboard/socials_network/index.html.twig', [
+        return $this->render('dashboard/streamers/socials_network/index.html.twig', [
             'socials_networks' => $socialsNetworks,
         ]);
     }
@@ -52,7 +52,7 @@ class StreamerSocialsNetworkController extends AbstractController
             return $this->redirectToRoute('streamer_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('dashboard/socials_network/new.html.twig', [
+        return $this->render('dashboard/streamers/socials_network/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -64,7 +64,7 @@ class StreamerSocialsNetworkController extends AbstractController
             throw $this->createAccessDeniedException('Vous n\'avez pas la permission d\'accéder à ce réseau social.');
         }
 
-        return $this->render('dashboard/socials_network/show.html.twig', [
+        return $this->render('dashboard/streamers/socials_network/show.html.twig', [
             'socials_network' => $socialsNetwork,
         ]);
     }
@@ -87,7 +87,7 @@ class StreamerSocialsNetworkController extends AbstractController
             return $this->redirectToRoute('streamer_socials_network_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('dashboard/socials_network/edit.html.twig', [
+        return $this->render('dashboard/streamers/socials_network/edit.html.twig', [
             'form' => $form->createView(),
             'socials_network' => $socialsNetwork,
         ]);

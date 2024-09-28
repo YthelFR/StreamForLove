@@ -17,7 +17,7 @@ class AdminArticlesController extends AbstractController
     #[Route('/', name: 'admin_articles_index', methods: ['GET'])]
     public function index(ArticlesRepository $articlesRepository): Response
     {
-        return $this->render('admin/articles/index.html.twig', [
+        return $this->render('dashboard/admin/articles/index.html.twig', [
             'articles' => $articlesRepository->findAll(),
         ]);
     }
@@ -40,7 +40,7 @@ class AdminArticlesController extends AbstractController
             $this->addFlash('error', 'Erreur lors de la création de l\'article. Veuillez vérifier les informations.');
         }
 
-        return $this->render('admin/articles/new.html.twig', [
+        return $this->render('dashboard/admin/articles/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -48,7 +48,7 @@ class AdminArticlesController extends AbstractController
     #[Route('/{id}', name: 'admin_articles_show', methods: ['GET'])]
     public function show(Articles $article): Response
     {
-        return $this->render('admin/articles/show.html.twig', [
+        return $this->render('dashboard/admin/articles/show.html.twig', [
             'article' => $article,
         ]);
     }
@@ -69,7 +69,7 @@ class AdminArticlesController extends AbstractController
             $this->addFlash('error', 'Erreur lors de la mise à jour de l\'article. Veuillez vérifier les informations.');
         }
 
-        return $this->render('admin/articles/edit.html.twig', [
+        return $this->render('dashboard/admin/articles/edit.html.twig', [
             'form' => $form->createView(),
             'article' => $article,
         ]);

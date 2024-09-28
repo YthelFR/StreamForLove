@@ -23,7 +23,7 @@ class AdminUsersController extends AbstractController
     {
         $users = $entityManager->getRepository(Users::class)->findAll();
 
-        return $this->render('admin/users/index.html.twig', [
+        return $this->render('dashboard/admin/users/index.html.twig', [
             'users' => $users,
         ]);
     }
@@ -57,7 +57,7 @@ class AdminUsersController extends AbstractController
             $this->addFlash('error', $error->getMessage());
         }
 
-        return $this->render('admin/users/edit.html.twig', [
+        return $this->render('dashboard/admin/users/edit.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
         ]);
@@ -127,7 +127,7 @@ class AdminUsersController extends AbstractController
             return $this->redirectToRoute('admin_profile_edit');
         }
 
-        return $this->render('admin/users/edit_profile.html.twig', [
+        return $this->render('dashboard/admin/users/edit_profile.html.twig', [
             'avatar_form' => $avatarForm->createView(),
             'form' => $form->createView(),
             'admin' => $admin,
@@ -155,7 +155,7 @@ class AdminUsersController extends AbstractController
     {
         $users = $entityManager->getRepository(Users::class)->findBy(['isValid' => false]);
 
-        return $this->render('admin/users/pending.html.twig', [
+        return $this->render('dashboard/admin/users/pending.html.twig', [
             'users' => $users,
         ]);
     }

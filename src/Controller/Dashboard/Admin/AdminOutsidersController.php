@@ -17,7 +17,7 @@ class AdminOutsidersController extends AbstractController
     #[Route('/', name: 'admin_outsiders_index', methods: ['GET'])]
     public function index(OutsidersRepository $outsidersRepository): Response
     {
-        return $this->render('admin/outsiders/index.html.twig', [
+        return $this->render('dashboard/admin/outsiders/index.html.twig', [
             'outsiders' => $outsidersRepository->findAll(),
         ]);
     }
@@ -40,7 +40,7 @@ class AdminOutsidersController extends AbstractController
             return $this->redirectToRoute('admin_outsiders_show', ['id' => $outsider->getId()]);
         }
 
-        return $this->render('admin/outsiders/new.html.twig', [
+        return $this->render('dashboard/admin/outsiders/new.html.twig', [
             'outsider' => $outsider,
             'form' => $form->createView(),
         ]);
@@ -55,7 +55,7 @@ class AdminOutsidersController extends AbstractController
             throw $this->createNotFoundException('Outsider non trouvé');
         }
 
-        return $this->render('admin/outsiders/show.html.twig', [
+        return $this->render('dashboard/admin/outsiders/show.html.twig', [
             'outsider' => $outsider,
         ]);
     }
@@ -73,7 +73,7 @@ class AdminOutsidersController extends AbstractController
             return $this->redirectToRoute('admin_outsiders_show', ['id' => $outsider->getId()]);
         }
 
-        return $this->render('admin/outsiders/edit.html.twig', [
+        return $this->render('dashboard/admin/outsiders/edit.html.twig', [
             'form' => $form->createView(),
             'outsider' => $outsider,
         ]);

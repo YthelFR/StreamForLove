@@ -19,7 +19,7 @@ class AdminEvenementsController extends AbstractController
     {
         $evenements = $evenementsRepository->findAll();
 
-        return $this->render('admin/evenements/index.html.twig', [
+        return $this->render('dashboard/admin/evenements/index.html.twig', [
             'evenements' => $evenements,
         ]);
     }
@@ -61,7 +61,7 @@ class AdminEvenementsController extends AbstractController
             return $this->redirectToRoute('admin_evenements_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/evenements/new.html.twig', [
+        return $this->render('dashboard/admin/evenements/new.html.twig', [
             'evenement' => $evenement,
             'form' => $form->createView(),
         ]);
@@ -72,7 +72,7 @@ class AdminEvenementsController extends AbstractController
     {
         $participants = $evenement->getParticipants(); // Récupérer les participants
 
-        return $this->render('admin/evenements/show.html.twig', [
+        return $this->render('dashboard/admin/evenements/show.html.twig', [
             'evenement' => $evenement,
             'participants' => $participants, // Passer les participants au template
         ]);
@@ -92,7 +92,7 @@ class AdminEvenementsController extends AbstractController
             return $this->redirectToRoute('admin_evenements_index');
         }
 
-        return $this->render('admin/evenements/edit.html.twig', [
+        return $this->render('dashboard/admin/evenements/edit.html.twig', [
             'evenement' => $evenement,
             'form' => $form->createView(),
         ]);

@@ -18,7 +18,7 @@ class AdminAbonnesController extends AbstractController
     #[Route('/', name: 'admin_abonnes_index', methods: ['GET'])]
     public function index(AbonnesRepository $abonnesRepository): Response
     {
-        return $this->render('admin/abonnes/index.html.twig', [
+        return $this->render('dashboard/admin/abonnes/index.html.twig', [
             'abonnes' => $abonnesRepository->findAll(),
         ]);
     }
@@ -37,7 +37,7 @@ class AdminAbonnesController extends AbstractController
             return $this->redirectToRoute('admin_abonnes_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/abonnes/new.html.twig', [
+        return $this->render('dashboard/admin/abonnes/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -45,7 +45,7 @@ class AdminAbonnesController extends AbstractController
     #[Route('/{id}', name: 'admin_abonnes_show', methods: ['GET'])]
     public function show(Abonnes $abonne): Response
     {
-        return $this->render('admin/abonnes/show.html.twig', [
+        return $this->render('dashboard/admin/abonnes/show.html.twig', [
             'abonne' => $abonne,
         ]);
     }
@@ -62,7 +62,7 @@ class AdminAbonnesController extends AbstractController
             return $this->redirectToRoute('admin_abonnes_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/abonnes/edit.html.twig', [
+        return $this->render('dashboard/admin/abonnes/edit.html.twig', [
             'form' => $form->createView(),
         ]);
     }

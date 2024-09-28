@@ -22,7 +22,7 @@ class StreamerPresentationsController extends AbstractController
             'streamersPresentation' => $user,
         ]);
 
-        return $this->render('dashboard/presentations/index.html.twig', [
+        return $this->render('dashboard/streamers/presentations/index.html.twig', [
             'presentation' => $presentation,
         ]);
     }
@@ -46,7 +46,7 @@ class StreamerPresentationsController extends AbstractController
             return $this->redirectToRoute('streamer_presentations_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('dashboard/presentations/new.html.twig', [
+        return $this->render('dashboard/streamers/presentations/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -71,7 +71,7 @@ class StreamerPresentationsController extends AbstractController
             return $this->redirectToRoute('streamer_presentations_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('dashboard/presentations/edit.html.twig', [
+        return $this->render('dashboard/streamers/presentations/edit.html.twig', [
             'form' => $form->createView(),
             'presentation' => $presentation,
         ]);
