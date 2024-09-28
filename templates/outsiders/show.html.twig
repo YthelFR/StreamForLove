@@ -3,6 +3,10 @@
 {% block title %}
 	{{ outsider.pseudo }}
 {% endblock %}
+{% block meta %}
+	<meta name="description" content="Découvrez {{ outsider.pseudo }}. Suivez ses aventures et découvrez les derniers jeux récents joués sur son stream. Vous pouvez aussi suivre ses derniers lives sur différentes plateformes de streaming, y compris Twitch.">
+	<meta name="keywords" content="{{ outsider.pseudo }}, streaming, outsider, jeux vidéo, plateforme de streaming, Twitch, dernières vidéos, communauté de streamers, jeux récents, somme collectée">
+{% endblock %}
 
 {% block body %}
 	<div class="container mx-auto p-4">
