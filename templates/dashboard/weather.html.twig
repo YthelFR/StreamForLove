@@ -1,0 +1,11 @@
+{% block body %}
+	<h2>Météo Locale</h2>
+	{% if weather %}
+		<p>Température:
+			{{ weather.main.temp }}°C</p>
+		<p>Conditions:
+			{{ weather.weather[0].description }}</p>
+	{% else %}
+		<p>Aucune donnée disponible.</p>
+	{% endif %}
+{% endblock %}
