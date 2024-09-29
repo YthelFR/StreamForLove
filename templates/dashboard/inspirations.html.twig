@@ -1,16 +1,4 @@
 {% block body %}
-    <h1>Inspiration du jour</h1>
-    <div id="inspiration-container">
-        <p id="inspiration-text">Chargement...</p>
-    </div>
-
-    <script>
-        async function fetchInspiration() {
-            const response = await fetch('/dashboard/inspirations');
-            const data = await response.json();
-            document.getElementById('inspiration-text').innerText = data.inspiration;
-        }
-
-        fetchInspiration();
-    </script>
+	<h2>Inspiration du jour</h2>
+	<p>{{ randomInspiration }}</p>
 {% endblock %}
