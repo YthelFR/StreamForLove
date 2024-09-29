@@ -62,6 +62,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
     private Collection $evenements;
 
+    private $resetToken;
+
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
@@ -350,6 +352,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->evenements->removeElement($evenement)) {
             $evenement->removeParticipant($this);  // Mise à jour de l'autre côté de la relation
         }
+
+        return $this;
+    }
+
+    public function getResetToken(): ?string
+    {
+        return $this->resetToken;
+    }
+
+    public function setResetToken(?string $resetToken): self
+    {
+        $this->resetToken = $resetToken;
 
         return $this;
     }
