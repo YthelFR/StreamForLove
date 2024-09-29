@@ -49,4 +49,4 @@ services:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
     App\Service\InspirationService:
         arguments:
-            $filePath: '%kernel.project_dir%/config/inspirations.yaml'
+            $filePath: '%kernel.project_dir%/config/Inspirations/inspirations.yaml'

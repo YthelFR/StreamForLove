@@ -1,7 +1,7 @@
 {% block body %}
-	<aside class="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
+<aside id="sidebar" class="fixed top-0 left-0 z-10 h-screen w-64 bg-white border-r transition-transform px-5 pt-20 md:pt-0">
 		<div>
-			<div class="-mx-6 px-6 py-4">
+			<div class="px-6 py-4">
 				<a href="{{ path('app_dashboard') }}" title="home">
 					<img src="{{ asset('assets/medias/headers/logo.png') }}" class="w-32" alt="tailus logo">
 				</a>
@@ -55,23 +55,12 @@
 				<li>
 					<a href="{{ path('app_home') }}" class="px-4 py-3 flex items-center space-x-4 rounded-md {{ app.request.get('_route') == 'app_home' ? 'text-white bg-gradient-to-r from-sky-600 to-cyan-400' : 'text-gray-600 group' }}">
 						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewbox="0 0 20 20" fill="currentColor">
-							<path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M10 2a1 1 0 00-1 1v1H7a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2h-2V3a1 1 0 00-1-1zm1 4v1h2v9h-8V6h2V4h2z"/>
+							<path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M10 2a1 1 0 00-1 1v1H7a2 2 0 00-2 2v9a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2h-2V3a1 1 0 00-1-1h-2z"/>
 						</svg>
-						<span class="group-hover:text-gray-700">Accueil</span>
+						<span class="group-hover:text-gray-700">Retour à l'accueil</span>
 					</a>
 				</li>
 			</ul>
 		</div>
-
-		<div class="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-    <a href="{{ path('app_logout') }}" class="block">
-        <button class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-            </svg>
-            <span class="group-hover:text-gray-700">Logout</span>
-        </button>
-    </a>	
-</div>
 	</aside>
 {% endblock %}

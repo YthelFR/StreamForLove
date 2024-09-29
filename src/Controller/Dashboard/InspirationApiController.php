@@ -16,7 +16,7 @@ class InspirationApiController extends AbstractController
         $this->inspirationService = $inspirationService;
     }
 
-    #[Route('/api/inspirations', name: 'api_inspirations')]
+    #[Route('/api/inspirations', name: 'dashboard_inspirations')]
     public function getInspiration(): JsonResponse
     {
         $randomInspiration = $this->inspirationService->getRandomInspiration();

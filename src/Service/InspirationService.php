@@ -13,13 +13,21 @@ class InspirationService
         $this->inspirations = Yaml::parseFile($filePath);
     }
 
-    public function getRandomInspiration(): string
+    public function getRandomInspiration(): array
     {
         $categories = $this->inspirations['inspirations'];
         $category = array_rand($categories);
         $person = array_rand($categories[$category]);
         $quotes = $categories[$category][$person];
 
-        return $quotes[array_rand($quotes)];
+        // Sélectionner une citation au hasard
+        $randomQuote = $quotes[array_rand($quotes)];
+
+        // Retourner la citation et les informations sur le personnage
+        return [
+            'quote' => $randomQuote,
+            'character' => ucfirst(str_replace('_', ' ', $person)), // Formater le nom du personnage
+            'series' => ucfirst(str_replace('_', ' ', $category)) // Formater le nom de la série
+        ];
     }
 }

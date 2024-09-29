@@ -1,4 +1,5 @@
 {% block body %}
-	<h2>Inspiration du jour</h2>
-	<p>{{ randomInspiration }}</p>
+    <h2>Citation célèbre</h2>
+    <p class="text-lg">"{{ randomInspiration.quote }}"</p>
+    <p><span class="font-bold">{{ randomInspiration.character }}</span> - <span class="italic"> {{ randomInspiration.series }}</span></p>
 {% endblock %}
