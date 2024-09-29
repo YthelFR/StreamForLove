@@ -18,10 +18,38 @@
 		{% endblock %}
 		<link rel="icon" type="image/jpg" href="{{ asset('/assets/medias/accueil/favicon.ico') }}"/>
 	</head>
-	{{ include('dashboard/views/sidebar.html.twig') }}
-	{{ include('dashboard/views/header.html.twig') }}
+	{{ include('dashboard/streamers/views/sidebar.html.twig') }}
+	{{ include('dashboard/streamers/views/header.html.twig') }}
 	<body>
 		{% block body %}{% endblock %}
+		<script>
+			document.addEventListener('DOMContentLoaded', () => {
+const toggleSidebarButton = document.getElementById('toggleSidebar');
+const sidebar = document.getElementById('sidebar');
 
+// Initialiser le basculement de la sidebar uniquement en mobile
+function updateSidebarState() {
+if (window.matchMedia('(max-width: 767px)').matches) {
+sidebar.classList.add('-translate-x-full'); // Cacher la sidebar par défaut sur mobile
+} else {
+sidebar.classList.remove('-translate-x-full'); // Assurer que la sidebar est visible sur desktop
+}
+}
+
+// Vérifier l'état de la sidebar au chargement
+updateSidebarState();
+
+// Mettre à jour la sidebar lors du redimensionnement
+window.addEventListener('resize', updateSidebarState);
+
+// Écouter le clic sur le bouton de basculement
+toggleSidebarButton.addEventListener('click', () => {
+if (window.matchMedia('(max-width: 767px)').matches) {
+sidebar.classList.toggle('-translate-x-full'); // Cache ou affiche la sidebar
+sidebar.classList.toggle('translate-x-0'); // Affiche la sidebar
+}
+});
+});
+		</script>
 	</body>
 </html>

@@ -47,3 +47,9 @@ services:
             $params: '@parameter_bag'
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    App\Service\InspirationService:
+        arguments:
+            $filePath: '%kernel.project_dir%/config/Inspirations/inspirations.yaml'
+    App\Service\WeatherService:
+        arguments:
+            $weatherApiKey: '%env(WEATHER_API_KEY)%'

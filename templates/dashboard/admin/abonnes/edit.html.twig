@@ -1,0 +1,14 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Edit Abonnes
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Abonnes</h1>
+
+	{{ include('dashboard/admin/abonnes/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('admin_abonnes_index') }}">back to list</a>
+
+	{{ include('dashboard/admin/abonnes/_delete_form.html.twig') }}
+{% endblock %}
