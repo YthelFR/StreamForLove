@@ -1,4 +1,40 @@
 inspirations:
+  dead_by_daylight:
+    Albert_Wesker:
+      avatar: "/assets/medias/citations/albert_wesker.jpeg"
+      quotes:
+        - "Tu es vraiment devenu un désagrément pour moi."
+        - "Sept minutes, c'est tout ce que je peux passer à jouer avec toi."
+        - "Vos faibles tentatives ne font que retarder l'inévitable."
+    La_Chasseuse:
+      avatar: "/assets/medias/citations/la_chasseuse.jpeg"
+      quotes:
+        - "Lala lalala... Lalala la lalalaaaaa..."
+    Chucky:
+      avatar: "/assets/medias/citations/chucky.jpg"
+      quotes:
+        - "Salut, je suis Chucky, et je suis ton ami jusqu'à la fin ! Hidey-ho, ha-ha-ha !"
+        - "Attends, Je pensais que j'étais la star ici."
+        - "C'est ce qui arrive quand on joue avec les poupées !"
+        - "T'es mort, tu m'entends ? MOOOORT !"
+        - "Je vais te trouver ! Et quand je l'aurai fait, j'vais te découper en tranches !"
+    Dracula:
+      avatar: "/assets/medias/citations/dracula.png"
+      quotes:
+        - "Ah ! J'avais bien flairé un Belmont !"
+        - "La destinée peut parfois être très amusante."
+        - "Ne te vide pas trop vite de ton sang."
+        - "Les humains ont rendu leur jugement à mon endroit. Aussi je les condamne à l'extinction."
+        - "Mon âme immortelle est liée à la sombre étreinte de l'éternité."
+  world_of-warcraft:
+    mimiron:
+      avatar: "/assets/medias/citations/mimiron.jpg"
+      quotes:
+        - "Mais, pourquoi avez-vous été faire une chose pareille ? Vous n'avez donc pas vu le panneau : " NE PAS APPUYER SUR CE BOUTON ! " ? Comment allons-nous finir les essais avec le mécanisme d'autodestruction activé ?"
+    yogg_saron:
+      avatar: "/assets/medias/citations/yogg_saron.jpeg"
+      quotes:
+        - "Je suis le rêve éveillé, le monstre de vos cauchemars, le démon au mille visages, tremblez devant mon véritable aspect, À GENOU DEVANT LE DIEU DE LA MORT !"
   mass_effect:
     commandant_shepard:
       avatar: "/assets/medias/citations/commandant_shepard.jpg"
