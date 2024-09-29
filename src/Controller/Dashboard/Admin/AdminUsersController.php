@@ -7,6 +7,7 @@ use App\Form\AvatarType;
 use App\Form\EditUsersType;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +23,28 @@ class AdminUsersController extends AbstractController
 {
 
     #[Route('/', name: 'admin_users_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
-        $users = $entityManager->getRepository(Users::class)->findAll();
+        $searchTerm = $request->query->get('search', '');
+
+        $queryBuilder = $entityManager->getRepository(Users::class)->createQueryBuilder('u');
+
+        if ($searchTerm) {
+            $queryBuilder
+                ->where('u.pseudo LIKE :search OR u.email LIKE :search')
+                ->setParameter('search', '%' . $searchTerm . '%');
+        }
+
+        $query = $queryBuilder->getQuery();
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1), // page number
+            25 // limit per page
+        );
 
         return $this->render('dashboard/admin/users/index.html.twig', [
             'users' => $users,
+            'searchTerm' => $searchTerm,
         ]);
     }
 

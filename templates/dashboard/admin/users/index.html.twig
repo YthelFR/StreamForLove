@@ -1,79 +1,158 @@
 {% extends 'admin_base.html.twig' %}
 
 {% block body %}
-	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
-		<div class="flex items-center justify-between pb-6">
-			<div>
-				<h2 class="font-semibold text-gray-700">Liste des utilisateurs</h2>
-				<span class="text-xs text-gray-500">Gestion des comptes utilisateurs</span>
-			</div>
-		</div>
+    <style>
+    /* Styles par défaut pour le tableau */
+    .user-table {
+        display: table; /* Affiche le tableau par défaut */
+        width: 100%; /* Assure que le tableau utilise toute la largeur */
+    }
 
-		{% for label, messages in app.flashes %}
-			<div class="mb-4">
-				<div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
-					<p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
-					<p>{{ messages|join(', ') }}</p>
-				</div>
-			</div>
-		{% endfor %}
+    .user-card {
+        display: none; /* Cache les cartes par défaut */
+    }
 
-		<div class="overflow-y-hidden rounded-lg border">
-			<table class="w-full">
-				<thead>
-					<tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
-						<th class="px-5 py-3">Avatar</th>
-						<th class="px-5 py-3">Pseudo</th>
-						<th class="px-5 py-3">Email</th>
-						<th class="px-5 py-3">Rôles</th>
-						<th class="px-5 py-3">Actions</th>
-					</tr>
-				</thead>
-				<tbody class="text-gray-500">
-					{% for user in users %}
-						<tr class="bg-white hover:bg-gray-100">
-							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<div class="flex items-center">
-									<div class="h-10 w-10 flex-shrink-0">
-										<img class="h-full w-full rounded-full" src="{{ user.avatar ?: asset('medias/avatars/default-avatar.png') }}" alt="Avatar de {{ user.pseudo }}"/>
-									</div>
-								</div>
-							</td>
+    /* Affiche le tableau en mode tableau uniquement sur les écrans larges */
+    @media (min-width: 640px) {
+        .user-card {
+            display: none; /* Cache les cartes sur les écrans larges */
+        }
+        .user-table {
+            display: table; /* Affiche le tableau sur les écrans larges */
+        }
+    }
 
-							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<div class="ml-3">
-									<p class="whitespace-no-wrap">{{ user.pseudo }}</p>
-								</div>
-							</td>
+    /* Affiche les cartes en mode mobile uniquement */
+    @media (max-width: 639px) {
+        .user-card {
+            display: block; /* Affiche les cartes sur les petits écrans */
+            margin-bottom: 16px; /* Ajoute un espacement entre les cartes */
+            border: 1px solid #e5e7eb; /* Ajoute une bordure légère pour séparer les cartes */
+            border-radius: 8px; /* Arrondit les coins des cartes */
+            padding: 16px; /* Ajoute un espacement intérieur */
+            background-color: #fff; /* Fond blanc pour les cartes */
+        }
+        
+        .user-table {
+            display: none; /* Cache le tableau sur les petits écrans */
+        }
+    }
 
-							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<p class="whitespace-no-wrap">{{ user.email }}</p>
-							</td>
+    /* Styles pour le tableau afin qu'il soit plus lisible sur les écrans larges */
+    @media (min-width: 640px) {
+        .user-table th, .user-table td {
+            padding: 12px; /* Ajoute du padding pour les cellules */
+            text-align: left; /* Aligne le texte à gauche */
+        }
+    }
+</style>
 
-							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<p class="whitespace-no-wrap">{{ user.roles|join(', ') }}</p>
-							</td>
+    <div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
+        <div class="flex items-center justify-between pb-6">
+            <div>
+                <h2 class="font-semibold text-gray-700">Liste des utilisateurs</h2>
+                <span class="text-xs text-gray-500">Gestion des comptes utilisateurs</span>
+            </div>
+            <div>
+                <form method="get" action="{{ path('admin_users_index') }}" class="flex">
+                    <input type="text" name="search" value="{{ searchTerm }}" placeholder="Rechercher un utilisateur..." class="p-2 border border-gray-300 rounded-l">
+                    <button type="submit" class="bg-blue-600 text-white p-2 rounded-r">Rechercher</button>
+                </form>
+            </div>
+        </div>
 
-							<td class="border-b border-gray-200 px-5 py-5 text-sm">
-								<div class="flex space-x-2">
-									<a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-3 py-1 text-sm font-semibold text-white hover:bg-green-600">
-										Éditer
-									</a>
+        {% for label, messages in app.flashes %}
+            <div class="mb-4">
+                <div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+                    <p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+                    <p>{{ messages|join(', ') }}</p>
+                </div>
+            </div>
+        {% endfor %}
 
-									{% if user.id != app.user.id %}
-										<form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline-block">
-											<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
-											<button class="rounded bg-red-500 px-3 py-1 text-sm font-semibold text-white hover:bg-red-600">
-												Supprimer
-											</button>
-										</form>
-									{% endif %}
-								</div>
-							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
+        <div class="overflow-x-auto rounded-lg border user-table">
+            <table class="min-w-full">
+                <thead>
+                    <tr class="bg-blue-600 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                        <th class="px-5 py-3">Avatar</th>
+                        <th class="px-5 py-3">Pseudo</th>
+                        <th class="px-5 py-3">Email</th>
+                        <th class="px-5 py-3">Rôles</th>
+                        <th class="px-5 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-500">
+                    {% for user in users %}
+                        <tr class="bg-white hover:bg-gray-100">
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 flex-shrink-0">
+                                        <img class="h-full w-full rounded-full" src="{{ user.avatar ? asset('assets/users/avatars/' ~ user.avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="Avatar de {{ user.pseudo }}"/>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <div class="ml-3">
+                                    <p class="whitespace-no-wrap">{{ user.pseudo }}</p>
+                                </div>
+                            </td>
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ user.email }}</p>
+                            </td>
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <p class="whitespace-no-wrap">{{ user.roles|join(', ') }}</p>
+                            </td>
+                            <td class="border-b border-gray-200 px-5 py-5 text-sm">
+                                <div class="flex space-x-2">
+                                    <a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-3 py-1 text-sm font-semibold text-white hover:bg-green-600">
+                                        Éditer
+                                    </a>
+                                    {% if user.id != app.user.id %}
+                                        <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" class="inline-block">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                            <button class="rounded bg-red-500 px-3 py-1 text-sm font-semibold text-white hover:bg-red-600">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4 user-card">
+            {% for user in users %}
+                <div class="border-b border-gray-200 p-4 flex flex-col">
+                    <div class="flex items-center mb-2">
+                        <img class="h-12 w-12 rounded-full mr-3" src="{{ user.avatar ? asset('assets/users/avatars/' ~ user.avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="Avatar de {{ user.pseudo }}"/>
+                        <div>
+                            <p class="font-semibold">{{ user.pseudo }}</p>
+                            <p class="text-sm text-gray-500">{{ user.email }}</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500">Rôles : {{ user.roles|join(', ') }}</p>
+                    <div class="flex space-x-2 mt-2">
+                        <a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="inline-block rounded bg-green-500 px-3 py-1 text-sm font-semibold text-white hover:bg-green-600">
+                            Éditer
+                        </a>
+                        {% if user.id != app.user.id %}
+                            <form method="post" action="{{ path('admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                <button class="rounded bg-red-500 px-3 py-1 text-sm font-semibold text-white hover:bg-red-600">
+                                    Supprimer
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-4">
+            {{ knp_pagination_render(users) }}
+        </div>
+    </div>
 {% endblock %}
