@@ -11,6 +11,13 @@
 
 {% block body %}
 	<div class="gradientBg py-12 px-5 lg:px-20">
+
+		<div id="countdown" class="text-center text-white mb-10">
+			<h3 class="text-2xl">Événement caritatif de 2024 dans :
+				<span id="timer" class="font-bold"></span>
+			</h3>
+		</div>
+
 		<h2 class="text-3xl font-bold text-center pb-10 text-white">Nos streamers en direct !</h2>
 
 		{% if liveUsers is not empty %}
@@ -133,4 +140,33 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		// Date et heure de l'événement
+const eventDate = new Date("November 1, 2024 10:00:00 GMT+0200"); // Heure de Paris
+
+function updateCountdown() {
+const now = new Date();
+const remainingTime = eventDate - now;
+
+// Calcul des jours, heures, minutes et secondes restantes
+const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+const hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+// Affichage du compte à rebours
+const timerElement = document.getElementById("timer");
+timerElement.innerHTML = `${days} jours, ${hours} heures, ${minutes} minutes et ${seconds} secondes`;
+
+// Vérifiez si l'événement est terminé
+if (remainingTime < 0) {
+clearInterval(countdownInterval);
+timerElement.innerHTML = "L'événement a commencé !";
+}
+}
+
+// Met à jour le compte à rebours chaque seconde
+const countdownInterval = setInterval(updateCountdown, 1000);
+	</script>
 {% endblock %}
