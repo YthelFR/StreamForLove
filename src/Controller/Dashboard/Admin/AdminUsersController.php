@@ -4,12 +4,16 @@ namespace App\Controller\Dashboard\Admin;
 
 use App\Entity\Users;
 use App\Form\AvatarType;
+use App\Form\EditUsersType;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -19,12 +23,28 @@ class AdminUsersController extends AbstractController
 {
 
     #[Route('/', name: 'admin_users_index')]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
-        $users = $entityManager->getRepository(Users::class)->findAll();
+        $searchTerm = $request->query->get('search', '');
+
+        $queryBuilder = $entityManager->getRepository(Users::class)->createQueryBuilder('u');
+
+        if ($searchTerm) {
+            $queryBuilder
+                ->where('u.pseudo LIKE :search OR u.email LIKE :search')
+                ->setParameter('search', '%' . $searchTerm . '%');
+        }
+
+        $query = $queryBuilder->getQuery();
+        $users = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1), // page number
+            25 // limit per page
+        );
 
         return $this->render('dashboard/admin/users/index.html.twig', [
             'users' => $users,
+            'searchTerm' => $searchTerm,
         ]);
     }
 
@@ -33,22 +53,42 @@ class AdminUsersController extends AbstractController
         Users $user,
         Request $request,
         EntityManagerInterface $em,
-        UserPasswordHasherInterface $passwordHasher
+        MailerInterface $mailer
     ): Response {
-        $form = $this->createForm(ProfileType::class, $user);
+        $form = $this->createForm(EditUsersType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newPassword = $form->get('new_password')->getData();
-            if ($newPassword) {
-                $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-                $user->setPassword($hashedPassword);
+            // Changement de rôle
+            $roles = $form->get('roles')->getData();
+            $user->setRoles($roles);
+
+            // Envoi d'e-mail pour réinitialiser le mot de passe
+            if ($request->request->has('send_password_reset_email')) {
+                $token = bin2hex(random_bytes(32));
+                $user->setResetToken($token);
+                $em->persist($user);
+                $em->flush();
+
+                // Préparez l'e-mail avec Symfony Mailer
+                $email = (new Email())
+                    ->from('support@streamforlove.coalitionplus.org')
+                    ->to($user->getEmail())
+                    ->subject('Réinitialisation du mot de passe')
+                    ->html(
+                        $this->renderView(
+                            'dashboard/admin/mail/reset_password.html.twig',
+                            ['token' => $token, 'user' => $user] // Ajout de l'utilisateur ici
+                        )
+                    );
+
+                $mailer->send($email);
+                $this->addFlash('success', 'Un e-mail de réinitialisation du mot de passe a été envoyé à l\'utilisateur.');
             }
 
             $em->persist($user);
             $em->flush();
 
-            // Ajout du message flash
             $this->addFlash('success', 'Profil de l\'utilisateur mis à jour.');
             return $this->redirectToRoute('admin_users_index');
         }

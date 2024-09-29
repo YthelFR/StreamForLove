@@ -1,6 +1,7 @@
 {% extends 'admin_base.html.twig' %}
 
-{% block title %}Éditer l'utilisateur{% endblock %}
+{% block title %}Éditer l'utilisateur
+{% endblock %}
 
 {% block body %}
 	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
@@ -12,7 +13,7 @@
 		{% for message in app.flashes('error') %}
 			<div class="alert alert-danger">{{ message }}</div>
 		{% endfor %}
-		
+
 		{{ form_start(form) }}
 
 		<div class="mb-4">
@@ -26,19 +27,11 @@
 		</div>
 
 		<div class="mb-4">
-			{{ form_label(form.old_password, 'Mot de passe actuel', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-			{{ form_widget(form.old_password, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+			{{ form_label(form.roles, 'Rôle', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.roles, {'attr': {'class': 'select2 block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
 		</div>
 
-		<div class="mb-4">
-			{{ form_label(form.new_password.first, 'Nouveau mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-			{{ form_widget(form.new_password.first, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-		</div>
-
-		<div class="mb-4">
-			{{ form_label(form.new_password.second, 'Répéter le mot de passe', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-			{{ form_widget(form.new_password.second, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
-		</div>
+		{{ form_row(form.send_password_reset_email) }}
 
 		<div class="flex justify-end mt-6">
 			<a href="{{ path('admin_users_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
@@ -47,4 +40,12 @@
 
 		{{ form_end(form) }}
 	</div>
+	<script>
+		$(document).ready(function () {
+			$('.select2').select2({
+				placeholder: 'Sélectionnez un ou plusieurs rôles',
+				allowClear: true
+			});
+		});
+	</script>
 {% endblock %}

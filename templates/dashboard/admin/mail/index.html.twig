@@ -1,0 +1,55 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Envoyer un Email{% endblock %}
+
+{% block body %}
+    <div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+        <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Envoyer un Email</h1>
+
+        {{ form_start(form) }}
+
+        <div class="mb-4">
+            {{ form_label(form.senderName, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.senderName, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.senderName) }}
+        </div>
+
+        <div class="mb-4" id="roleContainer">
+            {{ form_label(form.role, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.role, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.role) }}
+        </div>
+
+        <div class="mb-4" id="recipientContainer" style="display: none;">
+            {{ form_label(form.recipient, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.recipient, {
+                'attr': {
+                    'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none select2',
+                }
+            }) }}
+            {{ form_errors(form.recipient) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.subject, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.subject, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.subject) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.message, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.message, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.message) }}
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500 rounded">Envoyer</button>
+        </div>
+
+        {{ form_end(form) }}
+
+        {% for message in app.flashes('success') %}
+            <div class="mt-4 p-2 bg-green-200 text-green-800 rounded">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
