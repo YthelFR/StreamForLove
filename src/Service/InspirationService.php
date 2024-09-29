@@ -21,13 +21,14 @@ class InspirationService
         $quotes = $categories[$category][$person];
 
         // Sélectionner une citation au hasard
-        $randomQuote = $quotes[array_rand($quotes)];
+        $randomQuote = $quotes['quotes'][array_rand($quotes['quotes'])];
 
-        // Retourner la citation et les informations sur le personnage
+        // Retourner la citation, le personnage, la série et l'avatar
         return [
             'quote' => $randomQuote,
             'character' => ucfirst(str_replace('_', ' ', $person)), // Formater le nom du personnage
-            'series' => ucfirst(str_replace('_', ' ', $category)) // Formater le nom de la série
+            'series' => ucfirst(str_replace('_', ' ', $category)), // Formater le nom de la série
+            'avatar' => $quotes['avatar'] // Ajouter l'avatar
         ];
     }
 }

@@ -1,5 +1,14 @@
 {% block body %}
-    <h2>Citation célèbre</h2>
-    <p class="text-lg">"{{ randomInspiration.quote }}"</p>
-    <p><span class="font-bold">{{ randomInspiration.character }}</span> - <span class="italic"> {{ randomInspiration.series }}</span></p>
+	<h2>Citation célèbre</h2>
+	<div class="flex items-center space-x-4">
+		<img src="{{ randomInspiration.avatar }}" alt="{{ randomInspiration.character }}" class="w-16 h-16 object-cover  rounded-full shadow-md">
+		<div>
+			<p class="text-lg">"{{ randomInspiration.quote }}"</p>
+			<p>
+				<span class="font-bold">{{ randomInspiration.character }}</span>
+				-
+				<span class="italic">{{ randomInspiration.series }}</span>
+			</p>
+		</div>
+	</div>
 {% endblock %}

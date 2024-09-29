@@ -1,43 +1,59 @@
 inspirations:
   mass_effect:
     commandant_shepard:
-      - "Tu préfères être un cadavre ou une balance ?"
-      - "Appelle-moi encore une fois ma princesse et tu vas devoir ramasser tes dents avec tes doigts cassés."
-      - "En parlant d'une IV qui s'active : 'Et merde, un popup.'"
-      - "En gros, vous partouzez à tour de bras ?"
-      - "On sort d'ici et on lui éclate la gueule !"
-      - "Eh quoi, quelqu'un a pissé dans la tasse de café de votre chef de sécurité ?"
-      - "Vous nous privez de notre futur. Sans futur, on n'a pas d'espoir. Et sans espoir... Autant être des machines... Programmées pour agir. Pour obéir."
-      - "Je suis le commandant Shepard et cette boutique est ma préférée de la Citadelle."
+      avatar: "/assets/medias/citations/commandant_shepard.jpg"
+      quotes:
+        - "Tu préfères être un cadavre ou une balance ?"
+        - "Appelle-moi encore une fois ma princesse et tu vas devoir ramasser tes dents avec tes doigts cassés."
+        - "En parlant d'une IV qui s'active : 'Et merde, un popup.'"
+        - "En gros, vous partouzez à tour de bras ?"
+        - "On sort d'ici et on lui éclate la gueule !"
+        - "Eh quoi, quelqu'un a pissé dans la tasse de café de votre chef de sécurité ?"
+        - "Vous nous privez de notre futur. Sans futur, on n'a pas d'espoir. Et sans espoir... Autant être des machines... Programmées pour agir. Pour obéir."
+        - "Je suis le commandant Shepard et cette boutique est ma préférée de la Citadelle."
     joker:
-      - "C'est pas en montrant ses dents comme un con qu'on réussit dans la vie."
-      - "Il n'y a aucun problème qu'une balle dans la tête ne puisse résoudre."
-      - "Oh vous avez retrouvé Garrus ! Super, je les adore tous les deux, lui et le balai qu'il a dans le cul."
-      - "On dirait que Garrus s'est sorti le balai qu'il avait dans le cul et qu'il s'en sert pour faire de nouveaux trous aux autres. Ça me fait mal de dire ça mais je préférais l'ancien."
-      - "Jacob, c’est un type beaucoup trop sympa pour connaître autant de manières de tuer."
-      - "Thane, c’est un peu l’exemple parfait du type gouverné par ses émotions : l’amour, l’amitié, les petits oiseaux cui-cui, le meurtre de sang froid. Un vrai nounours."
-      - "Samara, j'ai toujours l'impression qu'elle va me tuer, mais avec une immense compassion... Mais me tuer quand même."
-      - "Avoir Légion dans l’équipage, c’est chercher à se faire insérer un fusil dans le fondement. Sans préliminaires, ni vaseline."
-      - "J'adore mon travail. Je regarde des boutons clignoter toute la journée et parfois j'appuie même dessus."
-      - "Mode furtif activé. Maintenant, à moins de commencer à chanter l'hymne national russe, ils ne nous détecteront pas !"
-    liara_t_soni:
-      - "Je sais pas ce qui me gène le plus, les Geths, ou tous ce sable dans ma... Hum, non rien."
+      avatar: "/assets/medias/citations/joker.jpeg"
+      quotes:
+        - "C'est pas en montrant ses dents comme un con qu'on réussit dans la vie."
+        - "Il n'y a aucun problème qu'une balle dans la tête ne puisse résoudre."
+        - "Oh vous avez retrouvé Garrus ! Super, je les adore tous les deux, lui et le balai qu'il a dans le cul."
+        - "On dirait que Garrus s'est sorti le balai qu'il avait dans le cul et qu'il s'en sert pour faire de nouveaux trous aux autres. Ça me fait mal de dire ça mais je préférais l'ancien."
+        - "Jacob, c’est un type beaucoup trop sympa pour connaître autant de manières de tuer."
+        - "Thane, c’est un peu l’exemple parfait du type gouverné par ses émotions : l’amour, l’amitié, les petits oiseaux cui-cui, le meurtre de sang froid. Un vrai nounours."
+        - "Samara, j'ai toujours l'impression qu'elle va me tuer, mais avec une immense compassion... Mais me tuer quand même."
+        - "Avoir Légion dans l’équipage, c’est chercher à se faire insérer un fusil dans le fondement. Sans préliminaires, ni vaseline."
+        - "J'adore mon travail. Je regarde des boutons clignoter toute la journée et parfois j'appuie même dessus."
+        - "Mode furtif activé. Maintenant, à moins de commencer à chanter l'hymne national russe, ils ne nous détecteront pas !"
+    liara_T'Soni:
+      avatar: "/assets/medias/citations/liara.jpg"
+      quotes:
+        - "Je sais pas ce qui me gène le plus, les Geths, ou tous ce sable dans ma... Hum, non rien."
     urdnot_wrex:
-      - "Je mets les pieds où je veux, et c'est souvent dans la gueule."
-      - "Si je meurs ici, je jure que j'le tue !"
-      - "Une bonne explosion, rien de tel pour faire circuler le sang."
-      - "Un peu plus de puissance de feu n'a jamais tué personne."
-      - "Je comprends pas que les gens se plaignent de la foule, moi on me laisse toujours passer."
-      - "Cinquante degrés d'plus et je sors la crème solaire. Et vous les mammifères, ça roule ?"
-      - "Tous ces bureaucrates, ça vous fait des ronds de jambe pour mieux vous chier dessus..."
-      - "Ça c'est des vacances : ballades, plages, et massacre à volonté."
-      - "Aaahh!... le calme, la nature, les petits oiseaux... C'est d'un chiant !"
-      - "Ah Shepard ! Vous m’impressionnez ! Bientôt vous allez me dire qu'il en a cinq et qu'il chie de l'énergie noire."
+      avatar: "/assets/medias/citations/wrex.png"
+      quotes:
+        - "Je mets les pieds où je veux, et c'est souvent dans la gueule."
+        - "Si je meurs ici, je jure que j'le tue !"
+        - "Une bonne explosion, rien de tel pour faire circuler le sang."
+        - "Un peu plus de puissance de feu n'a jamais tué personne."
+        - "Je comprends pas que les gens se plaignent de la foule, moi on me laisse toujours passer."
+        - "Cinquante degrés d'plus et je sors la crème solaire. Et vous les mammifères, ça roule ?"
+        - "Tous ces bureaucrates, ça vous fait des ronds de jambe pour mieux vous chier dessus..."
+        - "Ça c'est des vacances : ballades, plages, et massacre à volonté."
+        - "Aaahh!... le calme, la nature, les petits oiseaux... C'est d'un chiant !"
+        - "Ah Shepard ! Vous m’impressionnez ! Bientôt vous allez me dire qu'il en a cinq et qu'il chie de l'énergie noire."
     garrus:
-      - "On peut refuser une mission suicide ?! Mais pourquoi on me l'a jamais dit ?!"
+      avatar: "/assets/medias/citations/garrus.jpg"
+      quotes:
+        - "On peut refuser une mission suicide ?! Mais pourquoi on me l'a jamais dit ?!"
     jack:
-      - "C'est la puberté ? Grunt a le kiki tout dur ?"
-    ida:
-      - "Ne vous inquiétez pas : je n'oublie de renouveler l'air du vaisseau que si je tombe sur quelque chose de vraiment intéressant. [...] C'était une blague..."
+      avatar: "/assets/medias/citations/jack.jpg"
+      quotes:
+        - "C'est la puberté ? Grunt a le kiki tout dur ?"
+    IDA:
+      avatar: "/assets/medias/citations/ida.jpg"
+      quotes:
+        - "Ne vous inquiétez pas : je n'oublie de renouveler l'air du vaisseau que si je tombe sur quelque chose de vraiment intéressant. [...] C'était une blague..."
     zaed_massani:
-      - "J'vais trouver celui qui a créé ce jeu et lui faire rentrer un peu d'inspiration dans l'cul !!"
+      avatar: "/assets/medias/citations/zaed.jpg"
+      quotes:
+        - "J'vais trouver celui qui a créé ce jeu et lui faire rentrer un peu d'inspiration dans l'cul !!"
