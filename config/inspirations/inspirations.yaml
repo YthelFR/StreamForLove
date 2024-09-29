@@ -26,11 +26,11 @@ inspirations:
         - "Ne te vide pas trop vite de ton sang."
         - "Les humains ont rendu leur jugement à mon endroit. Aussi je les condamne à l'extinction."
         - "Mon âme immortelle est liée à la sombre étreinte de l'éternité."
-  world_of-warcraft:
+  world_of_warcraft:
     mimiron:
       avatar: "/assets/medias/citations/mimiron.jpg"
       quotes:
-        - "Mais, pourquoi avez-vous été faire une chose pareille ? Vous n'avez donc pas vu le panneau : " NE PAS APPUYER SUR CE BOUTON ! " ? Comment allons-nous finir les essais avec le mécanisme d'autodestruction activé ?"
+        - "Mais, pourquoi avez-vous été faire une chose pareille ? Vous n'avez donc pas vu le panneau : ' NE PAS APPUYER SUR CE BOUTON ! ' ? Comment allons-nous finir les essais avec le mécanisme d'autodestruction activé ?"
     yogg_saron:
       avatar: "/assets/medias/citations/yogg_saron.jpeg"
       quotes:
