@@ -5,22 +5,22 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                 <h2 class="text-xl text-gray-700 text-center font-semibold mb-4">Météo Locale</h2>
-                {% include 'dashboard/admin/weather.html.twig' with {'weather': weather} %}
+                {% include 'dashboard/admin/views/weather.html.twig' with {'weather': weather} %}
             </div>
 
             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                 <h2 class="text-xl text-gray-700 text-center font-semibold mb-4">Ressources et Liens Utiles</h2>
-                {% include 'dashboard/resources.html.twig' %}
+                {% include 'dashboard/admin/views/resources.html.twig' %}
             </div>
 
             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                 <h2 class="text-xl text-gray-700 text-center font-semibold mb-4">Inspirations</h2>
-                {% include 'dashboard/inspirations.html.twig' %}
+                {% include 'dashboard/admin/views/inspirations.html.twig' %}
             </div>
 
             <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
                 <h2 class="text-xl text-gray-700 text-center font-semibold mb-4">Mises à Jour</h2>
-                {% include 'dashboard/updates.html.twig' %}
+                {% include 'dashboard/admin/views/updates.html.twig' %}
             </div>
 
             <div class="col-span-1 md:col-span-2 lg:col-span-3">

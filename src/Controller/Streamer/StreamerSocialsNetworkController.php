@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Dashboard\Streamer;
+namespace App\Controller\Streamer;
 
 use App\Entity\SocialsNetwork;
 use App\Form\SocialsNetworkType;
