@@ -2,27 +2,26 @@
 
 namespace App\Controller\Admin;
 
-// use App\Service\InspirationService;
 use App\Service\WeatherService;
+use App\Service\InspirationsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class AdminDashboardController extends AbstractController
 {
-    // private InspirationService $inspirationService;
     private WeatherService $weatherService;
+    private InspirationsService $inspirationsService;
     private LoggerInterface $logger;
 
 
-    public function __construct(LoggerInterface $logger, WeatherService $weatherService)
+    public function __construct(LoggerInterface $logger, WeatherService $weatherService, InspirationsService $inspirationsService)
     {
-        // $this->inspirationService = $inspirationService;
         $this->weatherService = $weatherService;
+        $this->inspirationsService = $inspirationsService;
         $this->logger = $logger;
     }
 
@@ -40,12 +39,12 @@ class AdminDashboardController extends AbstractController
             $weatherData = null;  // Gérer une valeur par défaut ou une erreur utilisateur
         }
 
-        // $randomInspiration = $this->inspirationService->getRandomInspiration();
+        $randomInspiration = $this->inspirationsService->getRandomInspiration();
 
         return $this->render('dashboard/admin/admindashboard.html.twig', [
             'currentUser' => $currentUser,
             'weather' => $weatherData,
-            // 'randomInspiration' => $randomInspiration,
+            'inspiration' => $randomInspiration,
         ]);
     }
 

@@ -2,8 +2,8 @@
 
 namespace App\Controller\Streamer;
 
-// use App\Service\InspirationService;
 use App\Service\WeatherService;
+use App\Service\InspirationsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +14,14 @@ use Psr\Log\LoggerInterface;
 
 class StreamerDashboardController extends AbstractController
 {
-    // private InspirationService $inspirationService;
     private WeatherService $weatherService;
+    private InspirationsService $inspirationsService;
     private LoggerInterface $logger;
 
-
-    public function __construct(LoggerInterface $logger, WeatherService $weatherService)
+    public function __construct(LoggerInterface $logger, WeatherService $weatherService, InspirationsService $inspirationsService)
     {
-        // $this->inspirationService = $inspirationService;
         $this->weatherService = $weatherService;
+        $this->inspirationsService = $inspirationsService;
         $this->logger = $logger;
     }
     #[Route('/dashboard', name: 'app_dashboard')]
@@ -39,12 +38,12 @@ class StreamerDashboardController extends AbstractController
             $weatherData = null;  // Gérer une valeur par défaut ou une erreur utilisateur
         }
 
-        // $randomInspiration = $this->inspirationService->getRandomInspiration();
+        $randomInspiration = $this->inspirationsService->getRandomInspiration();
 
         return $this->render('dashboard/streamers/user_dashboard.html.twig', [
             'currentUser' => $currentUser,
             'weather' => $weatherData,
-            // 'randomInspiration' => $randomInspiration,
+            'inspiration' => $randomInspiration,
         ]);
     }
 
