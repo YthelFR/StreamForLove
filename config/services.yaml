@@ -50,3 +50,6 @@ services:
     # App\Service\InspirationService:
     #     arguments:
     #         $filePath: '%kernel.project_dir%/config/Inspirations/inspirations.yaml'
+    App\Service\WeatherService:
+        arguments:
+            $weatherApiKey: '%env(WEATHER_API_KEY)%'

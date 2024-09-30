@@ -170,21 +170,6 @@
     array (
     ),
   ),
-  'quill' => 
-  array (
-    'version' => '2.0.2',
-    'dependencies' => 
-    array (
-      0 => 'lodash-es',
-      1 => 'parchment',
-      2 => 'parchment',
-      3 => 'quill-delta',
-      4 => 'eventemitter3',
-    ),
-    'extraFiles' => 
-    array (
-    ),
-  ),
   'lodash-es' => 
   array (
     'version' => '4.17.21',
@@ -200,19 +185,6 @@
     'version' => '3.0.0',
     'dependencies' => 
     array (
-    ),
-    'extraFiles' => 
-    array (
-    ),
-  ),
-  'quill-delta' => 
-  array (
-    'version' => '5.1.0',
-    'dependencies' => 
-    array (
-      0 => 'fast-diff',
-      1 => 'lodash.clonedeep',
-      2 => 'lodash.isequal',
     ),
     'extraFiles' => 
     array (
@@ -258,6 +230,44 @@
     array (
     ),
   ),
+  'axios' => 
+  array (
+    'version' => '1.7.7',
+    'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  'quill' => 
+  array (
+    'version' => '2.0.2',
+    'dependencies' => 
+    array (
+      0 => 'lodash-es',
+      1 => 'parchment',
+      2 => 'parchment',
+      3 => 'quill-delta',
+      4 => 'eventemitter3',
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  'quill-delta' => 
+  array (
+    'version' => '5.1.0',
+    'dependencies' => 
+    array (
+      0 => 'fast-diff',
+      1 => 'lodash.clonedeep',
+      2 => 'lodash.isequal',
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
   'quill/dist/quill.snow.css' => 
   array (
     'version' => '2.0.2',
@@ -271,16 +281,6 @@
   'quill/dist/quill.bubble.css' => 
   array (
     'version' => '2.0.2',
-    'dependencies' => 
-    array (
-    ),
-    'extraFiles' => 
-    array (
-    ),
-  ),
-  'axios' => 
-  array (
-    'version' => '1.7.7',
     'dependencies' => 
     array (
     ),
