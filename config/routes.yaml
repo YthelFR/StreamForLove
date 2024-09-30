@@ -8,3 +8,7 @@ when@dev:
     _errors:
         resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
         prefix:   /_error
+
+maintenance:
+    path: /maintenance
+    controller: App\Controller\MaintenanceController::show

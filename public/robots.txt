@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /admin
+Disallow: /login
+Disallow: /logout
+Disallow: /register
+Disallow: /dashboard
+Disallow: /mentions-légales
+Disallow: /politique-de-confidentialité
+
+Allow: /contact
+Allow: /evenements
+Allow: /evenements/*
+Allow: /streamers
+Allow: /streamers/*
+Allow: / 
+
+Sitemap: https://streamforlove.coalitionplus.org/sitemap.xml

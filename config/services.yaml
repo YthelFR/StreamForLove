@@ -9,7 +9,7 @@ parameters:
     goals_directory: '%kernel.project_dir%/public/assets/users/presentations/goals'
     avatars_directory: '%kernel.project_dir%/public/assets/users/avatars'
     evenements_directory: '%kernel.project_dir%/public/assets/medias/evenements/thumbnail'
-
+    MAINTENANCE_MODE: '%env(MAINTENANCE_MODE)%'
     
 services:
     # default configuration for services in *this* file
@@ -42,3 +42,14 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
         tags:
             - { name: 'twig.extension' }
+    App\EventListener\MaintenanceListener:
+        arguments:
+            $params: '@parameter_bag'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    App\Service\InspirationService:
+        arguments:
+            $filePath: '%kernel.project_dir%/config/Inspirations/inspirations.yaml'
+    App\Service\WeatherService:
+        arguments:
+            $weatherApiKey: '%env(WEATHER_API_KEY)%'

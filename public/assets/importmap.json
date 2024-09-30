@@ -1,0 +1,166 @@
+{
+    "app": {
+        "path": "\/assets\/app-faadeb9e2e54ef6910bc1473539ab29e.js",
+        "type": "js"
+    },
+    "\/assets\/styles\/app.css": {
+        "path": "\/assets\/styles\/app-aa649f3b1064f97285eb8d8b6fa09e4d.css",
+        "type": "css"
+    },
+    "@hotwired\/stimulus": {
+        "path": "\/assets\/vendor\/@hotwired\/stimulus\/stimulus.index-8169deece04a7eb6681b3f3b7fc63a95.js",
+        "type": "js"
+    },
+    "tom-select\/dist\/css\/tom-select.default.css": {
+        "path": "\/assets\/vendor\/tom-select\/dist\/css\/tom-select.default-92c31c033a23be0cfebdda3d089d8b11.css",
+        "type": "css"
+    },
+    "@symfony\/stimulus-bundle": {
+        "path": "\/assets\/@symfony\/stimulus-bundle\/loader-870999a02e9fc147c034d522826ea70d.js",
+        "type": "js"
+    },
+    "\/assets\/@symfony\/stimulus-bundle\/controllers.js": {
+        "path": "\/assets\/@symfony\/stimulus-bundle\/controllers-cb6f49ff3f9aa0c01d15549f99671778.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/controller.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/controller-068e41a2e92a7c87192a0c8d7e455436.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/modules.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/modules-5cb3c92db1de19a810860e1e36710f82.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/imageUploader.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/imageUploader-7bd81c98a64a32f6ee21e1f73ffb29c4.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/blots\/image.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/blots\/image-7fb990400cf649552297823eef2f67c1.js",
+        "type": "js"
+    },
+    "\/assets\/@symfony\/ux-autocomplete\/controller.js": {
+        "path": "\/assets\/@symfony\/ux-autocomplete\/controller-dd1b31bd819824edecb124585c6bdb56.js",
+        "type": "js"
+    },
+    "\/assets\/@symfony\/ux-turbo\/turbo_controller.js": {
+        "path": "\/assets\/@symfony\/ux-turbo\/turbo_controller-ce5e32dafdec0b7752f02e3e2cb25751.js",
+        "type": "js"
+    },
+    "\/assets\/controllers\/hello_controller.js": {
+        "path": "\/assets\/controllers\/hello_controller-55882fcad241d2bea50276ea485583bc.js",
+        "type": "js"
+    },
+    "tom-select": {
+        "path": "\/assets\/vendor\/tom-select\/tom-select.index-c0036889cf3e94dade1e56c11996b014.js",
+        "type": "js"
+    },
+    "@hotwired\/turbo": {
+        "path": "\/assets\/vendor\/@hotwired\/turbo\/turbo.index-bc0c8bf326e8073d5850bd89dfe30f28.js",
+        "type": "js"
+    },
+    "file-loader": {
+        "path": "\/assets\/vendor\/file-loader\/file-loader.index-5f0537effd08c725cbcfea37357d5fbd.js",
+        "type": "js"
+    },
+    "loader-utils": {
+        "path": "\/assets\/vendor\/loader-utils\/loader-utils.index-d04c7768922f73fc15a1e45cea14349d.js",
+        "type": "js"
+    },
+    "schema-utils": {
+        "path": "\/assets\/vendor\/schema-utils\/schema-utils.index-ba60e7fd94c3b24b239a82d8d8df6844.js",
+        "type": "js"
+    },
+    "json5": {
+        "path": "\/assets\/vendor\/json5\/json5.index-4acc3fa6ea6c31061545e764e5847e1b.js",
+        "type": "js"
+    },
+    "big.js": {
+        "path": "\/assets\/vendor\/big.js\/big.js.index-b81f6092d60c5bdb1f108f33233d6731.js",
+        "type": "js"
+    },
+    "emojis-list": {
+        "path": "\/assets\/vendor\/emojis-list\/emojis-list.index-48d00d6d3259d1dbd9cb223be78e35ba.js",
+        "type": "js"
+    },
+    "ajv": {
+        "path": "\/assets\/vendor\/ajv\/ajv.index-5a70798e25fbeef286f068657de925c2.js",
+        "type": "js"
+    },
+    "ajv-keywords": {
+        "path": "\/assets\/vendor\/ajv-keywords\/ajv-keywords.index-e5c7e4f75d2511a5c7c5a20fcb42c908.js",
+        "type": "js"
+    },
+    "uri-js": {
+        "path": "\/assets\/vendor\/uri-js\/uri-js.index-1c8d962ba6e5a37fc7593fdc1785d123.js",
+        "type": "js"
+    },
+    "fast-deep-equal": {
+        "path": "\/assets\/vendor\/fast-deep-equal\/fast-deep-equal.index-2e3d7da5848fa06171a1d5702471bcf3.js",
+        "type": "js"
+    },
+    "json-schema-traverse": {
+        "path": "\/assets\/vendor\/json-schema-traverse\/json-schema-traverse.index-daba79a71786177dc084ac5d38225c29.js",
+        "type": "js"
+    },
+    "fast-json-stable-stringify": {
+        "path": "\/assets\/vendor\/fast-json-stable-stringify\/fast-json-stable-stringify.index-ec21f14ba7148405afcebc0fe3f310fc.js",
+        "type": "js"
+    },
+    "quill": {
+        "path": "\/assets\/vendor\/quill\/quill.index-0a06006d4771ad65bdd36e0743d173a6.js",
+        "type": "js"
+    },
+    "lodash-es": {
+        "path": "\/assets\/vendor\/lodash-es\/lodash-es.index-26386f79a77084507070ed850a69797b.js",
+        "type": "js"
+    },
+    "parchment": {
+        "path": "\/assets\/vendor\/parchment\/parchment.index-d7bd3b4ffa15aab8f8afdb9c5722aeb4.js",
+        "type": "js"
+    },
+    "quill-delta": {
+        "path": "\/assets\/vendor\/quill-delta\/quill-delta.index-58df70e0b6c762d89cc6d2afd82fd58b.js",
+        "type": "js"
+    },
+    "eventemitter3": {
+        "path": "\/assets\/vendor\/eventemitter3\/eventemitter3.index-002da52f735f9d40f7cf91af1cdd1b63.js",
+        "type": "js"
+    },
+    "fast-diff": {
+        "path": "\/assets\/vendor\/fast-diff\/fast-diff.index-ca3cf298a3712bc2228bd9b3d9bb7fae.js",
+        "type": "js"
+    },
+    "lodash.clonedeep": {
+        "path": "\/assets\/vendor\/lodash.clonedeep\/lodash.clonedeep.index-861a9f69d16cf45c3f4cb1204fc7ff97.js",
+        "type": "js"
+    },
+    "lodash.isequal": {
+        "path": "\/assets\/vendor\/lodash.isequal\/lodash.isequal.index-08efbe584868341174be3f2adc515de3.js",
+        "type": "js"
+    },
+    "quill\/dist\/quill.snow.css": {
+        "path": "\/assets\/vendor\/quill\/dist\/quill.snow-4da2c5a5fa53f7b23528685a046ece46.css",
+        "type": "css"
+    },
+    "quill\/dist\/quill.bubble.css": {
+        "path": "\/assets\/vendor\/quill\/dist\/quill.bubble-875140a943d06a1c061d55776dce1265.css",
+        "type": "css"
+    },
+    "axios": {
+        "path": "\/assets\/vendor\/axios\/axios.index-98f6aeeedd38c0c7662edf9e8fa1ab1d.js",
+        "type": "js"
+    },
+    "quill2-emoji": {
+        "path": "\/assets\/vendor\/quill2-emoji\/quill2-emoji.index-c429e45c482ba5a359db9c87dfefd8de.js",
+        "type": "js"
+    },
+    "quill2-emoji\/dist\/style.css": {
+        "path": "\/assets\/vendor\/quill2-emoji\/dist\/style-e2ee39a9ee191998aff2609bd9ad2974.css",
+        "type": "css"
+    },
+    "quill-resize-image": {
+        "path": "\/assets\/vendor\/quill-resize-image\/quill-resize-image.index-6f35898166ed318d0b9ce44443f275b9.js",
+        "type": "js"
+    }
+}

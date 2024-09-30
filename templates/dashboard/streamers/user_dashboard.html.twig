@@ -1,0 +1,44 @@
+{% extends 'user_base.html.twig' %}
+
+{% block body %}
+	<div class="ml-auto pb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+		<div class="px-6 pt-6 2xl:container">
+			<h1 class="pb-6 text-2xl font-bold text-gray-800">Bienvenue sur votre espace personnel</h1>
+			<div
+				class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+				<!-- Météo Locale -->
+				<div class="h-full py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+					<h2 class="text-xl text-gray-700 text-center font-semibold">Météo Locale</h2>
+					{% include 'dashboard/streamers/weather.html.twig' with {'weather': weather} %}
+				</div>
+
+				<!-- Autres sections -->
+				<!-- Ressources et Liens Utiles -->
+				<div class="h-full py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+					<h2 class="text-xl text-gray-700 text-center font-semibold">Ressources et Liens Utiles</h2>
+					{% include 'dashboard/resources.html.twig' %}
+				</div>
+
+				<!-- Inspirations -->
+				<div class="h-full py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+					<h2 class="text-xl text-gray-700 text-center font-semibold">Inspirations</h2>
+					{% include 'dashboard/inspirations.html.twig' %}
+				</div>
+
+				<!-- Mises à Jour -->
+				<div class="h-full py-8 px-6 space-y-6 rounded-xl border border-gray-200 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl">
+					<h2 class="text-xl text-gray-700 text-center font-semibold">Mises à Jour</h2>
+					{% include 'dashboard/updates.html.twig' %}
+				</div>
+
+				<div class="col-span-1 md:col-span-2 lg:col-span-3">
+					<p class="text-gray-600 text-center">
+						Si vous avez des problèmes ou des questions, n'hésitez pas à nous contacter via le
+						<a href="{{ path('contact') }}" class="text-blue-500 hover:underline">formulaire de contact</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
