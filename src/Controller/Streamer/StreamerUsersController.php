@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Dashboard\Streamer;
+namespace App\Controller\Streamer;
 
 use App\Entity\Users;
 use App\Form\AvatarType;

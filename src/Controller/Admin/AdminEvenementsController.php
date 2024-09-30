@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Dashboard\Admin;
+namespace App\Controller\Admin;
 
 use App\Entity\Evenements;
 use App\Form\EvenementsType;
