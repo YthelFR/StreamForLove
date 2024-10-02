@@ -46,7 +46,6 @@ class EditUsersType extends AbstractType
                 'label' => 'Rôle',
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
-                    'Admin' => 'ROLE_ADMIN',
                     'Manager' => 'ROLE_MANAGER',
                     'Streamer Actif' => 'ROLE_STREAMER_ACTIF',
                     'Streamer Absent' => 'ROLE_STREAMER_ABSENT',

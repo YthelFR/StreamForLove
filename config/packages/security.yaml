@@ -51,7 +51,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin/*, roles: [ROLE_ADMIN, ROLE_MANAGER] }
-        - { path: ^/dashboard/*, roles: [ROLE_BLOGUEUR, ROLE_STREAMER_ACTIF, ROLE_STREAMER_ABSENT] }
+        - { path: ^/dashboard/*, roles: [ROLE_ADMIN, ROLE_STREAMER_ACTIF, ROLE_STREAMER_ABSENT] }
         # - { path: ^/outsider, roles: ROLE_OUTSIDER }
 
 when@test:
