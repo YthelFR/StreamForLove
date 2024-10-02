@@ -1,0 +1,51 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Éditer l'utilisateur
+{% endblock %}
+
+{% block body %}
+	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+		<h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Éditer l'utilisateur</h1>
+
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">{{ message }}</div>
+		{% endfor %}
+		{% for message in app.flashes('error') %}
+			<div class="alert alert-danger">{{ message }}</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+
+		<div class="mb-4">
+			{{ form_label(form.email, 'Adresse Email', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.email, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.pseudo, 'Pseudo', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.pseudo, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		<div class="mb-4">
+			{{ form_label(form.roles, 'Rôle', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.roles, {'attr': {'class': 'select2 block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+		</div>
+
+		{{ form_row(form.send_password_reset_email) }}
+
+		<div class="flex justify-end mt-6">
+			<a href="{{ path('admin_users_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+			<button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Sauvegarder</button>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+	<script>
+		$(document).ready(function () {
+			$('.select2').select2({
+				placeholder: 'Sélectionnez un ou plusieurs rôles',
+				allowClear: true
+			});
+		});
+	</script>
+{% endblock %}

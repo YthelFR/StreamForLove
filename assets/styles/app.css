@@ -1,3 +1,95 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('/assets/fonts/Montserrat/Montserrat-Bold.woff2') format('woff2'),
+        url('/assets/fonts/Montserrat/Montserrat-Bold.woff') format('woff'),
+        url('/assets/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/assets/fonts/Poppins/Poppins-Bold.woff2') format('woff2'),
+        url('/assets/fonts/Poppins/Poppins-Bold.woff') format('woff'),
+        url('/assets/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('/assets/fonts/Poppins/Poppins-Regular.woff2') format('woff2'),
+        url('/assets/fonts/Poppins/Poppins-Regular.woff') format('woff'),
+        url('/assets/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-    background-color: skyblue;
+    background-color: white;
+    overflow-x : clip; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p, li {
+    font-family: 'Poppins', sans-serif;
+}
+
+.gradientBg {
+    background: rgb(255,186,133);
+    background: linear-gradient(90deg, rgba(255,186,133,1) 0%, rgba(251,191,22,1) 100%);
+}
+
+.card1 {
+    background-color: #F9F9F9;
+}
+
+.card2 {
+    background-color: #FFF8F6;
+}
+
+.btnSfl {
+    background: rgb(159,38,39);
+    background: linear-gradient(135deg, rgba(159,38,39,1) 0%, rgba(213,105,106,1) 100%);
+    border-radius:linear-gradient(135deg, rgba(159,38,39,1) 0%, rgba(213,105,106,1) 100%) 2px;
+}
+
+.hidden {
+    display: none;
+}
+
+.flash-messages {
+    position: fixed; /* Positionner le message en haut à droite */
+    top: 20px; /* Distance du haut de la fenêtre */
+    right: 20px; /* Distance du côté droit de la fenêtre */
+    z-index: 1000; /* Assurez-vous qu'il est au-dessus des autres éléments */
+    padding: 10px 20px; /* Espacement autour du message */
+    border-radius: 5px; /* Coins arrondis */
+    transition: opacity 0.5s ease-in-out; /* Transition pour l'effet de disparition */
+    opacity: 1; /* Opacité initiale */
+}
+
+.flash-messages.success {
+    background-color: green; /* Couleur de fond pour succès */
+    color: white; /* Couleur du texte */
+}
+
+.flash-messages.error {
+    background-color: red; /* Couleur de fond pour erreur */
+    color: white; /* Couleur du texte */
+}
+
+/* Animation pour faire disparaître le message flash après quelques secondes */
+.fade-out {
+    opacity: 0; /* Rendre le message transparent */
 }

@@ -1,0 +1,59 @@
+{% extends 'user_base.html.twig' %}
+
+{% block title %}Présentation{% endblock %}
+
+{% block body %}
+    <div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+        <div class="container mx-auto p-6">
+            <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Ma Présentation</h1>
+
+            {% if presentation is not null %}
+                <div class="bg-white p-6 rounded-lg shadow-lg transition duration-300 hover:shadow-xl">
+                    <div class="mb-6">
+                        {% if presentation.picturePath %}
+                            <img src="{{ asset('assets/users/presentations/pictures/' ~ presentation.picturePath) }}" alt="Présentation Image" class="w-1/4 h-auto mb-4 rounded-lg shadow-sm">
+                        {% endif %}
+                        <div class="space-y-2">
+                            <p class="text-gray-800">
+                                <strong class="text-gray-600">Question 1 :</strong></br>
+                                {{ presentation.question1 }}
+                            </p>
+                            <p class="text-gray-800">
+                                <strong class="text-gray-600">Question 2 :</strong></br>
+                                {{ presentation.question2 }}
+                            </p>
+                            <p class="text-gray-800">
+                                <strong class="text-gray-600">Question 3 :</strong></br>
+                                {{ presentation.question3 }}
+                            </p>
+							{% if presentation.goals %}
+                            <p class="text-gray-800">
+                                <strong class="text-gray-600">Objectifs :</strong></br>
+                                {{ presentation.goals }}
+                            </p>
+							{% endif %}
+                            {% if presentation.planning %}
+							<strong class="text-gray-600">Planning :</strong></br>
+                                <img src="{{ asset('assets/users/presentations/planning/' ~ presentation.planning) }}" alt="Planning Image" class="w-full h-auto mb-4 rounded-lg shadow-sm">
+                            {% endif %}
+                            {% for clip in [presentation.clip1, presentation.clip2, presentation.clip3, presentation.clip4] %}
+                                {% if clip %}
+                                    <p class="text-gray-800">
+                                        <strong class="text-gray-600">Clip {{ loop.index }}:</strong></br>
+                                        <a href="{{ clip }}" target="_blank" class="text-blue-500 hover:underline">Voir le clip</a>
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a href="{{ path('streamer_presentations_edit', { id: presentation.id }) }}" class="inline-block mt-4 text-blue-600 hover:underline transition duration-200">Éditer la présentation</a>
+                </div>
+            {% else %}
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-800">Aucune présentation trouvée. Vous pouvez en créer une nouvelle.</p>
+                    <a href="{{ path('streamer_presentations_new') }}" class="text-blue-500 hover:underline transition duration-200">Créer une présentation</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

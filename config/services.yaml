@@ -4,13 +4,18 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    upload_directory: '%kernel.project_dir%/public/assets/users/presentations/pictures'
+    planning_directory: '%kernel.project_dir%/public/assets/users/presentations/planning'
+    goals_directory: '%kernel.project_dir%/public/assets/users/presentations/goals'
+    avatars_directory: '%kernel.project_dir%/public/assets/users/avatars'
+    evenements_directory: '%kernel.project_dir%/public/assets/medias/evenements/thumbnail'
+    MAINTENANCE_MODE: '%env(MAINTENANCE_MODE)%'
+    
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
@@ -19,6 +24,32 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-
+    App\Service\TwitchApiService:
+        arguments:
+            $clientId: '%env(TWITCH_CLIENT_ID)%'
+            $accessToken: '%env(TWITCH_ACCESS_TOKEN)%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Repository\ArticlesRepository:
+        arguments:
+            $paginator: '@knp_paginator'
+    App\Form\Type\EnumType:
+        arguments:
+            $enumClass: 'App\Enum\SocialsNetworkTypeEnum'
+    App\Twig\GlobalUserExtension:
+        arguments:
+            $security: '@security.helper'
+            $entityManager: '@doctrine.orm.entity_manager'
+        tags:
+            - { name: 'twig.extension' }
+    App\EventListener\MaintenanceListener:
+        arguments:
+            $params: '@parameter_bag'
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    App\Service\InspirationsService:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+    App\Service\WeatherService:
+        arguments:
+            $weatherApiKey: '%env(WEATHER_API_KEY)%'

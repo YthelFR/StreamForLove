@@ -1,17 +1,84 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Stream For Love - Luttons contre le VIH et le SIDA
+			{% endblock %}
+		</title>
+		{% block meta %}
+			<meta name="author" content="JAMBON 'Ythel_' Yoan"/>
+			<meta name="robots" content="index, follow">
+			<meta
+			name="google-site-verification" content="dEESSkO3orijebbl4dSWcauBWaNRj28Gh9u2ORdIh4I"/>
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+			<!-- Open Graph Tags -->
+			<meta property="og:title" content="Stream For Love - Luttons contre le VIH et le SIDA"/>
+			<meta name="description" content="{% block meta_description %}{% endblock %}">
+			<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+			<meta property="og:image" content="{{ asset('/assets/medias/headers/logo.png') }}"/>
+			<meta property="og:url" content="https://facebook.com/coalitionplus"/>
+		{% endblock %}
+		<link
+		rel="canonical" href="https://streamforlove.coalitionplus.org/"/>
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="{{ asset('/assets/medias/accueil/favicon.ico') }}" sizes="32x32"/>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		{{ include('views/referencement.html.twig') }}
+	</head>
+	{{ include('views/header.html.twig') }}
+	<body>
+		{% block body %}{% endblock %}
+		<script src="https://unpkg.com/@popperjs/core@2"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script>
+			document.addEventListener('click', function (e) {
+const toggle = e.target.closest('.dropdown-toggle');
+const menu = e.target.closest('.dropdown-menu');
+if (toggle) {
+const menuEl = toggle.closest('.dropdown').querySelector('.dropdown-menu');
+if (menuEl.classList.contains('hidden')) {
+hideDropdown();
+menuEl.classList.remove('hidden');
+} else {
+menuEl.classList.add('hidden');
+}
+} else if (! menu) {
+hideDropdown();
+}
+});
+
+function hideDropdown() {
+document.querySelectorAll('.dropdown-menu').forEach(function (item) {
+item.classList.add('hidden');
+});
+}
+		</script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+const flashMessages = document.querySelectorAll('.flash-messages');
+
+flashMessages.forEach(function (message) {
+setTimeout(() => {
+message.classList.add('fade-out'); // Ajouter la classe pour disparaître
+setTimeout(() => {
+message.remove(); // Retirer le message du DOM après la disparition
+}, 500); // Attendre la fin de la transition
+}, 3000); // Temps avant de commencer la disparition (3 secondes)
+});
+});
+		</script>
+	</body>
+	{# {{ include('views/newsletter.html.twig') }} #}
+	{{ include('views/footer.html.twig') }}
+	{{ include('views/back_to_top.html.twig') }}
 </html>

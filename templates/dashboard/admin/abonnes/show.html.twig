@@ -1,0 +1,27 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Abonnes
+{% endblock %}
+
+{% block body %}
+	<h1>Abonnes</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ abonne.id }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ abonne.email }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('admin_abonnes_index') }}">back to list</a>
+
+	<a href="{{ path('admin_abonnes_edit', {'id': abonne.id}) }}">edit</a>
+
+	{{ include('dashboard/admin/abonnes/_delete_form.html.twig') }}
+{% endblock %}

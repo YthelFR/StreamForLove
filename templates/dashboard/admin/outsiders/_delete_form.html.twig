@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('admin_outsiders_delete', {'id': outsider.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet outsider ?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ outsider.id) }}">
+	<button class="bg-red-500 text-white p-2 px-4 font-semibold border border-red-500" type="submit">Supprimer</button>
+</form>

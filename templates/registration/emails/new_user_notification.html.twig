@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvel utilisateur à vérifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Nouveau compte utilisateur</h1>
+        <p>
+            <strong>Email :</strong>
+            <a href="mailto:{{ user.email }}">{{ user.email }}</a>
+        </p>
+        <p>
+            <strong>Nom :</strong>
+            {{ user.pseudo }}
+        </p>
+        <p style="margin-top: 30px;">
+            <img src="https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png" alt="Logo" style="width: 150px;">
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<h1>Informations sur la chaîne Twitch</h1>
+
+{% if channel.data is not empty %}
+	{% set user = channel.data[0] %}
+	<p>Nom d'utilisateur :
+		{{ user.display_name }}</p>
+	<p>Bio :
+		{{ user.description }}</p>
+	<img src="{{ user.profile_image_url }}" alt="Image de profil">
+{% else %}
+	<p>Aucune information disponible pour cette chaîne.</p>
+{% endif %}

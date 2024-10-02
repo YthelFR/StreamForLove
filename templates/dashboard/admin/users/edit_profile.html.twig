@@ -1,0 +1,84 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Modifier votre Profil
+{% endblock %}
+
+{% block body %}
+	<div class="ml-auto pb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+		<div class="container mx-auto px-4 py-8">
+			<h1 class="text-center text-2xl font-bold mb-4 text-gray-800">Modifier votre Profil</h1>
+
+			{% for message in app.flashes('success') %}
+				<div class="bg-green-500 text-white p-3 rounded mb-4">{{ message }}</div>
+			{% endfor %}
+			{% for message in app.flashes('error') %}
+				<div class="bg-red-500 text-white p-3 rounded mb-4">{{ message }}</div>
+			{% endfor %}
+
+			<div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white mt-8">
+				<h2 class="text-lg font-bold mb-4">Changer l'Avatar</h2>
+				{{ form_start(avatar_form) }}
+				<div class="mb-4">
+					<label class="block text-gray-700 font-bold mb-2">Avatar actuel</label>
+					{% if app.user.avatar %}
+						<img src="{{ asset('assets/users/avatars/' ~ app.user.avatar) }}" alt="Avatar actuel" class="w-64 h-64 object-cover rounded-full pb-2">
+					{% else %}
+						<p>Pas d'avatar</p>
+					{% endif %}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(avatar_form.avatar, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(avatar_form.avatar, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(avatar_form.avatar) }}
+				</div>
+
+				<div class="flex justify-end mt-4">
+					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Mettre à jour l'Avatar</button>
+				</div>
+				{{ form_end(avatar_form) }}
+			</div>
+
+			<div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white mt-8">
+				<h2 class="text-lg font-bold mb-4">Modifier le Profil</h2>
+				{{ form_start(form) }}
+
+				<div class="mb-4">
+					{{ form_label(form.email, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.email, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.email) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(form.pseudo, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.pseudo, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.pseudo) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(form.old_password, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.old_password, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.old_password) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(form.new_password.first, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.new_password.first, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.new_password.first) }}
+				</div>
+
+				<div class="mb-4">
+					{{ form_label(form.new_password.second, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.new_password.second, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.new_password.second) }}
+				</div>
+
+				<div class="flex justify-end mt-4">
+					<a href="{{ path('admin_profile_edit') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour au profil</a>
+					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Mettre à jour le Profil</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

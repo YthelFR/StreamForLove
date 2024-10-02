@@ -1,14 +1,17 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-    #csrf_protection: true
-
+    csrf_protection: true
+    disallow_search_engine_index: false
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    session: 
+        enabled: true
+        cookie_lifetime: 3600   # Durée du cookie en secondes (1 heure)
+        gc_maxlifetime: 3600     # Durée de vie maximale des sessions en secondes (1 heure)
+    error_controller: App\Controller\ErrorController::show
 
     #esi: true
     #fragments: true
-
 when@test:
     framework:
         test: true

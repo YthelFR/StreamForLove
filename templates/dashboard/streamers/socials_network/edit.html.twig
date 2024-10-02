@@ -1,0 +1,38 @@
+{% extends 'user_base.html.twig' %}
+
+{% block title %}Éditer Réseau Social
+{% endblock %}
+
+{% block body %}
+	<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
+		<div class="container mx-auto px-4 py-8">
+			<h1 class="text-center text-2xl font-bold mb-4 text-gray-800">Éditer Réseau Social</h1>
+
+			{% for label, messages in app.flashes %}
+				<div class="bg-green-500 text-white p-3 rounded mb-4">
+					{% for message in messages %}
+						<p>{{ message }}</p>
+					{% endfor %}
+				</div>
+			{% endfor %}
+
+			<div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white">
+				{{ form_start(form) }}
+
+				<div class="mb-4">
+					{{ form_row(form.name, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+				</div>
+				<div class="mb-4">
+					{{ form_row(form.url, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+				</div>
+
+				<div class="flex justify-end mt-4">
+					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Sauvegarder</button>
+					<a href="{{ path('streamer_socials_network_index') }}" class="bg-gray-500 text-white px-4 py-2 rounded ml-4">Annuler</a>
+				</div>
+
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}

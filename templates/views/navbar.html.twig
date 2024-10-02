@@ -1,0 +1,143 @@
+{% block body %}
+	<style>
+		.nav-link.active {
+			color: #FBBF16;
+			text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+		}
+	</style>
+
+	<header data-controller="active-link" class="w-dvw absolute top-0 left-1/2 -translate-x-1/2 z-[1000] py-4 bg-white bg-opacity-50">
+    <div class="max-w-[120rem] text-black px-6 md:px-8 lg:px-10" id="mainNavbar">
+        <nav class="w-full flex flex-row items-center font-sans">
+            <a class="text-black w-1/4" href="/">
+                <img class="h-12" src="{{ asset('assets/medias/headers/logo.png') }}" alt="Logo de Stream For Love - Au profit de Coalition PLUS"/>
+            </a>
+            <div class="flex-1 w-2/4 relative hidden lg:flex items-center justify-center">
+                <ul class="mx-auto inline-flex gap-6 text-base font-bold">
+                    <li>
+                        <a class="nav-link {{ app.request.get('_route') == 'app_home' ? 'active' : '' }}" href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ app.request.get('_route') == 'app_streamers' ? 'active' : '' }}" href="{{ path('app_streamers') }}">Nos streamers</a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ app.request.get('_route') == 'app_evenements_index' ? 'active' : '' }}" href="{{ path('app_evenements_index') }}">Evenement</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="https://www.coalitionplus.org/" target="_blank">Coalition PLUS</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Menu Hamburger -->
+            <div class="lg:hidden w-1/4 flex justify-center">
+                <button id="menu-btn" class="focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- End Menu Hamburger -->
+
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="absolute top-16 left-1/2 transform -translate-x-1/2 hidden bg-white shadow-lg rounded-lg w-full max-w-md z-50">
+                <ul class="flex flex-col p-4">
+                    <li>
+                        <a class="nav-link" href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_streamers') }}">Nos streamers</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{ path('app_evenements_index') }}">Evenement</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="https://www.coalitionplus.org/" target="_blank">Coalition PLUS</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Menu Mobile -->
+
+            <ul class="ml-auto flex justify-end self-center w-1/4">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <!-- Dropdown User Avatar -->
+                    <li class="px-2 dropdown ml-3 relative">
+                        <button type="button" class="dropdown-toggle flex items-center">
+                            <div class="p-2 md:block text-left">
+                                <h2 class="text-sm font-semibold text-gray-800">{{ app.user.pseudo }}</h2>
+                                <p class="text-xs text-gray-800">{{ app.user.roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}</p>
+                            </div>
+                            <div class="flex-shrink-0 w-10 h-10 relative">
+                                <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
+                                    <img class="w-8 h-8 rounded-full object-cover" src="{{ app.user.avatar ? asset('assets/users/avatars/' ~ app.user.avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ app.user.pseudo }} - Avatar de l'utilisateur"/>
+                                </div>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
+                            <li>
+                                {% set userRole = app.user.roles[0] %}
+                                {% set path = '' %}
+                                {% if userRole == 'ROLE_ADMIN' or userRole == 'ROLE_MANAGER' %}
+                                    {% set path = path('app_admin') %}
+                                {% elseif userRole == 'ROLE_STREAMER_ACTIF' or userRole == 'ROLE_STREAMER_ABSENT' or userRole == 'ROLE_BLOGUEUR' %}
+                                    {% set path = path('app_dashboard') %}
+                                {% else %}
+                                    {% set path = '#' %}
+                                {% endif %}
+                                <a href="{{ path }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profil</a>
+                            </li>
+                            <li>
+                                <form method="POST" action="{{ path('app_logout') }}" style="display: none;" id="logout-form">
+                                    {{ csrf_token('logout') }}
+                                </form>
+                                <a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="px-2 dropdown ml-3 relative">
+                        <button type="button" class="dropdown-toggle flex items-center">
+                            <div class="flex-shrink-0 w-10 h-10 relative">
+                                <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
+                                    <img class="w-8 h-8 rounded-full" src="{{ asset('assets/users/avatars/default-avatar.png') }}" alt="Default Avatar"/>
+                                </div>
+                            </div>
+                        </button>
+                        <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
+                            <li>
+                                <a href="{{ path('app_login') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Connexion</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('app_register') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">S'inscrire</a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                <!-- Contact Button -->
+                <a href="{{ path('contact') }}" class="inline-flex">
+                    <li class="relative">
+                        <button class="btnSfl items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+                            <span class="flex items-center justify-center text-lg px-5 py-1 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">Contact</span>
+                        </button>
+                    </li>
+                </a>
+                <!-- End Contact Button -->
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<script>
+    // Script to toggle the mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
+{% endblock %}

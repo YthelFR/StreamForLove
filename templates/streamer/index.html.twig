@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Streamers - Stream For Love
+{% endblock %}
+{% block meta_description %}Découvrez les streamers participants à l'événement Stream For Love. Suivez vos créateurs préférés sur Twitch et soutenez la collecte de fonds pour Coalition PLUS.
+{% endblock %}
+{% block meta_keywords %}Stream For Love, streamers, Twitch, collecte de fonds, Coalition PLUS, Addrictif, Ch0ouxx, Formagayte, KasSandreTV, Labsy, Little_spo0n, Lumystic, MalincTV, Mandragoule_, Masthom_, PandoraReina, PixEtMotion, Porc_Qui_Pique, Reven_vl, Sora_Kwak, stitchjo85, SugarYouni, TataKleo, TATAWYATT, THORNGAR_, Tyhnaria, xPurgatoire, Ythel_
+{% endblock %}
+
+{% block body %}
+	{{ include('streamer/referencement.html.twig') }}
+	<div class="gradientBg py-12 px-4 md:px-8 lg:px-16 xl:px-20">
+		<h2 class="text-2xl md:text-3xl font-bold text-center pb-6 md:pb-10 text-white">Les streamers de l'évènement</h2>
+
+		{% if activeStreamers is not empty %}
+			<ul class="flex flex-wrap gap-4 justify-center">
+				{% for streamer in activeStreamers %}
+					<li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
+						<a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}" class="flex flex-col items-center">
+							<div class="relative rounded-full overflow-hidden w-full h-full bg-white {% if streamer.isLive %}border-8 border-red-600{% endif %}">
+								<img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }} - streamer de jeux vidéo sur Twitch">
+							</div>
+							<p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl text-white">{{ streamer.pseudo }}</p>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p class="text-xl md:text-2xl font-bold text-center pb-6 md:pb-10 text-white">Aucun streamer trouvé.</p>
+		{% endif %}
+	</div>
+
+	<div class="py-12 px-4 md:px-8 lg:px-16 xl:px-20">
+		<h2 class="text-2xl md:text-3xl font-bold text-center pb-6 md:pb-10">Streamers anciens évènements</h2>
+
+		{% if inactiveStreamers is not empty %}
+			<ul class="flex flex-wrap gap-4 justify-center">
+				{% for streamer in inactiveStreamers %}
+					<li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
+						<a href="{{ path('app_streamers_show', { 'pseudo': streamer.pseudo }) }}" class="flex flex-col items-center">
+							<div class="relative rounded-full overflow-hidden w-full h-full bg-white {% if streamer.isLive %}border-8 border-red-600{% endif %}">
+								<img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ streamer.avatarUrl }}" alt="{{ streamer.pseudo }} - streamer de jeux vidéo sur Twitch">
+							</div>
+							<p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl">{{ streamer.pseudo }}</p>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p class="text-xl md:text-2xl font-bold text-center pb-6 md:pb-10">Aucun streamer trouvé.</p>
+		{% endif %}
+	</div>
+
+	<div class="py-12 px-4 md:px-8 lg:px-16 xl:px-20">
+		<h2 class="text-2xl md:text-3xl font-bold text-center pb-6 md:pb-10">Les streamers hors-évènement</h2>
+
+		{% if outsiders is not empty %}
+			<ul class="flex flex-wrap gap-4 justify-center">
+				{% for outsider in outsiders %}
+					<li class="w-24 sm:w-32 md:w-44 lg:w-48 xl:w-56">
+						<a href="{{ path('app_outsiders_show', { 'pseudo': outsider.pseudo }) }}" class="flex flex-col items-center">
+							<div class="relative rounded-full overflow-hidden w-full h-full">
+								<img class="w-full h-full object-cover transition-transform duration-600 transform hover:scale-110" src="{{ outsider.avatarUrl }}" alt="{{ outsider.pseudo }} - streamer de jeux vidéo">
+							</div>
+							<p class="text-center pt-2 sm:pt-4 font-bold text-sm sm:text-base md:text-xl">{{ outsider.pseudo }}</p>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p class="text-xl md:text-2xl font-bold text-center pb-6 md:pb-10">Aucun streamer trouvé.</p>
+		{% endif %}
+	</div>
+{% endblock %}

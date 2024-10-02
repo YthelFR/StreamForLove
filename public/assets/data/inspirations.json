@@ -1,0 +1,390 @@
+{
+  "dead_by_daylight": {
+    "Albert_Wesker": {
+      "avatar": "/assets/medias/citations/albert_wesker.jpeg",
+      "quotes": [
+        "Tu es vraiment devenu un désagrément pour moi.",
+        "Sept minutes, c'est tout ce que je peux passer à jouer avec toi.",
+        "Vos faibles tentatives ne font que retarder l'inévitable."
+      ]
+    },
+    "La_Chasseuse": {
+      "avatar": "/assets/medias/citations/la_chasseuse.jpeg",
+      "quotes": ["Lala lalala... Lalala la lalalaaaaa..."]
+    },
+    "Chucky": {
+      "avatar": "/assets/medias/citations/chucky.jpg",
+      "quotes": [
+        "Salut, je suis Chucky, et je suis ton ami jusqu'à la fin ! Hidey-ho, ha-ha-ha !",
+        "Attends, Je pensais que j'étais la star ici.",
+        "C'est ce qui arrive quand on joue avec les poupées !",
+        "T'es mort, tu m'entends ? MOOOORT !",
+        "Je vais te trouver ! Et quand je l'aurai fait, j'vais te découper en tranches !"
+      ]
+    },
+    "Dracula": {
+      "avatar": "/assets/medias/citations/dracula.png",
+      "quotes": [
+        "Ah ! J'avais bien flairé un Belmont !",
+        "La destinée peut parfois être très amusante.",
+        "Ne te vide pas trop vite de ton sang.",
+        "Les humains ont rendu leur jugement à mon endroit. Aussi je les condamne à l'extinction.",
+        "Mon âme immortelle est liée à la sombre étreinte de l'éternité."
+      ]
+    },
+    "Meg_Thomas": {
+      "avatar": "/assets/medias/citations/meg_thomas.png",
+      "quotes": [
+        "Je suis plus rapide que la lumière, mais parfois la lumière me trahit.",
+        "Il n'y a pas de chemin facile pour échapper à la mort.",
+        "La peur peut être un bon moteur, mais je dois rester lucide."
+      ]
+    },
+    "Claudette_Morel": {
+      "avatar": "/assets/medias/citations/claudette_morel.png",
+      "quotes": [
+        "La survie n'est pas seulement un instinct, c'est un choix.",
+        "Parfois, il faut se cacher pour mieux observer.",
+        "La nature peut être à la fois belle et terrifiante."
+      ]
+    },
+    "dwight_fairfield": {
+      "avatar": "/assets/medias/citations/dwight_fairfield.png",
+      "quotes": [
+        "La peur peut être paralysante, mais l'amitié peut la surmonter.",
+        "Chaque décision compte, et il faut être prêt à en assumer les conséquences.",
+        "Il n'y a rien de plus fort que l'unité dans l'adversité."
+      ]
+    },
+    "nea_karlsson": {
+      "avatar": "/assets/medias/citations/nea_karlsson.jpeg",
+      "quotes": [
+        "La créativité peut sauver des vies, même dans les pires situations.",
+        "Il faut être astucieux pour survivre, mais il ne faut pas perdre son humanité.",
+        "L'art peut être une échappatoire, même face à l'horreur."
+      ]
+    },
+    "jake_park": {
+      "avatar": "/assets/medias/citations/jake_park.jpg",
+      "quotes": [
+        "La nature est sauvage, tout comme moi.",
+        "La survie est un défi, et je suis prêt à relever ce défi.",
+        "Il faut être en phase avec la terre pour échapper à la mort."
+      ]
+    },
+    "felix_richter": {
+      "avatar": "/assets/medias/citations/felix_richter.jpeg",
+      "quotes": [
+        "La confiance peut être une arme à double tranchant.",
+        "Chaque échec est une leçon, mais j'en ai assez d'apprendre à la dure.",
+        "Il est temps de prendre des risques pour se sauver soi-même."
+      ]
+    },
+    "yui_kimura": {
+      "avatar": "/assets/medias/citations/yui_kimura.png",
+      "quotes": [
+        "Je suis une force de la nature, et personne ne peut m'arrêter.",
+        "Chaque moment est une occasion de se battre pour sa liberté.",
+        "La vie est un voyage, et je suis ici pour tracer mon propre chemin."
+      ]
+    },
+    "detective_david_tapp": {
+      "avatar": "/assets/medias/citations/tapp_david.png",
+      "quotes": [
+        "L'eau peut être une source de vie, mais aussi un outil de destruction.",
+        "Il est essentiel de s'adapter pour survivre dans cet environnement hostile.",
+        "La résilience est ma plus grande force."
+      ]
+    },
+    "le_piégeur": {
+      "avatar": "/assets/medias/citations/the_trapper.png",
+      "quotes": [
+        "Je suis le prédateur, et vous êtes ma proie.",
+        "Chaque piège que je pose est un pas de plus vers la victoire.",
+        "La douleur des autres est ma plus grande joie."
+      ]
+    },
+    "le_spectre": {
+      "avatar": "/assets/medias/citations/the_wraith.png",
+      "quotes": [
+        "Je suis l'ombre qui vous poursuit dans vos pires cauchemars.",
+        "La solitude est ma compagne, et la mort, mon art.",
+        "Invisible aux yeux des autres, je suis toujours là, prêt à frapper."
+      ]
+    },
+    "le_montagnard": {
+      "avatar": "/assets/medias/citations/the_hillbilly.png",
+      "quotes": [
+        "Le bruit de ma scie est la dernière chose que vous entendrez.",
+        "Je ne suis pas comme les autres. La forêt est ma maison, et je la protège.",
+        "La folie est un cadeau que je partage avec mes victimes."
+      ]
+    },
+    "l'infirmière": {
+      "avatar": "/assets/medias/citations/the_nurse.png",
+      "quotes": [
+        "La douleur peut être un chemin vers la guérison, mais je suis ici pour infliger la souffrance.",
+        "Vous ne pouvez pas fuir vos blessures, peu importe où vous allez.",
+        "Les cris de ceux qui souffrent sont ma mélodie préférée."
+      ]
+    },
+    "l'esprit": {
+      "avatar": "/assets/medias/citations/the_hag.png",
+      "quotes": [
+        "Les ombres sont mes alliées, et la peur, mon arme.",
+        "Je fais surgir les cauchemars des profondeurs de la terre.",
+        "Vous pensiez être en sécurité ? Chaque pas vous rapproche de ma colère."
+      ]
+    },
+    "le_demogorgon": {
+      "avatar": "/assets/medias/citations/the_demogorgon.jpeg",
+      "quotes": [
+        "Je viens des ténèbres, et je ne laisse que la destruction derrière moi.",
+        "La réalité est une illusion, et je suis ici pour vous le prouver.",
+        "Votre monde va s'effondrer, et je vais me délecter de votre peur."
+      ]
+    },
+    "le_fléau": {
+      "avatar": "/assets/medias/citations/the_blight.png",
+      "quotes": [
+        "L'adrénaline est ma drogue, et je suis ici pour une dose.",
+        "La mort est un jeu, et je suis le meilleur joueur.",
+        "Chaque instant passé à chasser, c'est un instant de pur plaisir."
+      ]
+    }
+  },
+  "mass_effect": {
+    "Commander_Shepard": {
+      "avatar": "/assets/medias/citations/commandant_shepard.jpg",
+      "quotes": [
+        "Tu préfères être un cadavre ou une balance ?",
+        "Appelle-moi encore une fois ma princesse et tu vas devoir ramasser tes dents avec tes doigts cassés.",
+        "Je suis le commandant Shepard et cette boutique est ma préférée de la Citadelle.",
+        "Je ne suis pas ici pour faire des amis, mais pour sauver l'univers.",
+        "Si nous échouons, tout ce que nous avons fait ici n'aura servi à rien.",
+        "Le sacrifice est ce qui nous rend humains."
+      ]
+    },
+    "Garrus": {
+      "avatar": "/assets/medias/citations/garrus.jpg",
+      "quotes": [
+        "On peut refuser une mission suicide ?! Mais pourquoi on me l'a jamais dit ?!",
+        "Les gens pensent que je suis un fou, mais je fais ce qu'il faut pour protéger les innocents.",
+        "Un bon tir est un tir qui touche l'objectif. Ça fait toute la différence.",
+        "La justice est un concept flou, mais je fais de mon mieux pour la rendre plus claire."
+      ]
+    },
+    "Joker": {
+      "avatar": "/assets/medias/citations/joker.jpeg",
+      "quotes": [
+        "C'est pas en montrant ses dents comme un con qu'on réussit dans la vie.",
+        "Il n'y a aucun problème qu'une balle dans la tête ne puisse résoudre.",
+        "Oh vous avez retrouvé Garrus ! Super, je les adore tous les deux, lui et le balai qu'il a dans le cul.",
+        "On dirait que Garrus s'est sorti le balai qu'il avait dans le cul et qu'il s'en sert pour faire de nouveaux trous aux autres. Ça me fait mal de dire ça mais je préférais l'ancien.",
+        "Jacob, c’est un type beaucoup trop sympa pour connaître autant de manières de tuer.",
+        "Thane, c’est un peu l’exemple parfait du type gouverné par ses émotions : l’amour, l’amitié, les petits oiseaux cui-cui, le meurtre de sang froid. Un vrai nounours.",
+        "Samara, j'ai toujours l'impression qu'elle va me tuer, mais avec une immense compassion... Mais me tuer quand même.",
+        "Avoir Légion dans l’équipage, c’est chercher à se faire insérer un fusil dans le fondement. Sans préliminaires, ni vaseline.",
+        "J'adore mon travail. Je regarde des boutons clignoter toute la journée et parfois j'appuie même dessus.",
+        "Mode furtif activé. Maintenant, à moins de commencer à chanter l'hymne national russe, ils ne nous détecteront pas !",
+        "J'aime les voyages en vaisseau spatial. C'est comme être sur une montagne russe, mais sans la sécurité.",
+        "L'important, c'est d'être vivant. Pour le reste, on improvisera.",
+        "S'il y a un moyen de se sortir d'un problème, je le trouverai, même si je dois tourner en rond."
+      ]
+    },
+    "Liara_T'Soni": {
+      "avatar": "/assets/medias/citations/liara.jpg",
+      "quotes": [
+        "Je sais pas ce qui me gène le plus, les Geths, ou tous ce sable dans ma... Hum, non rien.",
+        "La connaissance est une arme. Plus vous en avez, plus vous êtes fort.",
+        "Je n'ai jamais rencontré un mystère que je n'avais pas envie de résoudre.",
+        "Les secrets des Prothéens sont plus profonds que ce que nous pouvons imaginer."
+      ]
+    },
+    "Urdnot_Wrex": {
+      "avatar": "/assets/medias/citations/wrex.png",
+      "quotes": [
+        "Je mets les pieds où je veux, et c'est souvent dans la gueule.",
+        "Si je meurs ici, je jure que j'le tue !",
+        "Une bonne explosion, rien de tel pour faire circuler le sang.",
+        "Un peu plus de puissance de feu n'a jamais tué personne.",
+        "Je comprends pas que les gens se plaignent de la foule, moi on me laisse toujours passer.",
+        "Cinquante degrés d'plus et je sors la crème solaire. Et vous les mammifères, ça roule ?",
+        "Tous ces bureaucrates, ça vous fait des ronds de jambe pour mieux vous chier dessus...",
+        "Ça c'est des vacances : ballades, plages, et massacre à volonté.",
+        "Aaahh!... le calme, la nature, les petits oiseaux... C'est d'un chiant !",
+        "Ah Shepard ! Vous m’impressionnez ! Bientôt vous allez me dire qu'il en a cinq et qu'il chie de l'énergie noire.",
+        "J'ai vu des choses qui feraient frémir n'importe quel être vivant.",
+        "Un bon mercenaire est un mercenaire vivant. Et je prévois de rester vivant.",
+        "La guerre est ce que nous en faisons. À mes yeux, elle n'est rien de plus qu'un autre jour de travail."
+      ]
+    },
+    "Jack": {
+      "avatar": "/assets/medias/citations/jack.jpg",
+      "quotes": [
+        "C'est la puberté ? Grunt a le kiki tout dur ?",
+        "Je suis ici pour me battre, pas pour jouer au poupée.",
+        "Je suis plus qu'un numéro. Je suis la tempête qui arrive.",
+        "Les règles, c'est pour les faibles. Moi, je fais ce que je veux."
+      ]
+    },
+    "IDA": {
+      "avatar": "/assets/medias/citations/ida.jpg",
+      "quotes": [
+        "Ne vous inquiétez pas : je n'oublie de renouveler l'air du vaisseau que si je tombe sur quelque chose de vraiment intéressant. [...] C'était une blague..."
+      ]
+    },
+    "Zaed_Massani": {
+      "avatar": "/assets/medias/citations/zaed.jpg",
+      "quotes": [
+        "J'vais trouver celui qui a créé ce jeu et lui faire rentrer un peu d'inspiration dans l'cul !!"
+      ]
+    },
+    "thane_krios": {
+      "avatar": "/assets/medias/citations/thane.jpg",
+      "quotes": [
+        "La vie est courte, mais il reste toujours un moment pour la beauté.",
+        "Je n'ai jamais été un héros, mais j'ai toujours combattu pour ceux que j'aime.",
+        "Il n'y a pas de rédemption sans sacrifice."
+      ]
+    },
+    "samara": {
+      "avatar": "/assets/medias/citations/samara.jpg",
+      "quotes": [
+        "La justice est une voie solitaire, mais elle est nécessaire.",
+        "Il n'y a pas de paix sans sacrifice.",
+        "Je suis la vengeresse. Et je ne lâcherai pas ma proie."
+      ]
+    },
+    "legion": {
+      "avatar": "/assets/medias/citations/legion.png",
+      "quotes": [
+        "Nous sommes nombreux. Nous sommes un.",
+        "Le concept de soi est une illusion. Nous sommes un tout.",
+        "Nous servons la volonté de la somme de nos parties."
+      ]
+    },
+    "tali_zorah": {
+      "avatar": "/assets/medias/citations/tali_zorah.jpeg",
+      "quotes": [
+        "La technologie est une part de nous, elle nous aide à survivre.",
+        "Nous ne pouvons pas laisser nos peurs nous contrôler.",
+        "Chaque bataille est un pas vers la paix."
+      ]
+    },
+    "kaidan_alenko": {
+      "avatar": "/assets/medias/citations/kaidan_alenko.jpg",
+      "quotes": [
+        "Les choix que nous faisons définissent qui nous sommes.",
+        "Il n'y a pas de victoire sans sacrifices.",
+        "L'honneur est parfois plus important que la vie."
+      ]
+    },
+    "ashley_williams": {
+      "avatar": "/assets/medias/citations/ashley_williams.jpg",
+      "quotes": [
+        "Je suis là pour combattre, pas pour fuir.",
+        "L'humanité doit prouver sa valeur dans l'univers.",
+        "Les vérités sont parfois des mensonges déguisés."
+      ]
+    },
+    "miranda_lawson": {
+      "avatar": "/assets/medias/citations/miranda_lawson.jpg",
+      "quotes": [
+        "La génétique n'est qu'un début. La véritable force vient de l'intérieur.",
+        "La loyauté est quelque chose que vous devez gagner.",
+        "Nous sommes tous des expériences, mais nous pouvons choisir qui nous voulons être."
+      ]
+    },
+    "mordin_solus": {
+      "avatar": "/assets/medias/citations/mordin_solus.png",
+      "quotes": [
+        "Les généticiens disent que tout est déterminé par la génétique, mais je crois que nous avons le choix.",
+        "La mort est inévitable, mais l'héritage que nous laissons peut changer le monde.",
+        "Les mots ont un pouvoir incroyable, mais les actions parlent plus fort."
+      ]
+    }
+  },
+  "world_of_warcraft": {
+    "Thrall": {
+      "avatar": "/assets/medias/citations/thrall.jpg",
+      "quotes": [
+        "Je suis la Horde.",
+        "La paix, mais pas à n’importe quel prix."
+      ]
+    },
+    "Illidan": {
+      "avatar": "/assets/medias/citations/illidan.jpeg",
+      "quotes": [
+        "Vous n'êtes pas prêts !",
+        "C'est fini, traître ! Votre maître est détruit. Vous avez été vaincu !"
+      ]
+    },
+    "Mimiron": {
+      "avatar": "/assets/medias/citations/mimiron.jpg",
+      "quotes": [
+        "Mais, pourquoi avez-vous été faire une chose pareille ? Vous n'avez donc pas vu le panneau : ' NE PAS APPUYER SUR CE BOUTON ! ' ? Comment allons-nous finir les essais avec le mécanisme d'autodestruction activé ?"
+      ]
+    },
+    "Yogg_Saron": {
+      "avatar": "/assets/medias/citations/yogg_saron.jpeg",
+      "quotes": [
+        "Je suis le rêve éveillé, le monstre de vos cauchemars, le démon au mille visages, tremblez devant mon véritable aspect, À GENOU DEVANT LE DIEU DE LA MORT !"
+      ]
+    },
+    "Sylvanas_Coursevent": {
+      "avatar": "/assets/medias/citations/sylvanas.jpg",
+      "quotes": [
+        "Qu'est-ce que sont nos vies, sinon une longue série de choix non réalisés ?",
+        "Je ne fais que rendre à la vie ce qu'elle m'a pris.",
+        "Que la Horde soit prévenue : le roi Liche tombera. Et vous périrez tous avec lui !"
+      ]
+    },
+    "Arthas_Menethil": {
+      "avatar": "/assets/medias/citations/arthas.jpeg",
+      "quotes": [
+        "Je vois... seulement des ténèbres devant moi.",
+        "Cette terre est à moi maintenant !"
+      ]
+    },
+    "Gul'dan": {
+      "avatar": "/assets/medias/citations/guldan.jpg",
+      "quotes": ["Tout a un prix.", "Ce n'est que le commencement."]
+    },
+    "Garrosh_Hurlenfer": {
+      "avatar": "/assets/medias/citations/garrosh.jpg",
+      "quotes": [
+        "Des épreuves, je suis sorti plus fort. Nous sommes la Horde. Nous mettrons à genoux quiconque ose nous défier.",
+        "La Horde mourra si elle cesse de se battre."
+      ]
+    },
+    "Anduin_Wrynn": {
+      "avatar": "/assets/medias/citations/anduin.jpeg",
+      "quotes": [
+        "Je suis le roi, et je ferai tout ce qui est en mon pouvoir pour protéger mon peuple.",
+        "La guerre ne fait que détruire, et nous devons nous battre pour la paix."
+      ]
+    },
+    "Jaina_Portvaillant": {
+      "avatar": "/assets/medias/citations/jaina.jpg",
+      "quotes": [
+        "La magie est une force puissante, mais elle doit être utilisée avec sagesse.",
+        "Il n'y a pas de paix sans sacrifice."
+      ]
+    },
+    "Kael'thas_Haut-Soleil": {
+      "avatar": "/assets/medias/citations/kaelthas.jpg",
+      "quotes": [
+        "Je ne suis pas ici pour parler, mais pour triompher.",
+        "Il n'y a rien de plus précieux que le pouvoir."
+      ]
+    },
+    "Xal'atath": {
+      "avatar": "/assets/medias/citations/xalatath.jpg",
+      "quotes": [
+        "Je suis la voix dans l'ombre, et je sais tout.",
+        "La vérité est une arme, et je suis la plus dangereuse des guerrières."
+      ]
+    }
+  }
+}

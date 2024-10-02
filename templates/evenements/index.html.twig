@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Evenements - Stream For Love
+{% endblock %}
+{% block meta_description %}Participez à Stream For Love, un événement caritatif annuel organisé par des streamers sur Twitch pour collecter des fonds en faveur de Coalition PLUS dans la lutte contre le VIH et le SIDA. Découvrez comment faire un don et soutenir cette cause essentielle.
+{% endblock %}
+{% block meta_keywords %}Stream For Love, événement caritatif, VIH, SIDA, Twitch, donations, Coalition PLUS, sensibilisation, collecte de fonds, santé publique, droits humains
+{% endblock %}
+{% block body %}
+	{{ include('evenements/referencement.html.twig') }}
+
+	<div class="gradientBg py-12 h-4/6 flex flex-col items-center justify-center">
+		<button class="btnSfl inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200">
+			<span class="flex items-center justify-center px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-opacity-0">
+				Liste des anciens évènements
+				<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 10">
+					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+				</svg>
+			</span>
+		</button>
+
+		<div class="flex flex-col md:flex-row items-center gap-4 mt-8">
+			<div class="w-full md:w-1/2 flex justify-center">
+				<img class="h-auto max-w-xs md:max-w-lg rounded-lg" src="{{ asset('assets/medias/evenements/event1.jpeg') }}" alt="Représentation d'une streameuse participant à l'événement Stream For Love, en train de sensibiliser le public au VIH et au SIDA."/>
+			</div>
+			<div class="w-full md:w-1/2 md:pr-20 text-center md:text-left">
+				<h2 class="mb-2 text-xl md:text-3xl font-bold break-normal">
+					Qu’est-ce que le Stream For Love ?
+				</h2>
+				<p class="text-sm md:text-lg text-white mb-4">
+					Stream For Love est un événement caritatif qui a lieu chaque année, organisé par des streamers sur Twitch. Son objectif est de collecter des fonds pour l'association Coalition PLUS. Pendant plusieurs jours, des streamers s'engagent à sensibiliser le public à la lutte contre le VIH et le SIDA, tout en encourageant leurs communautés à faire des dons. L'intégralité des fonds récoltés est destinée à Coalition PLUS, une organisation internationale qui se consacre à la lutte contre le VIH / SIDA et à la défense des droits humains.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12">
+		<div class="w-full md:w-1/2 md:pl-20 text-center md:text-left">
+			<h2 class="mb-2 text-xl md:text-3xl font-bold break-normal">
+				Pourquoi faire un don ?
+			</h2>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Pour remettre la lutte contre le VIH/sida au cœur discussions politiques en tant qu’enjeu majeur de santé publique.
+			</p>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Pour promouvoir l’accès aux traitements, aux services de santé sexuelle et aux outils de prévention innovants (PrEP, …) auprès des populations les plus éloignées des systèmes de santé.
+			</p>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Pour soutenir et protéger les activistes des droits humains et de la lutte contre le sida qui se battent dans des contextes sécuritaires parfois extrêmement violents.
+			</p>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Pour réaliser des études en recherche opérationnelle afin de démontrer l’efficacité de solutions innovantes contre le VIH/sida.
+			</p>
+		</div>
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-xs md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event2.jpeg') }}" alt="Participant/viewer discutant et faisant des dons pendant le Stream For Love."/>
+		</div>
+	</div>
+
+	<!-- Parallax section -->
+	<section class="flex flex-col w-full h-[500px] bg-cover bg-fixed bg-[75%] md:bg-center flex justify-center items-right" style="background-image: url({{'assets/medias/evenements/parallax.jpeg'}});" alt="Image illustrant l'événement Stream For Love avec des streamers engagés pour la lutte contre le VIH."></section>
+
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12">
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-xs md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event3.jpeg') }}" alt="Viewer se posant des questions sur les donations pour le Stream For Love."/>
+		</div>
+		<div class="w-full md:w-1/2 md:pr-20 text-center md:text-left">
+			<h2 class="mb-2 text-xl md:text-3xl font-bold break-normal">
+				Comment faire une donation ?
+			</h2>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Faire une donation pendant le Stream For Love est vraiment facile ! En regardant un streamer qui participe, vous trouverez un lien vers sa cagnotte personnelle depuis sa chaîne. En quelques clics, vous pouvez effectuer un don sécurisé qui sera directement envoyé à Coalition PLUS. De plus, certains streamers proposeront des "objectifs de dons" pour inciter les contributions à travers des défis amusants ou des projets à réaliser sur leur chaîne. N'oubliez pas d'indiquer votre adresse e-mail pour bénéficier d'une réduction d'impôts de 66 % !
+			</p>
+		</div>
+	</div>
+
+	<div class="flex flex-col md:flex-row items-center gap-4 py-12 bg-gray-100">
+		<div class="w-full md:w-1/2 md:pl-20 text-center md:text-left">
+			<h2 class="mb-2 text-xl md:text-3xl font-bold break-normal">
+				A quoi serviront les donations ?
+			</h2>
+			<p class="leading-relaxed text-sm md:text-lg mb-4 break-normal">
+				Grâce à votre don, des femmes vivant avec le VIH et dans la précarité peuvent bénéficier d’un dépistage du cancer du col de l’utérus. Des personnes issues de communautés discriminées sont reçues dans des centres de santé ou sur leurs lieux de vie en toute confidentialité et sécurité. Des personnes LGBT+ en danger sont mises en sécurité. Des hommes et des femmes peuvent avoir recours à des outils de prévention et nouer un dialogue autour de leur santé sexuelle, et bien plus encore.
+			</p>
+		</div>
+		<div class="w-full md:w-1/2 flex justify-center">
+			<img class="h-auto max-w-xs md:max-w-lg rounded-lg object-cover" src="{{ asset('assets/medias/evenements/event4.jpeg') }}" alt="Représentation d'un médecin qui fait de la prévention sur le VIH et le SIDA."/>
+		</div>
+	</div>
+
+	<h1 class="text-2xl md:text-4xl font-bold mb-8 text-center">Liste des Événements</h1>
+
+	<ul class="text-center">
+		{% for evenement in evenements %}
+			<li class="mb-4 text-lg">
+				<a href="{{ path('app_evenements_show', { id: evenement.id }) }}" class="text-blue-600 hover:underline">
+					-
+					{{ evenement.annee ? evenement.annee|date('Y') }}
+				</a>
+			</li>
+		{% else %}
+			<li>Aucun événement trouvé.</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
