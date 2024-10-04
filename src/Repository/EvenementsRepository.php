@@ -16,6 +16,15 @@ class EvenementsRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenements::class);
     }
 
+    public function findByYear(int $year)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.annee = :year')
+            ->setParameter('year', $year)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Evenements[] Returns an array of Evenements objects
     //     */

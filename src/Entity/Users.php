@@ -64,6 +64,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $resetToken;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Cagnotte $cagnotteStreamers = null;
+
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
@@ -364,6 +367,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetToken(?string $resetToken): self
     {
         $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    public function getCagnotteStreamers(): ?Cagnotte
+    {
+        return $this->cagnotteStreamers;
+    }
+
+    public function setCagnotteStreamers(?Cagnotte $cagnotteStreamers): static
+    {
+        $this->cagnotteStreamers = $cagnotteStreamers;
 
         return $this;
     }
