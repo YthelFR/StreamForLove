@@ -1,0 +1,46 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Ajouter un Clip{% endblock %}
+
+{% block body %}
+    <div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+        <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Ajouter un Clip</h1>
+
+        {% for label, messages in app.session.flashBag.all() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} mb-4">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {{ form_start(form) }}
+
+        <div class="mb-4">
+            {{ form_label(form.url, 'URL', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.url, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
+            {{ form_errors(form.url) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.evenement, 'Événement', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.evenement, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none select2'}}) }}
+            {{ form_errors(form.evenement) }}
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <a href="{{ path('admin_clips_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+            <button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500">Ajouter</button>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: 'Sélectionnez un événement',
+                allowClear: true
+            });
+        });
+    </script>
+{% endblock %}

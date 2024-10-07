@@ -28,18 +28,15 @@
 {% block body %}
 	<div class="gradientBg py-12 px-4 md:px-20 lg:px-40 flex flex-col">
 		<div class="flex flex-col lg:flex-row items-center">
-			<div class="w-full lg:w-1/2 flex justify-center mb-10 lg:mb-0">
+			<div class="w-full lg:w-1/2 flex flex-col justify-center mb-10 lg:mb-0">
+				<h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-white pb-5 font-bold uppercase text-center">
+					{{ streamer.pseudo }}
+				</h2>
 				{% if presentations %}
 					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation de {{ streamer.pseudo }}, streamer populaire sur Twitch."/>
 				{% else %}
 					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ channelInfo.profile_image_url }}" alt="Image de profil de {{ streamer.pseudo }} sur Twitch."/>
 				{% endif %}
-			</div>
-
-			<div class="w-full lg:w-1/2">
-				<h2 class="text-3xl md:text-4xl lg:text-5xl xl:text-7xl text-white font-bold uppercase text-center">
-					{{ streamer.pseudo }}
-				</h2>
 				{% if streamer.pronoms %}
 					<h3 class="pt-4 md:pt-8 text-center text-white font-bold text-1xl md:text-2xl lg:text-3xl">
 						{{ streamer.pronoms }}
@@ -50,7 +47,9 @@
 					{{ followersCount }}
 					followers
 				</p>
+			</div>
 
+			<div class="w-full lg:w-1/2">
 				{% if presentations %}
 					<h3 class="text-2xl md:text-3xl pb-4" style="color: #9F2627;">Peux-tu te présenter en quelques mots ?</h3>
 					<p class="text-white text-base md:text-lg">{{ presentations.question1 }}</p>
@@ -182,44 +181,44 @@
 
 
 	{# <div>
-																								        <h2>Infos sur la chaîne Twitch</h2>
-																								        {% if channelInfo %}
-																								            <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
-																								            <p><strong>Affichage:</strong> <img src="{{ channelInfo.profile_image_url }}" alt="Avatar de {{ channelInfo.login }}" /></p>
-																								            <p><strong>Description:</strong> {{ channelInfo.description }}</p>
-																								        {% else %}
-																								            <p>Aucune information disponible.</p>
-																								        {% endif %}
-																								    </div>
-																								
-																								    <div>
-																								        <h2>Présentation</h2>
-																								        {% if presentations %}
-																								            <p><strong>Question 1:</strong> {{ presentations.question1 }}</p>
-																								            <p><strong>Question 2:</strong> {{ presentations.question2 }}</p>
-																								            <p><strong>Question 3:</strong> {{ presentations.question3 }}</p>
-																								            <p><strong>Clip 1:</strong> <a href="{{ presentations.clip1 }}">{{ presentations.clip1 }}</a></p>
-																								            <p><strong>Clip 2:</strong> <a href="{{ presentations.clip2 }}">{{ presentations.clip2 }}</a></p>
-																								            <p><strong>Clip 3:</strong> <a href="{{ presentations.clip3 }}">{{ presentations.clip3 }}</a></p>
-																								            <p><strong>Clip 4:</strong> <a href="{{ presentations.clip4 }}">{{ presentations.clip4 }}</a></p>
-																								            <p><strong>Planning:</strong> <img src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" /></p>
-																								            <p><strong>Image:</strong> <img src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" /></p>
-																								        {% else %}
-																								            <p>Aucune présentation disponible.</p>
-																								        {% endif %}
-																								    </div>
-																								
-																								    <div>
-																								        <h2 class="text-2xl font-bold mb-2">Dernier Jeu Joué</h2>
-																								        {% if recentGames is not empty %}
-																								            <div class="flex items-center">
-																								                <img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-32 rounded mr-4">
-																								                <div>
-																								                    <p><strong>Nom du Jeu:</strong> {{ recentGames['name'] }}</p>
-																								                </div>
-																								            </div>
-																								        {% else %}
-																								            <p>Aucun jeu récent trouvé.</p>
-																								        {% endif %}
-																								    </div> #}
+																												        <h2>Infos sur la chaîne Twitch</h2>
+																												        {% if channelInfo %}
+																												            <p><strong>Nom d'utilisateur:</strong> {{ channelInfo.login }}</p>
+																												            <p><strong>Affichage:</strong> <img src="{{ channelInfo.profile_image_url }}" alt="Avatar de {{ channelInfo.login }}" /></p>
+																												            <p><strong>Description:</strong> {{ channelInfo.description }}</p>
+																												        {% else %}
+																												            <p>Aucune information disponible.</p>
+																												        {% endif %}
+																												    </div>
+																												
+																												    <div>
+																												        <h2>Présentation</h2>
+																												        {% if presentations %}
+																												            <p><strong>Question 1:</strong> {{ presentations.question1 }}</p>
+																												            <p><strong>Question 2:</strong> {{ presentations.question2 }}</p>
+																												            <p><strong>Question 3:</strong> {{ presentations.question3 }}</p>
+																												            <p><strong>Clip 1:</strong> <a href="{{ presentations.clip1 }}">{{ presentations.clip1 }}</a></p>
+																												            <p><strong>Clip 2:</strong> <a href="{{ presentations.clip2 }}">{{ presentations.clip2 }}</a></p>
+																												            <p><strong>Clip 3:</strong> <a href="{{ presentations.clip3 }}">{{ presentations.clip3 }}</a></p>
+																												            <p><strong>Clip 4:</strong> <a href="{{ presentations.clip4 }}">{{ presentations.clip4 }}</a></p>
+																												            <p><strong>Planning:</strong> <img src="{{ asset('assets/users/presentations/planning/' ~ presentations.planning) }}" alt="Image de présentation" /></p>
+																												            <p><strong>Image:</strong> <img src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation" /></p>
+																												        {% else %}
+																												            <p>Aucune présentation disponible.</p>
+																												        {% endif %}
+																												    </div>
+																												
+																												    <div>
+																												        <h2 class="text-2xl font-bold mb-2">Dernier Jeu Joué</h2>
+																												        {% if recentGames is not empty %}
+																												            <div class="flex items-center">
+																												                <img src="{{ recentGames['box_art_url'] }}" alt="{{ recentGames['name'] }}" class="w-32 h-32 rounded mr-4">
+																												                <div>
+																												                    <p><strong>Nom du Jeu:</strong> {{ recentGames['name'] }}</p>
+																												                </div>
+																												            </div>
+																												        {% else %}
+																												            <p>Aucun jeu récent trouvé.</p>
+																												        {% endif %}
+																												    </div> #}
 {% endblock %}

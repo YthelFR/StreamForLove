@@ -61,7 +61,7 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
@@ -71,7 +71,7 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
@@ -81,7 +81,7 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
@@ -90,6 +90,7 @@ class PresentationsType extends AbstractType
             // Validation des clips
             ->add('clip1', TextType::class, [
                 'label' => 'Clip 1',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -103,6 +104,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip2', TextType::class, [
                 'label' => 'Clip 2',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -116,6 +118,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip3', TextType::class, [
                 'label' => 'Clip 3',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -129,6 +132,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip4', TextType::class, [
                 'label' => 'Clip 4',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,

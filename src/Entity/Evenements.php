@@ -31,9 +31,13 @@ class Evenements
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $thumbnail = null;
 
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: EvenementsClips::class, cascade: ['persist', 'remove'])]
+    private Collection $clips;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
+        $this->clips = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +117,33 @@ class Evenements
     public function setThumbnail(?string $thumbnail): static
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getClips(): Collection
+    {
+        return $this->clips;
+    }
+
+    public function addClip(EvenementsClips $clip): static
+    {
+        if (!$this->clips->contains($clip)) {
+            $this->clips->add($clip);
+            $clip->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClip(EvenementsClips $clip): static
+    {
+        if ($this->clips->removeElement($clip)) {
+            // Définir la relation inverse à null
+            if ($clip->getEvenement() === $this) {
+                $clip->setEvenement(null);
+            }
+        }
 
         return $this;
     }
