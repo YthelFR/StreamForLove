@@ -27,6 +27,12 @@
 		</div>
 
 		<div class="mb-4">
+			{{ form_label(form.pronoms, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+			{{ form_widget(form.pronoms, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+			{{ form_errors(form.pronoms) }}
+		</div>
+
+		<div class="mb-4">
 			{{ form_label(form.roles, 'Rôle', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
 			{{ form_widget(form.roles, {'attr': {'class': 'select2 block w-full mt-1 p-2 bg-gray-100 border border-gray-300 outline-none'}}) }}
 		</div>
@@ -42,10 +48,7 @@
 	</div>
 	<script>
 		$(document).ready(function () {
-			$('.select2').select2({
-				placeholder: 'Sélectionnez un ou plusieurs rôles',
-				allowClear: true
-			});
-		});
+$('.select2').select2({placeholder: 'Sélectionnez un ou plusieurs rôles', allowClear: true});
+});
 	</script>
 {% endblock %}

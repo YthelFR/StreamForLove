@@ -60,7 +60,18 @@ class EditUsersType extends AbstractType
                     'class' => 'bg-yellow-500 text-white p-2 px-4 font-semibold rounded shadow-md hover:bg-yellow-400 transition duration-300',
                 ],
             ])
-        ;
+            ->add('pronoms', ChoiceType::class, [
+                'choices' => [
+                    'Il/Lui' => 'Il/Lui',
+                    'Elle/Elle' => 'Elle/Elle',
+                    'Iel/Iels' => 'Iel/Iels',
+                    'Ils/Eux' => 'Ils/Eux',
+                    'Elles/Eux' => 'Elles/Eux',
+                ],
+                'required' => false,
+                'label' => 'Pronoms',
+                'placeholder' => 'Sélectionnez vos pronoms',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

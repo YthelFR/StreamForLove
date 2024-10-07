@@ -31,6 +31,12 @@
 					{{ form_errors(avatar_form.avatar) }}
 				</div>
 
+				<div class="mb-4">
+					{{ form_label(avatar_form.pronoms, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(avatar_form.pronoms, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(avatar_form.pronoms) }}
+				</div>
+
 				<div class="flex justify-end mt-4">
 					<button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistrer l'Avatar</button>
 				</div>

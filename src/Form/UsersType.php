@@ -87,6 +87,18 @@ class UsersType extends AbstractType
                 'label' => 'Réseaux sociaux',
                 'prototype' => true,
                 'required' => false,
+            ])
+            ->add('pronoms', ChoiceType::class, [
+                'choices' => [
+                    'Il/Lui' => 'Il/Lui',
+                    'Elle/Elle' => 'Elle/Elle',
+                    'Iel/Iels' => 'Iel/Iels',
+                    'Ils/Eux' => 'Ils/Eux',
+                    'Elles/Eux' => 'Elles/Eux',
+                ],
+                'required' => false,
+                'label' => 'Pronoms',
+                'placeholder' => 'Sélectionnez vos pronoms',
             ]);
     }
 

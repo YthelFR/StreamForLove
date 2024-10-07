@@ -70,6 +70,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Cagnotte $cagnotteStreamers = null;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $pronoms = null;
+
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
@@ -413,6 +416,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $cagnotte->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPronoms(): ?string
+    {
+        return $this->pronoms;
+    }
+
+    public function setPronoms(?string $pronoms): static
+    {
+        $this->pronoms = $pronoms;
 
         return $this;
     }
