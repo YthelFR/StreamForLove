@@ -1,82 +1,90 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Stream For Love {{ evenement.annee }}
+	Stream For Love
+	{{ evenement.annee }}
 {% endblock %}
 
 {% block body %}
-    <div class="gradientBg py-12 min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 lg:px-16">
-        <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mt-8">
-            <div class="w-full md:w-1/2 flex justify-center">
-                {% if evenement.thumbnail %}
-                    <img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement Stream For Love {{ evenement.annee }}" class="w-full max-w-xs md:max-w-md lg:max-w-lg rounded-lg shadow-lg object-cover">
-                {% endif %}
-            </div>
-            <div class="w-full md:w-1/2 text-center md:text-left">
-                <h2 class="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-                    Stream For Love {{ evenement.annee }}
-                </h2>
-                <p class="text-base md:text-lg lg:text-xl text-white mb-6 leading-relaxed">
-                    {{ evenement.description }}
-                </p>
-                <h2 class="mb-4 text-2xl md:text-3xl lg:text-4xl font-bold text-white">
-                    Somme récoltée : {{ evenement.donations }} €
-                </h2>
-            </div>
-        </div>
-    </div>
+	<div class="gradientBg py-12 min-h-screen flex flex-col items-center justify-center px-4 sm:px-8 lg:px-16">
+		<div class="flex flex-col md:flex-row items-center gap-8 md:gap-12 mt-8">
+			<div class="w-full md:w-1/2 flex justify-center">
+				{% if evenement.thumbnail %}
+					<img src="{{ asset('assets/medias/evenements/thumbnail/' ~ evenement.thumbnail) }}" alt="Image de l'événement Stream For Love {{ evenement.annee }}" class="w-full max-w-xs md:max-w-md lg:max-w-lg rounded-lg shadow-lg object-cover">
+				{% endif %}
+			</div>
+			<div class="w-full md:w-1/2 text-center md:text-left">
+				<h2 class="mb-4 text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+					Stream For Love
+					{{ evenement.annee }}
+				</h2>
+				<p class="text-base md:text-lg lg:text-xl text-white mb-6 leading-relaxed">
+					{{ evenement.description }}
+				</p>
+				<h2 class="mb-4 text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+					Somme récoltée :
+					{{ evenement.donations }}
+					€
+				</h2>
+			</div>
+		</div>
+	</div>
 
-    <div class="py-12 px-4 sm:px-8 lg:px-16 xl:px-24 bg-gray-900">
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center pb-6 text-white">
-            Les participants de l'événement
-        </h2>
+	<div class="py-12 px-4 sm:px-8 lg:px-16 xl:px-24 bg-gray-900">
+		<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center pb-6 text-white">
+			Les participants de l'événement
+		</h2>
 
-        {% if participants is not empty %}
-            <ul class="flex flex-wrap gap-6 justify-center">
-                {% for participant in participants %}
-                    <li class="w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
-                        <a href="{{ path('app_streamers_show', { 'pseudo': participant.pseudo }) }}" class="flex flex-col items-center">
-                            <div class="relative rounded-full overflow-hidden w-full h-full bg-white">
-                                <img class="w-full h-full object-cover transition-transform duration-500 transform hover:scale-110" src="{{ asset('assets/users/avatars/' ~ participant.avatar) }}" alt="Avatar de {{ participant.pseudo }}">
-                            </div>
-                            <p class="text-center mt-2 font-bold text-sm sm:text-base md:text-lg lg:text-xl text-gray-300">
-                                {{ participant.pseudo }}
-                            </p>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="text-xl md:text-2xl lg:text-3xl font-bold text-center text-white">
-                Aucun participant trouvé.
-            </p>
-        {% endif %}
+		{% if participants is not empty %}
+			<ul class="flex flex-wrap gap-6 justify-center">
+				{% for participant in participants %}
+					{% set avatarUrl = twitchApiService.getAvatarUrl(participant.pseudo) %}
+					{% set isLive = twitchApiService.isUserLive(participant) %}
 
-        <div class="py-12">
-            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center pb-6 text-white">
-                Clips de l'événement
-            </h2>
-            <div class="flex flex-wrap justify-center">
-                {% set siteUrl = 'streamforlove.coalitionplus.org' %}
+					<li class="w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
+						<a href="{{ path('app_streamers_show', { 'pseudo': participant.pseudo }) }}" class="flex flex-col items-center">
+							<div class="relative rounded-full overflow-hidden w-full h-full bg-white {% if isLive %}border-4 border-red-600{% endif %}">
+								<img class="w-full h-full object-cover transition-transform duration-500 transform hover:scale-110" src="{{ avatarUrl }}" alt="Avatar de {{ participant.pseudo }} participant à l'événement Stream For Love">
+							</div>
+							<p class="text-center mt-2 font-bold text-sm sm:text-base md:text-lg lg:text-xl text-gray-300">
+								{{ participant.pseudo }}
+							</p>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p class="text-xl md:text-2xl lg:text-3xl font-bold text-center text-white">
+				Aucun participant trouvé.
+			</p>
+		{% endif %}
 
-                {% if evenement.clips is not empty %}
-                    {% for clip in evenement.clips %}
-                        {% set clipUrl = clip.url %} {# On suppose que `clip.url` est la propriété qui contient l'URL complète du clip #}
-                        {% set clipId = clipUrl|split('/clip/')[1] %}
-                        <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4">
-                            <iframe src="https://clips.twitch.tv/embed?clip={{ clipId }}&parent={{ siteUrl }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full h-56"></iframe>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p class="text-lg text-center text-white">Aucun clip disponible pour cet événement.</p>
-                {% endif %}
-            </div>
-        </div>
+		<div class="py-12">
+			<h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-center pb-6 text-white">
+				Clips de l'événement
+			</h2>
+			<div class="flex flex-wrap justify-center">
+				{% set siteUrl = 'streamforlove.coalitionplus.org' %}
 
-        <div class="text-center mt-8">
-            <a href="{{ path('app_evenements_index') }}" class="text-yellow-500 hover:text-yellow-400 underline">
-                Retour à la liste des événements
-            </a>
-        </div>
-    </div>
+				{% if evenement.clips is not empty %}
+					{% for clip in evenement.clips %}
+						{% set clipUrl = clip.url %}
+						{# On suppose que `clip.url` est la propriété qui contient l'URL complète du clip #}
+						{% set clipId = clipUrl|split('/clip/')[1] %}
+						<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4">
+							<iframe src="https://clips.twitch.tv/embed?clip={{ clipId }}&parent={{ siteUrl }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full h-56"></iframe>
+						</div>
+					{% endfor %}
+				{% else %}
+					<p class="text-lg text-center text-white">Aucun clip disponible pour cet événement.</p>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="text-center mt-8">
+			<a href="{{ path('app_evenements_index') }}" class="text-yellow-500 hover:text-yellow-400 underline">
+				Retour à la liste des événements
+			</a>
+		</div>
+	</div>
 {% endblock %}
