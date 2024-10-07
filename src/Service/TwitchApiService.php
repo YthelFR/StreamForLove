@@ -182,7 +182,7 @@ class TwitchApiService
         return $data['total'] ?? 0;
     }
 
-    public function getRecentClips(string $broadcasterId, int $limit = 4): array // Changer le limit par défaut à 4
+    public function getRecentClips(string $broadcasterId, int $limit = 4): array 
     {
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/clips', [
             'headers' => [

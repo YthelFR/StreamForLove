@@ -71,4 +71,21 @@
 
 		{{ form_end(form) }}
 	</div>
+
+	<h2 class="text-lg font-bold mb-4">Modifier la Cagnotte</h2>
+	{{ form_start(formCagnotte) }}
+	<div class="mb-4">
+		{{ form_row(formCagnotte.lien, {'attr': {'class': 'block w-full border border-gray-300 rounded-lg p-2 text-gray-900'}}) }}
+		{% if formCagnotte.lien.vars.errors is not empty %}
+			<div class="text-red-500 text-sm mt-1">
+				{% for error in formCagnotte.lien.vars.errors %}
+					<p>{{ error.message }}</p>
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+	<div class="flex justify-end">
+		<button class="inline-block border border-indigo-500 p-2 px-4 font-semibold text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg">Enregistrer la cagnotte</button>
+	</div>
+	{{ form_end(formCagnotte) }}
 {% endblock %}

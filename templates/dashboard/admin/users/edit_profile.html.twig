@@ -56,6 +56,12 @@
 				</div>
 
 				<div class="mb-4">
+					{{ form_label(form.pronoms, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+					{{ form_widget(form.pronoms, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+					{{ form_errors(form.pronoms) }}
+				</div>
+
+				<div class="mb-4">
 					{{ form_label(form.old_password, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
 					{{ form_widget(form.old_password, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
 					{{ form_errors(form.old_password) }}

@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use App\Entity\Users;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -72,7 +73,18 @@ class ProfileType extends AbstractType
                     ]),
                 ],
             ])
-        ;
+            ->add('pronoms', ChoiceType::class, [
+                'choices' => [
+                    'Il/Lui' => 'Il/Lui',
+                    'Elle/Elle' => 'Elle/Elle',
+                    'Iel/Iels' => 'Iel/Iels',
+                    'Ils/Eux' => 'Ils/Eux',
+                    'Elles/Eux' => 'Elles/Eux',
+                ],
+                'required' => false,
+                'label' => 'Pronoms',
+                'placeholder' => 'Sélectionnez vos pronoms',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

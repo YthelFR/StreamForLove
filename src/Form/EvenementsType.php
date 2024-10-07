@@ -22,11 +22,16 @@ class EvenementsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('annee', DateType::class, [
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
+            ->add('annee', IntegerType::class, [
+                'label' => 'Année',
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank([
+                        'message' => 'L\'année est requise.',
+                    ]),
+                ],
+                'attr' => [
+                    'min' => 1900, // Optionnel : pour limiter la saisie des années
+                    'max' => date('Y'), // Optionnel : limite l'année au présent
                 ],
             ])
             ->add('donations', IntegerType::class, [
@@ -62,7 +67,6 @@ class EvenementsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Outsiders;
 use App\Entity\Users;
+use App\Repository\CagnotteRepository;
 use App\Repository\PresentationsRepository;
 use App\Repository\UsersRepository;
 use App\Service\TwitchApiService;
@@ -71,6 +72,7 @@ class StreamerController extends AbstractController
     #[Route('/streamers/{pseudo}', name: 'app_streamers_show', methods: ['GET'])]
     public function showStreamer(
         UsersRepository $usersRepository,
+        CagnotteRepository $cagnotteRepository,
         TwitchApiService $twitchApiService,
         string $pseudo
     ): Response {
@@ -79,6 +81,7 @@ class StreamerController extends AbstractController
         if (!$streamer) {
             throw $this->createNotFoundException('Streamer not found');
         }
+        $cagnotte = $cagnotteRepository->findOneBy(['user' => $streamer]);
         $presentations = $this->presentationsRepository->findOneBy(['streamersPresentation' => $streamer]);
         $socialsNetworks = $streamer->getSocialsNetworks();
         $channelInfo = $twitchApiService->getChannelInfo($streamer->getPseudo());
@@ -89,6 +92,7 @@ class StreamerController extends AbstractController
 
         return $this->render('streamer/show.html.twig', [
             'streamer' => $streamer,
+            'cagnotte' => $cagnotte,
             'channelInfo' => $channelInfo,
             'recentGames' => $recentGames,
             'presentations' => $presentations,

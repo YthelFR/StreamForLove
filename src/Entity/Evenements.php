@@ -16,8 +16,8 @@ class Evenements
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $annee = null;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $annee = null;
 
     #[ORM\Column]
     private ?int $donations = null;
@@ -41,12 +41,12 @@ class Evenements
         return $this->id;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee(): ?int
     {
         return $this->annee;
     }
 
-    public function setAnnee(\DateTimeInterface $annee): static
+    public function setAnnee(int $annee): static
     {
         $this->annee = $annee;
 

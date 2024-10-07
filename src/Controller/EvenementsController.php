@@ -23,21 +23,25 @@ final class EvenementsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_evenements_show', methods: ['GET'])]
-    public function show(Evenements $evenement, TwitchApiService $twitchApiService): Response
+    #[Route('/{annee}', name: 'app_evenements_show', methods: ['GET'])]
+    public function show(EvenementsRepository $evenementsRepository, int $annee, TwitchApiService $twitchApiService): Response
     {
-        // Convertir les participants en tableau
-        $participantsArray = $evenement->getParticipants()->toArray();
+        $evenements = $evenementsRepository->findByYear($annee);
 
-        // Trier les participants par ordre alphabétique selon le pseudo
+        if (!$evenements) {
+            throw $this->createNotFoundException('Aucun événement trouvé pour cette année.');
+        }
+
+        $evenement = $evenements[0];
+
+        $participantsArray = $evenement->getParticipants()->toArray();
         usort($participantsArray, function ($a, $b) {
             return strcmp($a->getPseudo(), $b->getPseudo());
         });
 
-        // Passer le tableau trié à la vue
         return $this->render('evenements/show.html.twig', [
             'evenement' => $evenement,
-            'participants' => $participantsArray, // Passer le tableau trié ici
+            'participants' => $participantsArray,
             'twitchApiService' => $twitchApiService,
         ]);
     }

@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Modifier la Cagnotte
+{% endblock %}
+
+{% block body %}
+	<div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+		<h2 class="text-center font-bold text-2xl mb-5 text-gray-800">Modifier la Cagnotte</h2>
+
+		{% for message in app.session.flashBag.get('success') %}
+			<div class="mb-4 p-4 text-sm text-green-700 bg-green-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in app.session.flashBag.get('error') %}
+			<div class="mb-4 p-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		{{ form_start(form) }}
+		<div class="mb-4">
+            {{ form_label(form.user, 'Utilisateur', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.user, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 rounded-md outline-none'}}) }}
+        </div>
+		
+		<div class="mb-4">
+			{{ form_label(form.lien, 'Lien de la cagnotte', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+			{{ form_widget(form.lien, {'attr': {'class': 'block w-full mt-1 p-2 bg-gray-100 border border-gray-300 rounded-md outline-none'}}) }}
+		</div>
+
+		<div class="flex justify-end mt-6">
+			<a href="{{ path('admin_cagnottes_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500 mr-2">Retour à la liste</a>
+			<button type="submit" class="bg-indigo-500 text-white p-2 px-4 font-semibold border border-indigo-500 rounded-md">Mettre à jour</button>
+		</div>
+
+		{{ form_end(form) }}
+	</div>
+{% endblock %}
