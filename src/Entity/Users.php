@@ -62,6 +62,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
     private Collection $evenements;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)]
+    private Collection $cagnottes;
+
     private $resetToken;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
@@ -74,6 +77,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->outsiders = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->evenements = new ArrayCollection();
+        $this->cagnottes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -379,6 +383,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCagnotteStreamers(?Cagnotte $cagnotteStreamers): static
     {
         $this->cagnotteStreamers = $cagnotteStreamers;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cagnotte>
+     */
+    public function getCagnottes(): Collection
+    {
+        return $this->cagnottes;
+    }
+
+    public function addCagnotte(Cagnotte $cagnotte): static
+    {
+        if (!$this->cagnottes->contains($cagnotte)) {
+            $this->cagnottes->add($cagnotte);
+            $cagnotte->setUser($this); // Mise à jour de l'autre côté de la relation
+        }
+
+        return $this;
+    }
+
+    public function removeCagnotte(Cagnotte $cagnotte): static
+    {
+        if ($this->cagnottes->removeElement($cagnotte)) {
+            // set the owning side to null (unless already changed)
+            if ($cagnotte->getUser() === $this) {
+                $cagnotte->setUser(null);
+            }
+        }
 
         return $this;
     }

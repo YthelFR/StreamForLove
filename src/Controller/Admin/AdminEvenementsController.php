@@ -85,6 +85,29 @@ class AdminEvenementsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Gestion du fichier image (thumbnail)
+            $thumbnailFile = $form->get('thumbnail')->getData();
+
+            if ($thumbnailFile) {
+                // Générer un nom unique pour le fichier
+                $newFilename = uniqid() . '.' . $thumbnailFile->guessExtension();
+
+                try {
+                    // Déplacer le fichier dans le répertoire configuré
+                    $thumbnailFile->move(
+                        $this->getParameter('evenements_directory'),
+                        $newFilename
+                    );
+                    // Stocker le nom du fichier dans l'entité Evenements
+                    $evenement->setThumbnail($newFilename);
+                } catch (FileException $e) {
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
+                }
+            } else {
+                // Conserver l'image existante si aucune nouvelle image n'est uploadée
+                $newFilename = $evenement->getThumbnail(); // Conserve l'ancienne image
+            }
+            $entityManager->persist($evenement);
             $entityManager->flush();
 
             $this->addFlash('success', 'L\'événement a été mis à jour avec succès.');

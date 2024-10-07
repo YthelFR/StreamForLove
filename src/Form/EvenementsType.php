@@ -67,7 +67,6 @@ class EvenementsType extends AbstractType
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',

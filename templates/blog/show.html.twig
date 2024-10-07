@@ -6,7 +6,7 @@
 
 {% block body %}
 	<article>
-		<h1>{{ article.titre }}</h1>
+		<h2>{{ article.titre }}</h2>
 
 		{% if article.entete %}
 			<img src="{{ asset(article.entete) }}" alt="{{ article.titre }}" class="article-image-large">
