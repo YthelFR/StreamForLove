@@ -6,13 +6,14 @@
 {% block body %}
 	<div class="mx-auto max-w-screen-lg px-4 py-8 sm:px-8">
 		<h1 class="text-2xl font-semibold text-gray-700">Utilisateurs en attente de validation</h1>
-		{% for label, messages in app.flashes %}
-			<div class="alert alert-{{ label }} bg-{{ label == 'success' ? 'green' : 'red' }}-500 text-white px-4 py-2 rounded mb-4">
-				{% for message in messages %}
-					<p>{{ message }}</p>
-				{% endfor %}
-			</div>
-		{% endfor %}
+		 {% for label, messages in app.flashes %}
+            <div class="mb-4">
+                <div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+                    <p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+                    <p>{{ messages|join(', ') }}</p>
+                </div>
+            </div>
+        {% endfor %}
 		{% if users is empty %}
 			<p class="mt-4 text-gray-500">Aucun utilisateur en attente de validation.</p>
 		{% else %}
