@@ -8,7 +8,6 @@
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
 			{{ encore_entry_link_tags('admin') }}
 		{% endblock %}
 
@@ -24,21 +23,19 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 	</head>
 
-	<body
-		class="text-gray-800 font-inter">
-
-		<!--sidenav -->
-		{{ include('dashboard/admin/views/sidebar.html.twig') }}
+	<body class="text-gray-800 font-inter">
+		<main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main"> 
+			<!--sidenav -->
+			{{ include('dashboard/admin/views/sidebar.html.twig') }}
 		<!-- end sidenav -->
 
-		<main
-			class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all main">
 			<!-- navbar -->
 			{{ include('dashboard/admin/views/navbar.html.twig') }}
 			<!-- end navbar -->
 
-			<!-- Content -->{% block body %}
-		{% endblock %}
+			<!-- Content -->
+			{% block body %}
+			{% endblock %}
 			<!-- End Content -->
 		</main>
 		<script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -76,9 +73,10 @@ parent.classList.add('selected')
 })
 })
 // end: Sidebar
+		</script>
 
-
-// start: Popper
+		<script>
+			// start: Popper
 const popperInstance = {}
 document.querySelectorAll('.dropdown').forEach(function (item, index) {
 const popperId = 'popper-' + index
