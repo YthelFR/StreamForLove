@@ -47,26 +47,51 @@
 			</div>
 		{% endif %}
 	</div>
-	<div class="mx-5 md:mx-20 xl:mx-40 py-12 h-full">
-		<h2 class="text-3xl font-bold text-center mb-10"></h2>
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
-			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo1.png') }}" alt="Logo de l'événement Stream For Love représentant deux personnes qui s'enlacent amicalement"/>
-				<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi un événement caritatif sur Twitch ?</h3>
-				<p class="px-2 md:px-5 min-h-[120px]">Cette plateforme offre à une génération numérique un moyen d'exprimer leur générosité tout en permettant des interactions en direct avec Coalition PLUS et les viewers.</p>
+	{# <div class="mx-5 md:mx-20 xl:mx-40 py-12 h-full">
+			<h2 class="text-3xl font-bold text-center mb-10"></h2>
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
+				<div class="flex flex-col items-center px-5 min-w-[300px]">
+					<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo1.png') }}" alt="Logo de l'événement Stream For Love représentant deux personnes qui s'enlacent amicalement"/>
+					<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi un événement caritatif sur Twitch ?</h3>
+					<p class="px-2 md:px-5 min-h-[120px]">Cette plateforme offre à une génération numérique un moyen d'exprimer leur générosité tout en permettant des interactions en direct avec Coalition PLUS et les viewers.</p>
+				</div>
+				<div class="flex flex-col items-center px-5 min-w-[300px]">
+					<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo2.png') }}" alt="Logo de l'événement Stream For Love représentant une personne qui fait une donation"/>
+					<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi récolter des dons en 2023 pour le VIH/sida ?</h3>
+					<p class="px-2 md:px-5 min-h-[120px]">Le VIH/sida n'est pas une maladie lointaine. Nous connaissons tous des personnes touchées. Si, dans nos pays, elle ne tue plus, ce n'est pas le cas partout : en 2022, 630 000 personnes en sont encore mortes de maladies opportunistes liées au SIDA.</p>
+				</div>
+				<div class="flex flex-col items-center px-5 min-w-[300px]">
+					<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo3.png') }}" alt="Logo de l'événement Stream For Love représentant une seringue pour montrer que les dons serviront aux soins"/>
+					<h3 class="text-2xl font-bold py-3 min-h-[72px]">À quoi serviront les dons ?</h3>
+					<p class="px-2 md:px-5 min-h-[120px]">Les dons financeront des dépistages dans les pays où Coalition PLUS opère via ses associations membres, ainsi que l'achat d'unités mobiles et de matériel pour les centres de soins. Connaître son statut sérologique est essentiel pour entamer un suivi de la maladie.</p>
+				</div>
 			</div>
-			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo2.png') }}" alt="Logo de l'événement Stream For Love représentant une personne qui fait une donation"/>
-				<h3 class="text-2xl font-bold py-3 min-h-[72px]">Pourquoi récolter des dons en 2023 pour le VIH/sida ?</h3>
-				<p class="px-2 md:px-5 min-h-[120px]">Le VIH/sida n'est pas une maladie lointaine. Nous connaissons tous des personnes touchées. Si, dans nos pays, elle ne tue plus, ce n'est pas le cas partout : en 2022, 630 000 personnes en sont encore mortes de maladies opportunistes liées au SIDA.</p>
+	
+		</div> #}
+	<div class="text-center xl:px-20 px-5 py-12">
+		<h2 class="text-3xl font-bold pb-10">Le VIH / Sida en 2023 ce sont :</h2>
+		<div class="grid grid-flow-row md:grid-flow-col items-start">
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo4.png') }}" alt="Statistiques sur le VIH/SIDA : 39 millions de personnes vivant avec la maladie"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">39.900.000</h3>
+				<p class="px-5 sm:px-10">de personnes qui vivent encore avec la maladie</p>
 			</div>
-			<div class="flex flex-col items-center px-5 min-w-[300px]">
-				<img class="w-24 h-24 mb-5" src="{{ asset('assets/medias/accueil/logo3.png') }}" alt="Logo de l'événement Stream For Love représentant une seringue pour montrer que les dons serviront aux soins"/>
-				<h3 class="text-2xl font-bold py-3 min-h-[72px]">À quoi serviront les dons ?</h3>
-				<p class="px-2 md:px-5 min-h-[120px]">Les dons financeront des dépistages dans les pays où Coalition PLUS opère via ses associations membres, ainsi que l'achat d'unités mobiles et de matériel pour les centres de soins. Connaître son statut sérologique est essentiel pour entamer un suivi de la maladie.</p>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo5.png') }}" alt="Statistiques sur le VIH/SIDA : près de 10 millions de personnes sans accès à un traitement"/>
+				<h3 class="text-2xl font-bold py1 md:py-3">Près de 9.000.000</h3>
+				<p class="px-5 sm:px-10">de personnes n’ont pas accès à un traitement</p>
+			</div>
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo6.png') }}" alt="Statistiques sur le VIH/SIDA : 130,000 enfants de moins de 14 ans infectés"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">130.000</h3>
+				<p class="px-5 sm:px-10">enfants de moins de 14 ans qui ont été infectés par la maladie</p>
+			</div>	
+			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
+				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo7.png') }}" alt="Statistiques sur le VIH/SIDA : 630,000 décès liés au sida"/>
+				<h3 class="text-2xl font-bold py-1 md:py-3">630.000</h3>
+				<p class="px-5 sm:px-10">de personnes qui sont décédées des maladies liées au sida</p>
 			</div>
 		</div>
-
 	</div>
 	<div class="flex flex-col items-center px-5 text-center bg-gray-200 px-6 md:px-20 xl:px-80 py-12">
 		<h2 class="text-xl md:text-3xl font-bold pb-5">
@@ -76,31 +101,6 @@
 			<img src="{{ asset('assets/medias/accueil/pdg.png') }}" alt="Portrait de Vincent Leclercq, Directeur général de Coalition PLUS"/>
 		</div>
 		<p class="pt-5">Vincent Leclercq – Directeur général de Coalition PLUS</p>
-	</div>
-	<div class="text-center xl:px-20 px-5 py-12">
-		<h2 class="text-3xl font-bold pb-10">Le VIH / Sida en 2022 ce sont :</h2>
-		<div class="grid grid-flow-row md:grid-flow-col items-start">
-			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo4.png') }}" alt="Statistiques sur le VIH/SIDA : 39 millions de personnes vivant avec la maladie"/>
-				<h3 class="text-2xl font-bold py-1 md:py-3">39.000.000</h3>
-				<p class="px-5 sm:px-10">de personnes qui vivent encore avec la maladie</p>
-			</div>
-			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo5.png') }}" alt="Statistiques sur le VIH/SIDA : près de 10 millions de personnes sans accès à un traitement"/>
-				<h3 class="text-2xl font-bold py1 md:py-3">Près de 10.000.000</h3>
-				<p class="px-5 sm:px-10">de personnes n’ont pas accès à un traitement</p>
-			</div>
-			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo6.png') }}" alt="Statistiques sur le VIH/SIDA : 130,000 enfants de moins de 14 ans infectés"/>
-				<h3 class="text-2xl font-bold py-1 md:py-3">130.000</h3>
-				<p class="px-5 sm:px-10">enfants de moins de 14 ans qui ont été infectés par la maladie</p>
-			</div>
-			<div class="flex flex-col items-center px-4 pb-10 md:pb-0">
-				<img class="size-20 lg:size-40" src="{{ asset('assets/medias/accueil/logo7.png') }}" alt="Statistiques sur le VIH/SIDA : 630,000 décès liés au sida"/>
-				<h3 class="text-2xl font-bold py-1 md:py-3">630.000</h3>
-				<p class="px-5 sm:px-10">de personnes qui sont décédées des maladies liées au sida</p>
-			</div>
-		</div>
 	</div>
 	<div class="gradientBg flex flex-col md:flex-row py-20">
 		<div class="flex flex-col sm:flex-row card1 md:w-1/2 rounded-lg mx-4 sm:mx-10 md:mx-16 xl:mx-20 p-3 sm:p-5">
