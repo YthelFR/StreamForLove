@@ -75,7 +75,8 @@ class StreamerController extends AbstractController
         CagnotteRepository $cagnotteRepository,
         TwitchApiService $twitchApiService,
         string $pseudo
-    ): Response {
+    ): Response 
+    {
         $streamer = $usersRepository->findOneByPseudo($pseudo);
 
         if (!$streamer) {

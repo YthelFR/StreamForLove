@@ -45,14 +45,14 @@ class RegistrationController extends AbstractController
                 'app_verify_email',
                 $user,
                 (new TemplatedEmail())
-                    ->from(new Address('support@streamforlove.coalitionplus.org', 'Support'))
+                    ->from(new Address('support@streamforlove.coalitionplus.org', 'Support Stream For Love'))
                     ->to((string) $user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/emails/confirmation_email.html.twig')
             );
 
             $mailer->send((new TemplatedEmail())
-                    ->from(new Address('noreply@streamforlove.coalitionplus.org', 'Support'))
+                    ->from(new Address('noreply@streamforlove.coalitionplus.org', 'Support Stream For Love'))
                     ->to('support@streamforlove.coalitionplus.org')
                     ->subject('Nouvel utilisateur à vérifier')
                     ->htmlTemplate('registration/emails/new_user_notification.html.twig')
@@ -83,7 +83,7 @@ class RegistrationController extends AbstractController
 
             // Envoyer un email de confirmation à l'utilisateur
             $mailer->send((new TemplatedEmail())
-                    ->from(new Address('support@streamforlove.coalitionplus.org', 'Support'))
+                    ->from(new Address('support@streamforlove.coalitionplus.org', 'Support Stream For Love'))
                     ->to($user->getEmail())
                     ->subject('Votre adresse e-mail a été vérifiée')
                     ->htmlTemplate('registration/emails/verification_success.html.twig')

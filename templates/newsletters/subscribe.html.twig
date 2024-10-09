@@ -30,13 +30,14 @@
 					</div>
 				{% endif %}
 
-				{% if app.flashes('success') %}
-					{% for message in app.flashes('success') %}
-						<div class="alert alert-success mb-4 text-sm sm:text-base">
-							{{ message }}
-						</div>
-					{% endfor %}
-				{% endif %}
+				 {% for label, messages in app.flashes %}
+            <div class="mb-4">
+                <div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+                    <p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+                    <p>{{ messages|join(', ') }}</p>
+                </div>
+            </div>
+        {% endfor %}
 
 				<div class="flex flex-col mb-5">
 					{{ form_label(form.email, 'E-Mail:', {'attr': {'class': 'mb-1 text-xs sm:text-sm tracking-wide text-gray-600'}}) }}

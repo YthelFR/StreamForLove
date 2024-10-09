@@ -2,9 +2,14 @@
 
 {% block body %}
 	<h2>Ajouter un réseau social</h2>
-	{% for message in app.flashes('success') %}
-		<div class="alert alert-success">{{ message }}</div>
-	{% endfor %}
+	 {% for label, messages in app.flashes %}
+            <div class="mb-4">
+                <div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+                    <p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+                    <p>{{ messages|join(', ') }}</p>
+                </div>
+            </div>
+        {% endfor %}
 	{{ form_start(form) }}
 	{{ form_widget(form) }}
 	<button class="btn">Ajouter</button>

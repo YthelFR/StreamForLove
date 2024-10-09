@@ -113,6 +113,47 @@ li {
   opacity: 0; /* Rendre le message transparent */
 }
 
+.sticky-button {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  transform: translateY(-50%);
+}
+
+.animated-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #f97316;
+  color: white;
+  font-weight: bold;
+  border-radius: 50px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
 .button-label {
   z-index: 2;
+}
+
+.cagnotte-info {
+  position: absolute;
+  top: 50%;
+  right: -220px; /* L'iframe est masquée hors de la vue */
+  transform: translateY(-50%);
+  transition: right 0.5s ease-in-out; /* Animation de glissement */
+}
+
+.animated-button:hover .cagnotte-info {
+  right: 0; /* L'iframe glisse dans la vue */
+}
+
+.cagnotte-iframe {
+  border: none;
+  border-radius: 10px;
 }
