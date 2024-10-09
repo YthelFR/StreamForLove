@@ -70,17 +70,7 @@ li {
 
 .btnSfl {
   background: rgb(159, 38, 39);
-  background: linear-gradient(
-    135deg,
-    rgba(159, 38, 39, 1) 0%,
-    rgba(213, 105, 106, 1) 100%
-  );
-  border-radius: linear-gradient(
-      135deg,
-      rgba(159, 38, 39, 1) 0%,
-      rgba(213, 105, 106, 1) 100%
-    )
-    2px;
+  border-radius: rgba(159, 38, 39, 1), 2px;
 }
 
 .hidden {
