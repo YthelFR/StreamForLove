@@ -49,6 +49,7 @@ class EditUsersType extends AbstractType
                     'Manager' => 'ROLE_MANAGER',
                     'Streamer Actif' => 'ROLE_STREAMER_ACTIF',
                     'Streamer Absent' => 'ROLE_STREAMER_ABSENT',
+                    'Simplon Testeur' => 'ROLE_SIMPLON',
                 ],
                 'expanded' => false,
                 'multiple' => true, // Permet de gérer les rôles multiples
