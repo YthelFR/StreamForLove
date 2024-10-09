@@ -1,17 +1,14 @@
-<div class="sticky-button">
-    <div class="animated-button">
-        <span class="button-label">Montant de la cagnotte</span>
-        <div class="cagnotte-info">
-            <iframe 
-                src="https://streamlabs.com/widgets/streamlabs-charity-donation-goal?token=64911C998E0224C20257" 
-                frameborder="0" 
-                scrolling="no"
-                class="cagnotte-iframe"
-                width="200"
-                height="80"
-                allowtransparency="true">
-            </iframe>
-        </div>
-    </div>
-</div>
+<iframe src="https://streamlabs.com/widgets/streamlabs-charity-donation-goal?token=64911C998E0224C20257" frameborder="0" scrolling="no" class="cagnotte-iframe" width="200" height="80" allowtransparency="true"></iframe>
 
+<script>
+	const button = document.querySelector('.animated-button');
+const info = document.querySelector('.cagnotte-info');
+
+button.addEventListener('mouseenter', () => {
+info.style.display = 'block'; // Afficher au survol
+});
+
+button.addEventListener('mouseleave', () => {
+info.style.display = 'none'; // Masquer lorsqu'on s'éloigne
+});
+</script>

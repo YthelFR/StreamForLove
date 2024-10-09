@@ -14,10 +14,16 @@
 
 		<!-- Open Graph Tags -->
 		<meta property="og:title" content="Stream For Love - Luttons contre le VIH et le SIDA"/>
-		<meta name="description" content="{% block meta_description %}{% endblock %}">
-		<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
-		<meta property="og:image" content="{{ absolute_url('/assets/medias/headers/logo.png') }}"/>
+		<meta property="og:description" name="description" content="{% block meta_description %}Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec nos streamers sur Twitch.{% endblock %}">
+		<meta property="og:keywords" name="keywords" content="{% block meta_keywords %}streaming, charité, VIH, SIDA, événement caritatif, Twitch{% endblock %}">
+		<meta property="og:image" content="https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png"/>
 		<meta property="og:url" content="https://facebook.com/coalitionplus"/>
+		<!-- Twitter Card Tags -->
+		<meta name="twitter:card" content="summary_large_image"/>
+		<meta name="twitter:title" content="Stream For Love - Luttons contre le VIH et le SIDA"/>
+		<meta name="twitter:description" content="Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec nos streamers sur Twitch."/>
+		<meta name="twitter:image" content="{{ absolute_url('/assets/medias/headers/event-banner.png') }}"/>
+		<meta name="twitter:site" content="@CoalitionPlus"/>
 		{% endblock %}
 		<link
 		rel="canonical" href="https://streamforlove.coalitionplus.org/"/>
@@ -36,6 +42,7 @@
 		{{ include('views/referencement.html.twig') }}
 	</head>
 	{{ include('views/header.html.twig') }}
+
 	<body>
 		{% block body %}{% endblock %}
 		<script src="https://unpkg.com/@popperjs/core@2"></script>
