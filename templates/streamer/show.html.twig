@@ -33,7 +33,7 @@
 					{{ streamer.pseudo }}
 				</h2>
 				{% if presentations %}
-					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation de {{ streamer.pseudo }}, streamer populaire sur Twitch."/>
+					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover self-center rounded-2xl lg:pr-4" src="{{ asset('assets/users/presentations/pictures/' ~ presentations.picturePath) }}" alt="Image de présentation de {{ streamer.pseudo }}, streamer populaire sur Twitch."/>
 				{% else %}
 					<img class="w-full max-w-xs lg:max-w-lg h-auto object-cover rounded-2xl md:pr-4" src="{{ channelInfo.profile_image_url }}" alt="Image de profil de {{ streamer.pseudo }} sur Twitch."/>
 				{% endif %}
@@ -43,7 +43,7 @@
 					</h3>
 					{% else %}
 				{% endif %}
-				<p class="pb-10 pt-4 md:pb-16 md:pt-8 text-center text-white font-bold text-xl md:text-2xl lg:text-3xl">
+				<p class="pt-4 md:pb-16 md:pt-8 text-center text-white font-bold text-xl md:text-2xl lg:text-3xl">
 					{{ followersCount }}
 					followers
 				</p>
