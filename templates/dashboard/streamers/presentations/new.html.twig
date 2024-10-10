@@ -4,14 +4,14 @@
 {% endblock %}
 
 {% block body %}
-	 {% for label, messages in app.flashes %}
-            <div class="mb-4">
-                <div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
-                    <p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
-                    <p>{{ messages|join(', ') }}</p>
-                </div>
-            </div>
-        {% endfor %}
+	{% for label, messages in app.flashes %}
+		<div class="mb-4">
+			<div class="bg-{{ label == 'success' ? 'green' : 'red' }}-100 border-l-4 border-{{ label == 'success' ? 'green' : 'red' }}-500 text-{{ label == 'success' ? 'green' : 'red' }}-700 p-4" role="alert">
+				<p class="font-bold">{{ label == 'success' ? 'Succès' : 'Erreur' }}</p>
+				<p>{{ messages|join(', ') }}</p>
+			</div>
+		</div>
+	{% endfor %}
 
 	<div class="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
 		<h1 class="text-center font-bold text-2xl m-5 text-gray-800">Créer une nouvelle Présentation</h1>
@@ -71,23 +71,6 @@
 			</div>
 
 			{{ form_end(form) }}
-
-			<h2 class="text-lg font-bold mb-4">Modifier la Cagnotte</h2>
-			{{ form_start(formCagnotte) }}
-			<div class="mb-4">
-				{{ form_row(formCagnotte.lien, {'attr': {'class': 'block w-full border border-gray-300 rounded-lg p-2 text-gray-900'}}) }}
-				{% if formCagnotte.lien.vars.errors is not empty %}
-					<div class="text-red-500 text-sm mt-1">
-						{% for error in formCagnotte.lien.vars.errors %}
-							<p>{{ error.message }}</p>
-						{% endfor %}
-					</div>
-				{% endif %}
-			</div>
-			<div class="flex justify-end">
-				<button class="inline-block border border-indigo-500 p-2 px-4 font-semibold text-white bg-indigo-500 hover:bg-indigo-600 rounded-lg">Enregistrer la cagnotte</button>
-			</div>
-			{{ form_end(formCagnotte) }}
 		</div>
 	</div>
 {% endblock %}

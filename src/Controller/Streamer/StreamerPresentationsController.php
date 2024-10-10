@@ -2,10 +2,7 @@
 
 namespace App\Controller\Streamer;
 
-use App\Entity\Cagnotte;
 use App\Entity\Presentations;
-use App\Form\CagnotteType;
-use App\Form\CagnotteUserType;
 use App\Form\PresentationsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,29 +34,23 @@ class StreamerPresentationsController extends AbstractController
         $presentation = new Presentations();
         $presentation->setStreamersPresentation($user);
 
-        // Formulaire de présentation
         $form = $this->createForm(PresentationsType::class, $presentation);
         $form->handleRequest($request);
 
-        // Formulaire de cagnotte
-        $cagnotte = new Cagnotte();
-        $formCagnotte = $this->createForm(CagnotteUserType::class, $cagnotte);
-        $formCagnotte->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid() && $formCagnotte->isSubmitted() && $formCagnotte->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->handleFileUpload($form, $presentation, $slugger);
-            $cagnotte->setUser($user);  // On lie la cagnotte à l'utilisateur connecté
 
             $entityManager->persist($presentation);
-            $entityManager->persist($cagnotte);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Présentation créée avec succès.');
             return $this->redirectToRoute('streamer_presentations_index', [], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted()) {
+            $this->addFlash('error', 'Une erreur est survenue lors de la création de la présentation.');
         }
 
         return $this->render('dashboard/streamers/presentations/new.html.twig', [
             'form' => $form->createView(),
-            'formCagnotte' => $formCagnotte->createView(),
         ]);
     }
 
@@ -75,27 +66,19 @@ class StreamerPresentationsController extends AbstractController
         $form = $this->createForm(PresentationsType::class, $presentation);
         $form->handleRequest($request);
 
-        $cagnotte = $entityManager->getRepository(Cagnotte::class)->findOneBy(['user' => $user]);
-        if (!$cagnotte) {
-            $cagnotte = new Cagnotte();
-        }
-
-        $formCagnotte = $this->createForm(CagnotteUserType::class, $cagnotte);
-        $formCagnotte->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid() && $formCagnotte->isSubmitted() && $formCagnotte->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->handleFileUpload($form, $presentation, $slugger, true);
-            $cagnotte->setUser($user);
 
-            $entityManager->persist($cagnotte);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Présentation modifiée avec succès.');
             return $this->redirectToRoute('streamer_presentations_index', [], Response::HTTP_SEE_OTHER);
+        } elseif ($form->isSubmitted()) {
+            $this->addFlash('error', 'Une erreur est survenue lors de la modification de la présentation.');
         }
 
         return $this->render('dashboard/streamers/presentations/edit.html.twig', [
             'form' => $form->createView(),
-            'formCagnotte' => $formCagnotte->createView(),
             'presentation' => $presentation,
         ]);
     }

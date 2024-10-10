@@ -73,6 +73,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $pronoms = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
@@ -429,6 +431,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->pronoms = $pronoms;
 
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): static
+    {
+        $this->lien = $lien;
         return $this;
     }
 }

@@ -1,15 +1,7 @@
 {% block body %}
-	<h2>Ressources et Liens Utiles</h2>
-	<ul>
-		<li>
-			<a href="https://www.example1.com">Exemple de ressource 1</a>
-		</li>
-		<li>
-			<a href="https://www.example2.com">Exemple de ressource 2</a>
-		</li>
-		<li>
-			<a href="https://www.example3.com">Exemple de ressource 3</a>
-		</li>
-		<!-- Ajoutez d'autres liens utiles ici -->
+	<p>Si vous avez besoin de quelques informations concernant l'association ou le VIH :</p>
+	<ul class="list-disc px-2">
+		<li class="hover:text-[#9F2627]"><a href="{{ asset('assets/infos/Formation_RD_2024_VIH.pdf') }}" target="_blank">Formation Recherche & Développement</a></li>
+		<li class="hover:text-[#9F2627]"><a href="{{ asset('assets/infos/Formation_recruteurs_de_donateurs_2024.pdf') }}" target="_blank">Formation Donateurs</a></li>
 	</ul>
 {% endblock %}

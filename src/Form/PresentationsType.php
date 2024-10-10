@@ -58,6 +58,7 @@ class PresentationsType extends AbstractType
             // Validation des champs textuels pour les questions
             ->add('question1', TextType::class, [
                 'label' => 'Peux-tu te présenter en quelques mots ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
@@ -68,6 +69,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('question2', TextType::class, [
                 'label' => 'Comment en es-tu arrivé à l\'univers du streaming ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
@@ -78,6 +80,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('question3', TextType::class, [
                 'label' => 'Pourquoi faire un stream caritatif ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
