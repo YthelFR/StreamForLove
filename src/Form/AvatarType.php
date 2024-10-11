@@ -42,10 +42,6 @@ class AvatarType extends AbstractType
                 'required' => false,
                 'label' => 'Pronoms',
                 'placeholder' => 'Sélectionnez vos pronoms',
-            ])
-            ->add('lien', TextType::class, [
-                'label' => 'Lien de la cagnotte',
-                'required' => false,
             ]);
     }
 

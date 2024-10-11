@@ -62,13 +62,10 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
     private Collection $evenements;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)] // Assurez-vous que cela pointe vers 'user'
     private Collection $cagnottes;
 
     private $resetToken;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Cagnotte $cagnotteStreamers = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $pronoms = null;
@@ -380,18 +377,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCagnotteStreamers(): ?Cagnotte
-    {
-        return $this->cagnotteStreamers;
-    }
-
-    public function setCagnotteStreamers(?Cagnotte $cagnotteStreamers): static
-    {
-        $this->cagnotteStreamers = $cagnotteStreamers;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Cagnotte>
      */
@@ -400,17 +385,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->cagnottes;
     }
 
-    public function addCagnotte(Cagnotte $cagnotte): static
+    public function addCagnotte(Cagnotte $cagnotte): self
     {
         if (!$this->cagnottes->contains($cagnotte)) {
-            $this->cagnottes->add($cagnotte);
-            $cagnotte->setUser($this); // Mise à jour de l'autre côté de la relation
+            $this->cagnottes[] = $cagnotte;
+            $cagnotte->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCagnotte(Cagnotte $cagnotte): static
+    public function removeCagnotte(Cagnotte $cagnotte): self
     {
         if ($this->cagnottes->removeElement($cagnotte)) {
             // set the owning side to null (unless already changed)
@@ -421,6 +406,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     public function getPronoms(): ?string
     {

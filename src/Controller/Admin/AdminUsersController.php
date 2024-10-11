@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cagnotte;
 use App\Entity\Users;
 use App\Form\AvatarType;
+use App\Form\CagnotteUserType;
 use App\Form\EditUsersType;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -118,6 +120,7 @@ class AdminUsersController extends AbstractController
         $avatarForm->handleRequest($request);
 
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+            // Gestion du changement d'avatar
             $avatarFile = $avatarForm->get('avatar')->getData();
             if ($avatarFile) {
                 // Supprimer l'ancien avatar s'il existe (sauf si c'est l'avatar par défaut)
@@ -145,32 +148,69 @@ class AdminUsersController extends AbstractController
                     $em->flush();
                     $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
                 } catch (FileException $e) {
-                    $this->addFlash('error', 'Erreur lors du téléchargement de l\'avatar : ' . $e->getMessage());
+                    $this->addFlash('danger', 'Erreur lors du téléchargement de l\'avatar : ' . $e->getMessage());
                 }
+            }
+
+            // Mettre à jour les pronoms si modifiés
+            $pronoms = $avatarForm->get('pronoms')->getData();
+            if ($pronoms) {
+                $admin->setPronoms($pronoms);
+                $em->flush();
+                $this->addFlash('success', 'Vos pronoms ont été mis à jour avec succès.');
+            }
+        }
+
+        $cagnotteForm = $this->createForm(CagnotteUserType::class);
+        $cagnotteForm->handleRequest($request);
+
+        if ($cagnotteForm->isSubmitted() && $cagnotteForm->isValid()) {
+            $lienCagnotte = $cagnotteForm->get('lien')->getData();
+            if ($lienCagnotte) {
+                // Récupérez la première cagnotte existante ou créez-en une nouvelle
+                $cagnotte = $admin->getCagnottes()->first() ?: new Cagnotte();
+
+                if (!$cagnotte->getId()) {
+                    $cagnotte->setUser($admin); // Associe la cagnotte à l'utilisateur
+                    $cagnotte->setLien($lienCagnotte); // Ajoute le lien de la cagnotte
+                    $em->persist($cagnotte); // Persiste la nouvelle cagnotte
+                } else {
+                    $cagnotte->setLien($lienCagnotte); // Met à jour le lien de la cagnotte existante
+                }
+
+                $em->flush(); // Valide les changements
+                $this->addFlash('success', 'Cagnotte mise à jour avec succès.');
             }
         }
 
         // Formulaire pour le profil
-        $form = $this->createForm(ProfileType::class, $admin);
-        $form->handleRequest($request);
+        $profileForm = $this->createForm(ProfileType::class, $admin);
+        $profileForm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $newPassword = $form->get('new_password')->getData();
-            if ($newPassword) {
-                $hashedPassword = $passwordHasher->hashPassword($admin, $newPassword);
-                $admin->setPassword($hashedPassword);
+        if ($profileForm->isSubmitted() && $profileForm->isValid()) {
+            // Gestion du mot de passe s'il est modifié
+            $oldPassword = $profileForm->get('old_password')->getData();
+            $newPassword = $profileForm->get('new_password')->getData();
+            if ($oldPassword && $newPassword) {
+                if ($passwordHasher->isPasswordValid($admin, $oldPassword)) {
+                    $hashedPassword = $passwordHasher->hashPassword($admin, $newPassword);
+                    $admin->setPassword($hashedPassword);
+                } else {
+                    $this->addFlash('danger', 'Le mot de passe actuel est incorrect.');
+                    return $this->redirectToRoute('admin_profile_edit');
+                }
             }
-            $em->persist($admin);
-            $em->flush();
 
-            $this->addFlash('success', 'Votre profil a été mis à jour.');
+            $em->flush(); // Pas besoin de persist, car l'entité est déjà gérée
+
+            $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
             return $this->redirectToRoute('admin_profile_edit');
         }
 
         return $this->render('dashboard/admin/users/edit_profile.html.twig', [
             'avatar_form' => $avatarForm->createView(),
-            'form' => $form->createView(),
-            'admin' => $admin,
+            'profile_form' => $profileForm->createView(),
+            'cagnotte_form' => $cagnotteForm->createView(),
         ]);
     }
 

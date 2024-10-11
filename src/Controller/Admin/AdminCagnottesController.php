@@ -31,10 +31,14 @@ class AdminCagnottesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($cagnotte);
-            $entityManager->flush();
+            $user = $form->get('user')->getData(); // Récupérer l'utilisateur depuis le formulaire
+            if ($user) {
+                $cagnotte->setUser($user); // Associer la cagnotte à l'utilisateur
+                $entityManager->persist($cagnotte);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('admin_cagnottes_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('admin_cagnottes_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->render('dashboard/admin/cagnottes/new.html.twig', [
@@ -50,33 +54,29 @@ class AdminCagnottesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+
             return $this->redirectToRoute('admin_cagnottes_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('dashboard/admin/cagnottes/edit.html.twig', [
             'form' => $form->createView(),
+            'cagnotte' => $cagnotte, // Passer la cagnotte pour l'affichage
         ]);
     }
 
     #[Route('/delete-all', name: 'admin_cagnottes_delete_all', methods: ['POST'])]
     public function deleteAll(CagnotteRepository $cagnotteRepository, EntityManagerInterface $entityManager): Response
     {
-        // Vérification que seul l'administrateur peut effectuer cette action
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        // Récupérer toutes les cagnottes et les supprimer
         $cagnottes = $cagnotteRepository->findAll();
         foreach ($cagnottes as $cagnotte) {
             $entityManager->remove($cagnotte);
         }
 
-        // Appliquer les changements en base de données
         $entityManager->flush();
-
-        // Ajouter un message flash pour signaler que la suppression a été effectuée
         $this->addFlash('success', 'Toutes les cagnottes ont été supprimées avec succès.');
 
-        // Redirection vers la page d'index
         return $this->redirectToRoute('admin_cagnottes_index');
     }
 }

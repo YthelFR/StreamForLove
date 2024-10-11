@@ -17,7 +17,7 @@ class Cagnotte
     #[ORM\Column(length: 255)]
     private ?string $lien = null;
 
-    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'cagnottes')]
+    #[ORM\ManyToOne(targetEntity: Users::class, inversedBy: 'cagnottes')] // Changez 'cagnotteStreamers' en 'cagnottes'
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $user = null;
 

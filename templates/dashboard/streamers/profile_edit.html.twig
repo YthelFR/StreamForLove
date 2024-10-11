@@ -14,6 +14,7 @@
                 </div>
             {% endfor %}
 
+            <!-- Section Avatar -->
             <div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white">
                 {{ form_start(avatar_form) }}
                 <div class="mb-4">
@@ -37,19 +38,30 @@
                     {{ form_errors(avatar_form.pronoms) }}
                 </div>
 
-                <!-- Ajout du champ lien de la cagnotte -->
-                <div class="mb-4">
-                    {{ form_label(avatar_form.lien, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                    {{ form_widget(avatar_form.lien, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
-                    {{ form_errors(avatar_form.lien) }}
-                </div>
-
                 <div class="flex justify-end mt-4">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistrer le profil</button>
                 </div>
                 {{ form_end(avatar_form) }}
             </div>
 
+            <!-- Section Cagnotte -->
+            <div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white mt-8">
+                <h2 class="text-lg font-bold mb-4">Ajouter le lien de votre cagnotte</h2>
+                {{ form_start(cagnotte_form) }}
+
+                <div class="mb-4">
+                    {{ form_label(cagnotte_form.lien, null, {'attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(cagnotte_form.lien, {'attr': {'class': 'w-full border border-gray-300 p-2 rounded-lg'}}) }}
+                    {{ form_errors(cagnotte_form.lien) }}
+                </div>
+
+                <div class="flex justify-end mt-4">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Enregistrer la cagnotte</button>
+                </div>
+                {{ form_end(cagnotte_form) }}
+            </div>
+
+            <!-- Section Profil -->
             <div class="mx-auto w-11/12 max-w-3xl border border-gray-300 p-5 shadow-lg rounded-lg bg-white mt-8">
                 <h2 class="text-lg font-bold mb-4">Modifier le Profil</h2>
                 {{ form_start(profile_form) }}
