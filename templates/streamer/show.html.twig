@@ -83,11 +83,11 @@
 			<div class="flex flex-wrap justify-around">
 				{% for social in socialsNetworks %}
 					<a href="{{ social.url }}" target="_blank" class="mb-4">
-						{% if 'twitch' in social.url %}
+						{% if 'twitch.tv' in social.url %}
 							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitchlogo.png') }}" alt="Logo Twitch, suivez {{ streamer.pseudo }} sur sa chaîne."/>
 						{% elseif 'x.com' in social.url %}
 							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/twitterlogo.png') }}" alt="Logo Twitter - X, suivez {{ streamer.pseudo }} sur son réseau social."/>
-						{% elseif 'instagram' in social.url %}
+						{% elseif 'www.instagram.com' in social.url %}
 							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/instagramlogo.png') }}" alt="Logo Instagram, suivez {{ streamer.pseudo }} sur son réseau social."/>
 						{% elseif 'youtube' in social.url %}
 							<img class="w-12 h-12 lg:w-16 lg:h-16 rounded-3xl shadow-xl transition-transform duration-300 transform hover:scale-110" src="{{ asset('assets/medias/socials/youtubelogo.png') }}" alt="Logo Youtube, suivez {{ streamer.pseudo }} sur son réseau social."/>

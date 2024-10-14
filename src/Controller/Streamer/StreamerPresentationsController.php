@@ -88,9 +88,9 @@ class StreamerPresentationsController extends AbstractController
         $file = $form->get('picturePath')->getData();
         if ($file) {
             if ($isEdit && $presentation->getPicturePath()) {
-                $this->deleteFile($this->getParameter('kernel.project_dir') . '/public/assets/users/presentations/pictures/' . $presentation->getPicturePath());
+                $this->deleteFile($this->getParameter('upload_directory') . '/' . $presentation->getPicturePath());
             }
-            $newFilename = $this->uploadFile($file, 'kernel.project_dir', 'pictures', $slugger);
+            $newFilename = $this->uploadFile($file, 'upload_directory', $slugger);
             $presentation->setPicturePath($newFilename);
         }
 
@@ -99,28 +99,29 @@ class StreamerPresentationsController extends AbstractController
             if ($isEdit && $presentation->getPlanning()) {
                 $this->deleteFile($this->getParameter('planning_directory') . '/' . $presentation->getPlanning());
             }
-            $newFilename = $this->uploadFile($planningFile, 'planning_directory', 'planning', $slugger);
+            $newFilename = $this->uploadFile($planningFile, 'planning_directory', $slugger);
             $presentation->setPlanning($newFilename);
         }
 
         $goalsFile = $form->get('goals')->getData();
         if ($goalsFile) {
             if ($isEdit && $presentation->getGoals()) {
-                $this->deleteFile($this->getParameter('goals_directory') . '/public/assets/users/presentations/goals/' . $presentation->getGoals());
+                $this->deleteFile($this->getParameter('goals_directory') . '/' . $presentation->getGoals());
             }
-            $newFilename = $this->uploadFile($goalsFile, 'goals_directory', 'goals', $slugger);
+            $newFilename = $this->uploadFile($goalsFile, 'goals_directory', $slugger);
             $presentation->setGoals($newFilename);
         }
     }
 
-    private function uploadFile($file, $directoryParameter, $subFolder, SluggerInterface $slugger): string
+    private function uploadFile($file, $directoryParameter, SluggerInterface $slugger): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
+        // Déplacement du fichier vers le bon répertoire
         $file->move(
-            $this->getParameter($directoryParameter) . '/public/assets/users/presentations/' . $subFolder,
+            $this->getParameter($directoryParameter),
             $newFilename
         );
 

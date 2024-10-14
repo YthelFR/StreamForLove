@@ -73,7 +73,12 @@
 		<div class="flex justify-center items-center mt-6">
 			<a href="#" target="_blank" class="inline-flex items-center text-gray-700 font-medium text-xs text-center">
 				<span class="ml-2">Pas encore de compte ?
-					<a href="#" class="text-xs ml-2 text-red-700 font-semibold">Inscrivez-vous !</a>
+					<a href="{{ path('app_register') }}" class="text-xs ml-2 text-red-700 font-semibold">Inscrivez-vous !</a>
+				</span>
+			</a>
+			<a href="#" target="_blank" class="inline-flex items-center text-gray-700 font-medium text-xs text-center">
+				<span class="ml-2">
+					<a href="{{ path('app_forgot_password_request') }}" class="text-xs ml-2 text-red-700 font-semibold">Mot de passe oublié ?</a>
 				</span>
 			</a>
 		</div>
