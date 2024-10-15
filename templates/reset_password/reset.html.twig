@@ -1,12 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Reset your password{% endblock %}
+{% block title %}Réinitialiser votre mot de passe{% endblock %}
 
 {% block body %}
-    <h1>Reset your password</h1>
+    <div class="min-h-screen flex flex-col items-center justify-center gradientBg">
+        <div class="flex flex-col bg-white shadow-md px-6 py-8 rounded-3xl w-full max-w-xs sm:max-w-md">
+            <div class="font-medium text-lg sm:text-xl text-center text-gray-800 mb-6">
+                Réinitialiser votre mot de passe
+            </div>
 
-    {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
-    {{ form_end(resetForm) }}
+            {{ form_start(resetForm, {'attr': {'class': 'space-y-6'}}) }}
+                <div class="flex flex-col">
+                    {{ form_row(resetForm.plainPassword, {
+                        'label_attr': {'class': 'text-sm font-semibold text-gray-600 mb-2'},
+                        'attr': {'class': 'text-sm placeholder-gray-500 rounded-2xl border border-gray-400 w-full py-2 px-4 focus:outline-none focus:border-blue-400'}
+                    }) }}
+                </div>
+
+                <div class="flex w-full">
+                    <button type="submit" class="flex mt-4 items-center justify-center focus:outline-none text-white text-sm sm:text-base btnSfl rounded-2xl py-2 w-full transition duration-150 ease-in">
+                        <span class="mr-2 uppercase">Réinitialiser le mot de passe</span>
+                        <span>
+                            <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" stroke="currentColor">
+                                <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            {{ form_end(resetForm) }}
+        </div>
+    </div>
 {% endblock %}

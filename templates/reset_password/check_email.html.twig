@@ -1,11 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Password Reset Email Sent{% endblock %}
+{% block title %}E-mail de réinitialisation envoyé{% endblock %}
 
 {% block body %}
-    <p>
-        If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
-        This link will expire in {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
-    </p>
-    <p>If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+    <div class="min-h-screen flex flex-col items-center justify-center gradientBg">
+        <div class="flex flex-col bg-white shadow-md px-6 py-8 rounded-3xl w-full max-w-xs sm:max-w-md text-center">
+            <img src="{{ asset('assets/medias/headers/logo.png') }}" alt="Réinitialisation" class="w-40 h-auto mx-auto mb-6">
+
+            <div class="text-xl sm:text-2xl font-medium text-gray-800 mb-4">
+                E-mail de réinitialisation envoyé !
+            </div>
+            <p class="text-gray-600 mb-4">
+                Si un compte correspondant à votre adresse e-mail existe, vous recevrez un lien pour réinitialiser votre mot de passe. Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <p class="text-gray-600">
+                Si vous ne recevez pas d'e-mail, vérifiez votre dossier spam ou <a href="{{ path('app_forgot_password_request') }}" class="text-red-700 font-semibold">réessayez</a>.
+            </p>
+
+            <a href="{{ path('app_home') }}" class="mt-6 flex justify-center items-center text-white text-sm btnSfl rounded-2xl py-2 px-6 w-full transition duration-150 ease-in">
+                Retour à l'accueil
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Redirection automatique vers la page d'accueil après 10 secondes
+        setTimeout(function() {
+            window.location.href = "{{ path('app_home') }}";
+        }, 60000); // 60 secondes
+    </script>
 {% endblock %}
