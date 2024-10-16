@@ -15,12 +15,12 @@ use Doctrine\ORM\EntityManagerInterface;
 class AdminMailController extends AbstractController
 {
     private MailerService $mailerService;
-    private EntityManagerInterface $entityManager; // Déclarez la variable pour EntityManager
+    private EntityManagerInterface $entityManager; 
 
     public function __construct(MailerService $mailerService, EntityManagerInterface $entityManager)
     {
         $this->mailerService = $mailerService;
-        $this->entityManager = $entityManager; // Initialisez EntityManager
+        $this->entityManager = $entityManager; 
     }
 
     #[Route('', name: 'admin_mail')]
@@ -32,14 +32,10 @@ class AdminMailController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            // Envoyer un mail selon le type de destinataire
             if ($data['recipientType'] === 'all') {
-                // Récupérer les utilisateurs selon le rôle choisi
                 if ($data['role'] === 'all') {
-                    // Envoyer à tous les utilisateurs
                     $users = $this->entityManager->getRepository(Users::class)->findAll();
                 } else {
-                    // Récupérer les utilisateurs selon le rôle spécifique
                     $users = $this->entityManager->getRepository(Users::class)->findBy(['roles' => [$data['role']]]);
                 }
 
@@ -47,7 +43,6 @@ class AdminMailController extends AbstractController
                     $this->mailerService->sendMail($user->getEmail(), $data['subject'], $data['message'], $data['senderName']);
                 }
             } else {
-                // Envoyer à l'utilisateur spécifique
                 foreach ($data['recipient'] as $recipient) {
                     $this->mailerService->sendMail($recipient->getEmail(), $data['subject'], $data['message'], $data['senderName']);
                 }

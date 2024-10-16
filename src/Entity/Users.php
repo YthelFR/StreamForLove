@@ -62,7 +62,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
     private Collection $evenements;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)] // Assurez-vous que cela pointe vers 'user'
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)] 
     private Collection $cagnottes;
 
     private $resetToken;
@@ -203,7 +203,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setStreamersPresentation(?Presentations $streamersPresentation): static
     {
-        // Set the owning side of the relation if necessary
         if ($streamersPresentation !== null && $streamersPresentation->getStreamersPresentation() !== $this) {
             $streamersPresentation->setStreamersPresentation($this);
         }
@@ -233,7 +232,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSocialsNetwork(SocialsNetwork $socialsNetwork): self
     {
         if ($this->socialsNetworks->removeElement($socialsNetwork)) {
-            // set the owning side to null (unless already changed)
             if ($socialsNetwork->getUser() === $this) {
                 $socialsNetwork->setUser(null);
             }
@@ -262,7 +260,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeBlogueursArticle(Articles $blogueursArticle): static
     {
         if ($this->blogueursArticle->removeElement($blogueursArticle)) {
-            // set the owning side to null (unless already changed)
             if ($blogueursArticle->getUsers() === $this) {
                 $blogueursArticle->setUsers(null);
             }
@@ -290,7 +287,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeOutsider(Outsiders $outsider): static
     {
         if ($this->outsiders->removeElement($outsider)) {
-            // set the owning side to null (unless already changed)
             if ($outsider->getUser() === $this) {
                 $outsider->setUser(null);
             }
@@ -318,7 +314,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeArticle(Articles $article): static
     {
         if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
             if ($article->getBlogueurArticles() === $this) {
                 $article->setBlogueurArticles(null);
             }
@@ -350,7 +345,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->evenements->contains($evenement)) {
             $this->evenements->add($evenement);
-            $evenement->addParticipant($this);  // Mise à jour de l'autre côté de la relation
+            $evenement->addParticipant($this);  
         }
 
         return $this;
@@ -359,7 +354,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeEvenement(Evenements $evenement): static
     {
         if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeParticipant($this);  // Mise à jour de l'autre côté de la relation
+            $evenement->removeParticipant($this);  
         }
 
         return $this;
@@ -398,7 +393,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeCagnotte(Cagnotte $cagnotte): self
     {
         if ($this->cagnottes->removeElement($cagnotte)) {
-            // set the owning side to null (unless already changed)
             if ($cagnotte->getUser() === $this) {
                 $cagnotte->setUser(null);
             }

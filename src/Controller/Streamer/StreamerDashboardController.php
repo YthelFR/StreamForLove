@@ -33,9 +33,8 @@ class StreamerDashboardController extends AbstractController
         try {
             $weatherData = $this->weatherService->getWeatherData($city);
         } catch (\Exception $e) {
-            // Enregistre l'erreur dans les logs
             $this->logger->error('Erreur lors de la récupération des données météo : ' . $e->getMessage());
-            $weatherData = null;  // Gérer une valeur par défaut ou une erreur utilisateur
+            $weatherData = null;  
         }
 
         $randomInspiration = $this->inspirationsService->getRandomInspiration();

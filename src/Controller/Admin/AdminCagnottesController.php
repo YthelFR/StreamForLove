@@ -31,9 +31,9 @@ class AdminCagnottesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $form->get('user')->getData(); // Récupérer l'utilisateur depuis le formulaire
+            $user = $form->get('user')->getData(); 
             if ($user) {
-                $cagnotte->setUser($user); // Associer la cagnotte à l'utilisateur
+                $cagnotte->setUser($user); 
                 $entityManager->persist($cagnotte);
                 $entityManager->flush();
 
@@ -60,7 +60,7 @@ class AdminCagnottesController extends AbstractController
 
         return $this->render('dashboard/admin/cagnottes/edit.html.twig', [
             'form' => $form->createView(),
-            'cagnotte' => $cagnotte, // Passer la cagnotte pour l'affichage
+            'cagnotte' => $cagnotte, 
         ]);
     }
 

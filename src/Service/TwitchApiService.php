@@ -124,13 +124,11 @@ class TwitchApiService
 
         $data = $response->toArray();
 
-        // Vérifier si 'data' est présent et non vide
         return $data['data'][0]['id'] ?? '';
     }
 
     public function getUsersInfo(array $usernames): array
     {
-        // Limiter à 100 pseudos maximum
         $usernames = array_slice($usernames, 0, 100);
 
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
@@ -150,7 +148,6 @@ class TwitchApiService
 
     public function getAvatarUrl(string $pseudo): string
     {
-        // Call Twitch API to get user data
         $response = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
             'headers' => [
                 'Client-ID' => $this->clientId,

@@ -68,8 +68,8 @@ class ProfileType extends AbstractType
                         'max' => 4096,
                     ]),
                     new Regex([
-                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
-                        'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule et un chiffre.',
+                        'pattern' => '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/',
+                        'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.',
                     ]),
                 ],
             ])
@@ -80,9 +80,9 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
-            'csrf_protection' => true, // Activer la protection CSRF
-            'csrf_field_name' => '_token', // Nom du champ pour le CSRF token
-            'csrf_token_id' => 'profile_item', // Identifiant du token CSRF
+            'csrf_protection' => true, 
+            'csrf_field_name' => '_token', 
+            'csrf_token_id' => 'profile_item', 
         ]);
     }
 }

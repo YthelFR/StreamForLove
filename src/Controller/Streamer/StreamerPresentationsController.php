@@ -119,7 +119,6 @@ class StreamerPresentationsController extends AbstractController
         $safeFilename = $slugger->slug($originalFilename);
         $newFilename = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
-        // Déplacement du fichier vers le bon répertoire
         $file->move(
             $this->getParameter($directoryParameter),
             $newFilename

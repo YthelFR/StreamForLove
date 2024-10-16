@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-            $user->setCreatedAt(new \DateTimeImmutable()); // Optionnel, mais bonne pratique d'initialiser createdAt
+            $user->setCreatedAt(new \DateTimeImmutable()); 
             $user->setRoles(['ROLE_USER']);
 
             $entityManager->persist($user);
@@ -56,7 +56,7 @@ class RegistrationController extends AbstractController
                     ->to('support@streamforlove.coalitionplus.org')
                     ->subject('Nouvel utilisateur à vérifier')
                     ->htmlTemplate('registration/emails/new_user_notification.html.twig')
-                    ->context(['user' => $user]) // Passer l'utilisateur à l'email
+                    ->context(['user' => $user]) 
             );
 
             return $this->redirectToRoute('app_register');
@@ -78,10 +78,8 @@ class RegistrationController extends AbstractController
         }
 
         try {
-            // Vérifiez l'email et activez le compte
             $this->emailVerifier->handleEmailConfirmation($request, $user);
 
-            // Envoyer un email de confirmation à l'utilisateur
             $mailer->send((new TemplatedEmail())
                     ->from(new Address('support@streamforlove.coalitionplus.org', 'Support Stream For Love'))
                     ->to($user->getEmail())
@@ -89,10 +87,9 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/emails/verification_success.html.twig')
             );
 
-            // Message flash
             $this->addFlash('success', 'Votre adresse e-mail a été vérifiée avec succès.');
 
-            return $this->redirectToRoute('app_home'); // Redirigez vers la page d'accueil
+            return $this->redirectToRoute('app_home'); 
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
             return $this->redirectToRoute('app_register');

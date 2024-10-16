@@ -40,8 +40,8 @@ class AdminUsersController extends AbstractController
         $query = $queryBuilder->getQuery();
         $users = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1), // page number
-            25 // limit per page
+            $request->query->getInt('page', 1), 
+            25 
         );
 
         return $this->render('dashboard/admin/users/index.html.twig', [
@@ -61,18 +61,15 @@ class AdminUsersController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Changement de rôle
             $roles = $form->get('roles')->getData();
             $user->setRoles($roles);
 
-            // Envoi d'e-mail pour réinitialiser le mot de passe
             if ($request->request->has('send_password_reset_email')) {
                 $token = bin2hex(random_bytes(32));
                 $user->setResetToken($token);
                 $em->persist($user);
                 $em->flush();
 
-                // Préparez l'e-mail avec Symfony Mailer
                 $email = (new Email())
                     ->from('support@streamforlove.coalitionplus.org')
                     ->to($user->getEmail())
@@ -80,7 +77,7 @@ class AdminUsersController extends AbstractController
                     ->html(
                         $this->renderView(
                             'dashboard/admin/mail/reset_password.html.twig',
-                            ['token' => $token, 'user' => $user] // Ajout de l'utilisateur ici
+                            ['token' => $token, 'user' => $user] 
                         )
                     );
 
@@ -115,35 +112,29 @@ class AdminUsersController extends AbstractController
         /** @var Users $admin */
         $admin = $this->getUser();
 
-        // Formulaire pour l'Avatar
         $avatarForm = $this->createForm(AvatarType::class);
         $avatarForm->handleRequest($request);
 
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-            // Gestion du changement d'avatar
             $avatarFile = $avatarForm->get('avatar')->getData();
             if ($avatarFile) {
-                // Supprimer l'ancien avatar s'il existe (sauf si c'est l'avatar par défaut)
                 $oldAvatar = $admin->getAvatar();
                 if ($oldAvatar && $oldAvatar !== 'default-avatar.png') {
                     $oldAvatarPath = $this->getParameter('avatars_directory') . '/' . $oldAvatar;
                     if (file_exists($oldAvatarPath)) {
-                        unlink($oldAvatarPath); // Supprimer l'ancien fichier avatar
+                        unlink($oldAvatarPath); 
                     }
                 }
 
-                // Générer un nouveau nom de fichier pour l'avatar
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
 
                 try {
-                    // Déplacer le fichier téléchargé dans le répertoire des avatars
                     $avatarFile->move(
                         $this->getParameter('avatars_directory'),
                         $newFilename
                     );
-                    // Mettre à jour l'avatar de l'utilisateur dans la base de données
                     $admin->setAvatar($newFilename);
                     $em->flush();
                     $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
@@ -152,7 +143,6 @@ class AdminUsersController extends AbstractController
                 }
             }
 
-            // Mettre à jour les pronoms si modifiés
             $pronoms = $avatarForm->get('pronoms')->getData();
             if ($pronoms) {
                 $admin->setPronoms($pronoms);
@@ -167,28 +157,25 @@ class AdminUsersController extends AbstractController
         if ($cagnotteForm->isSubmitted() && $cagnotteForm->isValid()) {
             $lienCagnotte = $cagnotteForm->get('lien')->getData();
             if ($lienCagnotte) {
-                // Récupérez la première cagnotte existante ou créez-en une nouvelle
                 $cagnotte = $admin->getCagnottes()->first() ?: new Cagnotte();
 
                 if (!$cagnotte->getId()) {
-                    $cagnotte->setUser($admin); // Associe la cagnotte à l'utilisateur
-                    $cagnotte->setLien($lienCagnotte); // Ajoute le lien de la cagnotte
-                    $em->persist($cagnotte); // Persiste la nouvelle cagnotte
+                    $cagnotte->setUser($admin); 
+                    $cagnotte->setLien($lienCagnotte); 
+                    $em->persist($cagnotte); 
                 } else {
-                    $cagnotte->setLien($lienCagnotte); // Met à jour le lien de la cagnotte existante
+                    $cagnotte->setLien($lienCagnotte); 
                 }
 
-                $em->flush(); // Valide les changements
+                $em->flush(); 
                 $this->addFlash('success', 'Cagnotte mise à jour avec succès.');
             }
         }
 
-        // Formulaire pour le profil
         $profileForm = $this->createForm(ProfileType::class, $admin);
         $profileForm->handleRequest($request);
 
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
-            // Gestion du mot de passe s'il est modifié
             $oldPassword = $profileForm->get('old_password')->getData();
             $newPassword = $profileForm->get('new_password')->getData();
             if ($oldPassword && $newPassword) {
@@ -201,7 +188,7 @@ class AdminUsersController extends AbstractController
                 }
             }
 
-            $em->flush(); // Pas besoin de persist, car l'entité est déjà gérée
+            $em->flush(); 
 
             $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
             return $this->redirectToRoute('admin_profile_edit');

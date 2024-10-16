@@ -52,8 +52,8 @@ class EditUsersType extends AbstractType
                     'Simplon Testeur' => 'ROLE_SIMPLON',
                 ],
                 'expanded' => false,
-                'multiple' => true, // Permet de gérer les rôles multiples
-                'attr' => ['class' => 'select2'], // Ajout de la classe pour Select2
+                'multiple' => true, 
+                'attr' => ['class' => 'select2'], 
             ])
             ->add('send_password_reset_email', SubmitType::class, [
                 'label' => 'Réinitialiser le mot de passe',
@@ -79,9 +79,9 @@ class EditUsersType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Users::class,
-            'csrf_protection' => true, // Activer la protection CSRF
-            'csrf_field_name' => '_token', // Nom du champ pour le CSRF token
-            'csrf_token_id' => 'profile_item', // Identifiant du token CSRF
+            'csrf_protection' => true, 
+            'csrf_field_name' => '_token', 
+            'csrf_token_id' => 'profile_item', 
         ]);
     }
 }

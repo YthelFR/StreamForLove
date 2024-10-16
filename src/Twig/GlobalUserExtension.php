@@ -34,7 +34,6 @@ class GlobalUserExtension extends AbstractExtension
 
     public function getPendingUsersCount(): int
     {
-        // Compter les utilisateurs non validés
         $repository = $this->entityManager->getRepository(Users::class);
         return $repository->count(['isValid' => false]);
     }

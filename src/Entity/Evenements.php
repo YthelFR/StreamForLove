@@ -139,7 +139,6 @@ class Evenements
     public function removeClip(EvenementsClips $clip): static
     {
         if ($this->clips->removeElement($clip)) {
-            // Définir la relation inverse à null
             if ($clip->getEvenement() === $this) {
                 $clip->setEvenement(null);
             }

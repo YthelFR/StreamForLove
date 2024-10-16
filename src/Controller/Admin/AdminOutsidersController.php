@@ -82,7 +82,6 @@ class AdminOutsidersController extends AbstractController
     #[Route('/{id}', name: 'admin_outsiders_delete', methods: ['POST'])]
     public function delete(Request $request, Outsiders $outsider, EntityManagerInterface $entityManager): Response
     {
-        // Vérification du token CSRF
         if ($this->isCsrfTokenValid('delete' . $outsider->getId(), $request->request->get('_token'))) {
             $entityManager->remove($outsider);
             $entityManager->flush();

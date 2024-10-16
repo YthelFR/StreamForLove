@@ -30,8 +30,8 @@ class EvenementsType extends AbstractType
                     ]),
                 ],
                 'attr' => [
-                    'min' => 1900, // Optionnel : pour limiter la saisie des années
-                    'max' => date('Y'), // Optionnel : limite l'année au présent
+                    'min' => 1900, 
+                    'max' => date('Y'), 
                 ],
             ])
             ->add('donations', IntegerType::class, [
@@ -54,16 +54,16 @@ class EvenementsType extends AbstractType
             ->add('participants', EntityType::class, [
                 'class' => Users::class,
                 'multiple' => true,
-                'expanded' => false, // Assurez-vous que `expanded` est faux pour utiliser un select multiple
+                'expanded' => false, 
                 'choice_label' => 'pseudo',
                 'attr' => [
-                    'class' => 'select2', // Ajout d'une classe pour utiliser select2
-                    'multiple' => 'multiple', // S'assure que l'attribut multiple est bien activé
+                    'class' => 'select2', 
+                    'multiple' => 'multiple', 
                 ],
             ])
             ->add('thumbnail', FileType::class, [
                 'label' => 'Image (Thumbnail)',
-                'mapped' => false, // Ce champ n'est pas mappé à une propriété de l'entité directement
+                'mapped' => false, 
                 'required' => false,
                 'constraints' => [
                     new File([

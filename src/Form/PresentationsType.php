@@ -55,7 +55,6 @@ class PresentationsType extends AbstractType
                 ],
             ])
 
-            // Validation des champs textuels pour les questions
             ->add('question1', TextType::class, [
                 'label' => 'Peux-tu te présenter en quelques mots ?',
                 'required' => false,
@@ -90,7 +89,6 @@ class PresentationsType extends AbstractType
                 ],
             ])
 
-            // Validation des clips
             ->add('clip1', TextType::class, [
                 'label' => 'Clip 1',
                 'required' => false,

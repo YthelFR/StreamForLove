@@ -29,35 +29,29 @@ class StreamerUsersController extends AbstractController
         /** @var Users $user */
         $user = $this->getUser();
     
-        // Formulaire pour l'avatar
         $avatarForm = $this->createForm(AvatarType::class);
         $avatarForm->handleRequest($request);
     
         if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
-            // Gestion du changement d'avatar
             $avatarFile = $avatarForm->get('avatar')->getData();
             if ($avatarFile) {
-                // Supprimer l'ancien avatar s'il existe (sauf si c'est l'avatar par défaut)
                 $oldAvatar = $user->getAvatar();
                 if ($oldAvatar && $oldAvatar !== 'default-avatar.png') {
                     $oldAvatarPath = $this->getParameter('avatars_directory') . '/' . $oldAvatar;
                     if (file_exists($oldAvatarPath)) {
-                        unlink($oldAvatarPath); // Supprimer l'ancien fichier avatar
+                        unlink($oldAvatarPath); 
                     }
                 }
     
-                // Générer un nouveau nom de fichier pour l'avatar
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . uniqid() . '.' . $avatarFile->guessExtension();
     
                 try {
-                    // Déplacer le fichier téléchargé dans le répertoire des avatars
                     $avatarFile->move(
                         $this->getParameter('avatars_directory'),
                         $newFilename
                     );
-                    // Mettre à jour l'avatar de l'utilisateur dans la base de données
                     $user->setAvatar($newFilename);
                     $em->flush();
                     $this->addFlash('success', 'Votre avatar a été mis à jour avec succès.');
@@ -66,7 +60,6 @@ class StreamerUsersController extends AbstractController
                 }
             }
     
-            // Mettre à jour les pronoms si modifiés
             $pronoms = $avatarForm->get('pronoms')->getData();
             if ($pronoms) {
                 $user->setPronoms($pronoms);
@@ -75,21 +68,17 @@ class StreamerUsersController extends AbstractController
             }
         }
     
-       // Formulaire pour la cagnotte
        $cagnotteForm = $this->createForm(CagnotteUserType::class);
        $cagnotteForm->handleRequest($request);
    
        if ($cagnotteForm->isSubmitted() && $cagnotteForm->isValid()) {
            $lienCagnotte = $cagnotteForm->get('lien')->getData();
            if ($lienCagnotte) {
-               // Récupérez la première cagnotte existante ou créez-en une nouvelle
-               $cagnotte = $user->getCagnottes()->first(); // Récupère la première cagnotte
+               $cagnotte = $user->getCagnottes()->first(); 
                if (!$cagnotte) {
-                   // Si aucune cagnotte n'est trouvée, créez-en une nouvelle
                    $cagnotte = new Cagnotte();
-                   $cagnotte->setUser($user); // Associe la cagnotte à l'utilisateur
+                   $cagnotte->setUser($user); 
                }
-               // Mettre à jour ou définir le lien de la cagnotte
                $cagnotte->setLien($lienCagnotte);
                $em->persist($cagnotte);
                $em->flush();
@@ -98,12 +87,10 @@ class StreamerUsersController extends AbstractController
            }
        }
     
-        // Formulaire pour le profil
         $profileForm = $this->createForm(ProfileType::class, $user);
         $profileForm->handleRequest($request);
     
         if ($profileForm->isSubmitted() && $profileForm->isValid()) {
-            // Gestion du mot de passe s'il est modifié
             $oldPassword = $profileForm->get('old_password')->getData();
             $newPassword = $profileForm->get('new_password')->getData();
             if ($oldPassword && $newPassword) {
@@ -116,7 +103,7 @@ class StreamerUsersController extends AbstractController
                 }
             }
     
-            $em->flush(); // Persist n'est pas nécessaire ici car l'entité $user est déjà gérée.
+            $em->flush(); 
     
             $this->addFlash('success', 'Votre profil a été mis à jour avec succès.');
             return $this->redirectToRoute('streamer_profile_edit');
