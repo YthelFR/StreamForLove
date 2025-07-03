@@ -69,9 +69,8 @@
 				{% if evenement.clips is not empty %}
 					{% for clip in evenement.clips %}
 						{% set clipUrl = clip.url %}
-						{# On suppose que `clip.url` est la propriété qui contient l'URL complète du clip #}
 						{% set clipId = clipUrl|split('/clip/')[1] %}
-						<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4">
+						<div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 p-4">
 							<iframe src="https://clips.twitch.tv/embed?clip={{ clipId }}&parent={{ siteUrl }}" frameborder="0" allowfullscreen="true" scrolling="no" class="w-full h-56"></iframe>
 						</div>
 					{% endfor %}

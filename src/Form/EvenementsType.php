@@ -30,8 +30,8 @@ class EvenementsType extends AbstractType
                     ]),
                 ],
                 'attr' => [
-                    'min' => 1900, 
-                    'max' => date('Y'), 
+                    'min' => 1900,
+                    'max' => date('Y'),
                 ],
             ])
             ->add('donations', IntegerType::class, [
@@ -54,25 +54,30 @@ class EvenementsType extends AbstractType
             ->add('participants', EntityType::class, [
                 'class' => Users::class,
                 'multiple' => true,
-                'expanded' => false, 
+                'expanded' => false,
                 'choice_label' => 'pseudo',
                 'attr' => [
-                    'class' => 'select2', 
-                    'multiple' => 'multiple', 
+                    'class' => 'select2',
+                    'multiple' => 'multiple',
                 ],
             ])
             ->add('thumbnail', FileType::class, [
                 'label' => 'Image (Thumbnail)',
-                'mapped' => false, 
+                'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File([
+                        'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG)',
-                    ]),
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
+                    ])
                 ],
             ])
         ;

@@ -50,6 +50,6 @@ services:
     App\Service\InspirationsService:
         arguments:
             $projectDir: '%kernel.project_dir%'
-    App\Service\WeatherService:
-        arguments:
-            $weatherApiKey: '%env(WEATHER_API_KEY)%'
+    App\EventListener\AccessProtectionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

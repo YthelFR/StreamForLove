@@ -23,11 +23,14 @@ class AvatarType extends AbstractType
                     new File([
                         'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (jpeg, png, gif).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
             ])

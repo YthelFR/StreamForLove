@@ -57,16 +57,19 @@ class UsersType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Avatar (Image file)',
-                'required' => false, 
+                'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG ou GIF).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
             ])

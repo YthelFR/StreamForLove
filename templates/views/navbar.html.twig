@@ -59,63 +59,6 @@
             <!-- End Menu Mobile -->
 
             <ul class="ml-auto flex justify-end self-center w-1/4">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <!-- Dropdown User Avatar -->
-                    <li class="px-2 dropdown ml-3 relative">
-                        <button type="button" class="dropdown-toggle flex items-center">
-                            <div class="p-2 md:block text-left">
-                                <h2 class="text-sm font-semibold text-gray-800">{{ app.user.pseudo }}</h2>
-                                <p class="text-xs text-gray-800">{{ app.user.roles[0] | replace({'ROLE_' : ''}) | replace({'_' : ' '}) | lower | capitalize }}</p>
-                            </div>
-                            <div class="flex-shrink-0 w-10 h-10 relative">
-                                <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                                    <img class="w-8 h-8 rounded-full object-cover" src="{{ app.user.avatar ? asset('assets/users/avatars/' ~ app.user.avatar) : asset('assets/users/avatars/default-avatar.png') }}" alt="{{ app.user.pseudo }} - Avatar de l'utilisateur"/>
-                                </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
-                            <li>
-                                {% set userRole = app.user.roles[0] %}
-                                {% set path = '' %}
-                                {% if userRole == 'ROLE_ADMIN' or userRole == 'ROLE_MANAGER' %}
-                                    {% set path = path('app_admin') %}
-                                {% elseif userRole == 'ROLE_STREAMER_ACTIF' or userRole == 'ROLE_STREAMER_ABSENT' or userRole == 'ROLE_BLOGUEUR' %}
-                                    {% set path = path('app_dashboard') %}
-                                {% else %}
-                                    {% set path = '#' %}
-                                {% endif %}
-                                <a href="{{ path }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Profil</a>
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ path('app_logout') }}" style="display: none;" id="logout-form">
-                                    {{ csrf_token('logout') }}
-                                </form>
-                                <a role="menuitem" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50 cursor-pointer" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Déconnexion
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                {% else %}
-                    <li class="px-2 dropdown ml-3 relative">
-                        <button type="button" class="dropdown-toggle flex items-center">
-                            <div class="flex-shrink-0 w-10 h-10 relative">
-                                <div class="p-1 bg-white rounded-full focus:outline-none focus:ring">
-                                    <img class="w-8 h-8 rounded-full" src="{{ asset('assets/users/avatars/default-avatar.png') }}" alt="Default Avatar"/>
-                                </div>
-                            </div>
-                        </button>
-                        <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-auto max-w-[140px] absolute right-0 mt-2">
-                            <li>
-                                <a href="{{ path('app_login') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">Connexion</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('app_register') }}" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#f84525] hover:bg-gray-50">S'inscrire</a>
-                            </li>
-                        </ul>
-                    </li>
-                {% endif %}
-
                 <!-- Contact Button -->
                 <a href="{{ path('contact') }}" class="inline-flex">
                     <li class="relative">
