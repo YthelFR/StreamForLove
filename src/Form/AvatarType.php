@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
@@ -20,19 +23,35 @@ class AvatarType extends AbstractType
                     new File([
                         'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (jpeg, png, gif).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
+            ])
+            ->add('pronoms', ChoiceType::class, [
+                'choices' => [
+                    'Il/Lui' => 'Il/Lui',
+                    'Elle/Elle' => 'Elle/Elle',
+                    'Iel/Iels' => 'Iel/Iels',
+                    'Ils/Eux' => 'Ils/Eux',
+                    'Elles/Eux' => 'Elles/Eux',
+                ],
+                'required' => false,
+                'label' => 'Pronoms',
+                'placeholder' => 'Sélectionnez vos pronoms',
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'data_class' => Users::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id' => 'avatar_form',

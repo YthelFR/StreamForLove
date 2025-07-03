@@ -43,9 +43,8 @@ class UsersType extends AbstractType
                 'constraints' => [
                     new NotBlank(['message' => 'Le mot de passe ne peut pas être vide.']),
                     new Length(['min' => 8, 'minMessage' => 'Le mot de passe doit contenir au moins 8 caractères.']),
-                    // Contrôle des caractères spéciaux, majuscules, etc.
                     new Regex([
-                        'pattern' => '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                        'pattern' => '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#\^()+={}[\]:;"\'<>,.\/\\|`~])[A-Za-z\d@$!%*?&#\^()+={}[\]:;"\'<>,.\/\\|`~]{8,}$/',
                         'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial.',
                     ]),
                 ],
@@ -58,16 +57,19 @@ class UsersType extends AbstractType
             ])
             ->add('avatar', FileType::class, [
                 'label' => 'Avatar (Image file)',
-                'required' => false, // Avatar peut être facultatif
+                'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '2M',
+                        'maxSize' => '10M',
                         'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif',
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
                         ],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG ou GIF).',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
             ])
@@ -88,18 +90,7 @@ class UsersType extends AbstractType
                 'prototype' => true,
                 'required' => false,
             ])
-            ->add('pronoms', ChoiceType::class, [
-                'choices' => [
-                    'Il/Lui' => 'Il/Lui',
-                    'Elle/Elle' => 'Elle/Elle',
-                    'Iel/Iels' => 'Iel/Iels',
-                    'Ils/Eux' => 'Ils/Eux',
-                    'Elles/Eux' => 'Elles/Eux',
-                ],
-                'required' => false,
-                'label' => 'Pronoms',
-                'placeholder' => 'Sélectionnez vos pronoms',
-            ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_clips_delete', { id: clip.id }) }}" style="display: inline;">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ clip.id) }}">
+    <button class="text-red-500 hover:text-red-700 underline" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce clip ?');">
+        Supprimer
+    </button>
+</form>

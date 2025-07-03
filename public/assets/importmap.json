@@ -4,7 +4,7 @@
         "type": "js"
     },
     "\/assets\/styles\/app.css": {
-        "path": "\/assets\/styles\/app-aa649f3b1064f97285eb8d8b6fa09e4d.css",
+        "path": "\/assets\/styles\/app-6f51faf48a91744806371c05e35be027.css",
         "type": "css"
     },
     "@hotwired\/stimulus": {
@@ -12,11 +12,11 @@
         "type": "js"
     },
     "tom-select\/dist\/css\/tom-select.default.css": {
-        "path": "\/assets\/vendor\/tom-select\/dist\/css\/tom-select.default-92c31c033a23be0cfebdda3d089d8b11.css",
+        "path": "\/assets\/vendor\/tom-select\/dist\/css\/tom-select.default-91eab77fd505412b22c2e5a66cc861ec.css",
         "type": "css"
     },
     "@symfony\/stimulus-bundle": {
-        "path": "\/assets\/@symfony\/stimulus-bundle\/loader-870999a02e9fc147c034d522826ea70d.js",
+        "path": "\/assets\/@symfony\/stimulus-bundle\/loader-9311b8ea36bad0f6168e687b4d6dee73.js",
         "type": "js"
     },
     "\/assets\/@symfony\/stimulus-bundle\/controllers.js": {
@@ -24,23 +24,39 @@
         "type": "js"
     },
     "\/assets\/@ehyiah\/ux-quill\/controller.js": {
-        "path": "\/assets\/@ehyiah\/ux-quill\/controller-068e41a2e92a7c87192a0c8d7e455436.js",
+        "path": "\/assets\/@ehyiah\/ux-quill\/controller-44108a4ddda2fea6a276b8301e96ca39.js",
         "type": "js"
     },
     "\/assets\/@ehyiah\/ux-quill\/modules.js": {
         "path": "\/assets\/@ehyiah\/ux-quill\/modules-5cb3c92db1de19a810860e1e36710f82.js",
         "type": "js"
     },
+    "\/assets\/@ehyiah\/ux-quill\/ui\/toolbarCustomizer.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/ui\/toolbarCustomizer-9b109f5e26bd257a9addf163772e43e5.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/upload-utils.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/upload-utils-5ea2d449bb8bd93c4e5f6104da62979f.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/register-modules.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/register-modules-a0a6360f0096b23716b8f561dbed45b9.js",
+        "type": "js"
+    },
     "\/assets\/@ehyiah\/ux-quill\/imageUploader.js": {
-        "path": "\/assets\/@ehyiah\/ux-quill\/imageUploader-7bd81c98a64a32f6ee21e1f73ffb29c4.js",
+        "path": "\/assets\/@ehyiah\/ux-quill\/imageUploader-d1d4f51a05b7ce97e9918c89508f8c11.js",
         "type": "js"
     },
     "\/assets\/@ehyiah\/ux-quill\/blots\/image.js": {
-        "path": "\/assets\/@ehyiah\/ux-quill\/blots\/image-7fb990400cf649552297823eef2f67c1.js",
+        "path": "\/assets\/@ehyiah\/ux-quill\/blots\/image-462e9a173b2b3ac5105c332873c0040d.js",
+        "type": "js"
+    },
+    "\/assets\/@ehyiah\/ux-quill\/modules\/smartLinks.js": {
+        "path": "\/assets\/@ehyiah\/ux-quill\/modules\/smartLinks-6ac02f1a2259e43177c5d7ca0535ad3a.js",
         "type": "js"
     },
     "\/assets\/@symfony\/ux-autocomplete\/controller.js": {
-        "path": "\/assets\/@symfony\/ux-autocomplete\/controller-dd1b31bd819824edecb124585c6bdb56.js",
+        "path": "\/assets\/@symfony\/ux-autocomplete\/controller-8633177465905fca99a698bd1e23e7a9.js",
         "type": "js"
     },
     "\/assets\/@symfony\/ux-turbo\/turbo_controller.js": {
@@ -48,11 +64,11 @@
         "type": "js"
     },
     "\/assets\/controllers\/hello_controller.js": {
-        "path": "\/assets\/controllers\/hello_controller-55882fcad241d2bea50276ea485583bc.js",
+        "path": "\/assets\/controllers\/hello_controller-87b6385829902356204e988334af9bf5.js",
         "type": "js"
     },
     "tom-select": {
-        "path": "\/assets\/vendor\/tom-select\/tom-select.index-c0036889cf3e94dade1e56c11996b014.js",
+        "path": "\/assets\/vendor\/tom-select\/tom-select.index-25812af08e631a7c1bf06a5e09536eae.js",
         "type": "js"
     },
     "@hotwired\/turbo": {
@@ -60,107 +76,107 @@
         "type": "js"
     },
     "file-loader": {
-        "path": "\/assets\/vendor\/file-loader\/file-loader.index-5f0537effd08c725cbcfea37357d5fbd.js",
+        "path": "\/assets\/vendor\/file-loader\/file-loader.index-d19b0f279008d9c17870729d12eec937.js",
         "type": "js"
     },
     "loader-utils": {
-        "path": "\/assets\/vendor\/loader-utils\/loader-utils.index-d04c7768922f73fc15a1e45cea14349d.js",
+        "path": "\/assets\/vendor\/loader-utils\/loader-utils.index-a9f02e53ebcbef4a58be595434fe27fb.js",
         "type": "js"
     },
     "schema-utils": {
-        "path": "\/assets\/vendor\/schema-utils\/schema-utils.index-ba60e7fd94c3b24b239a82d8d8df6844.js",
+        "path": "\/assets\/vendor\/schema-utils\/schema-utils.index-d9f36dd06aaa58fcd504c77dfb573e20.js",
         "type": "js"
     },
     "json5": {
-        "path": "\/assets\/vendor\/json5\/json5.index-4acc3fa6ea6c31061545e764e5847e1b.js",
+        "path": "\/assets\/vendor\/json5\/json5.index-ac58b0929f5578065a4a45c26c22ab9a.js",
         "type": "js"
     },
     "big.js": {
-        "path": "\/assets\/vendor\/big.js\/big.js.index-b81f6092d60c5bdb1f108f33233d6731.js",
+        "path": "\/assets\/vendor\/big.js\/big.js.index-e6078cfa72075628f88b702649875554.js",
         "type": "js"
     },
     "emojis-list": {
-        "path": "\/assets\/vendor\/emojis-list\/emojis-list.index-48d00d6d3259d1dbd9cb223be78e35ba.js",
+        "path": "\/assets\/vendor\/emojis-list\/emojis-list.index-84a4a7c5c5f466bd972c0a5c3b80e2bf.js",
         "type": "js"
     },
     "ajv": {
-        "path": "\/assets\/vendor\/ajv\/ajv.index-5a70798e25fbeef286f068657de925c2.js",
+        "path": "\/assets\/vendor\/ajv\/ajv.index-c8c9bf68a786378dbe78b84aefaf8d23.js",
         "type": "js"
     },
     "ajv-keywords": {
-        "path": "\/assets\/vendor\/ajv-keywords\/ajv-keywords.index-e5c7e4f75d2511a5c7c5a20fcb42c908.js",
+        "path": "\/assets\/vendor\/ajv-keywords\/ajv-keywords.index-d02f493a6d0c457c75c8665e3f93b5b7.js",
         "type": "js"
     },
     "uri-js": {
-        "path": "\/assets\/vendor\/uri-js\/uri-js.index-1c8d962ba6e5a37fc7593fdc1785d123.js",
+        "path": "\/assets\/vendor\/uri-js\/uri-js.index-db5738b1ec91b66ca4feaddc563ccabd.js",
         "type": "js"
     },
     "fast-deep-equal": {
-        "path": "\/assets\/vendor\/fast-deep-equal\/fast-deep-equal.index-2e3d7da5848fa06171a1d5702471bcf3.js",
+        "path": "\/assets\/vendor\/fast-deep-equal\/fast-deep-equal.index-5c8da0fd5b0d66dcb51ca38acf3f9253.js",
         "type": "js"
     },
     "json-schema-traverse": {
-        "path": "\/assets\/vendor\/json-schema-traverse\/json-schema-traverse.index-daba79a71786177dc084ac5d38225c29.js",
+        "path": "\/assets\/vendor\/json-schema-traverse\/json-schema-traverse.index-5a1cd31a3319431e61da0c4b0bbc9d2c.js",
         "type": "js"
     },
     "fast-json-stable-stringify": {
-        "path": "\/assets\/vendor\/fast-json-stable-stringify\/fast-json-stable-stringify.index-ec21f14ba7148405afcebc0fe3f310fc.js",
+        "path": "\/assets\/vendor\/fast-json-stable-stringify\/fast-json-stable-stringify.index-f818d3614f997e81a98308ee4fc8898b.js",
         "type": "js"
     },
     "quill": {
-        "path": "\/assets\/vendor\/quill\/quill.index-0a06006d4771ad65bdd36e0743d173a6.js",
+        "path": "\/assets\/vendor\/quill\/quill.index-c39d18a7f69906a8edb7a43d8eaa5811.js",
         "type": "js"
     },
     "lodash-es": {
-        "path": "\/assets\/vendor\/lodash-es\/lodash-es.index-26386f79a77084507070ed850a69797b.js",
+        "path": "\/assets\/vendor\/lodash-es\/lodash-es.index-06aa32ec836b1f6ede171d1793593439.js",
         "type": "js"
     },
     "parchment": {
-        "path": "\/assets\/vendor\/parchment\/parchment.index-d7bd3b4ffa15aab8f8afdb9c5722aeb4.js",
+        "path": "\/assets\/vendor\/parchment\/parchment.index-488b8a04e2c237dd8adfc9a4a802f3b9.js",
         "type": "js"
     },
     "quill-delta": {
-        "path": "\/assets\/vendor\/quill-delta\/quill-delta.index-58df70e0b6c762d89cc6d2afd82fd58b.js",
+        "path": "\/assets\/vendor\/quill-delta\/quill-delta.index-3d2bde849327b33773d9a04b9b352457.js",
         "type": "js"
     },
     "eventemitter3": {
-        "path": "\/assets\/vendor\/eventemitter3\/eventemitter3.index-002da52f735f9d40f7cf91af1cdd1b63.js",
+        "path": "\/assets\/vendor\/eventemitter3\/eventemitter3.index-3d149d9c2308f1a4e41016295434b6db.js",
         "type": "js"
     },
     "fast-diff": {
-        "path": "\/assets\/vendor\/fast-diff\/fast-diff.index-ca3cf298a3712bc2228bd9b3d9bb7fae.js",
+        "path": "\/assets\/vendor\/fast-diff\/fast-diff.index-c3e7a4940ebdaff0097e6d8056ec13bf.js",
         "type": "js"
     },
     "lodash.clonedeep": {
-        "path": "\/assets\/vendor\/lodash.clonedeep\/lodash.clonedeep.index-861a9f69d16cf45c3f4cb1204fc7ff97.js",
+        "path": "\/assets\/vendor\/lodash.clonedeep\/lodash.clonedeep.index-3eec7f40000f37a36be84f8e1fa3ffe4.js",
         "type": "js"
     },
     "lodash.isequal": {
-        "path": "\/assets\/vendor\/lodash.isequal\/lodash.isequal.index-08efbe584868341174be3f2adc515de3.js",
+        "path": "\/assets\/vendor\/lodash.isequal\/lodash.isequal.index-9ffc7561dc46698a6e604b019b1a5bb8.js",
         "type": "js"
     },
     "quill\/dist\/quill.snow.css": {
-        "path": "\/assets\/vendor\/quill\/dist\/quill.snow-4da2c5a5fa53f7b23528685a046ece46.css",
+        "path": "\/assets\/vendor\/quill\/dist\/quill.snow-6c736ac7979f3441997c1923bc40b887.css",
         "type": "css"
     },
     "quill\/dist\/quill.bubble.css": {
-        "path": "\/assets\/vendor\/quill\/dist\/quill.bubble-875140a943d06a1c061d55776dce1265.css",
+        "path": "\/assets\/vendor\/quill\/dist\/quill.bubble-4c4d5760d8bd2c4c3969f2d8c8be8f07.css",
         "type": "css"
     },
     "axios": {
-        "path": "\/assets\/vendor\/axios\/axios.index-98f6aeeedd38c0c7662edf9e8fa1ab1d.js",
+        "path": "\/assets\/vendor\/axios\/axios.index-05a0027736b98b532f94dd80bce4683d.js",
         "type": "js"
     },
     "quill2-emoji": {
-        "path": "\/assets\/vendor\/quill2-emoji\/quill2-emoji.index-c429e45c482ba5a359db9c87dfefd8de.js",
+        "path": "\/assets\/vendor\/quill2-emoji\/quill2-emoji.index-c7bc499d08b8d59ee2be63b762144278.js",
         "type": "js"
     },
     "quill2-emoji\/dist\/style.css": {
-        "path": "\/assets\/vendor\/quill2-emoji\/dist\/style-e2ee39a9ee191998aff2609bd9ad2974.css",
+        "path": "\/assets\/vendor\/quill2-emoji\/dist\/style-82605d26c96c1984ebdfc29505117d9d.css",
         "type": "css"
     },
     "quill-resize-image": {
-        "path": "\/assets\/vendor\/quill-resize-image\/quill-resize-image.index-6f35898166ed318d0b9ce44443f275b9.js",
+        "path": "\/assets\/vendor\/quill-resize-image\/quill-resize-image.index-6af9b13af03dd202c1a67552a24efea0.js",
         "type": "js"
     }
 }

@@ -33,7 +33,7 @@ class AdminPresentationsController extends AbstractController
             if ($pictureFile) {
                 $newFilename = uniqid() . '.' . $pictureFile->guessExtension();
                 $pictureFile->move(
-                    $this->getParameter('pictures_directory'),
+                    $this->getParameter('upload_directory'),
                     $newFilename
                 );
                 $presentation->setPicturePath($newFilename);

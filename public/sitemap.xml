@@ -9,8 +9,6 @@
         </image:image>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
-        <description>Participez à Stream For Love, un événement caritatif annuel organisé par des streamers sur Twitch pour collecter des fonds en faveur de Coalition PLUS dans la lutte contre le VIH et le SIDA. Découvrez comment faire un don et soutenir cette cause essentielle.</description>
-        <keywords>Stream For Love, événement caritatif, VIH, SIDA, Twitch, donations, Coalition PLUS, sensibilisation, collecte de fonds, santé publique, droits humains</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/evenements</loc>
@@ -19,8 +17,6 @@
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <description>Rejoignez Coalition PLUS pour l'événement annuel Stream For Love et soutenez la lutte contre le VIH et le SIDA avec nos streamers sur Twitch.</description>
-        <keywords>Coalition PLUS, VIH, SIDA, Stream For Love, dons, Twitch, associations</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamers</loc>
@@ -29,307 +25,209 @@
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
-        <description>Découvrez les streamers participants à l'événement Stream For Love. Suivez vos créateurs préférés sur Twitch et soutenez la collecte de fonds pour Coalition PLUS.</description>
-        <keywords>Stream For Love, streamers, Twitch, collecte de fonds, Coalition PLUS, Addrictif, Artamarok, Ch0ouxx, Formagayte, KasSandreTV, Labsy, Little_spo0n, Lumystic, MalincTV, Mandragoule_, Masthom_, PandoraReina, PixEtMotion, Porc_Qui_Pique, Reven_vl, Sora_Kwak, stitchjo85, SugarYouni, TataKleo, TATAWYATT, THORNGAR_, Tyhnaria, xPurgatoire, Yokuta_hamichi, Ythel_</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Addrictif</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Addrictif</image:caption>
-            <image:title>Addrictif</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Addrictif, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Addrictif, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Artamarok</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Artamarok</image:caption>
-            <image:title>Artamarok</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Artamarok, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Artamarok, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Ch0ouxx</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Ch0ouxx</image:caption>
-            <image:title>Ch0ouxx</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Ch0ouxx, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Ch0ouxx, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Formagayte</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Formagayte</image:caption>
-            <image:title>Formagayte</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Formagayte, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Formagayte, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/KasSandreTV</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de KasSandreTV</image:caption>
-            <image:title>KasSandreTV</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez KasSandreTV, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>KasSandreTV, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Labsy</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Labsy</image:caption>
-            <image:title>Labsy</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Labsy, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Labsy, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Little_spo0n</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Little_spo0n</image:caption>
-            <image:title>Little_spo0n</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Little_spo0n, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Little_spo0n, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Lumystic</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Lumystic</image:caption>
-            <image:title>Lumystic</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Lumystic, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Lumystic, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/MalincTV</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
             <image:caption>Image de MalincTV</image:caption>
             <image:title>MalincTV</image:title>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez MalincTV, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>MalincTV, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Mandragoule_</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Mandragoule_</image:caption>
-            <image:title>Mandragoule_</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Mandragoule_, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Mandragoule_, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Masthom_</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
             <image:caption>Image de Masthom_</image:caption>
             <image:title>Masthom_</image:title>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Masthom_, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Masthom_, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/PandoraReina</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de PandoraReina</image:caption>
-            <image:title>PandoraReina</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez PandoraReina, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>PandoraReina, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/PixEtMotion</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de PixEtMotion</image:caption>
-            <image:title>PixEtMotion</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez PixEtMotion, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>PixEtMotion, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Porc_Qui_Pique</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Porc_Qui_Pique</image:caption>
-            <image:title>Porc_Qui_Pique</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Porc_Qui_Pique, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Porc_Qui_Pique, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Reven_vl</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Reven_vl</image:caption>
-            <image:title>Reven_vl</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Reven_vl, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Reven_vl, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Sora_Kwak</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Sora_Kwak</image:caption>
-            <image:title>Sora_Kwak</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Sora_Kwak, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Sora_Kwak, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/stitchjo85</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de stitchjo85</image:caption>
-            <image:title>stitchjo85</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez stitchjo85, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>stitchjo85, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/SugarYouni</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de SugarYouni</image:caption>
-            <image:title>SugarYouni</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez SugarYouni, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>SugarYouni, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/TataKleo</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de TataKleo</image:caption>
-            <image:title>TataKleo</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez TataKleo, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>TataKleo, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/TATAWYATT</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de TATAWYATT</image:caption>
-            <image:title>TATAWYATT</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez TATAWYATT, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>TATAWYATT, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/THORNGAR_</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de THORNGAR_</image:caption>
-            <image:title>THORNGAR_</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez THORNGAR_, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>THORNGAR_, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Tyhnaria</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Tyhnaria</image:caption>
-            <image:title>Tyhnaria</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Tyhnaria, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Tyhnaria, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/xPurgatoire</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de xPurgatoire</image:caption>
-            <image:title>xPurgatoire</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez xPurgatoire, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>xPurgatoire, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Yokuta_hamichi</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Yokuta_hamichi</image:caption>
-            <image:title>Yokuta_hamichi</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Yokuta_hamichi, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Yokuta_hamichi, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
     <url>
         <loc>https://streamforlove.coalitionplus.org/streamer/Ythel_</loc>
         <image:image>
-            <image:loc>{{ asset('assets/users/presentations/pictures/' ~ streamer.picturePath) }}</image:loc>
-            <image:caption>Image de Ythel_</image:caption>
-            <image:title>Ythel_</image:title>
+            <image:loc>https://streamforlove.coalitionplus.org/assets/medias/headers/logo.png</image:loc>
         </image:image>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <description>Découvrez Ythel_, un streamer populaire sur Twitch. Suivez ses streams caritatifs et retrouvez ses meilleures clips.</description>
-        <keywords>Ythel_, Twitch, streaming, clips Twitch, streamer caritatif, jeux vidéo, communauté Twitch, jeux récents, planning, objectifs de dons</keywords>
     </url>
 </urlset>

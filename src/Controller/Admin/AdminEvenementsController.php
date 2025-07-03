@@ -32,27 +32,22 @@ class AdminEvenementsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Gestion du fichier image (thumbnail)
             $thumbnailFile = $form->get('thumbnail')->getData();
 
             if ($thumbnailFile) {
-                // Générer un nom unique pour le fichier
                 $newFilename = uniqid() . '.' . $thumbnailFile->guessExtension();
 
                 try {
-                    // Déplacer le fichier dans le répertoire configuré (evenements_directory)
                     $thumbnailFile->move(
                         $this->getParameter('evenements_directory'),
                         $newFilename
                     );
-                    // Stocker le nom du fichier dans l'entité Evenements
                     $evenement->setThumbnail($newFilename);
                 } catch (FileException $e) {
                     $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
                 }
             }
 
-            // Persist and save the event
             $entityManager->persist($evenement);
             $entityManager->flush();
 
@@ -70,11 +65,11 @@ class AdminEvenementsController extends AbstractController
     #[Route('/admin/evenements/{id}', name: 'admin_evenements_show', methods: ['GET'])]
     public function show(Evenements $evenement): Response
     {
-        $participants = $evenement->getParticipants(); // Récupérer les participants
+        $participants = $evenement->getParticipants(); 
 
         return $this->render('dashboard/admin/evenements/show.html.twig', [
             'evenement' => $evenement,
-            'participants' => $participants, // Passer les participants au template
+            'participants' => $participants, 
         ]);
     }
 
@@ -85,27 +80,22 @@ class AdminEvenementsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Gestion du fichier image (thumbnail)
             $thumbnailFile = $form->get('thumbnail')->getData();
 
             if ($thumbnailFile) {
-                // Générer un nom unique pour le fichier
                 $newFilename = uniqid() . '.' . $thumbnailFile->guessExtension();
 
                 try {
-                    // Déplacer le fichier dans le répertoire configuré
                     $thumbnailFile->move(
                         $this->getParameter('evenements_directory'),
                         $newFilename
                     );
-                    // Stocker le nom du fichier dans l'entité Evenements
                     $evenement->setThumbnail($newFilename);
                 } catch (FileException $e) {
                     $this->addFlash('error', 'Erreur lors du téléchargement de l\'image.');
                 }
             } else {
-                // Conserver l'image existante si aucune nouvelle image n'est uploadée
-                $newFilename = $evenement->getThumbnail(); // Conserve l'ancienne image
+                $newFilename = $evenement->getThumbnail(); 
             }
             $entityManager->persist($evenement);
             $entityManager->flush();

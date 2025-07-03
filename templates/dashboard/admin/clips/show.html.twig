@@ -1,0 +1,28 @@
+{% extends 'admin_base.html.twig' %}
+
+{% block title %}Détails du Clip{% endblock %}
+
+{% block body %}
+    <div class="mx-auto w-10/12 max-w-2xl p-4 border border-gray-300 shadow-lg mt-8">
+        <h1 class="text-center font-bold text-2xl mb-5 text-gray-800">Détails du Clip</h1>
+
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold text-gray-700">ID:</h3>
+            <p class="text-gray-600">{{ clip.id }}</p>
+        </div>
+
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold text-gray-700">URL:</h3>
+            <p class="text-gray-600">{{ clip.url }}</p>
+        </div>
+
+        <div class="mb-4">
+            <h3 class="text-lg font-semibold text-gray-700">Événement:</h3>
+            <p class="text-gray-600">{{ clip.evenement ? clip.evenement.annee : 'Aucun' }}</p>
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <a href="{{ path('admin_clips_index') }}" class="border border-gray-300 p-2 px-4 font-semibold text-gray-500">Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}

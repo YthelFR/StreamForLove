@@ -62,17 +62,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Evenements::class, mappedBy: 'participants')]
     private Collection $evenements;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Cagnotte::class)] 
     private Collection $cagnottes;
 
     private $resetToken;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Cagnotte $cagnotteStreamers = null;
-
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $pronoms = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lien = null;
     public function __construct()
     {
         $this->socialsNetworks = new ArrayCollection();
@@ -204,7 +203,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setStreamersPresentation(?Presentations $streamersPresentation): static
     {
-        // Set the owning side of the relation if necessary
         if ($streamersPresentation !== null && $streamersPresentation->getStreamersPresentation() !== $this) {
             $streamersPresentation->setStreamersPresentation($this);
         }
@@ -234,7 +232,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeSocialsNetwork(SocialsNetwork $socialsNetwork): self
     {
         if ($this->socialsNetworks->removeElement($socialsNetwork)) {
-            // set the owning side to null (unless already changed)
             if ($socialsNetwork->getUser() === $this) {
                 $socialsNetwork->setUser(null);
             }
@@ -263,7 +260,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeBlogueursArticle(Articles $blogueursArticle): static
     {
         if ($this->blogueursArticle->removeElement($blogueursArticle)) {
-            // set the owning side to null (unless already changed)
             if ($blogueursArticle->getUsers() === $this) {
                 $blogueursArticle->setUsers(null);
             }
@@ -291,7 +287,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeOutsider(Outsiders $outsider): static
     {
         if ($this->outsiders->removeElement($outsider)) {
-            // set the owning side to null (unless already changed)
             if ($outsider->getUser() === $this) {
                 $outsider->setUser(null);
             }
@@ -319,7 +314,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeArticle(Articles $article): static
     {
         if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
             if ($article->getBlogueurArticles() === $this) {
                 $article->setBlogueurArticles(null);
             }
@@ -351,7 +345,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->evenements->contains($evenement)) {
             $this->evenements->add($evenement);
-            $evenement->addParticipant($this);  // Mise à jour de l'autre côté de la relation
+            $evenement->addParticipant($this);  
         }
 
         return $this;
@@ -360,7 +354,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeEvenement(Evenements $evenement): static
     {
         if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeParticipant($this);  // Mise à jour de l'autre côté de la relation
+            $evenement->removeParticipant($this);  
         }
 
         return $this;
@@ -378,18 +372,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCagnotteStreamers(): ?Cagnotte
-    {
-        return $this->cagnotteStreamers;
-    }
-
-    public function setCagnotteStreamers(?Cagnotte $cagnotteStreamers): static
-    {
-        $this->cagnotteStreamers = $cagnotteStreamers;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Cagnotte>
      */
@@ -398,20 +380,19 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->cagnottes;
     }
 
-    public function addCagnotte(Cagnotte $cagnotte): static
+    public function addCagnotte(Cagnotte $cagnotte): self
     {
         if (!$this->cagnottes->contains($cagnotte)) {
-            $this->cagnottes->add($cagnotte);
-            $cagnotte->setUser($this); // Mise à jour de l'autre côté de la relation
+            $this->cagnottes[] = $cagnotte;
+            $cagnotte->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeCagnotte(Cagnotte $cagnotte): static
+    public function removeCagnotte(Cagnotte $cagnotte): self
     {
         if ($this->cagnottes->removeElement($cagnotte)) {
-            // set the owning side to null (unless already changed)
             if ($cagnotte->getUser() === $this) {
                 $cagnotte->setUser(null);
             }
@@ -419,6 +400,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     public function getPronoms(): ?string
     {
@@ -429,6 +411,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->pronoms = $pronoms;
 
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): static
+    {
+        $this->lien = $lien;
         return $this;
     }
 }

@@ -36,7 +36,7 @@ class MailType extends AbstractType
                 'expanded' => false,
                 'attr' => [
                     'class' => 'select2 mb-4',
-                    'style' => 'display:none;', // Assurez-vous que c'est ici
+                    'style' => 'display:none;'
                 ],
             ])
             ->add('subject', TextType::class, [

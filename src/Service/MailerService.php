@@ -22,7 +22,7 @@ class MailerService
             ->from('support@streamforlove.coalitionplus.org')
             ->to($recipient)
             ->subject($subject)
-            ->html($message . $signature); // Utilisation de html pour inclure la signature
+            ->html($message . $signature); 
 
         $this->mailer->send($email);
     }

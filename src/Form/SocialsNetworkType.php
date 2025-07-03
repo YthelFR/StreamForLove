@@ -1,8 +1,5 @@
 <?php
 
-// src/Form/SocialsNetworkType.php
-
-
 namespace App\Form;
 
 use App\Entity\SocialsNetwork;

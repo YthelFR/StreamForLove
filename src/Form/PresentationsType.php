@@ -25,8 +25,15 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10M',
-                        'mimeTypes' => ['image/jpeg', 'image/png'],
-                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG).',
+                        'mimeTypes' => [
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
             ])
@@ -37,8 +44,15 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10M',
-                        'mimeTypes' => ['application/pdf'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                        'mimeTypes' => [
+                            'image/jpeg',  // .jpeg, .jpg
+                            'image/png',   // .png
+                            'image/gif',   // .gif
+                            'image/bmp',   // .bmp
+                            'image/tiff',  // .tiff, .tif
+                            'image/webp',  // .webp
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG, PNG, GIF, BMP, TIFF ou WebP).',
                     ])
                 ],
             ])
@@ -49,47 +63,49 @@ class PresentationsType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10M',
-                        'mimeTypes' => ['application/pdf'],
-                        'mimeTypesMessage' => 'Veuillez télécharger un fichier PDF valide.',
+                        'mimeTypes' => ['image/jpeg', 'image/png'],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (JPEG ou PNG).',
                     ])
                 ],
             ])
 
-            // Validation des champs textuels pour les questions
             ->add('question1', TextType::class, [
                 'label' => 'Peux-tu te présenter en quelques mots ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
             ->add('question2', TextType::class, [
                 'label' => 'Comment en es-tu arrivé à l\'univers du streaming ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
             ->add('question3', TextType::class, [
                 'label' => 'Pourquoi faire un stream caritatif ?',
+                'required' => false,
                 'constraints' => [
                     new NotBlank(['message' => 'Ce champ ne peut pas être vide.']),
                     new Length([
-                        'max' => 255,
+                        'max' => 1000,
                         'maxMessage' => 'La réponse ne peut pas dépasser {{ limit }} caractères.',
                     ]),
                 ],
             ])
 
-            // Validation des clips
             ->add('clip1', TextType::class, [
                 'label' => 'Clip 1',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -103,6 +119,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip2', TextType::class, [
                 'label' => 'Clip 2',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -116,6 +133,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip3', TextType::class, [
                 'label' => 'Clip 3',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
@@ -129,6 +147,7 @@ class PresentationsType extends AbstractType
             ])
             ->add('clip4', TextType::class, [
                 'label' => 'Clip 4',
+                'required' => false,
                 'constraints' => [
                     new Length([
                         'max' => 255,
