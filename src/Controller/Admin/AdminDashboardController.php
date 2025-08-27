@@ -16,7 +16,7 @@ class AdminDashboardController extends AbstractController
     private LoggerInterface $logger;
 
 
-    public function __construct(LoggerInterface $logger, InspirationsService $inspirationsService)
+    public function __construct(LoggerInterface $logger,  InspirationsService $inspirationsService)
     {
         $this->inspirationsService = $inspirationsService;
         $this->logger = $logger;
@@ -26,8 +26,6 @@ class AdminDashboardController extends AbstractController
     public function dashboard(Security $security, Request $request): Response
     {
         $currentUser = $security->getUser();
-        $city = $request->query->get('city', 'Paris');
-
 
         $randomInspiration = $this->inspirationsService->getRandomInspiration();
 
