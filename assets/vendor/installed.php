@@ -269,6 +269,16 @@
     array (
     ),
   ),
+  'quill/dist/quill.bubble.css' => 
+  array (
+    'version' => '2.0.3',
+    'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
   'axios' => 
   array (
     'version' => '1.7.7',
@@ -310,9 +320,19 @@
     array (
     ),
   ),
-  'quill/dist/quill.bubble.css' => 
+  'tom-select/dist/css/tom-select.bootstrap4.css' => 
   array (
-    'version' => '2.0.3',
+    'version' => '2.4.3',
+    'dependencies' => 
+    array (
+    ),
+    'extraFiles' => 
+    array (
+    ),
+  ),
+  'tom-select/dist/css/tom-select.bootstrap5.css' => 
+  array (
+    'version' => '2.4.3',
     'dependencies' => 
     array (
     ),
